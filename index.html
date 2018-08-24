@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <!-- Document properties -->
+  <title>Libération.fr – [WIP] title</title>
+  <link rel="canonical" href="[WIP] Url complète de l'article">
+  <link rel="shortcut icon" href="https://www.liberation.fr/favicon.ico">
+  <meta name="author" content="[WIP] auteur">
+  <meta name="description" content="[WIP] description, ex: Tout savoir sur les dernières actualités politiques, monde, société, sports, écologie avec le journal en ligne Libération.">
+  <meta name="keywords" content="[WIP] keywords, ex: actualités, news">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@libe" />
+  <meta name="twitter:creator" content="@libe" />
+  <meta name="twitter:url" content="[WIP] Url complète de l'article pour Twitter" />
+  <meta name="twitter:title" content="[WIP] Titre pour Twitter" />
+  <meta name="twitter:description" content="[WIP] description pour Twitter" />
+  <meta name="twitter:image" content="[WIP] description pour les RS">
+  <meta name="custom:tweet-text" content="[WIP] Texte du tweet">
+  <meta name="custom:tweet-via" content="[WIP] Mentions du tweet, séparées par des virgules ex: @libe, @libe-sixplus">
+  <!-- Social media -->
+  <meta property="og:site_name" content="Libération.fr"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="[WIP] Url complète de l'article pour les RS" />
+  <meta property="og:title" content="[WIP] Titre pour les RS" />
+  <meta property="og:description" content="[WIP] description pour les RS" />
+  <meta property="og:image" content="[WIP] Url complète de l'image de l'article pour les RS" />
+  <!-- Libé styles -->
+  <style>
+    html,body { margin: 0; padding: 0; height:100%; width:100%; }
+    #libe-menu { height: auto !important; }
+  </style>
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="lib/normalize-8.0.0.css">
+  <link rel="stylesheet" href="styles/fonts.css">
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+
+  <!----------------------------------------------- APP START ------------------------------------------------>
+  <div id="wrapper" class="wrapper">
+    <h1>Coucou</h1>
+  </div>
+
+  <!-- Custom scripts -->
+  <script type="text/javascript" src="scripts/main.js"></script>
+  <!------------------------------------------------ APP END ------------------------------------------------>
+
+  <!-- Libé header injection -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="//www.liberation.fr/menu/script.js"></script>
+
+  <!-- Chartbeat -->
+  <script type='text/javascript'>
+    var _sf_async_config={};
+    _sf_async_config.uid = 43601;
+    _sf_async_config.domain = 'liberation.fr';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = "Static";
+    _sf_async_config.authors = "Static";
+    (function(){
+      function loadChartbeat() {
+        window._sf_endpt=(new Date()).getTime();
+        var e = document.createElement('script');
+        e.setAttribute('language', 'javascript');
+        e.setAttribute('type', 'text/javascript');
+        e.setAttribute('src', 'http://static.chartbeat.com/' + 'js/chartbeat.js');
+        document.body.appendChild(e);
+      }
+      var oldonload = window.onload;
+      window.onload = (typeof window.onload != 'function') ?
+      loadChartbeat : function() { oldonload(); loadChartbeat(); };
+    })();
+  </script>
+
+  <!-- Google Analytics -->
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+     ga('create', 'UA-41822557-1', 'liberation.fr');
+     ga('create', 'UA-116918263-1', 'auto', 'SixPlus');
+     ga('send', 'pageview');
+     ga('SixPlus.send', 'pageview');
+  </script>
+
+  <!-- Xiti -->
+  <script type="text/javascript">
+    xtnv = document;
+    xtsd = "http://logliberation";
+    xtsite = "381060";
+    xtn2 = "48";
+    xtpage = "Static::Data::[WIP] page name ex : golden-globe-challenge";
+    xtdi = "";
+    xt_pagetype = "";
+    xt_multc = "&x1=0&x2=43&x3=&x4=&x5=&x6=7&x7=";
+    xt_an = "";
+    xt_ac = "";
+    if (window.xtparam==null) { window.xtparam = ''; }
+    window.xtparam += "&ptype="+xt_pagetype+"&ac="+xt_ac+"&an="+xt_an+xt_multc;
+  </script>
+  <noscript>
+    <img width="1" height="1" src="http://logliberation.xiti.com/hit.xiti?s=381060&amp;s2=56&amp;p=Static::Data::&amp;di=&amp;" >
+  </noscript>
+  <script type="text/javascript" src="https://statics.liberation.fr/bloom/theme/js/xtcore.js"></script>
+</body>
+</html>
