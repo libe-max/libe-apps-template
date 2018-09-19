@@ -145,3 +145,16 @@
   .share-article__mail {
     display: none;
 }
+
+/*
+ *
+ *  Sixplus logo
+ *
+ */
+
+.sixplus-logo
+  svg {
+    max-width: 100%;
+    height: auto;
+}
+
