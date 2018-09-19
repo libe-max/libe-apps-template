@@ -4,13 +4,37 @@ body,
   box-sizing: border-box;
 }
 
+#app {
+  padding-bottom: 80px;
+}
+
+#app .app__example-paragraph {
+  margin-top: 80px;
+}
+
 #app .app__example-paragraph
   p {
-    margin: 80px auto;
+    margin: 0 auto;
     text-align: center;
+}
+
+#app .app__example-share {
+  margin-top: 80px;
 }
 
 #app .app__example-share
   .share-article {
-    margin: 80px auto;
+    margin: 0 auto;
+}
+
+#app .app__footer-logo {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+#app .app__footer-logo
+  .sixplus-logo
+    svg {
+    height: 64px;
 }
