@@ -15,8 +15,8 @@
         height="20"
         viewBox="0 0 20 20"
         version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink">
+        xmlns="https://www.w3.org/2000/svg"
+        xmlns:xlink="https://www.w3.org/1999/xlink">
         <title>Facebook</title>
         <path
           class="svg-shape"
@@ -30,8 +30,8 @@
         height="20"
         viewBox="0 0 20 20"
         version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink">
+        xmlns="https://www.w3.org/2000/svg"
+        xmlns:xlink="https://www.w3.org/1999/xlink">
         <title>Twitter</title>
         <path
           class="svg-shape"
@@ -45,8 +45,8 @@
         height="22"
         viewBox="0 0 27 22"
         version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink">
+        xmlns="https://www.w3.org/2000/svg"
+        xmlns:xlink="https://www.w3.org/1999/xlink">
         <title>Print</title>
         <path
           class="svg-shape"
@@ -59,8 +59,8 @@
         height="13"
         viewBox="0 0 20 13"
         version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink">
+        xmlns="https://www.w3.org/2000/svg"
+        xmlns:xlink="https://www.w3.org/1999/xlink">
         <title>Mail</title>
         <path 
           class="svg-shape"
@@ -69,7 +69,7 @@
     </div>`
   shareArticle.facebookShare = function (e) {
       const artUrl = $('meta[property="og:url"]').getAttribute('content')
-      const fbUrl = 'http://www.facebook.com/sharer/sharer.php?u=' + artUrl
+      const fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + artUrl
       const features = 'width=575,height=400,menubar=no,toolbar=no'
       window.open(fbUrl, '', features)
     }
@@ -124,8 +124,8 @@
         height="216.9"
         viewBox="0 0 447 216.9"
         version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink">
+        xmlns="https://www.w3.org/2000/svg"
+        xmlns:xlink="https://www.w3.org/1999/xlink">
         <style type="text/css">.st0{fill:#E61E49;} .st1{fill:#1D1D1B;}</style>
         <g>
           <path
