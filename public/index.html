@@ -1,18 +1,21 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
+
   <!-- Document properties -->
   <title>Libération.fr – [WIP] title</title>
   <link rel="canonical" href="[WIP] Url complète de l'article">
-  <link
-    rel="shortcut icon"
-    type="image/x-icon"
-    href="https://www.liberation.fr/apps/static/assets/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="https://www.liberation.fr/apps/static/assets/favicon.ico">
+  <meta charset="utf-8">
   <meta name="author" content="[WIP] auteur">
   <meta name="description" content="[WIP] description, ex: Tout savoir sur les dernières actualités politiques, monde, société, sports, écologie avec le journal en ligne Libération.">
   <meta name="keywords" content="[WIP] keywords, ex: actualités, news">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  
+  <!-- Create React App stuff -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@libe" />
@@ -23,6 +26,7 @@
   <meta name="twitter:image" content="[WIP] image pour Twitter">
   <meta name="custom:tweet-text" content="[WIP] Texte du tweet">
   <meta name="custom:tweet-via" content="[WIP] Mentions du tweet, séparées par des virgules ex: @libe, @libe-sixplus">
+  
   <!-- Social media -->
   <meta property="og:site_name" content="Libération.fr"/>
   <meta property="og:type" content="article" />
@@ -30,46 +34,23 @@
   <meta property="og:title" content="[WIP] Titre pour les RS" />
   <meta property="og:description" content="[WIP] description pour les RS" />
   <meta property="og:image" content="[WIP] Url complète de l'image de l'article pour les RS" />
+  
   <!-- Libé styles -->
   <style>
     html,body { margin: 0; padding: 0; height:100%; width:100%; }
     #libe-menu { height: auto !important; }
   </style>
-
-<!------------------------------------------ APP START ------------------------------------------->
-
-  <!-- App styles -->
+  
+  <!-- Libe Labo styles -->
   <link rel="stylesheet" href="https://www.liberation.fr/apps/static/lib/normalize-8.0.0.css">
   <link rel="stylesheet" href="https://www.liberation.fr/apps/static/styles/fonts.css">
   <link rel="stylesheet" href="https://www.liberation.fr/apps/static/styles/font-classes.css">
-  <link rel="stylesheet" href="styles/components.css">
-  <link rel="stylesheet" href="styles/style.css">
+  <!-- <link rel="stylesheet" href="https://www.liberation.fr/apps/static/styles/some-app.css"> -->
 </head>
-
 <body>
-  <!-- App body -->
-  <div id="app" class="app">
-    <div class="app__example-paragraph">
-      <p>Some content</p>
-    </div>
-    <div class="app__example-share">
-      <div class="share-article share-article_small"></div>
-    </div>
-    <div class="app__example-share">
-      <div class="share-article"></div>
-    </div>
-    <div class="app__footer-logo">
-      <div class="sixplus-logo">
-      </div>
-    </div>
-  </div>
 
-  <!-- App scripts -->
-  <script type="text/javascript" src="https://www.liberation.fr/apps/static/lib/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="scripts/components.js"></script>
-  <script type="text/javascript" src="scripts/main.js"></script>
-
-<!-------------------------------------------- APP END ------------------------------------------->
+  <!-- React app -->
+  <div id="react-app-root"></div>
 
   <!-- Libé header injection -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
