@@ -8,7 +8,7 @@ module.exports = {
     xiti_id: 'test'
   },
   tracking: {
-    active: true,
+    active: false,
     format: 'libe-apps-template',
     article: 'libe-apps-template'
   }
