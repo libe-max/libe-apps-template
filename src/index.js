@@ -29,13 +29,14 @@ class AppWrapper extends Component {
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
-      </Helmet>{
-        tracking.active
-          ? <LoadAndPing
-            format={tracking.format}
-            article={tracking.article} />
-          : ''
-      }<App {...props} />
+      </Helmet>
+      <App {...props} />{
+      tracking.active
+        ? <LoadAndPing
+          format={tracking.format}
+          article={tracking.article} />
+        : ''
+    }
     </div>
   }
 
