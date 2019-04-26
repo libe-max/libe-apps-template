@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Helmet } from 'react-helmet'
+import LoadAndPing from 'libe-components/lib/tracking/LoadAndPing'
 import * as serviceWorker from './serviceWorker'
 import config from './config'
 import 'whatwg-fetch'
 
-const MyApp = props => <div>
+const App = props => <div>
   Replace this component with your app
 </div>
 
 class AppWrapper extends Component {
   render () {
     const { props } = this
-    const { title, url, description, author, image } = props.meta
+    const { meta, tracking } = props
+    const { title, url, description, author, image } = meta
     return <div id='libe-labo-app-wrapper'>
       <Helmet>
         <title>Libération.fr – {title}</title>
@@ -27,8 +29,13 @@ class AppWrapper extends Component {
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
-      </Helmet>
-      <MyApp {...props} />
+      </Helmet>{
+        tracking.active
+          ? <LoadAndPing
+            format={tracking.format}
+            article={tracking.article} />
+          : ''
+      }<App {...props} />
     </div>
   }
 
