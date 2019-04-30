@@ -14,21 +14,23 @@ class AppWrapper extends Component {
   render () {
     const { props } = this
     const { meta, tracking } = props
-    const { title, url, description, author, image } = meta
+    const { title, url, description, author, image, statics_url, stylesheet } = meta
+    const stylesheetUrl = `${statics_url}/styles/apps/${stylesheet}`
     return <div id='libe-labo-app-wrapper'>
       <Helmet>
         <title>Libération.fr – {title}</title>
-        <link rel="canonical" href={url} />
-        <meta name="author" content={author} />
-        <meta name="description" content={description} />
-        <meta property="og:url" content={url} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={image} />
-        <meta name="twitter:url" content={url} />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={image} />
+        <link rel='canonical' href={url} />
+        <meta name='author' content={author} />
+        <meta name='description' content={description} />
+        <meta property='og:url' content={url} />
+        <meta property='og:title' content={title} />
+        <meta property='og:description' content={description} />
+        <meta property='og:image' content={image} />
+        <meta name='twitter:url' content={url} />
+        <meta name='twitter:title' content={title} />
+        <meta name='twitter:description' content={description} />
+        <meta name='twitter:image' content={image} />
+        <link rel='stylesheet' href={stylesheetUrl} />
       </Helmet>
       <App {...props} />{
       tracking.active
