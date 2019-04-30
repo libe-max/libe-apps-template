@@ -13,8 +13,8 @@ const App = props => <div>
 class AppWrapper extends Component {
   render () {
     const { props } = this
-    const { meta, tracking } = props
-    const { title, url, description, author, image, statics_url, stylesheet } = meta
+    const { meta, tracking, statics_url, stylesheet } = props
+    const { title, url, description, author, image } = meta
     const stylesheetUrl = `${statics_url}/styles/apps/${stylesheet}`
     return <div id='libe-labo-app-wrapper'>
       <Helmet>
