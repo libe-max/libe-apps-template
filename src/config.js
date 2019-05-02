@@ -13,7 +13,7 @@ module.exports = {
     article: 'libe-apps-template'
   },
   statics_url: process.env.NODE_ENV === 'production'
-    ? 'https://www.liberation.fr/apps/statics'
+    ? 'https://www.liberation.fr/apps/static'
     : 'http://localhost:3003',
   api_url: process.env.NODE_ENV === 'production'
     ? 'https://libe-labo.site/api'
