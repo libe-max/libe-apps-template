@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Helmet } from 'react-helmet'
-import LoadAndPing from 'libe-components/lib/tracking/LoadAndPing'
 import * as serviceWorker from './serviceWorker'
 import config from './config'
 import 'whatwg-fetch'
@@ -13,7 +12,7 @@ const App = props => <div>
 class AppWrapper extends Component {
   render () {
     const { props } = this
-    const { meta, tracking, statics_url, stylesheet } = props
+    const { meta, statics_url, stylesheet } = props
     const { title, url, description, author, image } = meta
     const stylesheetUrl = `${statics_url}/styles/apps/${stylesheet}`
     return <div id='libe-labo-app-wrapper'>
@@ -32,13 +31,7 @@ class AppWrapper extends Component {
         <meta name='twitter:image' content={image} />
         <link rel='stylesheet' href={stylesheetUrl} />
       </Helmet>
-      <App {...props} />{
-      tracking.active
-        ? <LoadAndPing
-          format={tracking.format}
-          article={tracking.article} />
-        : ''
-    }
+      <App {...props} />
     </div>
   }
 
