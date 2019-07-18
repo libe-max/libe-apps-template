@@ -37,9 +37,13 @@ class AppWrapper extends Component {
 
   componentDidMount () {
     const { xiti_id } = this.props.meta
+    const headerScript = document.createElement('script')
     const chartbeat = document.createElement('script')
     const googleAnalytics = document.createElement('script')
     const xiti = document.createElement('script')
+    const xtCore = document.createElement('script')
+    headerScript.setAttribute('type', 'text/javascript')
+    headerScript.setAttribute('src', 'https://www.liberation.fr/menu/script.js')
     chartbeat.innerHTML = `
     var _sf_async_config={};
     _sf_async_config.uid = 43601;
@@ -82,10 +86,16 @@ class AppWrapper extends Component {
     xt_ac = "";
     if (window.xtparam==null) { window.xtparam = ''; }
     window.xtparam += "&ptype="+xt_pagetype+"&ac="+xt_ac+"&an="+xt_an+xt_multc;`
+    xtCore.setAttribute('type', 'text/javascript')
+    xtCore.setAttribute('src', 'https://statics.liberation.fr/bloom/theme/js/xtcore.js')
+    if (config.show_header) {
+      document.body.appendChild(headerScript)
+    }
     if (process.env.NODE_ENV === 'production') {
       document.body.appendChild(chartbeat)
       document.body.appendChild(googleAnalytics)
       document.body.appendChild(xiti)
+      document.body.appendChild(xtCore)
     }
   }
 }
