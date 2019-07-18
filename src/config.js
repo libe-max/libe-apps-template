@@ -12,7 +12,7 @@ module.exports = {
     format: 'libe-apps-template',
     article: 'libe-apps-template'
   },
-  show_header: false,
+  show_header: true,
   statics_url: process.env.NODE_ENV === 'production'
     ? 'https://www.liberation.fr/apps/static'
     : 'http://localhost:3003',
