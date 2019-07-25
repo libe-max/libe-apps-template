@@ -2,19 +2,15 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Helmet } from 'react-helmet'
 import * as serviceWorker from './serviceWorker'
+import App from './App'
 import config from './config'
 import 'whatwg-fetch'
-
-const App = props => <div>
-  Replace this component with your app
-</div>
 
 class AppWrapper extends Component {
   render () {
     const { props } = this
     const { meta, statics_url, stylesheet } = props
     const { title, url, description, author, image } = meta
-    const stylesheetUrl = `${statics_url}/styles/apps/${stylesheet}`
     return <div id='libe-labo-app-wrapper'>
       <Helmet>
         <title>Libération.fr – {title}</title>
@@ -29,7 +25,18 @@ class AppWrapper extends Component {
         <meta name='twitter:title' content={title} />
         <meta name='twitter:description' content={description} />
         <meta name='twitter:image' content={image} />
-        <link rel='stylesheet' href={stylesheetUrl} />
+        {/* Libé styles */}
+        <link rel="stylesheet" href={`${statics_url}/styles/liberation.css`} />
+        {/* Libe Labo styles */}
+        <link rel="stylesheet" href={`${statics_url}/lib/normalize-8.0.0.css`} />
+        <link rel="stylesheet" href={`${statics_url}/styles/fonts.css`} />
+        <link rel="stylesheet" href={`${statics_url}/styles/font-classes.css`} />
+        <link rel="stylesheet" href={`${statics_url}/styles/components.css`} />
+        <link rel="stylesheet" href={`${statics_url}/styles/apps.css`} />
+        {/* Leaflet styles */}
+        <link rel="stylesheet" href={`${statics_url}/lib/leaflet-1.4.0/leaflet.css`} />
+        {/* This app styles */}
+        <link rel='stylesheet' href={`${statics_url}/styles/apps/${stylesheet}`} />
       </Helmet>
       <App {...props} />
     </div>
@@ -88,9 +95,7 @@ class AppWrapper extends Component {
     window.xtparam += "&ptype="+xt_pagetype+"&ac="+xt_ac+"&an="+xt_an+xt_multc;`
     xtCore.setAttribute('type', 'text/javascript')
     xtCore.setAttribute('src', 'https://statics.liberation.fr/bloom/theme/js/xtcore.js')
-    if (config.show_header) {
-      document.body.appendChild(headerScript)
-    }
+    if (config.show_header) document.body.appendChild(headerScript)
     if (process.env.NODE_ENV === 'production') {
       document.body.appendChild(chartbeat)
       document.body.appendChild(googleAnalytics)
