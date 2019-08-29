@@ -11,7 +11,6 @@ class AppWrapper extends Component {
     const { props } = this
     const { meta, statics_url, stylesheet } = props
     const { title, url, description, author, image } = meta
-    // [WIP] This should be added directly in index.html when `npm run build`
     return <div id='libe-labo-app-wrapper'>
       <Helmet>
         <title>Libération.fr – {title}</title>
