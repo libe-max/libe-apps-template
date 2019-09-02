@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
 import Loader from 'libe-components/lib/blocks/Loader'
 import LoadingError from 'libe-components/lib/blocks/LoadingError'
-
-/*
- *   MyNew app
- *   ------------------------------------------------------
- *
- *   DESCRIPTION
- *   Lorem ipsum dolor sit amet   
- *
- */
+import ShareArticle from 'libe-components/lib/blocks/ShareArticle'
+import LibeLaboLogo from 'libe-components/lib/blocks/LibeLaboLogo'
+import ArticleMeta from 'libe-components/lib/blocks/ArticleMeta'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -113,6 +107,20 @@ export default class App extends Component {
       App is ready.<br />
       - fill spreadsheet field in config.js<br />
       - display it's content via state.data_sheet
+      <div className='lblb-default-apps-signature'>
+        <ArticleMeta publishedOn='02/09/2019 17:13' authors={[
+        { name: 'Jean-Sol Partre',
+          role: '',
+          link: 'www.liberation.fr' },
+        { name: 'Maxime Fabas',
+          role: 'Production',
+          link: 'lol.com'
+        }]} />
+      </div>
+      <div className='lblb-default-apps-social-and-logo'>
+        <ShareArticle short iconsOnly />
+        <LibeLaboLogo target='blank' />
+      </div>
     </div>
   }
 }
