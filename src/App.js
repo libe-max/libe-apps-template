@@ -107,18 +107,12 @@ export default class App extends Component {
       App is ready.<br />
       - fill spreadsheet field in config.js<br />
       - display it's content via state.data_sheet
-      <div className='lblb-default-apps-signature'>
-        <ArticleMeta publishedOn='02/09/2019 17:13' authors={[
-        { name: 'Jean-Sol Partre',
-          role: '',
-          link: 'www.liberation.fr' },
-        { name: 'Maxime Fabas',
-          role: 'Production',
-          link: 'lol.com'
-        }]} />
-      </div>
-      <div className='lblb-default-apps-social-and-logo'>
+      <div className='lblb-default-apps-footer'>
         <ShareArticle short iconsOnly />
+        <ArticleMeta publishedOn='02/09/2019 17:13' updatedOn='03/09/2019 10:36' authors={[
+          { name: 'Jean-Sol Partre', role: '', link: 'www.liberation.fr' },
+          { name: 'Maxime Fabas', role: 'Production', link: 'lol.com' }
+        ]} />
         <LibeLaboLogo target='blank' />
       </div>
     </div>
