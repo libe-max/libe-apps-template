@@ -91,7 +91,7 @@ export default class App extends Component {
    *
    * * * * * * * * * * * * * * * * */
   render () {
-    const { c, state } = this
+    const { c, state, props } = this
 
     /* Assign classes */
     const classes = [c]
@@ -108,7 +108,7 @@ export default class App extends Component {
       - fill spreadsheet field in config.js<br />
       - display it's content via state.data_sheet
       <div className='lblb-default-apps-footer'>
-        <ShareArticle short iconsOnly />
+        <ShareArticle short iconsOnly tweet={props.meta.tweet} url={props.meta.url} />
         <ArticleMeta publishedOn='02/09/2019 17:13' updatedOn='03/09/2019 10:36' authors={[
           { name: 'Jean-Sol Partre', role: '', link: 'www.liberation.fr' },
           { name: 'Maxime Fabas', role: 'Production', link: 'lol.com' }

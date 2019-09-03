@@ -1,11 +1,12 @@
 module.exports = {
   meta: {
-    author: '',
-    title: '',
+    author: 'Maxime Fabas',
+    title: 'Libé apps template',
     url: '',
     description: '',
     image: '',
-    xiti_id: 'test'
+    xiti_id: 'test',
+    tweet: 'Some tweet text'
   },
   tracking: {
     active: false,
