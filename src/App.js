@@ -15,7 +15,7 @@ export default class App extends Component {
     super()
     this.c = 'lblb-some-app'
     this.state = {
-      loading_sheet: false,
+      loading_sheet: true,
       error_sheet: null,
       data_sheet: []
     }
@@ -30,7 +30,8 @@ export default class App extends Component {
    * * * * * * * * * * * * * * * * */
   componentDidMount () {
     this.fetchCredentials()
-    if (this.props.spreadsheet) this.fetchSheet()
+    if (this.props.spreadsheet) return this.fetchSheet()
+    return this.setState({ loading_sheet: false })
   }
 
   /* * * * * * * * * * * * * * * * *
