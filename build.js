@@ -17,7 +17,7 @@ async function readFilePromise (path, encoding = 'utf8') {
 
 async function writeFilePromise (path, data, encoding = 'utf8') {
   const result = await new Promise ((resolve, reject) => {
-    writeFile(path, encoding, err => {
+    writeFile(path, data, encoding, err => {
       if (err) resolve({ success: null, error: err })
       else resolve({ success: true, error: null })
     })
