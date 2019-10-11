@@ -37,6 +37,7 @@ class AppWrapper extends Component {
         <link rel="stylesheet" href={`${statics_url}/lib/leaflet-1.4.0/leaflet.css`} />
         {/* This app styles */}
         <link rel='stylesheet' href={`${statics_url}/styles/apps/${stylesheet}`} />
+        <link rel='stylesheet' href='./custom.css' />
       </Helmet>
       <App {...props} />
     </div>
