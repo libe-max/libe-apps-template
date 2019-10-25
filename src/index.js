@@ -84,9 +84,9 @@ class AppWrapper extends Component {
     xiti.innerHTML = `
     xtnv = document;
     xtsd = "https://logliberation";
-    xtsite = "381060";
+    xtsite = "507510";
     xtn2 = "48";
-    xtpage = "Static::Data::${xiti_id}";
+    xtpage = "LibeLabo::${xiti_id}";
     xtdi = "";
     xt_pagetype = "";
     xt_multc = "&x1=0&x2=43&x3=&x4=&x5=&x6=7&x7=";
