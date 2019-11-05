@@ -14,9 +14,23 @@ class AppWrapper extends Component {
    * * * * * * * * * * * * * * * * */
   constructor (props) {
     super(props)
-    this.getHeaderHeight = this.getHeaderHeight.bind(this)
-    window.setInterval(this.getHeaderHeight, 500)
-    window.onResize = this.getHeaderHeight
+    this.getElementsHeight = this.getElementsHeight.bind(this)
+    if (!window.LBLB_GLOBAL) window.LBLB_GLOBAL = {}
+    window.LBLB_GLOBAL.rem = 16
+    window.LBLB_GLOBAL.breakpoints = {
+      lg: { min: 1 + 63 * window.LBLB_GLOBAL.rem, max: Infinity },
+      md: { min: 1 + 40 * window.LBLB_GLOBAL.rem, max: 63 * window.LBLB_GLOBAL.rem },
+      sm: { min: 0, max: 40 * window.LBLB_GLOBAL.rem }
+    }
+    Object.defineProperty(window.LBLB_GLOBAL, 'current_display', {
+      get: function () {
+        return Object.keys(this.breakpoints).find(name => {
+          return this.breakpoints[name].min <= this.client_width &&
+            this.breakpoints[name].max >= this.client_width
+        })
+      }
+    })
+    window.setInterval(this.getElementsHeight, 250)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -25,7 +39,7 @@ class AppWrapper extends Component {
    *
    * * * * * * * * * * * * * * * * */
   componentWillUnmount () {
-    window.clearInterval(this.getHeaderHeight)
+    window.clearInterval(this.getElementsHeight)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -100,20 +114,26 @@ class AppWrapper extends Component {
    * GET HEADER HEIGHT
    *
    * * * * * * * * * * * * * * * * */
-  getHeaderHeight () {
+  getElementsHeight () {
     const $nav = document.querySelector('nav.main-nav')
     const $body = document.querySelector('body')
-    if (!window.LBLB_GLOBAL) window.LBLB_GLOBAL = {}
     const pNavHeight = window.LBLB_GLOBAL.nav_height
     const pBodyPaddingTop = window.LBLB_GLOBAL.body_padding_top
+    const pClientWidth = window.LBLB_GLOBAL.client_width
+    const pClientHeight = window.LBLB_GLOBAL.client_height
     const navHeight = $nav ? $nav.offsetHeight : 0
     const bodyPaddingTop = $body ? parseFloat(window.getComputedStyle($body)['padding-top'].slice(0, -2)) : 0
+    const clientWidth = document.documentElement.clientWidth
+    const clientHeight = document.documentElement.clientHeight
     window.LBLB_GLOBAL.nav_height = navHeight
     window.LBLB_GLOBAL.body_padding_top = bodyPaddingTop
+    window.LBLB_GLOBAL.client_width = clientWidth
+    window.LBLB_GLOBAL.client_height = clientHeight
     if (pNavHeight !== navHeight ||
-      pBodyPaddingTop !== bodyPaddingTop) {
-      const event = new CustomEvent('lblb-header-height-change')
-      window.dispatchEvent(event)
+      pBodyPaddingTop !== bodyPaddingTop ||
+      pClientWidth !== clientWidth ||
+      pClientHeight !== clientHeight) {
+      window.dispatchEvent(new CustomEvent('lblb-client-dimensions-change'))
     }
   }
 
