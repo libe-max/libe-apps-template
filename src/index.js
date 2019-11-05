@@ -7,42 +7,32 @@ import config from './config'
 import 'whatwg-fetch'
 
 class AppWrapper extends Component {
-  render () {
-    const { props } = this
-    const { meta, statics_url, stylesheet } = props
-    const { title, url, description, author, image } = meta
-    return <div id='libe-labo-app-wrapper'>
-      <Helmet>
-        <title>Libération.fr – {title}</title>
-        <link rel='canonical' href={url} />
-        <meta name='author' content={author} />
-        <meta name='description' content={description} />
-        <meta property='og:url' content={url} />
-        <meta property='og:title' content={title} />
-        <meta property='og:description' content={description} />
-        <meta property='og:image' content={image} />
-        <meta name='twitter:url' content={url} />
-        <meta name='twitter:title' content={title} />
-        <meta name='twitter:description' content={description} />
-        <meta name='twitter:image' content={image} />
-        {/* Libé styles */}
-        <link rel="stylesheet" href={`${statics_url}/styles/liberation.css`} />
-        {/* Libe Labo styles */}
-        <link rel="stylesheet" href={`${statics_url}/lib/normalize-8.0.0.css`} />
-        <link rel="stylesheet" href={`${statics_url}/styles/fonts.css`} />
-        <link rel="stylesheet" href={`${statics_url}/styles/font-classes.css`} />
-        <link rel="stylesheet" href={`${statics_url}/styles/components.css`} />
-        <link rel="stylesheet" href={`${statics_url}/styles/apps.css`} />
-        {/* Leaflet styles */}
-        <link rel="stylesheet" href={`${statics_url}/lib/leaflet-1.4.0/leaflet.css`} />
-        {/* This app styles */}
-        <link rel='stylesheet' href={`${statics_url}/styles/apps/${stylesheet}`} />
-        <link rel='stylesheet' href='./custom.css' />
-      </Helmet>
-      <App {...props} />
-    </div>
+  /* * * * * * * * * * * * * * * * *
+   *
+   * CONSTRUCTOR
+   *
+   * * * * * * * * * * * * * * * * */
+  constructor (props) {
+    super(props)
+    this.getHeaderHeight = this.getHeaderHeight.bind(this)
+    window.setInterval(this.getHeaderHeight, 500)
+    window.onResize = this.getHeaderHeight
   }
 
+  /* * * * * * * * * * * * * * * * *
+   *
+   * WILL UNMOUNT
+   *
+   * * * * * * * * * * * * * * * * */
+  componentWillUnmount () {
+    window.clearInterval(this.getHeaderHeight)
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * DID MOUNT
+   *
+   * * * * * * * * * * * * * * * * */
   componentDidMount () {
     const { xiti_id } = this.props.meta
     const headerScript = document.createElement('script')
@@ -103,6 +93,69 @@ class AppWrapper extends Component {
       document.body.appendChild(xiti)
       document.body.appendChild(xtCore)
     }
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * GET HEADER HEIGHT
+   *
+   * * * * * * * * * * * * * * * * */
+  getHeaderHeight () {
+    const $nav = document.querySelector('nav.main-nav')
+    const $body = document.querySelector('body')
+    if (!window.LBLB_GLOBAL) window.LBLB_GLOBAL = {}
+    const pNavHeight = window.LBLB_GLOBAL.nav_height
+    const pBodyPaddingTop = window.LBLB_GLOBAL.body_padding_top
+    const navHeight = $nav ? $nav.offsetHeight : 0
+    const bodyPaddingTop = $body ? parseFloat(window.getComputedStyle($body)['padding-top'].slice(0, -2)) : 0
+    window.LBLB_GLOBAL.nav_height = navHeight
+    window.LBLB_GLOBAL.body_padding_top = bodyPaddingTop
+    if (pNavHeight !== navHeight ||
+      pBodyPaddingTop !== bodyPaddingTop) {
+      const event = new CustomEvent('lblb-header-height-change')
+      window.dispatchEvent(event)
+    }
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * RENDER
+   *
+   * * * * * * * * * * * * * * * * */
+  render () {
+    const { props } = this
+    const { meta, statics_url, stylesheet } = props
+    const { title, url, description, author, image } = meta
+    return <div id='libe-labo-app-wrapper'>
+      <Helmet>
+        <title>Libération.fr – {title}</title>
+        <link rel='canonical' href={url} />
+        <meta name='author' content={author} />
+        <meta name='description' content={description} />
+        <meta property='og:url' content={url} />
+        <meta property='og:title' content={title} />
+        <meta property='og:description' content={description} />
+        <meta property='og:image' content={image} />
+        <meta name='twitter:url' content={url} />
+        <meta name='twitter:title' content={title} />
+        <meta name='twitter:description' content={description} />
+        <meta name='twitter:image' content={image} />
+        {/* Libé styles */}
+        <link rel="stylesheet" href={`${statics_url}/styles/liberation.css`} />
+        {/* Libe Labo styles */}
+        <link rel="stylesheet" href={`${statics_url}/lib/normalize-8.0.0.css`} />
+        <link rel="stylesheet" href={`${statics_url}/styles/fonts.css`} />
+        <link rel="stylesheet" href={`${statics_url}/styles/font-classes.css`} />
+        <link rel="stylesheet" href={`${statics_url}/styles/components.css`} />
+        <link rel="stylesheet" href={`${statics_url}/styles/apps.css`} />
+        {/* Leaflet styles */}
+        <link rel="stylesheet" href={`${statics_url}/lib/leaflet-1.4.0/leaflet.css`} />
+        {/* This app styles */}
+        <link rel='stylesheet' href={`${statics_url}/styles/apps/${stylesheet}`} />
+        <link rel='stylesheet' href='./custom.css' />
+      </Helmet>
+      <App {...props} />
+    </div>
   }
 }
 

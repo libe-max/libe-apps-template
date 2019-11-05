@@ -47,8 +47,9 @@ export default class App extends Component {
       const reach = await window.fetch(api, { method: 'POST' })
       const response = await reach.json()
       const { lblb_tracking, lblb_posting } = response._credentials
-      window.lblb_tracking = lblb_tracking
-      window.lblb_posting = lblb_posting
+      if (!window.LBLB_GLOBAL) window.LBLB_GLOBAL = {}
+      window.LBLB_GLOBAL.lblb_tracking = lblb_tracking
+      window.LBLB_GLOBAL.lblb_posting = lblb_posting
       return { lblb_tracking, lblb_posting }
     } catch (error) {
       console.error(`Unable to fetch credentials:`)
