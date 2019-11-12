@@ -161,15 +161,15 @@ class AppWrapper extends Component {
         <meta name='twitter:description' content={description} />
         <meta name='twitter:image' content={image} />
         {/* Libé styles */}
-        <link rel="stylesheet" href={`${statics_url}/styles/liberation.css`} />
+        <link rel='stylesheet' href={`${statics_url}/styles/liberation.css`} />
         {/* Libe Labo styles */}
-        <link rel="stylesheet" href={`${statics_url}/lib/normalize-8.0.0.css`} />
-        <link rel="stylesheet" href={`${statics_url}/styles/fonts.css`} />
-        <link rel="stylesheet" href={`${statics_url}/styles/font-classes.css`} />
-        <link rel="stylesheet" href={`${statics_url}/styles/components.css`} />
-        <link rel="stylesheet" href={`${statics_url}/styles/apps.css`} />
+        <link rel='stylesheet' href={`${statics_url}/lib/normalize-8.0.0.css`} />
+        <link rel='stylesheet' href={`${statics_url}/styles/fonts.css`} />
+        <link rel='stylesheet' href={`${statics_url}/styles/font-classes.css`} />
+        <link rel='stylesheet' href={`${statics_url}/styles/components.css`} />
+        <link rel='stylesheet' href={`${statics_url}/styles/apps.css`} />
         {/* Leaflet styles */}
-        <link rel="stylesheet" href={`${statics_url}/lib/leaflet-1.4.0/leaflet.css`} />
+        <link rel='stylesheet' href={`${statics_url}/lib/leaflet-1.4.0/leaflet.css`} />
         {/* This app styles */}
         <link rel='stylesheet' href={`${statics_url}/styles/apps/${stylesheet}`} />
         <link rel='stylesheet' href='./custom.css' />
