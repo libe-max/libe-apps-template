@@ -1,14 +1,112 @@
 # Libé apps template
 
-This repo contains a wrapper for every Libé Labo app.
+## General purpose
 
-Every Libé Labo app needs to be a React component, expecting to recieve props describing the content of the app.
+This repo contains the shared codebase for every front-end [Libé Labo](https://www.liberation.fr/libe-labo-data-nouveaux-formats,100538) app. Its purpose is to hold some transverse styles, scripts, functions, global variables, states, configurations and so on...
 
-When an app is displayed by the [Libé App Editor (Libé Tools)](https://github.com/libe-max/libe-tools), there is no need for this Libé apps template. The props are given to the app component by the editor which gets them from it's database.
+Every Libé Labo app is a fork of this repo.
 
-When the editor exports the app in order to make it live on it's own, it copies the Libé apps template repo, fills the `config.js` file, places the desired app component inside the app template, and runs `npm run build` in order to produce a production ready app, wrapped with the common Libé elements contained in this template, such as the Header or the meta tags for social networks (see `/public/index.html`).
+## Technologies
 
-## Create React app stuff
+This project implies the use of HTML, CSS, JavaScript, [React](https://reactjs.org/), and [Node.js](https://nodejs.org/en/). Furthermore, you'll need an up to date version of [MongoDB](https://docs.mongodb.com/manual/administration/install-community/) (3.6) and [Node.js](https://nodejs.org/en/) (LTS). It is strongly recommended that you use [NVM](https://github.com/nvm-sh/nvm) to manage multiple versions of Node.js.
+
+Good news is: React comes here with no Webpack configuration nightmare, since the project was initially created with [Create React App](https://github.com/facebook/create-react-app).
+
+## Install, start, build, publish & fork
+
+In a dev context, this app assumes the existence of a local instance of [libe-data-server](https://github.com/libe-data-server) running locally on port 3004, and [libe-static-ressources](https://github.com/libe-static-ressources), on port 3003.
+
+In a prod context, it is assumed that the [libe-data-server](https://github.com/libe-data-server) is hosted on https://libe-labo-2.site, and [libe-static-ressources](https://github.com/libe-static-ressources) on https://www.liberation.fr/apps/static
+
+#### Install
+
+```bash
+# Go to your favorite location
+> cd /wherever/you/want
+
+# Create a place for your database to store data
+> mkdir libe-database && mkdir libe-database/db
+
+# Clone libe-apps-template and its friends
+> git clone https://github.com/libe-max/libe-apps-template.git
+> git clone https://github.com/libe-max/libe-static-ressources.git
+> git clone https://github.com/libe-max/libe-data-server.git
+
+# Install dependencies (libe-static-ressources has none)
+> cd libe-data-server/ && npm i
+> cd ../libe-apps-template/ && npm i
+
+# It's all good!
+```
+
+#### Start
+
+```bash
+# Start the libe-static-ressources (simple HTTP python server on port 3003)
+> cd /wherever/you/installed/libe-static-ressources/ && npm start
+
+# Run a MongoDB instance on default port (27017)
+> mongod --dbpath ../libe-database/db/
+
+# Start the libe-data-server (Nodejs/Expressjs server on port 3004)
+> cd ../libe-data-server/ && npm start
+
+# Start libe-apps-template (React app with hot reloading on port 3000)
+> cd ../libe-apps-template/ && npm start
+```
+
+#### Build
+
+This app never really needs to be built, since its only purpose is to be forked and used as the beginning of other projects. However, the build script does some fancy stuff on top of the default build script coming with create-react-app. Details on what happens when building can be found a bit further in this document.
+
+```bash
+> cd /wherever/you/installed/libe-apps-template
+
+# Optional but generally a good idea to lint
+> npm run standard-fix
+
+# Build
+> npm run build
+```
+
+#### Publish
+
+When you're done writing wonderful improvments to this app :
+
+```bash
+> cd /wherever/you/installed
+
+# Commit and push everything
+> git add *
+> git commit -m "some lowercase descriptive action text"
+> git push origin master
+
+# Update "version" field in package.json, according to the [semantic versionning](https://semver.org/) method.
+> nano package.json
+
+# Install dependencies again in order to update package-lock.json
+> npm i
+
+# Commit & push version change
+> git add *
+> git commit -m "v{MAJOR}.{MINOR}.{PATCH}"
+> git push origin master
+
+# Publish to NPM
+> npm publish
+```
+
+#### Fork
+
+
+
+
+
+## Contents
+
+
+
+## Initial Create React app README.md
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -54,3 +152,10 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Auteurs
+
+- **Maxime Fabas** - _Rédaction_ - [maximefabas.github.io](https://maximefabas.github.io)
+
+___
+![Logo Libération](https://www.liberation.fr/apps/static/assets/liberation-logo_raster_64.png)       ![Logo Libé labo](https://www.liberation.fr/apps/static/assets/libe-labo-logo_raster_64.png)
