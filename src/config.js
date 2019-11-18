@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   meta: {
     author: 'Maxime Fabas',
     title: 'Libé apps template',
@@ -23,3 +23,5 @@ module.exports = {
   stylesheet: 'libe-apps-template.css', // The name of the css file hosted at ${statics_url}/styles/apps/
   spreadsheet: undefined // The spreadsheet providing data to the app
 }
+
+export default config
