@@ -22,7 +22,7 @@ In a prod context, it is assumed that the [libe-data-server](https://github.com/
 
 ```bash
 # Go to your favorite location
-> cd /wherever/you/want
+> cd /wherever/you/want/
 
 # Create a place for your database to store data
 > mkdir libe-database && mkdir libe-database/db
@@ -60,7 +60,7 @@ In a prod context, it is assumed that the [libe-data-server](https://github.com/
 This app never really needs to be built, since its only purpose is to be forked and used as the beginning of other projects. However, the build script does some fancy stuff on top of the default build script coming with create-react-app. Details on what happens when building can be found a bit further in this document.
 
 ```bash
-> cd /wherever/you/installed/libe-apps-template
+> cd /wherever/you/installed/libe-apps-template/
 
 # Optional but generally a good idea to lint
 > npm run standard-fix
@@ -74,7 +74,7 @@ This app never really needs to be built, since its only purpose is to be forked 
 When you're done writing wonderful improvments to this app :
 
 ```bash
-> cd /wherever/you/installed
+> cd /wherever/you/installed/libe-apps-template/
 
 # Commit and push everything
 > git add *
@@ -146,13 +146,13 @@ Path | Purpose
 -|-
 `/package.json` | The ID card of the project 
 `/package-lock.json` | Don't touch this 
-`/node_modules/` | Where the dependencies of the project are 
+**`/node_modules/`** | Where the dependencies of the project are 
 `/build.js` | The script executed in order to make an production build 
-`/public/` | **Home of the static files** 
+**`/public/`** | **Home of the static files** 
 `/public/index.html` | The template page where the React app (`/src/index.js`) injects stuff 
 `/public/custom.css` | Specific styles for your app overwriting the generic styles of the template 
 `/public/manifest.json` | ¯\\\_(ツ)\_/¯ 
-`/src/` | **The core of the app** 
+**`/src/`** | **The core of the app** 
 `/src/config.js` | The configuration file where are stored information like the title, the description, the path to the image for social cards, the url of the spreadsheet to fetch, etc, ...<br />This file is used by `/build.js` to hardcode inside `/build/index.html` the SEO stuff. 
 `/src/index.js` | The root of the React app. This file is not supposed to be configurated when working on a new app, all the "variable" suff lies in `/src/App.js`, which is imported.<br />Also imports `/src/config.js`, some polyfill for `window.fetch`, injects tracking scripts, and makes some generic information accessible to the rest of the app, like the height of the header, and the dimensions of the window.<br />This component eventually renders the App component defined in  `/src/App.js`, and gives it all the contents of `/src/config.js` as props. 
 `/src/App.js` | Where is defined the first-level React component of the app. This is where you start coding. This file is also prefilled with generic stuff, which can be edited. The main elements of this file are: the root CSS class of the app (`this.c`), the automatic request for data posting credentials to `libe-data-server` when `componentDidMount`, the automatic fetch for the spreadsheet given in `/src/config.js`, and the automatic rendered UI elements for `loading_sheet` and `error_sheet` states. 
@@ -206,6 +206,8 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
 
 ## Auteurs
 
