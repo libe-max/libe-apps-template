@@ -146,8 +146,8 @@ Path | Purpose
 -|-
 `/package.json` | The ID card of the project 
 `/package-lock.json` | Don't touch this 
-**`/node_modules/`** | Where the dependencies of the project are 
 `/build.js` | The script executed in order to make an production build 
+**`/node_modules/`** | Where the dependencies of the project are 
 **`/public/`** | **Home of the static files** 
 `/public/index.html` | The template page where the React app (`/src/index.js`) injects stuff 
 `/public/custom.css` | Specific styles for your app overwriting the generic styles of the template 
