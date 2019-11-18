@@ -132,14 +132,14 @@ libe-apps-template
 ├── build.js
 ├── node_modules/
 ├── public/
-		├── index.html
-		├── custom.css
-		├── manifest.json
+    ├── index.html
+    ├── custom.css
+    ├── manifest.json
 ├── src/
-		├── config.js
-		├── index.js
-		├── App.js
-		├── serviceWorker.js
+    ├── config.js
+    ├── index.js
+    ├── App.js
+    ├── serviceWorker.js
 ```
 
 Path | Purpose 
