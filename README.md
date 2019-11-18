@@ -98,11 +98,34 @@ When you're done writing wonderful improvments to this app :
 
 #### Fork
 
+When you're ready to start working on a new project, it's time to fork this repo and add new stuff.
 
+```bash
+# Create an empty (no README, no .gitignore) repo (https://github.new), and clone it
+> cd /wherever/you/want && git clone https://github.com/your-name/your-repo
+
+# Add an upstream remote repo in order to pull from libe-apps-template
+> git remote add upstream https://github.com/libe-max/libe-apps-template
+
+# Pull from upstream repo
+> git pull upstream master
+
+# Push this new stuff to your origin repo
+> git push origin master
+
+# Install dependencies 
+> npm i
+
+# Now do the start steps and you're good!
+```
 
 
 
 ## Contents
+
+
+
+
 
 
 
