@@ -6,6 +6,8 @@ This repo contains the shared codebase for every front-end [Libé Labo](https://
 
 Every Libé Labo app is a fork of this repo.
 
+Home repo: https://github.com/libe-max/libe-apps-template
+
 ## Technologies
 
 This project implies the use of HTML, CSS, JavaScript, [React](https://reactjs.org/), and [Node.js](https://nodejs.org/en/). Furthermore, you'll need an up to date version of [MongoDB](https://docs.mongodb.com/manual/administration/install-community/) (3.6) and [Node.js](https://nodejs.org/en/) (LTS). It is strongly recommended that you use [NVM](https://github.com/nvm-sh/nvm) to manage multiple versions of Node.js.
