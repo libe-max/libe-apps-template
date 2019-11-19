@@ -1,4 +1,4 @@
-# Libé apps template
+# Libé Apps Template
 
 ## General purpose
 
