@@ -101,7 +101,6 @@ export default class App extends Component {
     const listener = (e) => {
     	keys.push(e.keyCode)
     	if (keys.join(',').includes(konami)) {
-        console.log("test")
     		document.removeEventListener('keydown', listener)
     		window.location.href = this.props.meta.konami
     	}
