@@ -21,6 +21,7 @@ export default class App extends Component {
     }
     this.fetchSheet = this.fetchSheet.bind(this)
     this.fetchCredentials = this.fetchCredentials.bind(this)
+    this.setKonami = this.setKonami.bind(this)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -29,6 +30,7 @@ export default class App extends Component {
    *
    * * * * * * * * * * * * * * * * */
   componentDidMount () {
+    this.setKonami()
     this.fetchCredentials()
     if (this.props.spreadsheet) return this.fetchSheet()
     return this.setState({ loading_sheet: false })
@@ -85,6 +87,26 @@ export default class App extends Component {
         return Error(error)
       }
     }
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * SET KONAMI EASTER EGG
+   *
+   * * * * * * * * * * * * * * * * */
+  setKonami () {
+    if (this.props.meta.konami === '') return ;
+    const konami = '38,38,40,40,37,39,37,39,66,65'
+    const keys = []
+    const listener = (e) => {
+    	keys.push(e.keyCode)
+    	if (keys.join(',').includes(konami)) {
+        console.log("test")
+    		document.removeEventListener('keydown', listener)
+    		window.location.href = this.props.meta.konami
+    	}
+    }
+    document.addEventListener('keydown', listener)
   }
 
   /* * * * * * * * * * * * * * * * *

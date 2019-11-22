@@ -6,7 +6,8 @@ const config = {
     description: '',
     image: '',
     xiti_id: 'test',
-    tweet: 'Some tweet text'
+    tweet: 'Some tweet text',
+    konami: ''
   },
   tracking: {
     active: false,
