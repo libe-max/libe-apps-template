@@ -54,7 +54,7 @@ export default class App extends Component {
       window.LBLB_GLOBAL.lblb_posting = lblb_posting
       return { lblb_tracking, lblb_posting }
     } catch (error) {
-      console.error(`Unable to fetch credentials:`)
+      console.error('Unable to fetch credentials:')
       console.error(error)
       return Error(error)
     }
@@ -95,15 +95,15 @@ export default class App extends Component {
    *
    * * * * * * * * * * * * * * * * */
   setKonami () {
-    if (this.props.meta.konami === '') return ;
+    if (this.props.meta.konami === '') return
     const konami = '38,38,40,40,37,39,37,39,66,65'
     const keys = []
     const listener = (e) => {
-    	keys.push(e.keyCode)
-    	if (keys.join(',').includes(konami)) {
-    		document.removeEventListener('keydown', listener)
-    		window.location.href = this.props.meta.konami
-    	}
+      keys.push(e.keyCode)
+      if (keys.join(',').includes(konami)) {
+        document.removeEventListener('keydown', listener)
+        window.location.href = this.props.meta.konami
+      }
     }
     document.addEventListener('keydown', listener)
   }
@@ -132,10 +132,12 @@ export default class App extends Component {
       - display it's content via state.data_sheet
       <div className='lblb-default-apps-footer'>
         <ShareArticle short iconsOnly tweet={props.meta.tweet} url={props.meta.url} />
-        <ArticleMeta publishedOn='02/09/2019 17:13' updatedOn='03/09/2019 10:36' authors={[
-          { name: 'Jean-Sol Partre', role: '', link: 'www.liberation.fr' },
-          { name: 'Maxime Fabas', role: 'Production', link: 'lol.com' }
-        ]} />
+        <ArticleMeta
+          publishedOn='02/09/2019 17:13' updatedOn='03/09/2019 10:36' authors={[
+            { name: 'Jean-Sol Partre', role: '', link: 'www.liberation.fr' },
+            { name: 'Maxime Fabas', role: 'Production', link: 'lol.com' }
+          ]}
+        />
         <LibeLaboLogo target='blank' />
       </div>
     </div>
