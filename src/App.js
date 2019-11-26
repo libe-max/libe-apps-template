@@ -17,11 +17,15 @@ export default class App extends Component {
     this.state = {
       loading_sheet: true,
       error_sheet: null,
-      data_sheet: []
+      data_sheet: [],
+      keystrokes_history: [],
+      konami_mode: false
     }
     this.fetchSheet = this.fetchSheet.bind(this)
     this.fetchCredentials = this.fetchCredentials.bind(this)
-    this.setKonami = this.setKonami.bind(this)
+    this.startListeningKeystrokes = this.startListeningKeystrokes.bind(this)
+    this.watchKonamiCode = this.watchKonamiCode.bind(this)
+
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -30,10 +34,23 @@ export default class App extends Component {
    *
    * * * * * * * * * * * * * * * * */
   componentDidMount () {
-    this.setKonami()
+    this.startListeningKeystrokes()
     this.fetchCredentials()
     if (this.props.spreadsheet) return this.fetchSheet()
     return this.setState({ loading_sheet: false })
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * SHOULD UPDATE
+   *
+   * * * * * * * * * * * * * * * * */
+  shouldComponentUpdate (prev, next) {
+    for (let key of Object.keys(this.state)) {
+      if (key !== 'keystrokes_history' && prev[key] !== next[key])
+        return true
+    }
+    return false
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -91,21 +108,28 @@ export default class App extends Component {
 
   /* * * * * * * * * * * * * * * * *
    *
-   * SET KONAMI EASTER EGG
+   * START LISTENING KEYSTROKES
    *
    * * * * * * * * * * * * * * * * */
-  setKonami () {
-    if (this.props.meta.konami === '') return
-    const konami = '38,38,40,40,37,39,37,39,66,65'
-    const keys = []
-    const listener = (e) => {
-      keys.push(e.keyCode)
-      if (keys.join(',').includes(konami)) {
-        document.removeEventListener('keydown', listener)
-        window.location.href = this.props.meta.konami
-      }
+  startListeningKeystrokes () {
+    document.addEventListener('keydown', (e) => {
+      this.state.keystrokes_history.push(e.keyCode)
+      if (this.state.keystrokes_history.length > 10)
+        this.state.keystrokes_history.shift()
+      this.watchKonamiCode()
+    })
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * WATCH KONAMI CODEs
+   *
+   * * * * * * * * * * * * * * * * */
+  watchKonamiCode () {
+    const konamiCodeStr = '38,38,40,40,37,39,37,39,66,65'
+    if (this.state.keystrokes_history.join(',') === konamiCodeStr) {
+      this.setState({ konami_mode: true })
     }
-    document.addEventListener('keydown', listener)
   }
 
   /* * * * * * * * * * * * * * * * *
