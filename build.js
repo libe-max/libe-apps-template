@@ -6,7 +6,7 @@ const cheerio = require('cheerio')
 const config = require('./src/config')
 
 async function readFilePromise (path, encoding = 'utf8') {
-  const result = await new Promise ((resolve, reject) => {
+  const result = await new Promise((resolve, reject) => {
     readFile(path, encoding, (err, data) => {
       if (err) resolve({ success: null, error: err })
       else resolve({ success: data, error: null })
@@ -16,7 +16,7 @@ async function readFilePromise (path, encoding = 'utf8') {
 }
 
 async function writeFilePromise (path, data, encoding = 'utf8') {
-  const result = await new Promise ((resolve, reject) => {
+  const result = await new Promise((resolve, reject) => {
     writeFile(path, data, encoding, err => {
       if (err) resolve({ success: null, error: err })
       else resolve({ success: true, error: null })
@@ -62,7 +62,6 @@ async function build () {
 
   // Return
   console.log('\nDone.')
-  return
 }
 
 build()

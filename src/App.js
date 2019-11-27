@@ -17,10 +17,15 @@ export default class App extends Component {
     this.state = {
       loading_sheet: true,
       error_sheet: null,
-      data_sheet: []
+      data_sheet: [],
+      keystrokes_history: [],
+      konami_mode: false
     }
     this.fetchSheet = this.fetchSheet.bind(this)
     this.fetchCredentials = this.fetchCredentials.bind(this)
+    this.startListeningKeystrokes = this.startListeningKeystrokes.bind(this)
+    this.watchKonamiCode = this.watchKonamiCode.bind(this)
+
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -29,9 +34,23 @@ export default class App extends Component {
    *
    * * * * * * * * * * * * * * * * */
   componentDidMount () {
+    this.startListeningKeystrokes()
     this.fetchCredentials()
     if (this.props.spreadsheet) return this.fetchSheet()
     return this.setState({ loading_sheet: false })
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * SHOULD UPDATE
+   *
+   * * * * * * * * * * * * * * * * */
+  shouldComponentUpdate (prev, next) {
+    for (let key of Object.keys(this.state)) {
+      if (key !== 'keystrokes_history' && prev[key] !== next[key])
+        return true
+    }
+    return false
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -52,7 +71,7 @@ export default class App extends Component {
       window.LBLB_GLOBAL.lblb_posting = lblb_posting
       return { lblb_tracking, lblb_posting }
     } catch (error) {
-      console.error(`Unable to fetch credentials:`)
+      console.error('Unable to fetch credentials:')
       console.error(error)
       return Error(error)
     }
@@ -89,6 +108,32 @@ export default class App extends Component {
 
   /* * * * * * * * * * * * * * * * *
    *
+   * START LISTENING KEYSTROKES
+   *
+   * * * * * * * * * * * * * * * * */
+  startListeningKeystrokes () {
+    document.addEventListener('keydown', (e) => {
+      this.state.keystrokes_history.push(e.keyCode)
+      if (this.state.keystrokes_history.length > 10)
+        this.state.keystrokes_history.shift()
+      this.watchKonamiCode()
+    })
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * WATCH KONAMI CODEs
+   *
+   * * * * * * * * * * * * * * * * */
+  watchKonamiCode () {
+    const konamiCodeStr = '38,38,40,40,37,39,37,39,66,65'
+    if (this.state.keystrokes_history.join(',') === konamiCodeStr) {
+      this.setState({ konami_mode: true })
+    }
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
    * RENDER
    *
    * * * * * * * * * * * * * * * * */
@@ -111,10 +156,12 @@ export default class App extends Component {
       - display it's content via state.data_sheet
       <div className='lblb-default-apps-footer'>
         <ShareArticle short iconsOnly tweet={props.meta.tweet} url={props.meta.url} />
-        <ArticleMeta publishedOn='02/09/2019 17:13' updatedOn='03/09/2019 10:36' authors={[
-          { name: 'Jean-Sol Partre', role: '', link: 'www.liberation.fr' },
-          { name: 'Maxime Fabas', role: 'Production', link: 'lol.com' }
-        ]} />
+        <ArticleMeta
+          publishedOn='02/09/2019 17:13' updatedOn='03/09/2019 10:36' authors={[
+            { name: 'Jean-Sol Partre', role: '', link: 'www.liberation.fr' },
+            { name: 'Maxime Fabas', role: 'Production', link: 'lol.com' }
+          ]}
+        />
         <LibeLaboLogo target='blank' />
       </div>
     </div>
