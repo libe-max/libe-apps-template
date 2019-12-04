@@ -23,9 +23,9 @@ export default class App extends Component {
     }
     this.fetchSheet = this.fetchSheet.bind(this)
     this.fetchCredentials = this.fetchCredentials.bind(this)
-    this.startListeningKeystrokes = this.startListeningKeystrokes.bind(this)
+    this.listenToKeyStrokes = this.listenToKeyStrokes.bind(this)
     this.watchKonamiCode = this.watchKonamiCode.bind(this)
-
+    window.setInterval(() => { console.log(this) }, 1000)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -34,7 +34,7 @@ export default class App extends Component {
    *
    * * * * * * * * * * * * * * * * */
   componentDidMount () {
-    this.startListeningKeystrokes()
+    document.addEventListener('keydown', this.listenToKeyStrokes)
     this.fetchCredentials()
     if (this.props.spreadsheet) return this.fetchSheet()
     return this.setState({ loading_sheet: false })
@@ -42,15 +42,26 @@ export default class App extends Component {
 
   /* * * * * * * * * * * * * * * * *
    *
+   * WILL UNMOUNT
+   *
+   * * * * * * * * * * * * * * * * */
+  componentWillUnmount () {
+    document.removeEventListener('keydown', this.listenToKeyStrokes)
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
    * SHOULD UPDATE
    *
    * * * * * * * * * * * * * * * * */
-  shouldComponentUpdate (prev, next) {
-    for (let key of Object.keys(this.state)) {
-      if (key !== 'keystrokes_history' && prev[key] !== next[key])
-        return true
-    }
-    return false
+  shouldComponentUpdate (props, nextState) {
+    const changedKeys = []
+    Object.keys(nextState).forEach(key => {
+      if (this.state[key] !== nextState[key]) changedKeys.push(key)
+    })
+    if (changedKeys.length === 1 &&
+      changedKeys.includes('keystrokes_history')) return false
+    return true
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -111,25 +122,23 @@ export default class App extends Component {
    * START LISTENING KEYSTROKES
    *
    * * * * * * * * * * * * * * * * */
-  startListeningKeystrokes () {
-    document.addEventListener('keydown', (e) => {
-      this.state.keystrokes_history.push(e.keyCode)
-      if (this.state.keystrokes_history.length > 10)
-        this.state.keystrokes_history.shift()
-      this.watchKonamiCode()
-    })
+  listenToKeyStrokes (e) {
+    if (!e || !e.keyCode) return
+    const currHistory = this.state.keystrokes_history
+    const newHistory = [...currHistory, e.keyCode]
+    this.setState({ keystrokes_history: newHistory })
+    this.watchKonamiCode()
   }
 
   /* * * * * * * * * * * * * * * * *
    *
-   * WATCH KONAMI CODEs
+   * WATCH KONAMI CODE
    *
    * * * * * * * * * * * * * * * * */
   watchKonamiCode () {
     const konamiCodeStr = '38,38,40,40,37,39,37,39,66,65'
-    if (this.state.keystrokes_history.join(',') === konamiCodeStr) {
-      this.setState({ konami_mode: true })
-    }
+    const lastTenKeys = this.state.keystrokes_history.slice(-10)
+    if (lastTenKeys.join(',') === konamiCodeStr) this.setState({ konami_mode: true })
   }
 
   /* * * * * * * * * * * * * * * * *
