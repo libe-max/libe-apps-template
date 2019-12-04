@@ -25,7 +25,6 @@ export default class App extends Component {
     this.fetchCredentials = this.fetchCredentials.bind(this)
     this.listenToKeyStrokes = this.listenToKeyStrokes.bind(this)
     this.watchKonamiCode = this.watchKonamiCode.bind(this)
-    window.setInterval(() => { console.log(this) }, 1000)
   }
 
   /* * * * * * * * * * * * * * * * *
