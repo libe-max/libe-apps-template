@@ -125,6 +125,7 @@ class AppWrapper extends Component {
     const bodyPaddingTop = $body ? parseFloat(window.getComputedStyle($body)['padding-top'].slice(0, -2)) : 0
     const clientWidth = document.documentElement.clientWidth
     const clientHeight = document.documentElement.clientHeight
+    const pCurrentDisplay = window.LBLB_GLOBAL.current_display
     window.LBLB_GLOBAL.nav_height = navHeight
     window.LBLB_GLOBAL.body_padding_top = bodyPaddingTop
     window.LBLB_GLOBAL.client_width = clientWidth
@@ -134,6 +135,9 @@ class AppWrapper extends Component {
       pClientWidth !== clientWidth ||
       pClientHeight !== clientHeight) {
       window.dispatchEvent(new CustomEvent('lblb-client-dimensions-change'))
+    }
+    if (pCurrentDisplay !== window.LBLB_GLOBAL.current_display) {
+      window.dispatchEvent(new CustomEvent('lblb-client-display-change'))
     }
   }
 
