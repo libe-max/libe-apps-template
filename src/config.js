@@ -24,4 +24,4 @@ const config = {
   spreadsheet: undefined // The spreadsheet providing data to the app
 }
 
-export default config
+module.exports = config
