@@ -115,7 +115,7 @@ class AppWrapper extends Component {
    *
    * * * * * * * * * * * * * * * * */
   getElementsHeight () {
-    const $nav = document.querySelector('nav.main-nav')
+    const $nav = document.querySelector('header-fix-nav')
     const $body = document.querySelector('body')
     const pNavHeight = window.LBLB_GLOBAL.nav_height
     const pBodyPaddingTop = window.LBLB_GLOBAL.body_padding_top
