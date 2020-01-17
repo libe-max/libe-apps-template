@@ -1,3 +1,6 @@
+const currentProtocol = typeof window !== 'undefined' ? window.location.protocol : 'http:'
+const currentHostname = typeof window !== 'undefined' ? window.location.hostname : 'localhost'
+
 const config = {
   meta: {
     author: 'Maxime Fabas',
@@ -16,10 +19,10 @@ const config = {
   show_header: true,
   statics_url: process.env.NODE_ENV === 'production'
     ? 'https://www.liberation.fr/apps/static'
-    : `${window.location.protocol}//${window.location.hostname}:3003`,
+    : `${currentProtocol}//${currentHostname}:3003`,
   api_url: process.env.NODE_ENV === 'production'
     ? 'https://libe-labo-2.site/api'
-    : `${window.location.protocol}//${window.location.hostname}:3004/api`,
+    : `${currentProtocol}//${currentHostname}:3004/api`,
   stylesheet: 'libe-apps-template.css', // The name of the css file hosted at ${statics_url}/styles/apps/
   spreadsheet: undefined // The spreadsheet providing data to the app
 }
