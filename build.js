@@ -56,6 +56,7 @@ async function build () {
     
     <!-- Chartbeat -->
     <script type="text/javascript">
+      if (window.location.host !== 'www.liberation.fr') return
       var _sf_async_config={};
       _sf_async_config.uid = 43601;
       _sf_async_config.domain = 'liberation.fr';
@@ -80,14 +81,16 @@ async function build () {
     <!-- Google Analytics -->
     <script type="text/javascript" async src="https://www.googletagmanager.com/gtag/js?id=UA-116918263-1"></script>
     <script type="text/javascript">
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-116918263-1');
+      if (window.location.host !== 'www.liberation.fr') return
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-116918263-1');
     </script>
 
     <!-- Xiti -->
     <script type="text/javascript">
+      if (window.location.host !== 'www.liberation.fr') return
       xtnv = document
       xtsd = "https://logs1091"
       xtsite = "381060"
