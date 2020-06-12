@@ -3,13 +3,13 @@ const currentHostname = typeof window !== 'undefined' ? window.location.hostname
 
 const config = {
   meta: {
-    author: 'Maxime Fabas',
-    title: 'Libé apps template',
+    author: 'Libé Labo',
+    title: 'Libération - ',
     url: '',
     description: '',
     image: '',
     xiti_id: 'test',
-    tweet: 'Some tweet text',
+    tweet: '',
   },
   tracking: {
     active: false,
