@@ -165,9 +165,8 @@ export default class App extends Component {
       <div className='lblb-default-apps-footer'>
         <ShareArticle short iconsOnly tweet={props.meta.tweet} url={props.meta.url} />
         <ArticleMeta
-          publishedOn='02/09/2019 17:13' updatedOn='03/09/2019 10:36' authors={[
-            { name: 'Jean-Sol Partre', role: '', link: 'www.liberation.fr' },
-            { name: 'Maxime Fabas', role: 'Production', link: 'lol.com' }
+          publishedOn='01/01/2020 12:00' authors={[
+            { name: 'Libé Labo', role: 'Production', link: 'https://www.liberation.fr/libe-labo-data-nouveaux-formats,100538' }
           ]}
         />
         <LibeLaboLogo target='blank' />
