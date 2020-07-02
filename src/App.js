@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import { google } from 'googleapis'
 import Loader from 'libe-components/lib/blocks/Loader'
 import LoadingError from 'libe-components/lib/blocks/LoadingError'
 import ShareArticle from 'libe-components/lib/blocks/ShareArticle'
 import LibeLaboLogo from 'libe-components/lib/blocks/LibeLaboLogo'
 import ArticleMeta from 'libe-components/lib/blocks/ArticleMeta'
 import Paragraph from 'libe-components/lib/text-levels/Paragraph'
-import credentials from './credentials.json'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -28,8 +26,6 @@ export default class App extends Component {
     this.fetchCredentials = this.fetchCredentials.bind(this)
     this.listenToKeyStrokes = this.listenToKeyStrokes.bind(this)
     this.watchKonamiCode = this.watchKonamiCode.bind(this)
-    this.createSheetsApiClient = this.createSheetsApiClient.bind(this)
-    this.getRawSheetData = this.getRawSheetData.bind(this)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -101,18 +97,12 @@ export default class App extends Component {
     this.setState({ loading_sheet: true, error_sheet: null })
     const sheet = this.props.spreadsheet
     try {
-      const sheetsApi = await this.createSheetsApiClient()
-      const initRawSheetData = await this.getRawSheetData(sheetsApi)
-      console.log(initRawSheetData)
-      // const initSheetData = makeObjectsFromRawSheetData(initRawSheetData)
-
-
-      // const reach = await window.fetch(this.props.spreadsheet)
-      // if (!reach.ok) throw reach
-      // const data = await reach.text()
-      // const parsedData = data // Parse sheet here
-      // this.setState({ loading_sheet: false, error_sheet: null, data_sheet: parsedData })
-      // return data
+      const reach = await window.fetch(this.props.spreadsheet)
+      if (!reach.ok) throw reach
+      const data = await reach.text()
+      const parsedData = data // Parse sheet here
+      this.setState({ loading_sheet: false, error_sheet: null, data_sheet: parsedData })
+      return data
     } catch (error) {
       if (error.status) {
         const text = `${error.status} error while fetching : ${sheet}`
@@ -126,61 +116,6 @@ export default class App extends Component {
       }
     }
   }
-
-  /* * * * * * * * * * * * * * * * *
-   *
-   * CREATE GOOGLE API CLIENT
-   *
-   * * * * * * * * * * * * * * * * */
-  async createSheetsApiClient () {
-    const googleAPIClient = new google.auth.JWT(
-      credentials.client_email,
-      null,
-      credentials.private_key,
-      ['https://www.googleapis.com/auth/spreadsheets']
-    )
-    return new Promise((resolve, reject) => {
-      googleAPIClient.authorize(err => {
-        if (err) return reject(`Error in createSheetsApiClient: ${err.message}`)
-        const sheetsApi = google.sheets({
-          version: 'v4',
-          auth: googleAPIClient
-        })
-        resolve(sheetsApi)
-      })
-    })
-  }
-
-  /* * * * * * * * * * * * * * * * *
-   *
-   * GET RAW SHEET DATA
-   *
-   * * * * * * * * * * * * * * * * */
-  async getRawSheetData (sheetsApi) {
-    const options = { spreadsheetId: '182qplcZdqp3RFeYQ2ePIvPnx_KIkbv5RrrHLecwaIOg', range: 'Data!A:W' }
-    const response = await sheetsApi.spreadsheets.values.get(options)
-    const sheetData = response.data.values
-    return sheetData
-  }
-
-  /* * * * * * * * * * * * * * * * *
-   *
-   * MAKE OBJECTS FROM RAW SHEET DATA
-   *
-   * * * * * * * * * * * * * * * * */
-  // makeObjectsFromRawSheetData (rawData = []) {
-  //   const keys = rawData[0]
-  //   const lines = rawData.slice(1)
-  //   const objects = lines.map(line => {
-  //     const obj = {}
-  //     line.forEach((cell, i) => {
-  //       const key = keys[i]
-  //       obj[key] = cell
-  //     })
-  //     return obj
-  //   })
-  //   return objects
-  // }
 
   /* * * * * * * * * * * * * * * * *
    *
