@@ -1,6 +1,6 @@
 {
   "name": "libe-apps-template",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": true,
   "dependencies": {
     "libe-components": "^1.2.2",
