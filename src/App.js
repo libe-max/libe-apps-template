@@ -23,7 +23,6 @@ export default class App extends Component {
       konami_mode: false
     }
     this.fetchSheet = this.fetchSheet.bind(this)
-    this.fetchCredentials = this.fetchCredentials.bind(this)
     this.listenToKeyStrokes = this.listenToKeyStrokes.bind(this)
     this.watchKonamiCode = this.watchKonamiCode.bind(this)
   }
