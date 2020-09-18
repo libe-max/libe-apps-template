@@ -18,7 +18,6 @@ const config = {
   proxydata_url: process.env.NODE_ENV === 'production'
     ? 'https://proxydata.liberation.fr'
     : 'http://localhost:3004',
-  stylesheet: 'libe-apps-template.css', // The name of the css file hosted at ${statics_url}/styles/apps/
   spreadsheet_id: '1zucBQeRZ_SkPx13Yz5E1-Qpt1ayNWRlKPNVdAOkbZHY' // The spreadsheet providing data to the app
 }
 

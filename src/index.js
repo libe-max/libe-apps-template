@@ -95,7 +95,7 @@ class AppWrapper extends Component {
    * * * * * * * * * * * * * * * * */
   render () {
     const { props } = this
-    const { meta, statics_url: staticsUrl, stylesheet } = props
+    const { meta, statics_url: staticsUrl } = props
     const { title, url, description, author, image } = meta
     return <div id='libe-labo-app-wrapper'>
       <Helmet>
@@ -124,7 +124,6 @@ class AppWrapper extends Component {
         {/* Leaflet styles */}
         <link rel='stylesheet' href={`${staticsUrl}/lib/leaflet-1.4.0/leaflet.css`} />
         {/* This app styles */}
-        <link rel='stylesheet' href={`${staticsUrl}/styles/apps/${stylesheet}`} />
         <link rel='stylesheet' href='./custom.css' />
       </Helmet>
       <App {...props} />
