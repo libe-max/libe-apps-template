@@ -95,7 +95,7 @@ class AppWrapper extends Component {
    * * * * * * * * * * * * * * * * */
   render () {
     const { props } = this
-    const { meta, statics_url, stylesheet } = props
+    const { meta, statics_url: staticsUrl, stylesheet } = props
     const { title, url, description, author, image } = meta
     return <div id='libe-labo-app-wrapper'>
       <Helmet>
@@ -111,18 +111,20 @@ class AppWrapper extends Component {
         <meta name='twitter:title' content={title} />
         <meta name='twitter:description' content={description} />
         <meta name='twitter:image' content={image} />
+        {/* Libé Labo logger */}
+        <script type='text/javascript' src={`${staticsUrl}/scripts/logger.js`} />
         {/* Libé styles */}
-        <link rel='stylesheet' href={`${statics_url}/styles/liberation.css`} />
+        <link rel='stylesheet' href={`${staticsUrl}/styles/liberation.css`} />
         {/* Libe Labo styles */}
-        <link rel='stylesheet' href={`${statics_url}/lib/normalize-8.0.0.css`} />
-        <link rel='stylesheet' href={`${statics_url}/styles/fonts.css`} />
-        <link rel='stylesheet' href={`${statics_url}/styles/font-classes.css`} />
-        <link rel='stylesheet' href={`${statics_url}/styles/components.css`} />
-        <link rel='stylesheet' href={`${statics_url}/styles/apps.css`} />
+        <link rel='stylesheet' href={`${staticsUrl}/lib/normalize-8.0.0.css`} />
+        <link rel='stylesheet' href={`${staticsUrl}/styles/fonts.css`} />
+        <link rel='stylesheet' href={`${staticsUrl}/styles/font-classes.css`} />
+        <link rel='stylesheet' href={`${staticsUrl}/styles/components.css`} />
+        <link rel='stylesheet' href={`${staticsUrl}/styles/apps.css`} />
         {/* Leaflet styles */}
-        <link rel='stylesheet' href={`${statics_url}/lib/leaflet-1.4.0/leaflet.css`} />
+        <link rel='stylesheet' href={`${staticsUrl}/lib/leaflet-1.4.0/leaflet.css`} />
         {/* This app styles */}
-        <link rel='stylesheet' href={`${statics_url}/styles/apps/${stylesheet}`} />
+        <link rel='stylesheet' href={`${staticsUrl}/styles/apps/${stylesheet}`} />
         <link rel='stylesheet' href='./custom.css' />
       </Helmet>
       <App {...props} />
