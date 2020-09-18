@@ -34,7 +34,6 @@ export default class App extends Component {
    * * * * * * * * * * * * * * * * */
   componentDidMount () {
     document.addEventListener('keydown', this.listenToKeyStrokes)
-    this.fetchCredentials()
     if (this.props.spreadsheet) return this.fetchSheet()
     return this.setState({ loading_sheet: false })
   }
