@@ -19,11 +19,9 @@ export default class App extends Component {
       loading_sheet: true,
       error_sheet: null,
       data_sheet: [],
-      keystrokes_history: [],
       konami_mode: false
     }
     this.fetchSheet = this.fetchSheet.bind(this)
-    this.listenToKeyStrokes = this.listenToKeyStrokes.bind(this)
     this.watchKonamiCode = this.watchKonamiCode.bind(this)
   }
 
@@ -33,7 +31,7 @@ export default class App extends Component {
    *
    * * * * * * * * * * * * * * * * */
   componentDidMount () {
-    document.addEventListener('keydown', this.listenToKeyStrokes)
+    document.addEventListener('keydown', this.watchKonamiCode)
     if (this.props.spreadsheet) return this.fetchSheet()
     return this.setState({ loading_sheet: false })
   }
@@ -44,22 +42,7 @@ export default class App extends Component {
    *
    * * * * * * * * * * * * * * * * */
   componentWillUnmount () {
-    document.removeEventListener('keydown', this.listenToKeyStrokes)
-  }
-
-  /* * * * * * * * * * * * * * * * *
-   *
-   * SHOULD UPDATE
-   *
-   * * * * * * * * * * * * * * * * */
-  shouldComponentUpdate (props, nextState) {
-    const changedKeys = []
-    Object.keys(nextState).forEach(key => {
-      if (this.state[key] !== nextState[key]) changedKeys.push(key)
-    })
-    if (changedKeys.length === 1 &&
-      changedKeys.includes('keystrokes_history')) return false
-    return true
+    document.removeEventListener('keydown', this.watchKonamiCode)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -93,26 +76,17 @@ export default class App extends Component {
 
   /* * * * * * * * * * * * * * * * *
    *
-   * START LISTENING KEYSTROKES
-   *
-   * * * * * * * * * * * * * * * * */
-  listenToKeyStrokes (e) {
-    if (!e || !e.keyCode) return
-    const currHistory = this.state.keystrokes_history
-    const newHistory = [...currHistory, e.keyCode]
-    this.setState({ keystrokes_history: newHistory })
-    this.watchKonamiCode()
-  }
-
-  /* * * * * * * * * * * * * * * * *
-   *
    * WATCH KONAMI CODE
    *
    * * * * * * * * * * * * * * * * */
-  watchKonamiCode () {
+  keystrokesHistory = []
+  watchKonamiCode (e) {
+    if (!e || !e.keyCode) return
+    this.keystrokesHistory.push(e.keyCode)
     const konamiCodeStr = '38,38,40,40,37,39,37,39,66,65'
-    const lastTenKeys = this.state.keystrokes_history.slice(-10)
+    const lastTenKeys = this.keystrokesHistory.slice(-10)
     if (lastTenKeys.join(',') === konamiCodeStr) this.setState({ konami_mode: true })
+    else if (lastTenKeys.reverse().join(',') === konamiCodeStr) this.setState({ konami_mode: false })
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -127,6 +101,7 @@ export default class App extends Component {
     const classes = [c]
     if (state.loading_sheet) classes.push(`${c}_loading`)
     if (state.error_sheet) classes.push(`${c}_error`)
+    if (state.konami_mode) classes.push(`${c}_konami`)
 
     /* Load & errors */
     if (state.loading_sheet) {
