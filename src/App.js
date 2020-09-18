@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
-
 import Loader from './components/blocks/Loader'
 import LoadingError from './components/blocks/LoadingError'
 import ShareArticle from './components/blocks/ShareArticle'
 import LibeLaboLogo from './components/blocks/LibeLaboLogo'
 import ArticleMeta from './components/blocks/ArticleMeta'
 import Paragraph from './components/text-levels/Paragraph'
-
-import DemoPage from './components/layouts/DemoPage'
-
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -125,9 +121,11 @@ export default class App extends Component {
 
     /* Display component */
     return <div className={classes.join(' ')}>
-      App is ready.<br />
-      - fill spreadsheet field in config.js<br />
-      - display it's content via state.data_sheet
+      <div style={{ display: 'none' }}>
+        App is ready.<br />
+        - fill spreadsheet field in config.js<br />
+        - display it's content via state.data_sheet
+      </div>
 
       <div className='lblb-default-apps-footer'>
         <ShareArticle short iconsOnly tweet={props.meta.tweet} url={props.meta.url} />
