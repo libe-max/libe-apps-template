@@ -38,6 +38,7 @@ async function build () {
 
   // Add meta tags
   console.log('\nAdding meta tags')
+  const { statics_url: staticsUrl } = config
   const { title, url, description, author, image, xiti_id: xitiId } = config.meta
   const $ = cheerio.load(fileData)
   $('head').append(`
@@ -114,6 +115,9 @@ async function build () {
       <img width="1" height="1" src="https://logliberation.xiti.com/hit.xiti?s=381060&amp;s2=56&amp;p=LibeLabo::${xitiId}&amp;di=&amp;" >
     </noscript>
     <script type="text/javascript" src="https://statics.liberation.fr/bloom/theme/js/xtcore.js"></script>
+
+    <!-- Libe Labo logger -->
+    <script type="text/javascript" src="${staticsUrl}/scripts/logger.js"></script>
   `)
 
   // Save index.html
