@@ -15,6 +15,9 @@ const config = {
   statics_url: process.env.NODE_ENV === 'production'
     ? 'https://www.liberation.fr/apps/static'
     : `${currentProtocol}//${currentHostname}:3003`,
+  proxydata_url: process.env.NODE_ENV === 'production'
+    ? 'https://proxydata.liberation.fr'
+    : 'http://localhost:3004',
   stylesheet: 'libe-apps-template.css', // The name of the css file hosted at ${statics_url}/styles/apps/
   spreadsheet: undefined // The spreadsheet providing data to the app
 }
