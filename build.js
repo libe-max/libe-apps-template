@@ -39,7 +39,7 @@ async function build () {
   // Add meta tags
   console.log('\nAdding meta tags')
   const { statics_url: staticsUrl } = config
-  const { title, url, description, author, image, xiti_id: xitiId } = config.meta
+  const { title, url, description, author, image, slug } = config.meta
   const $ = cheerio.load(fileData)
   $('head').append(`
     <title>Libération.fr – ${title}</title>
@@ -98,7 +98,7 @@ async function build () {
         xtsd = "https://logs1091"
         xtsite = "381060"
         xtn2 = "48"
-        xtpage = "LibeLabo::${xitiId}"
+        xtpage = "LibeLabo::${slug}"
         xtdi = ""
         xt_pagetype = "2-1-0"
         xt_multc = "&x1=0&x2=40&x3=10&x4=&x5=20200401&x6=20&x7=1783805"
@@ -112,7 +112,7 @@ async function build () {
       }
     </script>
     <noscript>
-      <img width="1" height="1" src="https://logliberation.xiti.com/hit.xiti?s=381060&amp;s2=56&amp;p=LibeLabo::${xitiId}&amp;di=&amp;" >
+      <img width="1" height="1" src="https://logliberation.xiti.com/hit.xiti?s=381060&amp;s2=56&amp;p=LibeLabo::${slug}&amp;di=&amp;" >
     </noscript>
     <script type="text/javascript" src="https://statics.liberation.fr/bloom/theme/js/xtcore.js"></script>
   `)

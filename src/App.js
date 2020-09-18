@@ -12,9 +12,9 @@ export default class App extends Component {
    * CONSTRUCTOR
    *
    * * * * * * * * * * * * * * * * */
-  constructor () {
-    super()
-    this.c = 'lblb-some-app'
+  constructor (props) {
+    super(props)
+    this.c = props.meta.slug
     this.state = {
       loading_sheet: true,
       error_sheet: null,

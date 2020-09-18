@@ -8,7 +8,7 @@ const config = {
     url: '',
     description: '',
     image: '',
-    xiti_id: 'test',
+    slug: 'test',
     tweet: '',
   },
   show_header: true,
