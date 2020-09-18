@@ -11,11 +11,6 @@ const config = {
     xiti_id: 'test',
     tweet: '',
   },
-  tracking: {
-    active: false,
-    format: 'libe-apps-template',
-    article: 'libe-apps-template'
-  },
   show_header: true,
   statics_url: process.env.NODE_ENV === 'production'
     ? 'https://www.liberation.fr/apps/static'
