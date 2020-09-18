@@ -32,7 +32,7 @@ export default class App extends Component {
    * * * * * * * * * * * * * * * * */
   componentDidMount () {
     document.addEventListener('keydown', this.watchKonamiCode)
-    if (this.props.spreadsheet) return this.fetchSheet()
+    if (this.props.spreadsheet_id) return this.fetchSheet()
     return this.setState({ loading_sheet: false })
   }
 
@@ -52,17 +52,20 @@ export default class App extends Component {
    * * * * * * * * * * * * * * * * */
   async fetchSheet () {
     this.setState({ loading_sheet: true, error_sheet: null })
-    const sheet = this.props.spreadsheet
+    const { proxydata_url: proxydataUrl, spreadsheet_id: spreadsheetId } = this.props
     try {
-      const reach = await window.fetch(this.props.spreadsheet)
+      const url = `${proxydataUrl}/proxy/spreadsheets/${spreadsheetId}`
+      const reach = await window.fetch(url)
       if (!reach.ok) throw reach
-      const data = await reach.text()
+      const { data, err } = await reach.json()
+      if (err) throw err
       const parsedData = data // Parse sheet here
+      console.log(parsedData)
       this.setState({ loading_sheet: false, error_sheet: null, data_sheet: parsedData })
       return data
     } catch (error) {
       if (error.status) {
-        const text = `${error.status} error while fetching : ${sheet}`
+        const text = `${error.status} error while fetching : ${spreadsheetId}`
         this.setState({ loading_sheet: false, error_sheet: error })
         console.error(text, error)
         return Error(text)
@@ -123,7 +126,7 @@ export default class App extends Component {
     return <div className={classes.join(' ')}>
       <div style={{ display: 'none' }}>
         App is ready.<br />
-        - fill spreadsheet field in config.js<br />
+        - fill spreadsheet_id field in config.js<br />
         - display it's content via state.data_sheet
       </div>
 
