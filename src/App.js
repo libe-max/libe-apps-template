@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import Loader from './components/blocks/Loader'
-import LoadingError from './components/blocks/LoadingError'
-import ShareArticle from './components/blocks/ShareArticle'
-import LibeLaboLogo from './components/blocks/LibeLaboLogo'
-import ArticleMeta from './components/blocks/ArticleMeta'
-import Paragraph from './components/text-levels/Paragraph'
+import Loader from './libe-components/blocks/Loader'
+import LoadingError from './libe-components/blocks/LoadingError'
+import ShareArticle from './libe-components/blocks/ShareArticle'
+import LibeLaboLogo from './libe-components/blocks/LibeLaboLogo'
+import ArticleMeta from './libe-components/blocks/ArticleMeta'
+import Paragraph from './libe-components/text-levels/Paragraph'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
