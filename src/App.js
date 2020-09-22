@@ -130,12 +130,15 @@ export default class App extends Component {
       </div>
 
       <div className='lblb-default-apps-footer'>
-        <ShareArticle short iconsOnly tweet={props.meta.tweet} url={props.meta.url} />
+        <ShareArticle
+          short
+          iconsOnly
+          tweet={props.meta.tweet}
+          url={props.meta.url} />
         <ArticleMeta
-          publishedOn='01/01/2020 12:00' authors={[
-            { name: 'Libé Labo', role: 'Production', link: 'https://www.liberation.fr/libe-labo-data-nouveaux-formats,100538' }
-          ]}
-        />
+          publishedOn={props.meta.published_on}
+          updatedOn={props.meta.updated_on}
+          authors={props.meta.authors} />
         <LibeLaboLogo target='blank' />
       </div>
     </div>

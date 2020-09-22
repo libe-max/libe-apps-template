@@ -10,6 +10,13 @@ const config = {
     image: '',
     slug: 'test',
     tweet: '',
+    published_on: '01/01/2020 12:00',
+    updated_on: null,
+    authors: [{
+      name: 'Libé Labo',
+      role: 'Production',
+      link: 'https://www.liberation.fr/libe-labo-data-nouveaux-formats,100538'
+    }]
   },
   show_header: true,
   statics_url: process.env.NODE_ENV === 'production'
