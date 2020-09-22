@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Helmet } from 'react-helmet'
-import * as serviceWorker from './serviceWorker'
 import App from './App'
 import config from './config'
 import 'whatwg-fetch'
@@ -136,5 +135,3 @@ ReactDOM.render(
   <AppWrapper {...config} />,
   document.getElementById('libe-labo-app-root')
 )
-
-serviceWorker.unregister()
