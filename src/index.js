@@ -14,32 +14,55 @@ class AppWrapper extends Component {
    * * * * * * * * * * * * * * * * */
   constructor (props) {
     super(props)
-    this.getElementsHeight = this.getElementsHeight.bind(this)
-    if (!window.LBLB_GLOBAL) window.LBLB_GLOBAL = {}
-    window.LBLB_GLOBAL.rem = 16
-    window.LBLB_GLOBAL.breakpoints = {
-      lg: { min: 1 + 63 * window.LBLB_GLOBAL.rem, max: Infinity },
-      md: { min: 1 + 40 * window.LBLB_GLOBAL.rem, max: 63 * window.LBLB_GLOBAL.rem },
-      sm: { min: 0, max: 40 * window.LBLB_GLOBAL.rem }
+    this.state = {
+      rem: 16,
+      width: window.visualViewport.width,
+      height: window.visualViewport.height,
+      display: 'sm',
+      nav_height: 0,
+      body_padding_top: 0
     }
-    Object.defineProperty(window.LBLB_GLOBAL, 'current_display', {
-      get: function () {
-        return Object.keys(this.breakpoints).find(name => {
-          return this.breakpoints[name].min <= this.client_width &&
-            this.breakpoints[name].max >= this.client_width
-        })
-      }
-    })
-    window.setInterval(this.getElementsHeight, 250)
+    this.storeViewportDimentions = this.storeViewportDimentions.bind(this)
+    window.addEventListener('resize', this.storeViewportDimentions)
+    window.setInterval(this.storeViewportDimentions, 250)
   }
 
   /* * * * * * * * * * * * * * * * *
    *
-   * WILL UNMOUNT
+   * STORE VIEWPORT DIMENSIONS
    *
    * * * * * * * * * * * * * * * * */
-  componentWillUnmount () {
-    window.clearInterval(this.getElementsHeight)
+  storeViewportDimentions () {
+    this.setState(curr => {
+      const $nav = document.querySelector('.header-fix-nav')
+      const $body = document.querySelector('body')
+      const navHeight = $nav ? $nav.offsetHeight : 0
+      const bodyPaddingTop = $body ? parseFloat(window.getComputedStyle($body)['padding-top'].slice(0, -2)) : 0
+      const { width, height } = window.visualViewport
+      const breakpoints = {
+        lg: { min: 1 + 63 * curr.rem, max: Infinity },
+        md: { min: 1 + 40 * curr.rem, max: 63 * curr.rem },
+        sm: { min: 0, max: 40 * curr.rem }
+      }
+      const display = Object.keys(breakpoints).find(name => {
+        const { min, max } = breakpoints[name]
+        return min <= width && max >= width
+      })
+      const returned = {
+        width,
+        height,
+        display,
+        nav_height: navHeight,
+        body_padding_top: bodyPaddingTop
+      }
+      Object.keys(returned).forEach(key => {
+        const ret = returned[key]
+        const cur = curr[key]
+        if (ret === cur) delete returned[key]
+      })
+      if (!Object.keys(returned).length) return null
+      return { ...returned }
+    })
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -48,6 +71,7 @@ class AppWrapper extends Component {
    *
    * * * * * * * * * * * * * * * * */
   componentDidMount () {
+    this.storeViewportDimentions()
     if (config.show_header) {
       const headerScript = document.createElement('script')
       headerScript.setAttribute('type', 'text/javascript')
@@ -58,34 +82,11 @@ class AppWrapper extends Component {
 
   /* * * * * * * * * * * * * * * * *
    *
-   * GET HEADER HEIGHT
+   * WILL UNMOUNT
    *
    * * * * * * * * * * * * * * * * */
-  getElementsHeight () {
-    const $nav = document.querySelector('.header-fix-nav')
-    const $body = document.querySelector('body')
-    const pNavHeight = window.LBLB_GLOBAL.nav_height
-    const pBodyPaddingTop = window.LBLB_GLOBAL.body_padding_top
-    const pClientWidth = window.LBLB_GLOBAL.client_width
-    const pClientHeight = window.LBLB_GLOBAL.client_height
-    const navHeight = $nav ? $nav.offsetHeight : 0
-    const bodyPaddingTop = $body ? parseFloat(window.getComputedStyle($body)['padding-top'].slice(0, -2)) : 0
-    const clientWidth = document.documentElement.clientWidth
-    const clientHeight = document.documentElement.clientHeight
-    const pCurrentDisplay = window.LBLB_GLOBAL.current_display
-    window.LBLB_GLOBAL.nav_height = navHeight
-    window.LBLB_GLOBAL.body_padding_top = bodyPaddingTop
-    window.LBLB_GLOBAL.client_width = clientWidth
-    window.LBLB_GLOBAL.client_height = clientHeight
-    if (pNavHeight !== navHeight ||
-      pBodyPaddingTop !== bodyPaddingTop ||
-      pClientWidth !== clientWidth ||
-      pClientHeight !== clientHeight) {
-      window.dispatchEvent(new CustomEvent('lblb-client-dimensions-change'))
-    }
-    if (pCurrentDisplay !== window.LBLB_GLOBAL.current_display) {
-      window.dispatchEvent(new CustomEvent('lblb-client-display-change'))
-    }
+  componentWillUnmount () {
+    window.clearInterval(this.storeViewportDimentions)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -94,7 +95,7 @@ class AppWrapper extends Component {
    *
    * * * * * * * * * * * * * * * * */
   render () {
-    const { props } = this
+    const { props, state } = this
     const { meta, statics_url: staticsUrl } = props
     const { title, url, description, author, image } = meta
     return <div id='libe-labo-app-wrapper'>
@@ -126,7 +127,7 @@ class AppWrapper extends Component {
         {/* This app styles */}
         <link rel='stylesheet' href='./custom.css' />
       </Helmet>
-      <App {...props} />
+      <App {...props} viewport={state} />
     </div>
   }
 }

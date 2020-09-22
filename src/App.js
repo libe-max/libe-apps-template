@@ -60,7 +60,6 @@ export default class App extends Component {
       const { data, err } = await reach.json()
       if (err) throw err
       const parsedData = data // Parse sheet here
-      console.log(parsedData)
       this.setState({ loading_sheet: false, error_sheet: null, data_sheet: parsedData })
       return data
     } catch (error) {
@@ -116,7 +115,7 @@ export default class App extends Component {
     } else if (state.error_sheet) {
       return <div className={classes.join(' ')}>
         <div className='lblb-default-apps-error'>
-          <Paragraph>{state.error_sheet}</Paragraph>
+          <Paragraph>{state.error_sheet.message}</Paragraph>
           <LoadingError />
         </div>
       </div>
