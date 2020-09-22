@@ -86,9 +86,9 @@ export default class App extends Component {
     if (!e || !e.keyCode) return
     this.keystrokesHistory.push(e.keyCode)
     const konamiCodeStr = '38,38,40,40,37,39,37,39,66,65'
-    const lastTenKeys = this.keystrokesHistory.slice(-10)
-    if (lastTenKeys.join(',') === konamiCodeStr) this.setState({ konami_mode: true })
-    else if (lastTenKeys.reverse().join(',') === konamiCodeStr) this.setState({ konami_mode: false })
+    const lastTen = this.keystrokesHistory.slice(-10)
+    if (lastTen.join(',') === konamiCodeStr) this.setState({ konami_mode: true })
+    else if (lastTen.reverse().join(',') === konamiCodeStr) this.setState({ konami_mode: false })
   }
 
   /* * * * * * * * * * * * * * * * *
