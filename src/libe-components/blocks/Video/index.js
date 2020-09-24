@@ -34,28 +34,26 @@ export default class Video extends Component {
         origin: 'youtube',
         id: src.split('&')[0].split('?v=')[1]
       }
-    }
-    if (src.includes('dailymotion')) {
+    } else if (src.includes('dailymotion')) {
       return {
         origin: 'dailymotion',
         id: src.split('&')[0].split('/').pop()
       }
-    }
-    if (src.includes('ina.fr/video')) {
+    } else if (src.includes('ina.fr/video')) {
       return {
         origin: 'ina',
         id: this.props.src.split('&')[0].split('/').pop()
       }
-    }
-    if (src.includes('ina')) {
+    } else if (src.includes('ina')) {
       return {
         origin: 'ina',
         id: null
       }
-    }
-    return {
-      origin: 'file',
-      id: null
+    } else {
+      return {
+        origin: 'file',
+        id: null
+      }
     }
   }
 
@@ -79,22 +77,20 @@ export default class Video extends Component {
    * * * * * * * * * * * * * * * * */
   render () {
     const { c, props } = this
-
     const { origin, id } = this.guessOriginAndId(props.src)
-
-    const unknown = !origin || (origin !== 'file' && !id)
+    const unknownOrigin = !origin || (origin !== 'file' && !id)
 
     /* Assign classes */
     const classes = [c]
-    if (unknown) classes.push(`${c}_unknown-origin`)
+    if (unknownOrigin) classes.push(`${c}_unknown-origin`)
     else classes.push(`${c}_${origin}`)
 
     return <div
       className={classes.join(' ')}
-      style={!unknown && origin !== 'file' ? { paddingTop: `${100 / props.ratio}%` } : {}}>
-      {unknown && <Paragraph>Source inconnue</Paragraph>}
+      style={!unknownOrigin && origin !== 'file' ? { paddingTop: `${100 / props.ratio}%` } : {}}>
+      {unknownOrigin && <Paragraph>Source inconnue</Paragraph>}
       {origin === 'file' && <video controls {...props} />}
-      {!unknown && origin !== 'file' && (
+      {!unknownOrigin && origin !== 'file' && (
         <iframe
           title={`${origin}-${id}`}
           src={this.buildVideoEmbedUrl(origin, id)}

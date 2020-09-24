@@ -6,6 +6,8 @@ import LibeLaboLogo from './libe-components/blocks/LibeLaboLogo'
 import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Paragraph from './libe-components/text-levels/Paragraph'
 
+import Tweet from './libe-components/blocks/Tweet'
+
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
    *
@@ -123,10 +125,22 @@ export default class App extends Component {
 
     /* Display component */
     return <div className={classes.join(' ')}>
-      <div style={{ display: 'none' }}>
+      <div>
         App is ready.<br />
         - fill spreadsheet_id field in config.js<br />
         - display it's content via state.data_sheet
+      </div>
+
+      <div style={{
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '40rem'
+      }}>
+        <Tweet url='https://twitter.com/dusttodigital/status/1306942442374082561' />
+        <Tweet url='https://twitter.com/stupidites/status/1308694766511685632' />
+        <Tweet url='https://twitter.com/StopCarnet/status/1308691981237977089' />
+        <Tweet url='https://twitter.com/thediaryofastay/status/1308746752229609473' />
+        <Tweet url='https://twitter.com/libe/status/1308764828673155073' />
       </div>
 
       <div className='lblb-default-apps-footer'>
