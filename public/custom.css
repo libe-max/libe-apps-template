@@ -1,0 +1,49 @@
+.covid-19-1M__head {
+  text-align: center;
+  padding: 2rem;
+  padding-top: 3rem;
+}
+
+.covid-19-1M__title {
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 40rem) {
+  .covid-19-1M__head {
+    padding: 1rem;
+    padding-top: 2rem;
+  }
+
+  .covid-19-1M__title {
+    margin-bottom: 1rem;
+  }
+}
+
+.covid-19-1M__filters {
+  text-align: center;
+  padding: 1rem;
+  padding-top: 2rem;
+}
+
+.covid-19-1M__filter-title {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.covid-19-1M__filter-option {
+  cursor: pointer;
+}
+
+.covid-19-1M__filter-option .lblb-paragraph {
+  margin: 0 .5rem;
+  color: #999999;
+}
+
+.covid-19-1M__filter-option_active .lblb-paragraph {
+  color: #212121;
+  border-bottom: 2px solid #e91845;
+}
+
+.covid-19-1M__filter-option:hover .lblb-paragraph {
+  color: #212121;
+}

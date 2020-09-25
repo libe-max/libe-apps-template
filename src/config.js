@@ -4,11 +4,11 @@ const currentHostname = typeof window !== 'undefined' ? window.location.hostname
 const config = {
   meta: {
     author: 'Libé Labo',
-    title: 'Libération - ',
-    url: '',
+    title: 'Covid-19 - 1 million de morts',
+    url: 'https://www.liberation.fr/apps/2020/09/covid-19-1M',
     description: '',
     image: '',
-    slug: 'test',
+    slug: 'covid-19-1M',
     tweet: '',
     published_on: '01/01/2020 12:00',
     updated_on: null,
@@ -25,7 +25,7 @@ const config = {
   proxydata_url: process.env.NODE_ENV === 'production'
     ? 'https://proxydata.liberation.fr'
     : 'http://localhost:3004',
-  spreadsheet_id: '1zucBQeRZ_SkPx13Yz5E1-Qpt1ayNWRlKPNVdAOkbZHY' // The spreadsheet providing data to the app
+  spreadsheet_id: undefined
 }
 
 module.exports = config

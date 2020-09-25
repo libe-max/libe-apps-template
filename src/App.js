@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import ArticleMeta from './libe-components/blocks/ArticleMeta'
+import LibeLaboLogo from './libe-components/blocks/LibeLaboLogo'
 import Loader from './libe-components/blocks/Loader'
 import LoadingError from './libe-components/blocks/LoadingError'
-import ShareArticle from './libe-components/blocks/ShareArticle'
-import LibeLaboLogo from './libe-components/blocks/LibeLaboLogo'
-import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Paragraph from './libe-components/text-levels/Paragraph'
-
-import Tweet from './libe-components/blocks/Tweet'
+import ParagraphTitle from './libe-components/text-levels/ParagraphTitle'
+import Slug from './libe-components/text-levels/Slug'
+import InterTitle from './libe-components/text-levels/InterTitle'
+import ShareArticle from './libe-components/blocks/ShareArticle'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -21,10 +22,12 @@ export default class App extends Component {
       loading_sheet: true,
       error_sheet: null,
       data_sheet: [],
-      konami_mode: false
+      konami_mode: false,
+      sort: null
     }
     this.fetchSheet = this.fetchSheet.bind(this)
     this.watchKonamiCode = this.watchKonamiCode.bind(this)
+    this.activateSort = this.activateSort.bind(this)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -95,6 +98,16 @@ export default class App extends Component {
 
   /* * * * * * * * * * * * * * * * *
    *
+   * ACTIVATE SORT
+   *
+   * * * * * * * * * * * * * * * * */
+  activateSort (value) {
+    console.log(value)
+    this.setState(curr => ({ sort: value }))
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
    * RENDER
    *
    * * * * * * * * * * * * * * * * */
@@ -125,24 +138,38 @@ export default class App extends Component {
 
     /* Display component */
     return <div className={classes.join(' ')}>
-      <div>
-        App is ready.<br />
-        - fill spreadsheet_id field in config.js<br />
-        - display it's content via state.data_sheet
+      {/* Head */}
+      <div className={`${c}__head`}>
+        <div className={`${c}__overhead`}><InterTitle level={1}>Covid 19</InterTitle></div>
+        <div className={`${c}__title`}><InterTitle level={2}>Un million de morts</InterTitle></div>
+        <div className={`${c}__intro`}><Paragraph>Un paragraphe</Paragraph></div>
       </div>
-
-      <div style={{
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        width: '40rem'
-      }}>
-        <Tweet url='https://twitter.com/dusttodigital/status/1306942442374082561' />
-        <Tweet url='https://twitter.com/stupidites/status/1308694766511685632' />
-        <Tweet url='https://twitter.com/StopCarnet/status/1308691981237977089' />
-        <Tweet url='https://twitter.com/thediaryofastay/status/1308746752229609473' />
-        <Tweet url='https://twitter.com/libe/status/1308764828673155073' />
+      {/* Filters */}
+      <div className={`${c}__filters`}>
+        <span className={`${c}__filter-title`}>
+          <Slug>Tri</Slug>
+        </span>
+        <span
+          onClick={e => this.activateSort(null)}
+          className={`${c}__filter-option ${state.sort === null ? `${c}__filter-option_active` : ''}`}>
+          <Paragraph>aucun</Paragraph>
+        </span>
+        <span
+          onClick={e => this.activateSort('continent')}
+          className={`${c}__filter-option ${state.sort === 'continent' ? `${c}__filter-option_active` : ''}`}>
+          <Paragraph>par continent</Paragraph>
+        </span>
+        <span
+          onClick={e => this.activateSort('country')}
+          className={`${c}__filter-option ${state.sort === 'country' ? `${c}__filter-option_active` : ''}`}>
+          <Paragraph>par pays</Paragraph>
+        </span>
       </div>
-
+      {/* Content */}
+      <div className={`${c}__content`}>
+        {state.sort}
+      </div>
+      {/* Footer */}
       <div className='lblb-default-apps-footer'>
         <ShareArticle
           short

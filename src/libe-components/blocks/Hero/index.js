@@ -87,6 +87,5 @@ Hero.propTypes = {
 Hero.defaultProps = {
   illustrationPosition: '50 85',
   maxContentWidth: 90,
-  height: 20,
   textPosition: '50 0'
 }
