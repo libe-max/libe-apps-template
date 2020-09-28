@@ -4,8 +4,19 @@
   padding-top: 3rem;
 }
 
+.covid-19-1M__overhead .heading,
+.covid-19-1M__title .heading {
+  font-family: 'Libe-Sans-Condensed';
+  letter-spacing: .03rem;
+  text-transform: none;
+}
+
+.covid-19-1M__overhead .heading {
+  color: #e91845;
+}
+
 .covid-19-1M__title {
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 @media screen and (max-width: 40rem) {
@@ -15,7 +26,7 @@
   }
 
   .covid-19-1M__title {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 }
 

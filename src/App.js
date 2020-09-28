@@ -6,8 +6,9 @@ import LoadingError from './libe-components/blocks/LoadingError'
 import Paragraph from './libe-components/text-levels/Paragraph'
 import ParagraphTitle from './libe-components/text-levels/ParagraphTitle'
 import Slug from './libe-components/text-levels/Slug'
-import InterTitle from './libe-components/text-levels/InterTitle'
+import PageTitle from './libe-components/text-levels/PageTitle'
 import ShareArticle from './libe-components/blocks/ShareArticle'
+import chroma from 'chroma-js'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -23,7 +24,134 @@ export default class App extends Component {
       error_sheet: null,
       data_sheet: [],
       konami_mode: false,
-      sort: null
+      sort: null,
+      data: [{
+        month: 1,
+        total: 213,
+        detail: [
+          { name: 'France', deaths: 0 },
+          { name: 'Italie', deaths: 0 },
+          { name: 'Espagne', deaths: 0 },
+          { name: 'Royaume-Uni', deaths: 0 },
+          { name: 'Etats-Unis', deaths: 0 },
+          { name: 'Mexique', deaths: 0 },
+          { name: 'Brésil', deaths: 0 },
+          { name: 'Pérou', deaths: 0 },
+          { name: 'Autres', deaths: 213 }
+        ]
+      }, {
+        month: 2,
+        total: 2714,
+        detail: [
+          { name: 'France', deaths: 2 },
+          { name: 'Italie', deaths: 21 },
+          { name: 'Espagne', deaths: 0 },
+          { name: 'Royaume-Uni', deaths: 0 },
+          { name: 'Etats-Unis', deaths: 0 },
+          { name: 'Mexique', deaths: 0 },
+          { name: 'Brésil', deaths: 0 },
+          { name: 'Pérou', deaths: 0 },
+          { name: 'Autres', deaths: 2691 }
+        ]
+      }, {
+        month: 3,
+        total: 35799,
+        detail: [
+          { name: 'France', deaths: 3022 },
+          { name: 'Italie', deaths: 11570 },
+          { name: 'Espagne', deaths: 7340 },
+          { name: 'Royaume-Uni', deaths: 2050 },
+          { name: 'Etats-Unis', deaths: 3170 },
+          { name: 'Mexique', deaths: 28 },
+          { name: 'Brésil', deaths: 159 },
+          { name: 'Pérou', deaths: 24 },
+          { name: 'Autres', deaths: 8436 }
+        ]
+      }, {
+        month: 4,
+        total: 189176,
+        detail: [
+          { name: 'France', deaths: 21063 },
+          { name: 'Italie', deaths: 16091 },
+          { name: 'Espagne', deaths: 17203 },
+          { name: 'Royaume-Uni', deaths: 23999 },
+          { name: 'Etats-Unis', deaths: 57796 },
+          { name: 'Mexique', deaths: 1704 },
+          { name: 'Brésil', deaths: 5307 },
+          { name: 'Pérou', deaths: 919 },
+          { name: 'Autres', deaths: 45094 }
+        ]
+      }, {
+        month: 5,
+        total: 140149,
+        detail: [
+          { name: 'France', deaths: 4684 },
+          { name: 'Italie', deaths: 5668 },
+          { name: 'Espagne', deaths: 2584 },
+          { name: 'Royaume-Uni', deaths: 11336 },
+          { name: 'Etats-Unis', deaths: 42815 },
+          { name: 'Mexique', deaths: 8047 },
+          { name: 'Brésil', deaths: 23368 },
+          { name: 'Pérou', deaths: 3428 },
+          { name: 'Autres', deaths: 38229 }
+        ]
+      }, {
+        month: 6,
+        total: 134078,
+        detail: [
+          { name: 'France', deaths: 1042 },
+          { name: 'Italie', deaths: 1404 },
+          { name: 'Espagne', deaths: 1228 },
+          { name: 'Royaume-Uni', deaths: 2956 },
+          { name: 'Etats-Unis', deaths: 22359 },
+          { name: 'Mexique', deaths: 17342 },
+          { name: 'Brésil', deaths: 29480 },
+          { name: 'Pérou', deaths: 5133 },
+          { name: 'Autres', deaths: 53134 }
+        ]
+      }, {
+        month: 7,
+        total: 166208,
+        detail: [
+          { name: 'France', deaths: 441 },
+          { name: 'Italie', deaths: 388 },
+          { name: 'Espagne', deaths: 90 },
+          { name: 'Royaume-Uni', deaths: 828 },
+          { name: 'Etats-Unis', deaths: 25930 },
+          { name: 'Mexique', deaths: 18879 },
+          { name: 'Brésil', deaths: 32949 },
+          { name: 'Pérou', deaths: 9517 },
+          { name: 'Autres', deaths: 77186 }
+        ]
+      }, {
+        month: 8,
+        total: 178628,
+        detail: [
+          { name: 'France', deaths: 352 },
+          { name: 'Italie', deaths: 345 },
+          { name: 'Espagne', deaths: 649 },
+          { name: 'Royaume-Uni', deaths: 330 },
+          { name: 'Etats-Unis', deaths: 30999 },
+          { name: 'Mexique', deaths: 18158 },
+          { name: 'Brésil', deaths: 29565 },
+          { name: 'Pérou', deaths: 9767 },
+          { name: 'Autres', deaths: 88463 }
+        ]
+      }, {
+        month: 9,
+        total: 153035,
+        detail: [
+          { name: 'France', deaths: 853 },
+          { name: 'Italie', deaths: 281 },
+          { name: 'Espagne', deaths: 1940 },
+          { name: 'Royaume-Uni', deaths: 363 },
+          { name: 'Etats-Unis', deaths: 18840 },
+          { name: 'Mexique', deaths: 10791 },
+          { name: 'Brésil', deaths: 18149 },
+          { name: 'Pérou', deaths: 3082 },
+          { name: 'Autres', deaths: 98736 }
+        ]
+      }]
     }
     this.fetchSheet = this.fetchSheet.bind(this)
     this.watchKonamiCode = this.watchKonamiCode.bind(this)
@@ -140,12 +268,12 @@ export default class App extends Component {
     return <div className={classes.join(' ')}>
       {/* Head */}
       <div className={`${c}__head`}>
-        <div className={`${c}__overhead`}><InterTitle level={1}>Covid 19</InterTitle></div>
-        <div className={`${c}__title`}><InterTitle level={2}>Un million de morts</InterTitle></div>
-        <div className={`${c}__intro`}><Paragraph>Un paragraphe</Paragraph></div>
+        <div className={`${c}__overhead`}><PageTitle level={1} big>Covid 19</PageTitle></div>
+        <div className={`${c}__title`}><PageTitle level={2} big>Un million de morts</PageTitle></div>
+        <div className={`${c}__intro`}><Paragraph literary>Un paragraphe</Paragraph></div>
       </div>
       {/* Filters */}
-      <div className={`${c}__filters`}>
+      {/*<div className={`${c}__filters`}>
         <span className={`${c}__filter-title`}>
           <Slug>Tri</Slug>
         </span>
@@ -164,10 +292,32 @@ export default class App extends Component {
           className={`${c}__filter-option ${state.sort === 'country' ? `${c}__filter-option_active` : ''}`}>
           <Paragraph>par pays</Paragraph>
         </span>
-      </div>
+      </div>*/}
       {/* Content */}
       <div className={`${c}__content`}>
-        {state.sort}
+        {state.data.map(month => {
+          const { width, display } = props.viewport
+          const totalHeight = display === 'lg'
+            ? 1.5 * width
+            : display === 'md'
+              ? 2 * width
+              : 4 * width
+          const heightPercent = month.total / 1000000
+          const height = `${totalHeight * heightPercent}px`
+          const backgroundColor = chroma.random().hex()
+          return <div
+            style={{ height, backgroundColor, display: 'flex' }}
+            key={month.month}>{
+              month.detail.map(country => {
+                const width = `${100 * country.deaths / month.total}%`
+                const backgroundColor = chroma.random().hex()
+                return <div style={{ width, height: '100%', flexGrow: 0, flexShrink: 0, backgroundColor }}>
+                  <span>{country.name}</span>
+                </div>
+              })
+            }
+          </div>
+        })}
       </div>
       {/* Footer */}
       <div className='lblb-default-apps-footer'>
