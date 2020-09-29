@@ -27,6 +27,9 @@
 
 .covid-19-1M__intro {
   margin-bottom: 2rem;
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media screen and (max-width: 40rem) {
@@ -59,12 +62,11 @@
   background: rgba(255, 255, 255, .9);
   padding: .5rem;
   margin: .25rem;
-  /*box-shadow: 0 0 .5rem 0 rgba(33, 33, 33, .2);*/
   border: 2px solid #DDDDDD;
 }
 
 .covid-19-1M__filter-option_active {
-  border: 3px solid #212121; 
+  border: 3px solid #212121;
 }
 
 .covid-19-1M__filter-option_hover {
@@ -75,6 +77,10 @@
   margin: 0 .5rem;
   color: #999999;
   display: inline-block;
+}
+
+.covid-19-1M__filter-option .lblb-annotation-title_small {
+  display: none;
 }
 
 .covid-19-1M__filter-option_active .lblb-annotation-title {
@@ -96,6 +102,14 @@
     margin: .125rem;
     border: 2px solid #DDDDDD;
   }
+
+  .covid-19-1M__filter-option .lblb-annotation-title {
+    display: none;
+  }
+
+  .covid-19-1M__filter-option .lblb-annotation-title_small {
+    display: inline-block;
+  }
 }
 
 /* * * * * * * * * * * * * * * * * * * 
@@ -105,15 +119,23 @@
  * * * * * * * * * * * * * * * * * * */
 
 .covid-19-1M__content {
-  padding: 1rem 0;
-  margin-top: 3rem;
+  padding: 0 3rem;
+  margin: 5rem auto 0 auto;
+  max-width: 80rem;
 }
 
 .covid-19-1M__month-line {
-  display: flex;
   margin-bottom: .5rem;
   position: relative;
-  padding: 0 3rem;
+}
+
+.covid-19-1M__month-line-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 
 .covid-19-1M__month-name {
@@ -135,20 +157,27 @@
   flex-grow: 0;
   flex-shrink: 0;
   position: relative;
-  background: rgba(33, 33, 33, .05);
+  /*background: rgba(33, 33, 33, .05);*/
+  background-size: cover;
+  opacity: .2;
 }
 
 .covid-19-1M__country-cell_active {
-  background: rgba(233, 24, 69, .3);
+  /*background: rgba(233, 24, 69, .3);*/
+  opacity: 1;
 }
 
 .covid-19-1M__country-cell_hover {
-  background: rgba(33, 33, 33, .1);
+  /*background: rgba(33, 33, 33, .1);*/
+  opacity: .5;
 }
 
 .covid-19-1M__country-deaths {
   position: absolute;
   display: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .covid-19-1M__country-deaths .lblb-annotation {
@@ -159,19 +188,33 @@
 
 .covid-19-1M__country-cell_active .covid-19-1M__country-deaths {
   display: block;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 63rem) {
+  .covid-19-1M__content {
+    padding: 0 1rem;
+  }
 }
 
 @media screen and (max-width: 40rem) {
-  .covid-19-1M__month-line {
+  .covid-19-1M__content {
     padding: 0 .5rem;
+    margin-top: 6rem;
   }
 
   .covid-19-1M__month-name {
     bottom: .125rem;
     left: .625rem;
+  }
+
+  .covid-19-1M__country-deaths {
+    top: 25%;
+  }
+}
+
+@media screen and (max-width: 30rem) {
+  .covid-19-1M__country-deaths {
+    top: 12%;
   }
 }
 

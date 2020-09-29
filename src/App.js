@@ -10,6 +10,7 @@ import ParagraphTitle from './libe-components/text-levels/ParagraphTitle'
 import Slug from './libe-components/text-levels/Slug'
 import PageTitle from './libe-components/text-levels/PageTitle'
 import ShareArticle from './libe-components/blocks/ShareArticle'
+import JSXInterpreter from './libe-components/logic/JSXInterpreter'
 import chroma from 'chroma-js'
 
 export default class App extends Component {
@@ -33,135 +34,180 @@ export default class App extends Component {
         month_name: '',
         total: 213,
         detail: [
-          { name: 'France', deaths: 0 },
-          { name: 'Italie', deaths: 0 },
-          { name: 'Espagne', deaths: 0 },
-          { name: 'Royaume-Uni', deaths: 0 },
-          { name: 'Etats-Unis', deaths: 0 },
-          { name: 'Mexique', deaths: 0 },
-          { name: 'Brésil', deaths: 0 },
-          { name: 'Pérou', deaths: 0 },
-          { name: 'Autres', deaths: 213 }
+          { name: 'France', short_name: 'FRA', deaths: 0 },
+          { name: 'Italie', short_name: 'ITA', deaths: 0 },
+          { name: 'Espagne', short_name: 'ESP', deaths: 0 },
+          { name: 'Royaume-Uni', short_name: 'UK', deaths: 0 },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 0  },
+          { name: 'Russie', short_name: 'RUS', deaths: 0  },
+          { name: 'Chine', short_name: 'CHN', deaths: 213 },
+          { name: 'Mexique', short_name: 'MEX', deaths: 0 },
+          { name: 'Brésil', short_name: 'BRE', deaths: 0 },
+          { name: 'Pérou', short_name: 'PER', deaths: 0 },
+          { name: 'Colombie', short_name: 'COL', deaths: 0 },
+          { name: 'Inde', short_name: 'IND', deaths: 0 },
+          { name: 'Iran', short_name: 'IRA', deaths: 0 },
+          { name: 'Autres pays', short_name: 'Autres', deaths: 0 }
         ]
       }, {
         month: 2,
         month_name: '',
-        total: 2714,
+        total: 2942,
         detail: [
-          { name: 'France', deaths: 2 },
-          { name: 'Italie', deaths: 21 },
-          { name: 'Espagne', deaths: 0 },
-          { name: 'Royaume-Uni', deaths: 0 },
-          { name: 'Etats-Unis', deaths: 0 },
-          { name: 'Mexique', deaths: 0 },
-          { name: 'Brésil', deaths: 0 },
-          { name: 'Pérou', deaths: 0 },
-          { name: 'Autres', deaths: 2691 }
+          { name: 'France', short_name: 'FRA', deaths: 2 },
+          { name: 'Italie', short_name: 'ITA', deaths: 29 },
+          { name: 'Espagne', short_name: 'ESP', deaths: 1 },
+          { name: 'Royaume-Uni', short_name: 'UK', deaths: 0 },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 0  },
+          { name: 'Russie', short_name: 'RUS', deaths: 0  },
+          { name: 'Chine', short_name: 'CHN', deaths: 2838 },
+          { name: 'Mexique', short_name: 'MEX', deaths: 0 },
+          { name: 'Brésil', short_name: 'BRE', deaths: 0 },
+          { name: 'Pérou', short_name: 'PER', deaths: 0 },
+          { name: 'Colombie', short_name: 'COL', deaths: 0 },
+          { name: 'Inde', short_name: 'IND', deaths: 0 },
+          { name: 'Iran', short_name: 'IRA', deaths: 43 },
+          { name: 'Autres pays', short_name: 'Autres', deaths: 29 }
         ]
       }, {
         month: 3,
-        month_name: 'Janvier, Février & Mars',
-        total: 35799,
+        month_name: 'Janvier,<br />Février & Mars',
+        total: 37842,
         detail: [
-          { name: 'France', deaths: 3022 },
-          { name: 'Italie', deaths: 11570 },
-          { name: 'Espagne', deaths: 7340 },
-          { name: 'Royaume-Uni', deaths: 2050 },
-          { name: 'Etats-Unis', deaths: 3170 },
-          { name: 'Mexique', deaths: 28 },
-          { name: 'Brésil', deaths: 159 },
-          { name: 'Pérou', deaths: 24 },
-          { name: 'Autres', deaths: 8436 }
+          { name: 'France', short_name: 'FRA', deaths: 3015 },
+          { name: 'Italie', short_name: 'ITA', deaths: 11562 },
+          { name: 'Espagne', short_name: 'ESP', deaths: 10045 },
+          { name: 'Royaume-Uni', short_name: 'UK', deaths: 2050 },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 2398  },
+          { name: 'Russie', short_name: 'RUS', deaths: 9  },
+          { name: 'Chine', short_name: 'CHN', deaths: 476},
+          { name: 'Mexique', short_name: 'MEX', deaths: 20 },
+          { name: 'Brésil', short_name: 'BRE', deaths: 136 },
+          { name: 'Pérou', short_name: 'PER', deaths: 11 },
+          { name: 'Colombie', short_name: 'COL', deaths: 10 },
+          { name: 'Inde', short_name: 'IND', deaths: 32 },
+          { name: 'Iran', short_name: 'IRA', deaths: 2855 },
+          { name: 'Autres pays', short_name: 'Autres', deaths: 5223 }
         ]
       }, {
         month: 4,
         month_name: 'Avril',
-        total: 189176,
+        total: 183727,
         detail: [
-          { name: 'France', deaths: 21063 },
-          { name: 'Italie', deaths: 16091 },
-          { name: 'Espagne', deaths: 17203 },
-          { name: 'Royaume-Uni', deaths: 23999 },
-          { name: 'Etats-Unis', deaths: 57796 },
-          { name: 'Mexique', deaths: 1704 },
-          { name: 'Brésil', deaths: 5307 },
-          { name: 'Pérou', deaths: 919 },
-          { name: 'Autres', deaths: 45094 }
+          { name: 'France', short_name: 'FRA', deaths: 21037 },
+          { name: 'Italie', short_name: 'ITA', deaths: 16091 },
+          { name: 'Espagne', short_name: 'ESP', deaths: 14971 },
+          { name: 'Royaume-Uni', short_name: 'UK', deaths: 23999 },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 55332 },
+          { name: 'Russie', short_name: 'RUS', deaths: 1064 },
+          { name: 'Chine', short_name: 'CHN', deaths: 1329},
+          { name: 'Mexique', short_name: 'MEX', deaths: 1549 },
+          { name: 'Brésil', short_name: 'BRE', deaths: 4881 },
+          { name: 'Pérou', short_name: 'PER', deaths: 843 },
+          { name: 'Colombie', short_name: 'COL', deaths: 259 },
+          { name: 'Inde', short_name: 'IND', deaths: 1042 },
+          { name: 'Iran', short_name: 'IRA', deaths: 3130 },
+          { name: 'Autres pays', short_name: 'Autres', deaths: 38200 }
         ]
       }, {
         month: 5,
         month_name: 'Mai',
-        total: 140149,
+        total: 141773,
         detail: [
-          { name: 'France', deaths: 4684 },
-          { name: 'Italie', deaths: 5668 },
-          { name: 'Espagne', deaths: 2584 },
-          { name: 'Royaume-Uni', deaths: 11336 },
-          { name: 'Etats-Unis', deaths: 42815 },
-          { name: 'Mexique', deaths: 8047 },
-          { name: 'Brésil', deaths: 23368 },
-          { name: 'Pérou', deaths: 3428 },
-          { name: 'Autres', deaths: 38229 }
+          { name: 'France', short_name: 'FRA', deaths: 4663 },
+          { name: 'Italie', short_name: 'ITA', deaths: 5658 },
+          { name: 'Espagne', short_name: 'ESP', deaths: 2946 },
+          { name: 'Royaume-Uni', short_name: 'UK', deaths: 11336 },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 44910 },
+          { name: 'Russie', short_name: 'RUS', deaths: 3620 },
+          { name: 'Chine', short_name: 'CHN', deaths: 2},
+          { name: 'Mexique', short_name: 'MEX', deaths: 7846 },
+          { name: 'Brésil', short_name: 'BRE', deaths: 22861 },
+          { name: 'Pérou', short_name: 'PER', deaths: 3376 },
+          { name: 'Colombie', short_name: 'COL', deaths: 584 },
+          { name: 'Inde', short_name: 'IND', deaths: 4090 },
+          { name: 'Iran', short_name: 'IRA', deaths: 1706 },
+          { name: 'Autres pays', short_name: 'Autres', deaths: 28175 }
         ]
       }, {
         month: 6,
         month_name: 'Juin',
-        total: 134078,
+        total: 134365,
         detail: [
-          { name: 'France', deaths: 1042 },
-          { name: 'Italie', deaths: 1404 },
-          { name: 'Espagne', deaths: 1228 },
-          { name: 'Royaume-Uni', deaths: 2956 },
-          { name: 'Etats-Unis', deaths: 22359 },
-          { name: 'Mexique', deaths: 17342 },
-          { name: 'Brésil', deaths: 29480 },
-          { name: 'Pérou', deaths: 5133 },
-          { name: 'Autres', deaths: 53134 }
+          { name: 'France', short_name: 'FRA', deaths: 1013 },
+          { name: 'Italie', short_name: 'ITA', deaths: 1404 },
+          { name: 'Espagne', short_name: 'ESP', deaths: 388 },
+          { name: 'Royaume-Uni', short_name: 'UK', deaths: 2956 },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 23563 },
+          { name: 'Russie', short_name: 'RUS', deaths: 4627 },
+          { name: 'Chine', short_name: 'CHN', deaths: 3},
+          { name: 'Mexique', short_name: 'MEX', deaths: 17233 },
+          { name: 'Brésil', short_name: 'BRE', deaths: 29744 },
+          { name: 'Pérou', short_name: 'PER', deaths: 5087 },
+          { name: 'Colombie', short_name: 'COL', deaths: 2253 },
+          { name: 'Inde', short_name: 'IND', deaths: 11729 },
+          { name: 'Iran', short_name: 'IRA', deaths: 2936 },
+          { name: 'Autres pays', short_name: 'Autres', deaths: 31429 }
         ]
       }, {
         month: 7,
         month_name: 'Juillet',
-        total: 166208,
+        total: 162946,
         detail: [
-          { name: 'France', deaths: 441 },
-          { name: 'Italie', deaths: 388 },
-          { name: 'Espagne', deaths: 90 },
-          { name: 'Royaume-Uni', deaths: 828 },
-          { name: 'Etats-Unis', deaths: 25930 },
-          { name: 'Mexique', deaths: 18879 },
-          { name: 'Brésil', deaths: 32949 },
-          { name: 'Pérou', deaths: 9517 },
-          { name: 'Autres', deaths: 77186 }
+          { name: 'France', short_name: 'FRA', deaths: 406 },
+          { name: 'Italie', short_name: 'ITA', deaths: 388 },
+          { name: 'Espagne', short_name: 'ESP', deaths: 103 },
+          { name: 'Royaume-Uni', short_name: 'UK', deaths: 828 },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 23851 },
+          { name: 'Russie', short_name: 'RUS', deaths: 4643 },
+          { name: 'Chine', short_name: 'CHN', deaths: 18},
+          { name: 'Mexique', short_name: 'MEX', deaths: 18713 },
+          { name: 'Brésil', short_name: 'BRE', deaths: 32512 },
+          { name: 'Pérou', short_name: 'PER', deaths: 9499 },
+          { name: 'Colombie', short_name: 'COL', deaths: 6348 },
+          { name: 'Inde', short_name: 'IND', deaths: 18854 },
+          { name: 'Iran', short_name: 'IRA', deaths: 5899 },
+          { name: 'Autres pays', short_name: 'Autres', deaths: 40884 }
         ]
       }, {
         month: 8,
         month_name: 'Août',
-        total: 178628,
+        total: 181040,
         detail: [
-          { name: 'France', deaths: 352 },
-          { name: 'Italie', deaths: 345 },
-          { name: 'Espagne', deaths: 649 },
-          { name: 'Royaume-Uni', deaths: 330 },
-          { name: 'Etats-Unis', deaths: 30999 },
-          { name: 'Mexique', deaths: 18158 },
-          { name: 'Brésil', deaths: 29565 },
-          { name: 'Pérou', deaths: 9767 },
-          { name: 'Autres', deaths: 88463 }
+          { name: 'France', short_name: 'FRA', deaths: 331 },
+          { name: 'Italie', short_name: 'ITA', deaths: 345 },
+          { name: 'Espagne', short_name: 'ESP', deaths: 817 },
+          { name: 'Royaume-Uni', short_name: 'UK', deaths: 330 },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 31635 },
+          { name: 'Russie', short_name: 'RUS', deaths: 3213 },
+          { name: 'Chine', short_name: 'CHN', deaths: 63},
+          { name: 'Mexique', short_name: 'MEX', deaths: 18458 },
+          { name: 'Brésil', short_name: 'BRE', deaths: 30328 },
+          { name: 'Pérou', short_name: 'PER', deaths: 9791 },
+          { name: 'Colombie', short_name: 'COL', deaths: 9610 },
+          { name: 'Inde', short_name: 'IND', deaths: 28722 },
+          { name: 'Iran', short_name: 'IRA', deaths: 4893 },
+          { name: 'Autres pays', short_name: 'Autres', deaths: 42504 }
         ]
       }, {
         month: 9,
         month_name: 'Septembre',
-        total: 153035,
+        total: 146589,
         detail: [
-          { name: 'France', deaths: 853 },
-          { name: 'Italie', deaths: 281 },
-          { name: 'Espagne', deaths: 1940 },
-          { name: 'Royaume-Uni', deaths: 363 },
-          { name: 'Etats-Unis', deaths: 18840 },
-          { name: 'Mexique', deaths: 10791 },
-          { name: 'Brésil', deaths: 18149 },
-          { name: 'Pérou', deaths: 3082 },
-          { name: 'Autres', deaths: 98736 }
+          { name: 'France', short_name: 'FRA', deaths: 806 },
+          { name: 'Italie', short_name: 'ITA', deaths: 281 },
+          { name: 'Espagne', short_name: 'ESP', deaths: 1763 },
+          { name: 'Royaume-Uni', short_name: 'UK', deaths: 363 },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 19036 },
+          { name: 'Russie', short_name: 'RUS', deaths: 3148 },
+          { name: 'Chine', short_name: 'CHN', deaths: 17},
+          { name: 'Mexique', short_name: 'MEX', deaths: 11130 },
+          { name: 'Brésil', short_name: 'BRE', deaths: 18515 },
+          { name: 'Pérou', short_name: 'PER', deaths: 3263 },
+          { name: 'Colombie', short_name: 'COL', deaths: 6039 },
+          { name: 'Inde', short_name: 'IND', deaths: 30034 },
+          { name: 'Iran', short_name: 'IRA', deaths: 3932 },
+          { name: 'Autres pays', short_name: 'Autres', deaths: 48262 }
         ]
       }]
     }
@@ -295,7 +341,11 @@ export default class App extends Component {
       <div className={`${c}__head`}>
         <div className={`${c}__overhead`}><PageTitle level={1} big>Covid 19</PageTitle></div>
         <div className={`${c}__title`}><PageTitle level={2} big>Un million de morts</PageTitle></div>
-        <div className={`${c}__intro`}><Paragraph literary>Un paragraphe</Paragraph></div>
+        <div className={`${c}__intro`}>
+          <Paragraph literary>
+            Dix mois après la naissance de la pandémie en Chine, le cap du million de morts officiellement dus au Covid-19 dans le monde a été franchi. Cette visualisation, où chaque point représente dix décès, montre comment, mois après mois, le virus s'est déplacé sur la planète, même si douze pays – ici isolés – concentrent 75% des morts.
+          </Paragraph>
+        </div>
       </div>
     
       {/* Filters */}
@@ -316,6 +366,11 @@ export default class App extends Component {
                 {country.name}
               </span>
             </AnnotationTitle>
+            <AnnotationTitle small>
+              <span onMouseEnter={e => this.activateHover(country.name)}>
+                {country.short_name}
+              </span>
+            </AnnotationTitle>
           </span>
         })}
       </div>
@@ -324,42 +379,46 @@ export default class App extends Component {
       <div className={`${c}__content`}>
         {state.data.map(month => {
           const { width, display } = props.viewport
-          const totalHeight = display === 'lg'
-            ? 1.2 * width
-            : display === 'md'
-              ? 1.8 * width
-              : 3.5 * width
           const heightPercent = month.total / 1000000
-          const height = `${totalHeight * heightPercent}px`
+          const paddingTop = display === 'lg'
+            ? `calc(100% * ${heightPercent})`
+            : display === 'md'
+              ? `calc(180% * ${heightPercent})`
+              : `calc(300% * ${heightPercent})`
           return <div
             className={`${c}__month-line`}
-            style={{ height }}
+            style={{ paddingTop }}
             key={month.month}>
-            <div className={`${c}__month-name`}>
-              <AnnotationTitle big>{month.month_name}</AnnotationTitle>
-              <Paragraph small literary>{month.month_name ? `${month.total} morts` : null}</Paragraph>
-              <Paragraph small literary>{month.month_name ? `dont ${month.detail[0].deaths} en France` : null}</Paragraph>
-            </div>
-            {month.detail.map(country => {
-              const width = `${100 * country.deaths / month.total}%`
-              const classes = [`${c}__country-cell`]
-              if (country.name === state.sort) classes.push(`${c}__country-cell_active`)
-              if (country.name === state.hover) classes.push(`${c}__country-cell_hover`)
-              return <div
-                className={classes.join(' ')}
-                style={{ width }}
-                onClick={e => this.activateFilter(country.name)}
-                onMouseEnter={e => this.activateHover(country.name)}
-                onMouseLeave={e => this.activateHover(null)}>
-                <span className={`${c}__country-deaths`}>
-                  <Annotation literary small>{
-                    month.month_name
-                    && country.name !== 'France'
-                    && country.deaths
-                  }</Annotation>
-                </span>
+            <div className={`${c}__month-line-inner`}>
+              <div className={`${c}__month-name`}>
+                <AnnotationTitle big><JSXInterpreter content={month.month_name} /></AnnotationTitle>
+                <Paragraph small literary>{month.month_name ? `${month.total} morts` : null}</Paragraph>
+                <Paragraph small literary>{month.month_name ? `dont ${month.detail[0].deaths} en France` : null}</Paragraph>
               </div>
-            })}
+              {month.detail.map(country => {
+                const width = `${100 * country.deaths / month.total}%`
+                const classes = [`${c}__country-cell`]
+                if (country.name === state.sort) classes.push(`${c}__country-cell_active`)
+                if (country.name === state.hover) classes.push(`${c}__country-cell_hover`)
+                const type = props.viewport.display.toUpperCase()
+                const color = country.name === state.sort ? 'red' : 'black'
+                const backgroundImage = `url(./assets/${type}-${color}-${month.month}-${country.short_name}.png)`
+                return <div
+                  className={classes.join(' ')}
+                  style={{ width, backgroundImage }}
+                  onClick={e => this.activateFilter(country.name)}
+                  onMouseEnter={e => this.activateHover(country.name)}
+                  onMouseLeave={e => this.activateHover(null)}>
+                  <span className={`${c}__country-deaths`}>
+                    <Annotation literary small>{
+                      month.month_name
+                      && country.name !== 'France'
+                      && country.deaths
+                    }</Annotation>
+                  </span>
+                </div>
+              })}
+            </div>
           </div>
         })}
       </div>
