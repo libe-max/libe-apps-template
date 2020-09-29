@@ -4,6 +4,8 @@ import LibeLaboLogo from './libe-components/blocks/LibeLaboLogo'
 import Loader from './libe-components/blocks/Loader'
 import LoadingError from './libe-components/blocks/LoadingError'
 import Paragraph from './libe-components/text-levels/Paragraph'
+import AnnotationTitle from './libe-components/text-levels/AnnotationTitle'
+import Annotation from './libe-components/text-levels/Annotation'
 import ParagraphTitle from './libe-components/text-levels/ParagraphTitle'
 import Slug from './libe-components/text-levels/Slug'
 import PageTitle from './libe-components/text-levels/PageTitle'
@@ -24,9 +26,11 @@ export default class App extends Component {
       error_sheet: null,
       data_sheet: [],
       konami_mode: false,
-      sort: null,
+      sort: 'France',
+      hover: null,
       data: [{
         month: 1,
+        month_name: '',
         total: 213,
         detail: [
           { name: 'France', deaths: 0 },
@@ -41,6 +45,7 @@ export default class App extends Component {
         ]
       }, {
         month: 2,
+        month_name: '',
         total: 2714,
         detail: [
           { name: 'France', deaths: 2 },
@@ -55,6 +60,7 @@ export default class App extends Component {
         ]
       }, {
         month: 3,
+        month_name: 'Janvier, Février & Mars',
         total: 35799,
         detail: [
           { name: 'France', deaths: 3022 },
@@ -69,6 +75,7 @@ export default class App extends Component {
         ]
       }, {
         month: 4,
+        month_name: 'Avril',
         total: 189176,
         detail: [
           { name: 'France', deaths: 21063 },
@@ -83,6 +90,7 @@ export default class App extends Component {
         ]
       }, {
         month: 5,
+        month_name: 'Mai',
         total: 140149,
         detail: [
           { name: 'France', deaths: 4684 },
@@ -97,6 +105,7 @@ export default class App extends Component {
         ]
       }, {
         month: 6,
+        month_name: 'Juin',
         total: 134078,
         detail: [
           { name: 'France', deaths: 1042 },
@@ -111,6 +120,7 @@ export default class App extends Component {
         ]
       }, {
         month: 7,
+        month_name: 'Juillet',
         total: 166208,
         detail: [
           { name: 'France', deaths: 441 },
@@ -125,6 +135,7 @@ export default class App extends Component {
         ]
       }, {
         month: 8,
+        month_name: 'Août',
         total: 178628,
         detail: [
           { name: 'France', deaths: 352 },
@@ -139,6 +150,7 @@ export default class App extends Component {
         ]
       }, {
         month: 9,
+        month_name: 'Septembre',
         total: 153035,
         detail: [
           { name: 'France', deaths: 853 },
@@ -155,7 +167,8 @@ export default class App extends Component {
     }
     this.fetchSheet = this.fetchSheet.bind(this)
     this.watchKonamiCode = this.watchKonamiCode.bind(this)
-    this.activateSort = this.activateSort.bind(this)
+    this.activateFilter = this.activateFilter.bind(this)
+    this.activateHover = this.activateHover.bind(this)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -226,12 +239,23 @@ export default class App extends Component {
 
   /* * * * * * * * * * * * * * * * *
    *
-   * ACTIVATE SORT
+   * ACTIVATE FILTER
    *
    * * * * * * * * * * * * * * * * */
-  activateSort (value) {
-    console.log(value)
-    this.setState(curr => ({ sort: value }))
+  activateFilter (value) {
+    this.setState(curr => ({
+      sort: value,
+      hover: curr.hover === value ? null : curr.hover
+    }))
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * ACTIVATE HOVER
+   *
+   * * * * * * * * * * * * * * * * */
+  activateHover (value) {
+    this.setState(curr => ({ hover: curr.sort === value ? null : value }))
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -266,59 +290,80 @@ export default class App extends Component {
 
     /* Display component */
     return <div className={classes.join(' ')}>
+
       {/* Head */}
       <div className={`${c}__head`}>
         <div className={`${c}__overhead`}><PageTitle level={1} big>Covid 19</PageTitle></div>
         <div className={`${c}__title`}><PageTitle level={2} big>Un million de morts</PageTitle></div>
         <div className={`${c}__intro`}><Paragraph literary>Un paragraphe</Paragraph></div>
       </div>
+    
       {/* Filters */}
-      {/*<div className={`${c}__filters`}>
-        <span className={`${c}__filter-title`}>
-          <Slug>Tri</Slug>
-        </span>
-        <span
-          onClick={e => this.activateSort(null)}
-          className={`${c}__filter-option ${state.sort === null ? `${c}__filter-option_active` : ''}`}>
-          <Paragraph>aucun</Paragraph>
-        </span>
-        <span
-          onClick={e => this.activateSort('continent')}
-          className={`${c}__filter-option ${state.sort === 'continent' ? `${c}__filter-option_active` : ''}`}>
-          <Paragraph>par continent</Paragraph>
-        </span>
-        <span
-          onClick={e => this.activateSort('country')}
-          className={`${c}__filter-option ${state.sort === 'country' ? `${c}__filter-option_active` : ''}`}>
-          <Paragraph>par pays</Paragraph>
-        </span>
-      </div>*/}
+      <div
+        className={`${c}__filters`}
+        style={{ top: `calc(${props.viewport.nav_height}px)` }}>
+        {state.data[0].detail.map(country => {
+          const classes = [`${c}__filter-option`]
+          if (country.name === state.sort) classes.push(`${c}__filter-option_active`)
+          if (country.name === state.hover) classes.push(`${c}__filter-option_hover`)
+          return <span
+            className={classes.join(' ')}
+            onMouseEnter={e => this.activateHover(country.name)}
+            onMouseLeave={e => this.activateHover(null)}
+            onClick={e => this.activateFilter(country.name)}>
+            <AnnotationTitle>
+              <span onMouseEnter={e => this.activateHover(country.name)}>
+                {country.name}
+              </span>
+            </AnnotationTitle>
+          </span>
+        })}
+      </div>
+      
       {/* Content */}
       <div className={`${c}__content`}>
         {state.data.map(month => {
           const { width, display } = props.viewport
           const totalHeight = display === 'lg'
-            ? 1.5 * width
+            ? 1.2 * width
             : display === 'md'
-              ? 2 * width
-              : 4 * width
+              ? 1.8 * width
+              : 3.5 * width
           const heightPercent = month.total / 1000000
           const height = `${totalHeight * heightPercent}px`
-          const backgroundColor = chroma.random().hex()
           return <div
-            style={{ height, backgroundColor, display: 'flex' }}
-            key={month.month}>{
-              month.detail.map(country => {
-                const width = `${100 * country.deaths / month.total}%`
-                const backgroundColor = chroma.random().hex()
-                return <div style={{ width, height: '100%', flexGrow: 0, flexShrink: 0, backgroundColor }}>
-                  <span>{country.name}</span>
-                </div>
-              })
-            }
+            className={`${c}__month-line`}
+            style={{ height }}
+            key={month.month}>
+            <div className={`${c}__month-name`}>
+              <AnnotationTitle big>{month.month_name}</AnnotationTitle>
+              <Paragraph small literary>{month.month_name ? `${month.total} morts` : null}</Paragraph>
+              <Paragraph small literary>{month.month_name ? `dont ${month.detail[0].deaths} en France` : null}</Paragraph>
+            </div>
+            {month.detail.map(country => {
+              const width = `${100 * country.deaths / month.total}%`
+              const classes = [`${c}__country-cell`]
+              if (country.name === state.sort) classes.push(`${c}__country-cell_active`)
+              if (country.name === state.hover) classes.push(`${c}__country-cell_hover`)
+              return <div
+                className={classes.join(' ')}
+                style={{ width }}
+                onClick={e => this.activateFilter(country.name)}
+                onMouseEnter={e => this.activateHover(country.name)}
+                onMouseLeave={e => this.activateHover(null)}>
+                <span className={`${c}__country-deaths`}>
+                  <Annotation literary small>{
+                    month.month_name
+                    && country.name !== 'France'
+                    && country.deaths
+                  }</Annotation>
+                </span>
+              </div>
+            })}
           </div>
         })}
       </div>
+      
       {/* Footer */}
       <div className='lblb-default-apps-footer'>
         <ShareArticle

@@ -1,3 +1,9 @@
+/* * * * * * * * * * * * * * * * * * * 
+ *
+ * HEAD
+ *
+ * * * * * * * * * * * * * * * * * * */
+
 .covid-19-1M__head {
   text-align: center;
   padding: 2rem;
@@ -19,6 +25,10 @@
   margin-bottom: 3rem;
 }
 
+.covid-19-1M__intro {
+  margin-bottom: 2rem;
+}
+
 @media screen and (max-width: 40rem) {
   .covid-19-1M__head {
     padding: 1rem;
@@ -32,8 +42,11 @@
 
 .covid-19-1M__filters {
   text-align: center;
-  padding: 1rem;
-  padding-top: 2rem;
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: sticky;
 }
 
 .covid-19-1M__filter-title {
@@ -43,18 +56,125 @@
 
 .covid-19-1M__filter-option {
   cursor: pointer;
+  background: rgba(255, 255, 255, .9);
+  padding: .5rem;
+  margin: .25rem;
+  /*box-shadow: 0 0 .5rem 0 rgba(33, 33, 33, .2);*/
+  border: 2px solid #DDDDDD;
 }
 
-.covid-19-1M__filter-option .lblb-paragraph {
+.covid-19-1M__filter-option_active {
+  border: 3px solid #212121; 
+}
+
+.covid-19-1M__filter-option_hover {
+  border: 2px solid #AAAAAA;
+}
+
+.covid-19-1M__filter-option .lblb-annotation-title {
   margin: 0 .5rem;
   color: #999999;
+  display: inline-block;
 }
 
-.covid-19-1M__filter-option_active .lblb-paragraph {
+.covid-19-1M__filter-option_active .lblb-annotation-title {
   color: #212121;
   border-bottom: 2px solid #e91845;
 }
 
-.covid-19-1M__filter-option:hover .lblb-paragraph {
+.covid-19-1M__filter-option_hover .lblb-annotation-title {
   color: #212121;
 }
+
+@media screen and (max-width: 40rem) {
+  .covid-19-1M__filters {
+    padding: .25rem;
+  }
+
+  .covid-19-1M__filter-option {
+    padding: .125rem;
+    margin: .125rem;
+    border: 2px solid #DDDDDD;
+  }
+}
+
+/* * * * * * * * * * * * * * * * * * * 
+ *
+ * Content
+ *
+ * * * * * * * * * * * * * * * * * * */
+
+.covid-19-1M__content {
+  padding: 1rem 0;
+  margin-top: 3rem;
+}
+
+.covid-19-1M__month-line {
+  display: flex;
+  margin-bottom: .5rem;
+  position: relative;
+  padding: 0 3rem;
+}
+
+.covid-19-1M__month-name {
+  position: absolute;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 1), 1.5px 1.5px 0 rgba(255, 255, 255, 1);
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 3;
+  max-width: 142px;
+}
+
+.covid-19-1M__month-name .lblb-annotation-title {
+  text-transform: none;
+}
+
+.covid-19-1M__country-cell {
+  cursor: pointer;
+  height: 100%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  position: relative;
+  background: rgba(33, 33, 33, .05);
+}
+
+.covid-19-1M__country-cell_active {
+  background: rgba(233, 24, 69, .3);
+}
+
+.covid-19-1M__country-cell_hover {
+  background: rgba(33, 33, 33, .1);
+}
+
+.covid-19-1M__country-deaths {
+  position: absolute;
+  display: none;
+}
+
+.covid-19-1M__country-deaths .lblb-annotation {
+  color: #e91845;
+  font-weight: 600;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 1), 1.5px 1.5px 0 rgba(255, 255, 255, 1);
+}
+
+.covid-19-1M__country-cell_active .covid-19-1M__country-deaths {
+  display: block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 40rem) {
+  .covid-19-1M__month-line {
+    padding: 0 .5rem;
+  }
+
+  .covid-19-1M__month-name {
+    bottom: .125rem;
+    left: .625rem;
+  }
+}
+
+
+
+
