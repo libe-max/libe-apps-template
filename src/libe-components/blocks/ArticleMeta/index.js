@@ -93,7 +93,7 @@ export default class ArticleMeta extends Component {
         delete roleGroupsJointWithCommas.author
       }
       if (Object.keys(roleGroupsJointWithCommas).length) {
-        fullDisplay.push(<span className={`${c}__label`} key='label-1'> (</span>)
+        // fullDisplay.push(<span className={`${c}__label`} key='label-1'> (</span>)
         for (let role in roleGroupsJointWithCommas) {
           const roleLine = roleGroupsJointWithCommas[role]
           fullDisplay.push(
@@ -103,7 +103,7 @@ export default class ArticleMeta extends Component {
           )
         }
         fullDisplay.pop()
-        fullDisplay.push(<span className={`${c}__label`} key='label-last'>)</span>)
+        // fullDisplay.push(<span className={`${c}__label`} key='label-last'>)</span>)
       }
       // Add dates
       if (displayPublishedOn) {

@@ -222,5 +222,12 @@
 }
 
 
+.lblb-default-apps-footer {
+  padding: 0 1rem;
+}
 
-
+@media screen and (max-width: 40rem) {
+  .lblb-default-apps-footer {
+    padding: 0 .5rem;
+  }
+}

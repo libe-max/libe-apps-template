@@ -13,10 +13,6 @@ const config = {
     published_on: null,
     updated_on: null,
     authors: [{
-      name: 'Baptiste Bouthier',
-      role: 'Textes',
-      link: 'https://www.liberation.fr/auteur/12359-baptiste-bouthier'
-    }, {
       name: 'Clara Dealberto',
       role: 'Production',
       link: 'https://www.liberation.fr/auteur/18438-clara-dealberto'
@@ -28,6 +24,10 @@ const config = {
       name: 'Maxime Fabas',
       role: 'Production',
       link: 'https://www.liberation.fr/libe-labo-data-nouveaux-formats,100538'
+    }, {
+      name: 'Baptiste Bouthier',
+      role: 'Texte',
+      link: 'https://www.liberation.fr/auteur/12359-baptiste-bouthier'
     }]
   },
   show_header: true,

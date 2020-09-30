@@ -442,6 +442,7 @@ export default class App extends Component {
           tweet={props.meta.tweet}
           url={props.meta.url} />
         <ArticleMeta
+          inline
           publishedOn={props.meta.published_on}
           updatedOn={props.meta.updated_on}
           authors={props.meta.authors} />
