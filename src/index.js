@@ -15,8 +15,8 @@ class AppWrapper extends Component {
     super(props)
     this.state = {
       rem: 16,
-      width: window.visualViewport.width,
-      height: window.visualViewport.height,
+      width: window.innerWidth,
+      height: window.innerHeight,
       display: 'sm',
       nav_height: 0,
       body_padding_top: 0
@@ -37,7 +37,8 @@ class AppWrapper extends Component {
       const $body = document.querySelector('body')
       const navHeight = $nav ? $nav.offsetHeight : 0
       const bodyPaddingTop = $body ? parseFloat(window.getComputedStyle($body)['padding-top'].slice(0, -2)) : 0
-      const { width, height } = window.visualViewport
+      const width = window.innerWidth
+      const height = window.innerHeight
       const breakpoints = {
         lg: { min: 1 + 63 * curr.rem, max: Infinity },
         md: { min: 1 + 40 * curr.rem, max: 63 * curr.rem },
