@@ -7,6 +7,7 @@ import JSXInterpreter from '../../logic/JSXInterpreter'
 import Paragraph from '../../text-levels/Paragraph'
 import TweetMedias from '../TweetMedias'
 import moment from 'moment'
+import _ from 'lodash'
 
 /*
  *   Tweet component
@@ -81,7 +82,7 @@ export default class Tweet extends Component {
 
     const textReplacements = []
     entities.hashtags.forEach(hashtag => {
-      const hashtagMatch = text.slice(hashtag.indices[0], hashtag.indices[1])
+      const hashtagMatch = _.toArray(text).slice(hashtag.indices[0], hashtag.indices[1]).join('')
       const transformedMention = `<a href="https://twitter.com/hashtag/${hashtag.text}" ref="noopener noreferrer" target="_blank">${hashtagMatch}</a>`
       textReplacements.push({
         before: hashtagMatch,
@@ -91,7 +92,7 @@ export default class Tweet extends Component {
       })
     })
     entities.urls.forEach(url => {
-      const urlMatch = text.slice(url.indices[0], url.indices[1])
+      const urlMatch = _.toArray(text).slice(url.indices[0], url.indices[1]).join('')
       const expUrl = url.expanded_url
       const displayExpUrl = expUrl.length > 37 ? `${expUrl.slice(0, 37)}...` : expUrl
       const quotedScreenName = quote ? quote.user.screen_name : undefined
@@ -106,7 +107,7 @@ export default class Tweet extends Component {
       })
     })
     entities.symbols.forEach(symbol => {
-      const symbolMatch = text.slice(symbol.indices[0], symbol.indices[1])
+      const symbolMatch = _.toArray(text).slice(symbol.indices[0], symbol.indices[1]).join('')
       const transformedMention = symbolMatch
       textReplacements.push({
         before: symbolMatch,
@@ -116,7 +117,7 @@ export default class Tweet extends Component {
       })
     })
     entities.user_mentions.forEach(userMention => {
-      const mentionMatch = text.slice(userMention.indices[0], userMention.indices[1])
+      const mentionMatch = _.toArray(text).slice(userMention.indices[0], userMention.indices[1]).join('')
       const transformedMention = `<a href="https://twitter.com/${userMention.screen_name}" ref="noopener noreferrer" target="_blank">${mentionMatch}</a>`
       textReplacements.push({
         before: mentionMatch,
@@ -126,7 +127,7 @@ export default class Tweet extends Component {
       })
     })
     if (entities.media) entities.media.forEach(media => {
-      const mediaMatch = text.slice(media.indices[0], media.indices[1])
+      const mediaMatch = _.toArray(text).slice(media.indices[0], media.indices[1]).join('')
       const transformedMedia = ''
       textReplacements.push({
         before: mediaMatch,
@@ -152,8 +153,8 @@ export default class Tweet extends Component {
       ]
     }))
     return finalReplacementsMap.reduce((acc, replacement) => {
-      const textBefore = acc.slice(0, replacement.computed_indices[0])
-      const textAfter = acc.slice(replacement.computed_indices[1])
+      const textBefore = _.toArray(acc).slice(0, replacement.computed_indices[0]).join('')
+      const textAfter = _.toArray(acc).slice(replacement.computed_indices[1]).join('')
       return textBefore + replacement.after + textAfter
     }, text).replace(/\n/igm, '<br />')
   }
