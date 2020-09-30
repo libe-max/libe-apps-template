@@ -11,6 +11,7 @@ import Slug from './libe-components/text-levels/Slug'
 import PageTitle from './libe-components/text-levels/PageTitle'
 import ShareArticle from './libe-components/blocks/ShareArticle'
 import JSXInterpreter from './libe-components/logic/JSXInterpreter'
+import numberToSpacedString from './libe-utils/number-to-spaced-string'
 import chroma from 'chroma-js'
 
 export default class App extends Component {
@@ -192,22 +193,22 @@ export default class App extends Component {
       }, {
         month: 9,
         month_name: 'Septembre',
-        total: 146589,
+        total: 155401,
         detail: [
-          { name: 'France', short_name: 'FRA', deaths: 806 },
-          { name: 'Italie', short_name: 'ITA', deaths: 281 },
-          { name: 'Espagne', short_name: 'ESP', deaths: 1763 },
-          { name: 'Royaume-Uni', short_name: 'UK', deaths: 363 },
-          { name: 'Etats-Unis', short_name: 'USA', deaths: 19036 },
-          { name: 'Russie', short_name: 'RUS', deaths: 3148 },
+          { name: 'France', short_name: 'FRA', deaths: 1141 },
+          { name: 'Italie', short_name: 'ITA', deaths: 374 },
+          { name: 'Espagne', short_name: 'ESP', deaths: 1961 },
+          { name: 'Royaume-Uni', short_name: 'UK', deaths: 502 },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 21931 },
+          { name: 'Russie', short_name: 'RUS', deaths: 3369 },
           { name: 'Chine', short_name: 'CHN', deaths: 17},
-          { name: 'Mexique', short_name: 'MEX', deaths: 11130 },
-          { name: 'Brésil', short_name: 'BRE', deaths: 18515 },
-          { name: 'Pérou', short_name: 'PER', deaths: 3263 },
-          { name: 'Colombie', short_name: 'COL', deaths: 6039 },
-          { name: 'Inde', short_name: 'IND', deaths: 30034 },
-          { name: 'Iran', short_name: 'IRA', deaths: 3932 },
-          { name: 'Autres pays', short_name: 'Autres', deaths: 48262 }
+          { name: 'Mexique', short_name: 'MEX', deaths: 12611 },
+          { name: 'Brésil', short_name: 'BRE', deaths: 21279 },
+          { name: 'Pérou', short_name: 'PER', deaths: 3655 },
+          { name: 'Colombie', short_name: 'COL', deaths: 6424 },
+          { name: 'Inde', short_name: 'IND', deaths: 31849 },
+          { name: 'Iran', short_name: 'IRA', deaths: 4317 },
+          { name: 'Autres pays', short_name: 'Autres', deaths: 45971 }
         ]
       }]
     }
@@ -339,11 +340,17 @@ export default class App extends Component {
 
       {/* Head */}
       <div className={`${c}__head`}>
-        <div className={`${c}__overhead`}><PageTitle level={1} big>Covid 19</PageTitle></div>
+        <div className={`${c}__overhead`}><PageTitle level={1} big>Covid-19</PageTitle></div>
         <div className={`${c}__title`}><PageTitle level={2} big>Un million de morts</PageTitle></div>
         <div className={`${c}__intro`}>
           <Paragraph literary>
-            Dix mois après la naissance de la pandémie en Chine, le cap du million de morts officiellement dus au Covid-19 dans le monde a été franchi. Cette visualisation, où chaque point représente dix décès, montre comment, mois après mois, le virus s'est déplacé sur la planète, même si douze pays – ici isolés – concentrent 75% des morts.
+            Dix mois après la naissance de la pandémie en Chine, le cap du million de morts officiellement dus au Covid-19 dans le monde a été franchi. Cette visualisation montre comment, mois après mois, le virus s'est déplacé sur la planète, même si douze pays – ici isolés – concentrent les trois-quarts des morts.
+            <br /><br />
+          </Paragraph>
+          <Paragraph small literary>
+            {props.viewport.display !== 'sm' ? 'Un point représente dix morts' : 'Un point représente cinquante morts'}.
+            <br />
+            Source OMS (données arrêtées au 30 septembre, 10 heures)
           </Paragraph>
         </div>
       </div>
@@ -357,6 +364,7 @@ export default class App extends Component {
           if (country.name === state.sort) classes.push(`${c}__filter-option_active`)
           if (country.name === state.hover) classes.push(`${c}__filter-option_hover`)
           return <span
+            key={country.name}
             className={classes.join(' ')}
             onMouseEnter={e => this.activateHover(country.name)}
             onMouseLeave={e => this.activateHover(null)}
@@ -392,18 +400,21 @@ export default class App extends Component {
             <div className={`${c}__month-line-inner`}>
               <div className={`${c}__month-name`}>
                 <AnnotationTitle big><JSXInterpreter content={month.month_name} /></AnnotationTitle>
-                <Paragraph small literary>{month.month_name ? `${month.total} morts` : null}</Paragraph>
-                <Paragraph small literary>{month.month_name ? `dont ${month.detail[0].deaths} en France` : null}</Paragraph>
+                <Paragraph small literary>{month.month_name ? `${numberToSpacedString(month.total)} morts` : null}</Paragraph>
+                <br />
+                <Paragraph small literary>{month.month_name ? `dont ${numberToSpacedString(month.detail[0].deaths)} en France` : null}</Paragraph>
               </div>
               {month.detail.map(country => {
                 const width = `${100 * country.deaths / month.total}%`
                 const classes = [`${c}__country-cell`]
                 if (country.name === state.sort) classes.push(`${c}__country-cell_active`)
                 if (country.name === state.hover) classes.push(`${c}__country-cell_hover`)
+                if (state.sort === null) classes.push(`${c}__country-cell_hover`)
                 const type = props.viewport.display.toUpperCase()
                 const color = country.name === state.sort ? 'red' : 'black'
                 const backgroundImage = `url(./assets/${type}-${color}-${month.month}-${country.short_name}.png)`
                 return <div
+                  key={country.name}
                   className={classes.join(' ')}
                   style={{ width, backgroundImage }}
                   onClick={e => this.activateFilter(country.name)}
@@ -413,7 +424,7 @@ export default class App extends Component {
                     <Annotation literary small>{
                       month.month_name
                       && country.name !== 'France'
-                      && country.deaths
+                      && numberToSpacedString(country.deaths)
                     }</Annotation>
                   </span>
                 </div>

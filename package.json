@@ -2,7 +2,7 @@
   "name": "libe-apps-template",
   "version": "0.2.4",
   "private": true,
-  "homepage": "/apps/maxime/1M-covid",
+  "homepage": "/apps/2020/09/1M-covid-19",
   "dependencies": {
     "chroma-js": "^2.1.0",
     "har-validator": "^5.1.5",

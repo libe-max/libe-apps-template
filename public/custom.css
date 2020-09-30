@@ -144,11 +144,16 @@
   left: 1rem;
   bottom: 1rem;
   z-index: 3;
-  max-width: 142px;
 }
 
 .covid-19-1M__month-name .lblb-annotation-title {
   text-transform: none;
+}
+
+.covid-19-1M__month-name .lblb-paragraph {
+  background: rgba(255, 255, 255, .9);
+  padding: 0 .25rem;
+  display: inline-block;
 }
 
 .covid-19-1M__country-cell {
@@ -157,19 +162,16 @@
   flex-grow: 0;
   flex-shrink: 0;
   position: relative;
-  /*background: rgba(33, 33, 33, .05);*/
   background-size: cover;
   opacity: .2;
 }
 
 .covid-19-1M__country-cell_active {
-  /*background: rgba(233, 24, 69, .3);*/
   opacity: 1;
 }
 
 .covid-19-1M__country-cell_hover {
-  /*background: rgba(33, 33, 33, .1);*/
-  opacity: .5;
+  opacity: .7;
 }
 
 .covid-19-1M__country-deaths {
@@ -181,9 +183,10 @@
 }
 
 .covid-19-1M__country-deaths .lblb-annotation {
-  color: #e91845;
+  color: #212121;
   font-weight: 600;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 1), 1.5px 1.5px 0 rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, .9);
+  padding: .125rem;
 }
 
 .covid-19-1M__country-cell_active .covid-19-1M__country-deaths {
