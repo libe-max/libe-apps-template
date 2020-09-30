@@ -132,7 +132,7 @@ class AppWrapper extends Component {
   }
 }
 
-ReactDOM.render(
+window.onload = () => ReactDOM.render(
   <AppWrapper {...config} />,
   document.getElementById('libe-labo-app-root')
 )
