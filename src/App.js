@@ -39,9 +39,9 @@ export default class App extends Component {
           { name: 'Italie', short_name: 'ITA', deaths: 0 },
           { name: 'Espagne', short_name: 'ESP', deaths: 0 },
           { name: 'Royaume-Uni', short_name: 'UK', deaths: 0 },
-          { name: 'Etats-Unis', short_name: 'USA', deaths: 0  },
-          { name: 'Russie', short_name: 'RUS', deaths: 0  },
-          { name: 'Chine', short_name: 'CHN', deaths: 213 },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 0 },
+          { name: 'Russie', short_name: 'RUS', deaths: 0 },
+          { name: 'Chine', short_name: 'CHN', deaths: 213 },
           { name: 'Mexique', short_name: 'MEX', deaths: 0 },
           { name: 'Brésil', short_name: 'BRE', deaths: 0 },
           { name: 'Pérou', short_name: 'PER', deaths: 0 },
@@ -53,15 +53,15 @@ export default class App extends Component {
       }, {
         month: 2,
         month_name: '',
-        total: 2942,
+        total: 2729,
         detail: [
           { name: 'France', short_name: 'FRA', deaths: 2 },
           { name: 'Italie', short_name: 'ITA', deaths: 29 },
           { name: 'Espagne', short_name: 'ESP', deaths: 1 },
           { name: 'Royaume-Uni', short_name: 'UK', deaths: 0 },
-          { name: 'Etats-Unis', short_name: 'USA', deaths: 0  },
-          { name: 'Russie', short_name: 'RUS', deaths: 0  },
-          { name: 'Chine', short_name: 'CHN', deaths: 2838 },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 0 },
+          { name: 'Russie', short_name: 'RUS', deaths: 0 },
+          { name: 'Chine', short_name: 'CHN', deaths: 2625 },
           { name: 'Mexique', short_name: 'MEX', deaths: 0 },
           { name: 'Brésil', short_name: 'BRE', deaths: 0 },
           { name: 'Pérou', short_name: 'PER', deaths: 0 },
@@ -79,8 +79,8 @@ export default class App extends Component {
           { name: 'Italie', short_name: 'ITA', deaths: 11562 },
           { name: 'Espagne', short_name: 'ESP', deaths: 10045 },
           { name: 'Royaume-Uni', short_name: 'UK', deaths: 2050 },
-          { name: 'Etats-Unis', short_name: 'USA', deaths: 2398  },
-          { name: 'Russie', short_name: 'RUS', deaths: 9  },
+          { name: 'Etats-Unis', short_name: 'USA', deaths: 2398 },
+          { name: 'Russie', short_name: 'RUS', deaths: 9 },
           { name: 'Chine', short_name: 'CHN', deaths: 476},
           { name: 'Mexique', short_name: 'MEX', deaths: 20 },
           { name: 'Brésil', short_name: 'BRE', deaths: 136 },
@@ -400,9 +400,20 @@ export default class App extends Component {
             <div className={`${c}__month-line-inner`}>
               <div className={`${c}__month-name`}>
                 <AnnotationTitle big><JSXInterpreter content={month.month_name} /></AnnotationTitle>
-                <Paragraph small literary>{month.month_name ? `${numberToSpacedString(month.total)} morts` : null}</Paragraph>
+                <Paragraph small literary>{
+                  month.month_name
+                    ? month.month === 3
+                      ? `${numberToSpacedString(state.data[0].total + state.data[1].total + month.total)} morts`
+                      : `${numberToSpacedString(month.total)} morts`
+                    : null
+                }</Paragraph>
                 <br />
-                <Paragraph small literary>{month.month_name ? `dont ${numberToSpacedString(month.detail[0].deaths)} en France` : null}</Paragraph>
+                <Paragraph small literary>{
+                  month.month_name
+                    ? month.month === 3
+                      ? `dont ${numberToSpacedString(state.data[0].detail[0].deaths + state.data[1].detail[0].deaths + month.detail[0].deaths)} en France`
+                      : `dont ${numberToSpacedString(month.detail[0].deaths)} en France`
+                    : null}</Paragraph>
               </div>
               {month.detail.map(country => {
                 const width = `${100 * country.deaths / month.total}%`
