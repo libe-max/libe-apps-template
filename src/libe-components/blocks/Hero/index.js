@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Hero component
@@ -26,6 +27,12 @@ export default class Hero extends Component {
   constructor () {
     super()
     this.c = 'lblb-hero'
+    this.usedProps = [
+      'children', 'height', 'maxContentWidth', 'fullHeight',
+      'bgColor', 'bgImage', 'bgPosition', 'bgSize', 'parallax',
+      'illustration', 'illustrationPosition', 'illustrationShadow',
+      'textPosition', 'textShadow', 'className'
+    ]
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -38,6 +45,7 @@ export default class Hero extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
     if (props.textShadow) classes.push(`${c}_text-shadow`)
     if (props.illustrationShadow) classes.push(`${c}_illustration-shadow`)
     if (props.parallax) classes.push(`${c}_parallax`)
@@ -48,7 +56,8 @@ export default class Hero extends Component {
       backgroundColor: props.bgColor,
       backgroundImage: props.bgImage ? `url(${props.bgImage})` : undefined,
       backgroundPosition: props.bgPosition || undefined,
-      backgroundSize: props.bgSize || undefined
+      backgroundSize: props.bgSize || undefined,
+      ...props.style
     }
     const innerStyle = {
       maxWidth: `${props.maxContentWidth}rem`
@@ -62,9 +71,11 @@ export default class Hero extends Component {
       left: `${props.textPosition.split(' ')[1]}%` || '0%'
     }
 
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
+
     /* Display component */
-    return <div className={classes.join(' ')}
-      style={wrapperStyle}>
+    return <div className={classes.join(' ')} style={wrapperStyle} {...passedProps}>
       <div className={`${c}__inner`}
         style={innerStyle}>
         <div className={`${c}__illustration`}

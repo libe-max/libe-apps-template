@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { statics_url as staticsUrl } from '../../../config.js'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Libé Labo logo component
@@ -22,6 +23,7 @@ export default class LibeLaboLogo extends Component {
   constructor () {
     super()
     this.c = 'lblb-libe-labo-logo'
+    this.usedProps = ['target', 'className']
   }
 
   /* * * * * * * * * * * * * * * *
@@ -34,8 +36,12 @@ export default class LibeLaboLogo extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
 
-    return <div className={classes.join(' ')}>
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
+
+    return <div className={classes.join(' ')} {...passedProps}>
       <a href='https://www.liberation.fr/libe-labo-data-nouveaux-formats,100538' target={props.target}>
         <img alt='Logo de Libé Labo' width='100%' src={`${staticsUrl}/assets/libe-labo-logo.svg`} />
       </a>

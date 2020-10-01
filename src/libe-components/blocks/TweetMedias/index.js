@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import chroma from 'chroma-js'
 import Photo from '../Photo2'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   TweetMedias component
@@ -24,6 +25,7 @@ export default class TweetMedias extends Component {
   constructor (props) {
     super(props)
     this.c = 'lblb-tweet-medias'
+    this.usedProps = ['data', 'className']
     this.state = {
       colors: props.data.map(e => chroma.random().hex())
     }
@@ -55,6 +57,10 @@ export default class TweetMedias extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
+    
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
     
     /* Inner logic */
     const medias = props.data.map((media, i) => {
@@ -81,7 +87,7 @@ export default class TweetMedias extends Component {
     })
 
     /* Display component */
-    return <div className={classes.join(' ')}>{
+    return <div className={classes.join(' ')} {...passedProps}>{
       medias.map((media, i) => <div
         key={media.id}
         className={`${c}__media`}

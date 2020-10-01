@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Annotation from '../../text-levels/Annotation'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   BottomNotes component
@@ -23,6 +24,7 @@ export default class BottomNotes extends Component {
   constructor () {
     super()
     this.c = 'lblb-bottom-notes'
+    this.usedProps = ['notes', 'activeNote', 'className']
   }
 
   /* * * * * * * * * * * * * * * *
@@ -35,12 +37,16 @@ export default class BottomNotes extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
     if (props.small) classes.push(`${c}_small`)
     if (props.big) classes.push(`${c}_big`)
     if (props.huge) classes.push(`${c}_huge`)
 
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
+
     /* Display component */
-    return <div className={classes.join(' ')}>{
+    return <div className={classes.join(' ')} {...passedProps}>{
       props.notes.map((note, i) => {
         const { id, component, text } = note
         const sup = (id || id === 0) ? <sup>({id + 1})&nbsp;</sup> : ''

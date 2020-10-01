@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import interpretJSX from './interpret-JSX'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   JSX interpreter component
@@ -25,6 +26,7 @@ export default class JSXInterpreter extends Component {
   constructor () {
     super()
     this.c = 'lblb-jsx-interpreter'
+    this.usedProps = ['content', 'className']
   }
 
   /* * * * * * * * * * * * * * * *
@@ -40,8 +42,12 @@ export default class JSXInterpreter extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
+    
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
 
-    return <span className={classes.join(' ')}>
+    return <span className={classes.join(' ')} {...passedProps}>
       {interpreted}
     </span>
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Paragraph from '../../text-levels/Paragraph'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Video component
@@ -24,6 +25,7 @@ export default class Video extends Component {
   constructor () {
     super()
     this.c = 'lblb-video'
+    this.usedProps = ['src', 'ratio', 'className']
     this.guessOriginAndId = this.guessOriginAndId.bind(this)
     this.buildVideoEmbedUrl = this.buildVideoEmbedUrl.bind(this)
   }
@@ -82,12 +84,17 @@ export default class Video extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
     if (unknownOrigin) classes.push(`${c}_unknown-origin`)
     else classes.push(`${c}_${origin}`)
 
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
+
     return <div
       className={classes.join(' ')}
-      style={!unknownOrigin && origin !== 'file' ? { paddingTop: `${100 / props.ratio}%` } : {}}>
+      style={!unknownOrigin && origin !== 'file' ? { paddingTop: `${100 / props.ratio}%` } : {}}
+      {...passedProps}>
       {unknownOrigin && <Paragraph>Source inconnue</Paragraph>}
       {origin === 'file' && <video controls {...props} />}
       {!unknownOrigin && origin !== 'file' && (

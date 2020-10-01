@@ -4,6 +4,7 @@ import { Parser } from 'html-to-react'
 import { statics_url as staticsUrl } from '../../../config.js'
 import Svg from '../../primitives/Svg'
 import Annotation from '../../text-levels/Annotation'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Photo component
@@ -27,6 +28,7 @@ export default class Photo extends Component {
   constructor () {
     super()
     this.c = 'lblb-photo'
+    this.usedProps = ['src', 'hdSrc', 'description', 'credits', 'expandable', 'zIndex', 'className']
     this.h2r = new Parser()
     this.state = { expanded: false }
     this.toggleExpand = this.toggleExpand.bind(this)
@@ -83,6 +85,7 @@ export default class Photo extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
     if (props.description || props.credits) classes.push(`${c}_with-info-line`)
     if (props.expandable) classes.push(`${c}_expandable`)
     if (props.expandable && state.expanded) classes.push(`${c}_expanded`)
@@ -90,8 +93,11 @@ export default class Photo extends Component {
     if (props.big) classes.push(`${c}_big`)
     if (props.huge) classes.push(`${c}_huge`)
 
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
+
     /* Display component */
-    return <div className={classes.join(' ')} style={inlineStyle}>
+    return <div className={classes.join(' ')} style={inlineStyle} {...passedProps}>
       <div className={`${c}__unexpanded-panel`}>
         <img className={`${c}__photo`} onClick={this.toggleExpand} alt={props.description} title={props.description} src={props.src} loading='lazy' />
         <div className={`${c}__info-line`}>

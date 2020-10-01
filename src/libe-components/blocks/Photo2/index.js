@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Annotation from '../../text-levels/Annotation'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Photo component
@@ -40,11 +41,7 @@ export default class Photo extends Component {
     if (props.className) classes.push(props.className)
     
     /* Inner logic */
-    const passedProps = {}
-    Object.keys(props).forEach(propName => {
-      if (this.usedProps.indexOf(propName) !== -1) return
-      passedProps[propName] = props[propName]
-    })
+    const passedProps = removeObjectKeys(props, this.usedProps)
     
     /* Display component */
     return <div className={classes.join(' ')} {...passedProps}>

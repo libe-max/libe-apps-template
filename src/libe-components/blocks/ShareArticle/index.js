@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { statics_url as staticsUrl } from '../../../config.js'
 import Svg from '../../primitives/Svg'
 import Paragraph from '../../text-levels/Paragraph'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Share article component
@@ -25,6 +26,7 @@ export default class ShareArticle extends Component {
   constructor () {
     super()
     this.c = 'lblb-share-article'
+    this.usedProps = ['short', 'iconsOnly', 'url', 'tweet', 'className']
     this.handleFacebookClick = this.handleFacebookClick.bind(this)
     this.handleTwitterClick = this.handleTwitterClick.bind(this)
     this.handlePrinterClick = this.handlePrinterClick.bind(this)
@@ -113,11 +115,15 @@ export default class ShareArticle extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
     if (props.short) classes.push(`${c}_short`)
     if (props.iconsOnly) classes.push(`${c}_icons-only`)
 
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
+
     /* Display component */
-    return <div className={classes.join(' ')}>
+    return <div className={classes.join(' ')} {...passedProps}>
       <button className={`${c}__facebook-button`}
         onClick={this.handleFacebookClick}>
         <Svg src={facebookIconSrc} />

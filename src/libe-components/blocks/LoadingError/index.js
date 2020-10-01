@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Paragraph from '../../text-levels/Paragraph'
 import LogoGlyph from '../../blocks/LogoGlyph'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Loading error component
@@ -24,6 +25,7 @@ export default class LoadingError extends Component {
   constructor () {
     super()
     this.c = 'lblb-loading-error'
+    this.usedProps = ['small', 'big', 'huge', 'className']
   }
 
   /* * * * * * * * * * * * * * * *
@@ -36,11 +38,15 @@ export default class LoadingError extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
     if (props.small) classes.push(`${c}_small`)
     if (props.big) classes.push(`${c}_big`)
     if (props.huge) classes.push(`${c}_huge`)
 
-    return <div className={classes.join(' ')}>
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
+
+    return <div className={classes.join(' ')} {...passedProps}>
       <Paragraph
         small={props.small}
         big={props.big}

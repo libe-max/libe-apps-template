@@ -8,6 +8,7 @@ import Paragraph from './libe-components/text-levels/Paragraph'
 
 import Tweet from './libe-components/blocks/Tweet'
 import Photo from './libe-components/blocks/Photo2'
+import DemoPage from './libe-components/layouts/DemoPage'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -126,7 +127,7 @@ export default class App extends Component {
 
     /* Display component */
     return <div className={classes.join(' ')}>
-      <div>
+      {/*<div>
         App is ready.<br />
         - fill spreadsheet_id field in config.js<br />
         - display it's content via state.data_sheet
@@ -148,12 +149,15 @@ export default class App extends Component {
         width: '20rem'
       }}>
         <Tweet url='https://twitter.com/12shiptost/status/1247127828459642880' />
-        {/*<Tweet url='https://twitter.com/dusttodigital/status/1306942442374082561' />
+        <Tweet url='https://twitter.com/dusttodigital/status/1306942442374082561' />
         <Tweet url='https://twitter.com/stupidites/status/1308694766511685632' />
         <Tweet url='https://twitter.com/StopCarnet/status/1308691981237977089' />
         <Tweet url='https://twitter.com/thediaryofastay/status/1308746752229609473' />
-        <Tweet url='https://twitter.com/libe/status/1308764828673155073' />*/}
+        <Tweet url='https://twitter.com/libe/status/1308764828673155073' />
       </div>
+      */}
+
+      <DemoPage />
 
       <div className='lblb-default-apps-footer'>
         <ShareArticle

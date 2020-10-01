@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactSvg from 'react-svg'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   SVG component
@@ -17,8 +18,23 @@ import ReactSvg from 'react-svg'
 const fallback = () => <img alt='Not found' src='https://www.liberation.fr' />
 
 export default class Svg extends Component {
+  constructor () {
+    super()
+    this.c = 'lblb-svg'
+    this.usedProps = ['className']
+  }
   render () {
-    return <div className='lblb-svg'>
+    const { props, c } = this
+
+    /* Assign classes */
+    const classes = [c]
+    if (props.className) classes.push(props.className)
+    
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
+
+    /* Display component */
+    return <div className={classes.join(' ')} {...passedProps}>
       <ReactSvg
         fallback={fallback}
         renumerateIRIElements={false}

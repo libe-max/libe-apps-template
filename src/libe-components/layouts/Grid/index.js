@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Wrapper from './style'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Grid component
@@ -23,6 +24,7 @@ export default class Grid extends Component {
   constructor () {
     super()
     this.c = 'lblb-grid'
+    this.usedProps = ['width', 'gutterSize', 'noSideGutter', 'showGrid', 'className']
     this.interpretProps = this.interpretProps.bind(this)
   }
 
@@ -95,9 +97,13 @@ export default class Grid extends Component {
       })
     }
 
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
+
     /* Display component */
     return <Wrapper className={classes.join(' ')}
-      {...interpretedProps}>
+      {...interpretedProps}
+      {...passedProps}>
       <div className={`${c}__visible-grid ${c}__visible-grid_lg`}>{visibleGrids.lg}</div>
       <div className={`${c}__visible-grid ${c}__visible-grid_md`}>{visibleGrids.md}</div>
       <div className={`${c}__visible-grid ${c}__visible-grid_sm`}>{visibleGrids.sm}</div>

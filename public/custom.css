@@ -39,3 +39,38 @@
   border: 1px solid black;
   background: green;
 }
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * GRID
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+.lblb-grid__inner {
+  align-items: flex-start;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * ICONS SECTION
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.lblb-demo-page__svg-section .lblb-svg #background {
+  fill: #FFFFFF;
+  fill-opacity: .5;
+  stroke: #DDD;
+}
+
+.lblb-demo-page__svg-section .lblb-svg #fill-1,
+.lblb-demo-page__svg-section .lblb-svg #fill-2,
+.lblb-demo-page__svg-section .lblb-svg #fill-3 {
+  fill: #212121;
+}
+
+.lblb-demo-page__svg-section .lblb-svg #fill-2 {
+  fill-opacity: .5;
+}
+
+.lblb-components__comp-row_icons .lblb-svg #fill-3 {
+  fill-opacity: .2;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Article component
@@ -21,6 +22,7 @@ export default class Article extends Component {
   constructor () {
     super()
     this.c = 'lblb-article'
+    this.usedProps = ['className']
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -33,9 +35,13 @@ export default class Article extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
+    
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
 
     /* Display component */
-    return <div className={classes.join(' ')}>
+    return <div className={classes.join(' ')} {...passedProps}>
       {props.children}
     </div>
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import logoGlyph from './assets/logo-glyph.svg'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Logo glyph component
@@ -23,6 +24,7 @@ export default class LogoGlyph extends Component {
   constructor () {
     super()
     this.c = 'lblb-logo-glyph'
+    this.usedProps = ['className']
     this.state = {
       fontSize: 18,
       lineHeight: 24
@@ -66,7 +68,7 @@ export default class LogoGlyph extends Component {
    *
    * * * * * * * * * * * * * * * */
   render () {
-    const { state, c } = this
+    const { props, state, c } = this
     const style = {
       height: `${state.fontSize * 0.7}px`,
       lineHeight: `${state.lineHeight}px`
@@ -74,11 +76,16 @@ export default class LogoGlyph extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
+    
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
 
     return <img alt=''
       style={style}
       src={logoGlyph}
       className={classes.join(' ')}
-      ref={n => { this.$node = n }} />
+      ref={n => { this.$node = n }}
+      {...passedProps} />
   }
 }

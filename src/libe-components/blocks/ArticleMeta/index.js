@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import 'moment/locale/fr'
 import Annotation from '../../text-levels/Annotation'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Article meta component
@@ -30,6 +31,7 @@ export default class ArticleMeta extends Component {
   constructor () {
     super()
     this.c = 'lblb-article-meta'
+    this.usedProps = ['authors', 'publishedOn', 'updatedOn', 'inline', 'className']
   }
 
   /* * * * * * * * * * * * * * * *
@@ -163,12 +165,16 @@ export default class ArticleMeta extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
     if (props.inline) classes.push(`${c}_inline`)
     if (props.small) classes.push(`${c}_small`)
     if (props.big) classes.push(`${c}_big`)
     if (props.huge) classes.push(`${c}_huge`)
 
-    return <div className={classes.join(' ')}>
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
+
+    return <div className={classes.join(' ')} {...passedProps}>
       <Annotation
         small={props.small}
         big={props.big}

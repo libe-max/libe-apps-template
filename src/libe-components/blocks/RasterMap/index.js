@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Map as Leaflet, TileLayer } from 'react-leaflet'
 import PropTypes from 'prop-types'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Raster map component
@@ -27,6 +28,13 @@ export default class RasterMap extends Component {
   constructor () {
     super()
     this.c = 'lblb-raster-map'
+    this.usedProps = [
+      'center', 'zoom', 'tilesUrl', 'tilesAttribution',
+      'tilesOpacity', 'tilesZIndex', 'animate', 'bounds',
+      'doubleClickZoom', 'dragging', 'keyboard', 'maxBounds',
+      'onViewportChange', 'onViewportChanged', 'touchZoom',
+      'viewport', 'className'
+    ]
     this.flyTo = this.flyTo.bind(this)
     this.zoomTo = this.zoomTo.bind(this)
     this.flyAndZoomTo = this.flyAndZoomTo.bind(this)
@@ -81,9 +89,13 @@ export default class RasterMap extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
+
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
 
     /* Display component */
-    return <div className={classes.join(' ')}>
+    return <div className={classes.join(' ')} {...passedProps}>
       <Leaflet ref={n => { this.map = n }}
         center={props.center}
         zoom={props.zoom}

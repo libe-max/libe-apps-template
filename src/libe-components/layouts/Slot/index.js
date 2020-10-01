@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Wrapper from './style'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Slot component
@@ -11,7 +12,7 @@ import Wrapper from './style'
  *   itself according to screen size
  *
  *   PROPS
- *   width, offset
+ *   width, offset, align
  *
  */
 
@@ -24,6 +25,7 @@ export default class Slot extends Component {
   constructor () {
     super()
     this.c = 'lblb-slot'
+    this.usedProps = ['width', 'offset', 'align', 'className']
     this.interpretProps = this.interpretProps.bind(this)
   }
 
@@ -70,11 +72,20 @@ export default class Slot extends Component {
 
     /* Inner logic */
     const interpretedProps = this.interpretProps()
+    const style = {
+      alignSelf: props.align,
+      ...props.style
+    }
+
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
 
     /* Display component */
     return <Wrapper className={classes.join(' ')}
       gridProps={props.gridProps}
-      {...interpretedProps}>
+      {...interpretedProps}
+      {...passedProps}
+      style={style}>
       <div className={`${c}__inner`}>{props.children}</div>
     </Wrapper>
   }

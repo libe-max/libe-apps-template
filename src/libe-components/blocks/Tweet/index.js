@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
+import _ from 'lodash'
 import { proxydata_url as proxydataUrl } from '../../../config.js'
 import Loader from '../../blocks/Loader'
 import LoadingError from '../../blocks/LoadingError'
 import JSXInterpreter from '../../logic/JSXInterpreter'
 import Paragraph from '../../text-levels/Paragraph'
 import TweetMedias from '../TweetMedias'
-import moment from 'moment'
-import _ from 'lodash'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Tweet component
@@ -30,6 +31,7 @@ export default class Tweet extends Component {
   constructor () {
     super()
     this.c = 'lblb-tweet'
+    this.usedProps = ['data', 'url', 'small', 'big', 'huge', 'literary', 'quoted', 'className']
     this.state = {
       loading: true,
       error: null,
@@ -180,6 +182,7 @@ export default class Tweet extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
     if (state.loading) classes.push(`${c}_loading`)
     if (state.error) classes.push(`${c}_error`)
     if (props.small) classes.push(`${c}_small`)
@@ -188,9 +191,12 @@ export default class Tweet extends Component {
     if (props.literary) classes.push(`${c}_literary`)
     if (props.quoted) classes.push(`${c}_quoted`)
 
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
+
     /* Display loading state */
     if (state.loading) {
-      return <div className={classes.join(' ')}>
+      return <div className={classes.join(' ')} {...passedProps}>
         <div className={`${c}__content`}>
           <Loader />
         </div>
@@ -199,7 +205,7 @@ export default class Tweet extends Component {
 
     /* Display error state */
     if (state.error) {
-      return <div className={classes.join(' ')}>
+      return <div className={classes.join(' ')} {...passedProps}>
         <div className={`${c}__content`}>
           <LoadingError small={props.small}
             big={props.big}
@@ -213,7 +219,7 @@ export default class Tweet extends Component {
     }
 
     /* Display component */
-    return <div className={classes.join(' ')}>
+    return <div className={classes.join(' ')} {...passedProps}>
       <TweetMedias data={tweetMedias.length === 4 ? tweetMedias.slice(1) : tweetMedias} />
       <div className={`${c}__content`}>
         <Paragraph small={props.small}
@@ -224,7 +230,13 @@ export default class Tweet extends Component {
         </Paragraph>
         {tweetData.quoted_status
           && !props.quoted
-          ? <Tweet data={tweetData.quoted_status} quoted={true} />
+          ? <Tweet
+            small={props.small}
+            big={props.big}
+            huge={props.huge}
+            literary={props.literary}
+            quoted={true}
+            data={tweetData.quoted_status} />
           : null
         }
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Paragraph from '../../text-levels/Paragraph'
+import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
  *   Copy value component
@@ -23,6 +24,7 @@ export default class CopyValue extends Component {
   constructor () {
     super()
     this.c = 'lblb-copy-value'
+    this.usedProps = ['value', 'label', 'successLabel', 'hideField', 'className']
     this.state = { copied: false }
     this.timeout = () => this.setState({ copied: false })
     this.copyToClipboard = this.copyToClipboard.bind(this)
@@ -63,11 +65,15 @@ export default class CopyValue extends Component {
 
     /* Assign classes */
     const classes = [c]
+    if (props.className) classes.push(props.className)
     if (props.hideField) classes.push(`${c}_hide-field`)
     if (state.copied) classes.push(`${c}_copied`)
 
+    /* Passed props */
+    const passedProps = removeObjectKeys(props, this.usedProps)
+
     /* Display component */
-    return <div className={classes.join(' ')}>
+    return <div className={classes.join(' ')} {...passedProps}>
       <button className={`${c}__button`}
         onClick={this.copyToClipboard}>
         <Paragraph small>{
