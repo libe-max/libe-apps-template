@@ -6,11 +6,28 @@
 
 .lblb-photo-2 {
   display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .lblb-photo-2__image {
   display: block;
   max-width: 100%;
+}
+
+.lblb-photo-2__background-image {
+  display: none;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.lblb-photo-2__meta {
+  display: block;
 }
 
 .lblb-photo-2__description,
@@ -19,6 +36,39 @@
 .lblb-photo-2__credit .lblb-annotation {
   display: inline;
 }
+
+.lblb-photo-2__description {
+  margin-right: .5rem;
+}
+
+.lblb-photo-2__credit .lblb-annotation {
+  color: #666666;
+}
+
+/* Cover modifier */
+.lblb-photo-2_cover {
+  background: blue;
+}
+
+.lblb-photo-2_cover .lblb-photo-2__image {
+  display: none;
+}
+
+.lblb-photo-2_cover .lblb-photo-2__background-image {
+  display: block;
+  background-size: cover;
+}
+
+.lblb-photo-2_cover .lblb-photo-2__meta {
+  position: absolute;
+  left: 1rem;
+  margin-right: 1rem;
+  bottom: 1rem;
+  background: rgba(255, 255, 255, .8);
+  padding: .5rem;
+}
+
+/* Contain modifier */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *

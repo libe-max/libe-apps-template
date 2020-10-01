@@ -7,7 +7,7 @@ import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Paragraph from './libe-components/text-levels/Paragraph'
 
 import Tweet from './libe-components/blocks/Tweet'
-import Photo from './libe-components/blocks/Photo2'
+import Photo2 from './libe-components/blocks/Photo2'
 import DemoPage from './libe-components/layouts/DemoPage'
 
 export default class App extends Component {
@@ -127,38 +127,73 @@ export default class App extends Component {
 
     /* Display component */
     return <div className={classes.join(' ')}>
-      {/*<div>
+      <Paragraph literary>
         App is ready.<br />
+        - remove DemoPage component<br />
         - fill spreadsheet_id field in config.js<br />
         - display it's content via state.data_sheet
+      </Paragraph>
+      <br />
+      <br />
+      <br />
+      <br />
+      {/*<Photo2
+        src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
+        description='Une longue description qui fait plusieurs lignes'
+        credit='Un crédit qui est long aussi oulalah' />
+      <br />
+      <div style={{ width: '10rem' }}>
+        <Photo2
+          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
+          description='Une longue description qui fait plusieurs lignes'
+          credit='Un crédit qui est long aussi oulalah' />
       </div>
-
-      <Photo
-        description='Une belle description oh là là'
-        credit={`La source de la photo hi hi hi c'est rigolo tout ça`}
-        src='https://freight.cargo.site/w/358/q/94/i/8f64dcc173f313e01f56500c7efbf2c87f3794864272e2d19dfa29a4c2566411/hepler_4_o.jpg' />
-
-      <Photo
-        className='custom-lblb-photo-2-class'
-        description='Une belle description oh là là'
-        credit={`La source de la photo hi hi hi c'est rigolo tout ça`}
-        src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg' />
-      <div style={{
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        width: '20rem'
-      }}>
-        <Tweet url='https://twitter.com/12shiptost/status/1247127828459642880' />
-        <Tweet url='https://twitter.com/dusttodigital/status/1306942442374082561' />
-        <Tweet url='https://twitter.com/stupidites/status/1308694766511685632' />
-        <Tweet url='https://twitter.com/StopCarnet/status/1308691981237977089' />
-        <Tweet url='https://twitter.com/thediaryofastay/status/1308746752229609473' />
-        <Tweet url='https://twitter.com/libe/status/1308764828673155073' />
+      <br />
+      <div style={{ width: '20rem', height: '20rem' }}>
+        <Photo2
+          cover
+          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
+          description='Une longue description qui fait plusieurs lignes'
+          credit='Un crédit qui est long aussi oulalah' />
       </div>
-      */}
-
+      <br />
+      <Photo2
+        src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
+        description='Une longue description qui fait plusieurs lignes'
+        credit='Un crédit qui est long aussi oulalah'
+        style={{ width: '30rem' }} />
+      <br />*/}
+      <Photo2
+        cover
+        src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
+        description='Une longue description qui fait plusieurs lignes'
+        credit='Un crédit qui est long aussi oulalah'
+        style={{ width: '100%', height: '30rem' }} />
+      <br />
+      <Photo2
+        src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg'
+        description='Une longue description qui fait plusieurs lignes'
+        credit='Un crédit qui est long aussi oulalah'
+        width='30rem' />
+      <br />
+      <Photo2
+        src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg'
+        description='Une longue description qui fait plusieurs lignes'
+        credit='Un crédit qui est long aussi oulalah'
+        width='30rem'
+        height='30rem' />
+      <br />
+      <Photo2
+        src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg'
+        description='Une longue description qui fait plusieurs lignes'
+        credit='Un crédit qui est long aussi oulalah'
+        height='30rem' />
+      <br />
+      <br />
+      <br />
+      <br />
       <DemoPage />
-
+      <br />
       <div className='lblb-default-apps-footer'>
         <ShareArticle
           short
