@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import chroma from 'chroma-js'
+import Photo from '../Photo2'
 
 /*
  *   TweetMedias component
@@ -79,6 +80,7 @@ export default class TweetMedias extends Component {
       }
     })
 
+    /* Display component */
     return <div className={classes.join(' ')}>{
       medias.map((media, i) => <div
         key={media.id}
@@ -87,21 +89,23 @@ export default class TweetMedias extends Component {
           backgroundColor: state.colors[i],
           width: media.display_width,
           paddingTop: media.display_height }}>
+          <div className={`${c}__media-inner`}>{
+          media.type === 'photo'
+            ? <Photo
+              src={media.url}
+              hdSrc={media.ulr}
+              expandable
+              description='Une description assez longue pour aller sur deux lignes quoi'
+              credit='une source certaine' />
+            : media.type === 'video'
+              ? ''/*<video width={media.width} height={media.height} controls>
+                <source src={media.url} type={media.contentType} />
+              </video>*/
+              : ''/*<video width={media.width} height={media.height} autoPlay loop>
+                <source src={media.url} type={media.contentType} />
+              </video>*/
+        }</div>
       </div>)
-    }</div>
-    
-    /* Display component */
-    return <div className={classes.join(' ')}>{
-      medias.map(media => media.type === 'photo'
-        ? <img src={media.url} />
-        : media.type === 'video'
-          ? <video width={media.width} height={media.height} controls>
-            <source src={media.url} type={media.contentType} />
-          </video>
-          : <video width={media.width} height={media.height} autoPlay loop>
-            <source src={media.url} type={media.contentType} />
-          </video>
-      )
     }</div>
   }
 }

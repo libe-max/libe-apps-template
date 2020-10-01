@@ -1,0 +1,41 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * PHOTO 2
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+.lblb-photo-2 {
+  display: inline-block;
+}
+
+.lblb-photo-2__image {
+  display: block;
+  max-width: 100%;
+}
+
+.lblb-photo-2__description,
+.lblb-photo-2__description .lblb-annotation,
+.lblb-photo-2__credit,
+.lblb-photo-2__credit .lblb-annotation {
+  display: inline;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ * TWEET MEDIAS
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+.lblb-tweet-medias__media {
+  position: relative;
+}
+
+.lblb-tweet-medias__media-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  background: green;
+}

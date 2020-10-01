@@ -7,6 +7,7 @@ import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Paragraph from './libe-components/text-levels/Paragraph'
 
 import Tweet from './libe-components/blocks/Tweet'
+import Photo from './libe-components/blocks/Photo2'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -131,16 +132,27 @@ export default class App extends Component {
         - display it's content via state.data_sheet
       </div>
 
+      <Photo
+        description='Une belle description oh là là'
+        credit={`La source de la photo hi hi hi c'est rigolo tout ça`}
+        src='https://freight.cargo.site/w/358/q/94/i/8f64dcc173f313e01f56500c7efbf2c87f3794864272e2d19dfa29a4c2566411/hepler_4_o.jpg' />
+
+      <Photo
+        className='custom-lblb-photo-2-class'
+        description='Une belle description oh là là'
+        credit={`La source de la photo hi hi hi c'est rigolo tout ça`}
+        src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg' />
       <div style={{
         marginLeft: 'auto',
         marginRight: 'auto',
-        width: '40rem'
+        width: '20rem'
       }}>
-        <Tweet url='https://twitter.com/dusttodigital/status/1306942442374082561' />
+        <Tweet url='https://twitter.com/12shiptost/status/1247127828459642880' />
+        {/*<Tweet url='https://twitter.com/dusttodigital/status/1306942442374082561' />
         <Tweet url='https://twitter.com/stupidites/status/1308694766511685632' />
         <Tweet url='https://twitter.com/StopCarnet/status/1308691981237977089' />
         <Tweet url='https://twitter.com/thediaryofastay/status/1308746752229609473' />
-        <Tweet url='https://twitter.com/libe/status/1308764828673155073' />
+        <Tweet url='https://twitter.com/libe/status/1308764828673155073' />*/}
       </div>
 
       <div className='lblb-default-apps-footer'>
