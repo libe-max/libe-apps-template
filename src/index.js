@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 import App from './App'
 import config from './config'
 import 'whatwg-fetch'
+import AppContext from './context'
 
 class AppWrapper extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -98,6 +99,7 @@ class AppWrapper extends Component {
     const { props, state } = this
     const { meta, statics_url: staticsUrl } = props
     const { title, url, description, author, image } = meta
+    const passedContext = { viewport: state }
     return <div id='libe-labo-app-wrapper'>
       <Helmet>
         <title>Libération.fr – {title}</title>
@@ -127,7 +129,9 @@ class AppWrapper extends Component {
         {/* This app styles */}
         <link rel='stylesheet' href='./custom.css' />
       </Helmet>
-      <App {...props} viewport={state} />
+        <AppContext.Provider value={passedContext}>
+          <App {...props} />
+        </AppContext.Provider>
     </div>
   }
 }

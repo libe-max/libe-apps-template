@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { statics_url as staticsUrl } from '../../../config.js'
+import { statics_url as staticsUrl } from '../../../config'
 
 import ArticleMeta from '../../blocks/ArticleMeta'
 import BottomNotes from '../../blocks/BottomNotes'
@@ -200,14 +200,14 @@ export default class DemoPage extends Component {
       <COMPONENT_BLOCK>Photo2</COMPONENT_BLOCK>
       <Photo2
         className='custom-classname'
-        description='Une bien belle image ma foi !'
+        description='Photo 2 Une bien belle image ma foi !'
         credit='But does it float'
         expandable
         src='https://freight.cargo.site/w/358/q/94/i/8f64dcc173f313e01f56500c7efbf2c87f3794864272e2d19dfa29a4c2566411/hepler_4_o.jpg' />
 
       <Photo2
         className='custom-classname'
-        description='Une bien belle image ma foi !'
+        description='Photo 3 Une bien belle image ma foi !'
         credit='Internet'
         expandable
         src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg' />

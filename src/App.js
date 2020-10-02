@@ -5,10 +5,10 @@ import ShareArticle from './libe-components/blocks/ShareArticle'
 import LibeLaboLogo from './libe-components/blocks/LibeLaboLogo'
 import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Paragraph from './libe-components/text-levels/Paragraph'
-
 import Tweet from './libe-components/blocks/Tweet'
 import Photo2 from './libe-components/blocks/Photo2'
 import DemoPage from './libe-components/layouts/DemoPage'
+import AppContext from './context'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -23,11 +23,23 @@ export default class App extends Component {
       loading_sheet: true,
       error_sheet: null,
       data_sheet: [],
-      konami_mode: false
+      konami_mode: false,
+      expandable_medias: []
     }
-    this.fetchSheet = this.fetchSheet.bind(this)
     this.watchKonamiCode = this.watchKonamiCode.bind(this)
+    this.addExpandableMedia = this.addExpandableMedia.bind(this)
+    this.updateExpandableMedia = this.updateExpandableMedia.bind(this)
+    this.removeExpandableMedia = this.removeExpandableMedia.bind(this)
+    this.requestMediaExpansion = this.requestMediaExpansion.bind(this)
+    this.fetchSheet = this.fetchSheet.bind(this)
   }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * MAKE CONTEXT ACCESSIBLE
+   *
+   * * * * * * * * * * * * * * * * */
+  static contextType = AppContext
 
   /* * * * * * * * * * * * * * * * *
    *
@@ -35,6 +47,10 @@ export default class App extends Component {
    *
    * * * * * * * * * * * * * * * * */
   componentDidMount () {
+    window.setTimeout(e => this.setState(curr => ({
+      ...curr,
+      photo: false
+    })), 2000)
     document.addEventListener('keydown', this.watchKonamiCode)
     if (this.props.spreadsheet_id) return this.fetchSheet()
     return this.setState({ loading_sheet: false })
@@ -47,6 +63,92 @@ export default class App extends Component {
    * * * * * * * * * * * * * * * * */
   componentWillUnmount () {
     document.removeEventListener('keydown', this.watchKonamiCode)
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * WATCH KONAMI CODE
+   *
+   * * * * * * * * * * * * * * * * */
+  keystrokesHistory = []
+  watchKonamiCode (e) {
+    if (!e || !e.keyCode) return
+    this.keystrokesHistory.push(e.keyCode)
+    const konamiCodeStr = '38,38,40,40,37,39,37,39,66,65'
+    const lastTen = this.keystrokesHistory.slice(-10)
+    if (lastTen.join(',') === konamiCodeStr) this.setState({ konami_mode: true })
+    else if (lastTen.reverse().join(',') === konamiCodeStr) this.setState({ konami_mode: false })
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * ADD EXPANDABLE MEDIA
+   *
+   * * * * * * * * * * * * * * * * */
+  addExpandableMedia (type, props, id) {
+    const newMedia = { type, props, id }
+    this.setState(curr => ({
+      ...curr,
+      expandable_medias: [...curr.expandable_medias, newMedia]
+    }))
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * UPDATE EXPANDABLE MEDIA
+   *
+   * * * * * * * * * * * * * * * * */
+  updateExpandableMedia (type, props, id) {
+    const newMedia = { type, props, id }
+    this.setState(curr => {
+      const currExpMedias = curr.expandable_medias
+      const currentMediaPos = currExpMedias.findIndex(media => media.id === newMedia.id)
+      if (currentMediaPos === -1) return {
+        ...curr,
+        expandable_medias: [...currExpMedias, newMedia]
+      }
+      const currentMedia = currExpMedias[currentMediaPos]
+      if (currentMedia.type === newMedia.type
+        && currentMedia.props === newMedia.props) return curr
+      const newExpandableMedias = [
+        ...currExpMedias.slice(0, currentMediaPos),
+        newMedia,
+        ...currExpMedias.slice(currentMediaPos + 1)
+      ]
+      return {
+        ...curr,
+        expandable_medias: newExpandableMedias
+      }
+    })
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * REMOVE EXPANDABLE MEDIA
+   *
+   * * * * * * * * * * * * * * * * */
+  removeExpandableMedia (id) {
+    this.setState(curr => {
+      const currExpMedias = curr.expandable_medias
+      const currentMediaPos = currExpMedias.findIndex(media => media.id === id)
+      if (currentMediaPos === -1) return { ...curr }
+      return {
+        ...curr,
+        expandable_medias: [
+          ...currExpMedias.slice(0, currentMediaPos),
+          ...currExpMedias.slice(currentMediaPos + 1)
+        ]
+      }
+    })
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * REQUEST MEDIA EXPANSION
+   *
+   * * * * * * * * * * * * * * * * */
+  requestMediaExpansion (id) {
+    alert('requested media expansion, see what i can do')
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -82,26 +184,12 @@ export default class App extends Component {
 
   /* * * * * * * * * * * * * * * * *
    *
-   * WATCH KONAMI CODE
-   *
-   * * * * * * * * * * * * * * * * */
-  keystrokesHistory = []
-  watchKonamiCode (e) {
-    if (!e || !e.keyCode) return
-    this.keystrokesHistory.push(e.keyCode)
-    const konamiCodeStr = '38,38,40,40,37,39,37,39,66,65'
-    const lastTen = this.keystrokesHistory.slice(-10)
-    if (lastTen.join(',') === konamiCodeStr) this.setState({ konami_mode: true })
-    else if (lastTen.reverse().join(',') === konamiCodeStr) this.setState({ konami_mode: false })
-  }
-
-  /* * * * * * * * * * * * * * * * *
-   *
    * RENDER
    *
    * * * * * * * * * * * * * * * * */
   render () {
     const { c, state, props } = this
+    console.log(state.expandable_medias)
 
     /* Assign classes */
     const classes = [c]
@@ -109,103 +197,123 @@ export default class App extends Component {
     if (state.error_sheet) classes.push(`${c}_error`)
     if (state.konami_mode) classes.push(`${c}_konami`)
 
+    const passedContext = {
+      ...this.context,
+      add_expandable_media: this.addExpandableMedia,
+      update_expandable_media: this.updateExpandableMedia,
+      remove_expandable_media: this.removeExpandableMedia,
+      request_media_expansion: this.requestMediaExpansion
+    }
+
     /* Load & errors */
     if (state.loading_sheet) {
-      return <div className={classes.join(' ')}>
-        <div className='lblb-default-apps-loader'>
-          <Loader />
+      return <AppContext.Provider value={passedContext}>
+        <div className={classes.join(' ')}>
+          <div className='lblb-default-apps-loader'>
+            <Loader />
+          </div>
         </div>
-      </div>
+      </AppContext.Provider>
     } else if (state.error_sheet) {
-      return <div className={classes.join(' ')}>
-        <div className='lblb-default-apps-error'>
-          <Paragraph>{state.error_sheet.message}</Paragraph>
-          <LoadingError />
+      return <AppContext.Provider value={passedContext}>
+        <div className={classes.join(' ')}>
+          <div className='lblb-default-apps-error'>
+            <Paragraph>{state.error_sheet.message}</Paragraph>
+            <LoadingError />
+          </div>
         </div>
-      </div>
+      </AppContext.Provider>
     }
 
     /* Display component */
-    return <div className={classes.join(' ')}>
-      <Paragraph literary>
-        App is ready.<br />
-        - remove DemoPage component<br />
-        - fill spreadsheet_id field in config.js<br />
-        - display it's content via state.data_sheet
-      </Paragraph>
-      <br />
-      <br />
-      <br />
-      <br />
-      {/*<Photo2
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-        description='Une longue description qui fait plusieurs lignes'
-        credit='Un crédit qui est long aussi oulalah' />
-      <br />
-      <div style={{ width: '10rem' }}>
+    return <AppContext.Provider value={passedContext}>
+      <div className={classes.join(' ')}>
+        <Paragraph literary>
+          App is ready.<br />
+          - remove DemoPage component<br />
+          - fill spreadsheet_id field in config.js<br />
+          - display it's content via state.data_sheet
+        </Paragraph>
+        <br />
+        <br />
+        <br />
+        <br />
+        <Photo2
+          width='240px'
+          height='240px'
+          cover
+          expandable
+          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
+          description='Photo 1 - Une longue description qui fait plusieurs lignes'
+          credit='Un crédit qui est long aussi oulalah' />
+        <br />
+        <div style={{ width: '10rem' }}>
+          <Photo2
+            src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
+            description='Une longue description qui fait plusieurs lignes'
+            credit='Un crédit qui est long aussi oulalah' />
+        </div>
+        <br />
+        <div style={{ width: '20rem', height: '20rem' }}>
+          <Photo2
+            cover
+            src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
+            description='Une longue description qui fait plusieurs lignes'
+            credit='Un crédit qui est long aussi oulalah' />
+        </div>
+        <br />
         <Photo2
           src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
           description='Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-      </div>
-      <br />
-      <div style={{ width: '20rem', height: '20rem' }}>
+          credit='Un crédit qui est long aussi oulalah'
+          style={{ width: '30rem' }} />
+        <br />
         <Photo2
           cover
+          position='center'
+          attachment='fixed'
           src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
           description='Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
+          credit='Un crédit qui est long aussi oulalah'
+          style={{ width: '100%', height: '30rem' }} />
+        <br />
+        <Photo2
+          src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg'
+          description='Une longue description qui fait plusieurs lignes'
+          credit='Un crédit qui est long aussi oulalah'
+          width='30rem' />
+        <br />
+        <Photo2
+          src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg'
+          description='Une longue description qui fait plusieurs lignes'
+          credit='Un crédit qui est long aussi oulalah'
+          width='30rem'
+          height='30rem' />
+        <br />
+        <Photo2
+          src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg'
+          description='Une longue description qui fait plusieurs lignes'
+          credit='Un crédit qui est long aussi oulalah'
+          height='30rem' />
+        <br />
+        <br />
+        <br />
+        <br />
+        <DemoPage />
+        <br />
+        <div className='lblb-default-apps-footer'>
+          <ShareArticle
+            short
+            iconsOnly
+            tweet={props.meta.tweet}
+            url={props.meta.url} />
+          <ArticleMeta
+            publishedOn={props.meta.published_on}
+            updatedOn={props.meta.updated_on}
+            authors={props.meta.authors} />
+          <LibeLaboLogo target='blank' />
+        </div>
       </div>
-      <br />
-      <Photo2
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-        description='Une longue description qui fait plusieurs lignes'
-        credit='Un crédit qui est long aussi oulalah'
-        style={{ width: '30rem' }} />
-      <br />*/}
-      <Photo2
-        cover
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-        description='Une longue description qui fait plusieurs lignes'
-        credit='Un crédit qui est long aussi oulalah'
-        style={{ width: '100%', height: '30rem' }} />
-      <br />
-      <Photo2
-        src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg'
-        description='Une longue description qui fait plusieurs lignes'
-        credit='Un crédit qui est long aussi oulalah'
-        width='30rem' />
-      <br />
-      <Photo2
-        src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg'
-        description='Une longue description qui fait plusieurs lignes'
-        credit='Un crédit qui est long aussi oulalah'
-        width='30rem'
-        height='30rem' />
-      <br />
-      <Photo2
-        src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg'
-        description='Une longue description qui fait plusieurs lignes'
-        credit='Un crédit qui est long aussi oulalah'
-        height='30rem' />
-      <br />
-      <br />
-      <br />
-      <br />
-      <DemoPage />
-      <br />
-      <div className='lblb-default-apps-footer'>
-        <ShareArticle
-          short
-          iconsOnly
-          tweet={props.meta.tweet}
-          url={props.meta.url} />
-        <ArticleMeta
-          publishedOn={props.meta.published_on}
-          updatedOn={props.meta.updated_on}
-          authors={props.meta.authors} />
-        <LibeLaboLogo target='blank' />
-      </div>
-    </div>
+    </AppContext.Provider>
   }
 }

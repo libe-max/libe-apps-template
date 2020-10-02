@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Parser } from 'html-to-react'
-import { statics_url as staticsUrl } from '../../../config.js'
+import { statics_url as staticsUrl } from '../../../config'
 import Svg from '../../primitives/Svg'
 import Annotation from '../../text-levels/Annotation'
 import removeObjectKeys from '../../../libe-utils/remove-object-keys'

@@ -19,6 +19,7 @@
 .lblb-photo-2__background-image {
   display: none;
   background-position: center;
+  background-repeat: no-repeat;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -31,9 +32,7 @@
 }
 
 .lblb-photo-2__description,
-.lblb-photo-2__description .lblb-annotation,
-.lblb-photo-2__credit,
-.lblb-photo-2__credit .lblb-annotation {
+.lblb-photo-2__credit {
   display: inline;
 }
 
@@ -41,25 +40,48 @@
   margin-right: .5rem;
 }
 
-.lblb-photo-2__credit .lblb-annotation {
+.lblb-photo-2__credit {
   color: #666666;
 }
 
-/* Cover modifier */
-.lblb-photo-2_cover {
-  background: blue;
-}
-
-.lblb-photo-2_cover .lblb-photo-2__image {
+.lblb-photo-2__expand-button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 200ms;
   display: none;
 }
 
-.lblb-photo-2_cover .lblb-photo-2__background-image {
-  display: block;
-  background-size: cover;
+.lblb-photo-2:hover .lblb-photo-2__expand-button {
+  opacity: 1;
 }
 
-.lblb-photo-2_cover .lblb-photo-2__meta {
+.lblb-photo-2__expand-button .lblb-svg #background {
+  fill: rgba(33, 33, 33, .7);
+}
+
+.lblb-photo-2__expand-button .lblb-svg #fill-1 {
+  fill: #FFFFFF;
+}
+
+/* Cover and contain modifiers */
+.lblb-photo-2_cover .lblb-photo-2__image,
+.lblb-photo-2_contain .lblb-photo-2__image {
+  display: none;
+}
+
+.lblb-photo-2_cover .lblb-photo-2__background-image,
+.lblb-photo-2_contain .lblb-photo-2__background-image {
+  display: block;
+}
+
+.lblb-photo-2_cover .lblb-photo-2__meta,
+.lblb-photo-2_contain .lblb-photo-2__meta {
   position: absolute;
   left: 1rem;
   margin-right: 1rem;
@@ -68,7 +90,24 @@
   padding: .5rem;
 }
 
+/* Cover modifier */
+.lblb-photo-2_cover .lblb-photo-2__background-image {
+  background-size: cover;
+}
+
 /* Contain modifier */
+.lblb-photo-2_contain .lblb-photo-2__background-image {
+  background-size: contain;
+}
+
+/* Expandable modifier */
+.lblb-photo-2_expandable {
+  cursor: zoom-in;
+}
+
+.lblb-photo-2_expandable .lblb-photo-2__expand-button {
+  display: block;
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *

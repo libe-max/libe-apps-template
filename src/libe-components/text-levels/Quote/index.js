@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { statics_url as staticsUrl } from '../../../config.js'
+import { statics_url as staticsUrl } from '../../../config'
 import Svg from '../../primitives/Svg'
 import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 

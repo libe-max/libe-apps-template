@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { statics_url as staticsUrl } from '../../../config.js'
+import { statics_url as staticsUrl } from '../../../config'
 import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
