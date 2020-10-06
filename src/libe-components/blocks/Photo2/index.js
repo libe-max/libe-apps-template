@@ -40,6 +40,13 @@ export default class Photo extends Component {
 
   /* * * * * * * * * * * * * * * * *
    *
+   * MAKE CONTEXT ACCESSIBLE
+   *
+   * * * * * * * * * * * * * * * * */
+  static contextType = AppContext
+
+  /* * * * * * * * * * * * * * * * *
+   *
    * DID MOUNT
    *
    * * * * * * * * * * * * * * * * */
@@ -83,21 +90,14 @@ export default class Photo extends Component {
 
   /* * * * * * * * * * * * * * * * *
    *
-   * MAKE CONTEXT ACCESSIBLE
-   *
-   * * * * * * * * * * * * * * * * */
-  static contextType = AppContext
-
-  /* * * * * * * * * * * * * * * * *
-   *
    * HANDLE EXPAND CLICK
    *
    * * * * * * * * * * * * * * * * */
   handleExpandClick (e) {
     const { props, state, context } = this
     if (!props.expandable) return
-    const { request_media_expansion: requestMediaExpansion } = context
-    requestMediaExpansion(this.state.id)
+    const { expand_media: expandMedia } = context
+    expandMedia(this.state.id)
   }
 
   /* * * * * * * * * * * * * * * * *

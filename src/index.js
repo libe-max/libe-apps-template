@@ -129,9 +129,9 @@ class AppWrapper extends Component {
         {/* This app styles */}
         <link rel='stylesheet' href='./custom.css' />
       </Helmet>
-        <AppContext.Provider value={passedContext}>
-          <App {...props} />
-        </AppContext.Provider>
+      <AppContext.Provider value={passedContext}>
+        <App {...props} />
+      </AppContext.Provider>
     </div>
   }
 }
