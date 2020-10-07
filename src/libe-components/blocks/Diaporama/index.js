@@ -131,7 +131,7 @@ export default class Diaporama extends Component {
    *
    * * * * * * * * * * * * * * * * */
   activateNearestIfNecessary () {
-    if (Date.now() - this.lastScrollEvent < 50) return
+    if (Date.now() - this.lastScrollEvent < 20) return
     this.activateNearest()
   }
 
@@ -168,7 +168,7 @@ export default class Diaporama extends Component {
   handleScroll (e) {
     this.lastScrollEvent = Date.now()
     window.clearTimeout(this.activateNearestIfNecessary)
-    window.setTimeout(this.activateNearestIfNecessary, 50)
+    window.setTimeout(this.activateNearestIfNecessary, 20)
   }
 
   /* * * * * * * * * * * * * * * * *

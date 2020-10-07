@@ -37,6 +37,7 @@ export default class App extends Component {
     this.removeExpandableMedia = this.removeExpandableMedia.bind(this)
     this.expandMedia = this.expandMedia.bind(this)
     this.handleCloseExpandedMediasPanelClick = this.handleCloseExpandedMediasPanelClick.bind(this)
+    this.expandedMediaPanelEscKeyListener = this.expandedMediaPanelEscKeyListener.bind(this)
     this.fetchSheet = this.fetchSheet.bind(this)
   }
 
@@ -158,6 +159,7 @@ export default class App extends Component {
       const foundMedia = curr.expandable_medias.find(media => media.id === id)
       if (!foundMedia) {
         document.body.style.overflow = null
+        window.removeEventListener('keydown', this.expandedMediaPanelEscKeyListener)
         return {
           ...curr,
           expanded_media_id: null,
@@ -165,6 +167,7 @@ export default class App extends Component {
         }  
       }
       document.body.style.overflow = 'hidden'
+      window.addEventListener('keydown', this.expandedMediaPanelEscKeyListener)
       return {
         ...curr,
         expanded_media_id: id,
@@ -180,9 +183,19 @@ export default class App extends Component {
    * * * * * * * * * * * * * * * * */
   handleCloseExpandedMediasPanelClick (e) {
     document.body.style.overflow = null
+    window.removeEventListener('keydown', this.expandedMediaPanelEscKeyListener)
     this.setState(curr => ({
       show_expanded_medias_panel: false
     }))
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * EXPANDED MEDIA PANEL ESC KEY LISTENER
+   *
+   * * * * * * * * * * * * * * * * */
+  expandedMediaPanelEscKeyListener (e) {
+    if (e.key === 'Escape') this.handleCloseExpandedMediasPanelClick(e)
   }
 
   /* * * * * * * * * * * * * * * * *
