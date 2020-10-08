@@ -7,9 +7,11 @@ import LibeLaboLogo from './libe-components/blocks/LibeLaboLogo'
 import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Diaporama from './libe-components/blocks/Diaporama'
 import Tweet from './libe-components/blocks/Tweet'
+import Photo2 from './libe-components/blocks/Photo2'
 import Svg from './libe-components/primitives/Svg'
 import InterTitle from './libe-components/text-levels/InterTitle'
 import Paragraph from './libe-components/text-levels/Paragraph'
+import MetroTiler from './libe-components/layouts/MetroTiler'
 import AppContext from './context'
 
 export default class App extends Component {
@@ -284,13 +286,14 @@ export default class App extends Component {
         </Paragraph>}
 
         { /* App */ }
-        {!state.loading_sheet && !state.error_sheet && <div style={{ maxWidth: 400 }}>
-          <Tweet url='https://twitter.com/dusttodigital/status/1306942442374082561' />
-          <Tweet url='https://twitter.com/stupidites/status/1308694766511685632' />
-          <Tweet url='https://twitter.com/StopCarnet/status/1308691981237977089' />
-          <Tweet url='https://twitter.com/thediaryofastay/status/1308746752229609473' />
-          <Tweet url='https://twitter.com/libe/status/1308764828673155073' />
-        </div>}
+        {!state.loading_sheet && !state.error_sheet && <MetroTiler noSideGutters gutters={[32, 16, 8]} columns={[3, 2, 1]} breakpoints={[1008, 840]}>
+          <Tweet small urlsLength={28} url='https://twitter.com/dusttodigital/status/1306942442374082561' />
+          <Tweet small urlsLength={28} url='https://twitter.com/stupidites/status/1308694766511685632' />
+          <Tweet small urlsLength={28} url='https://twitter.com/StopCarnet/status/1308691981237977089' />
+          <Tweet small urlsLength={28} url='https://twitter.com/thediaryofastay/status/1308746752229609473' />
+          <Tweet small urlsLength={28} url='https://twitter.com/libe/status/1308764828673155073' />
+          <Photo2 src='https://weneedfun.com/wp-content/uploads/2016/07/Most-Beautiful-Sunset-Pictures-14.jpg' />
+        </MetroTiler>}
 
         {/* Footer */}
         <div className='lblb-default-apps-footer'>

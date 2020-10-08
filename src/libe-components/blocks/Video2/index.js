@@ -10,7 +10,7 @@ import removeObjectKeys from '../../../libe-utils/remove-object-keys'
  *   ------------------------------------------------------
  *
  *   DESCRIPTION
- *   -
+ *   Wrapper for Youtube/Dailymotion/Ina embeds, and local videos
  *
  *   PROPS
  *   url, type, width, height, className

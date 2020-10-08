@@ -18,7 +18,7 @@ import removeObjectKeys from '../../../libe-utils/remove-object-keys'
  *   Tweet embed component
  *
  *   PROPS
- *   data, url, small, big, huge, literary, quoted
+ *   data, url, urlsLength, small, big, huge, literary, quoted
  *
  */
 
@@ -31,7 +31,7 @@ export default class Tweet extends Component {
   constructor () {
     super()
     this.c = 'lblb-tweet'
-    this.usedProps = ['data', 'url', 'small', 'big', 'huge', 'literary', 'quoted', 'className']
+    this.usedProps = ['data', 'url', 'urlsLength', 'small', 'big', 'huge', 'literary', 'quoted', 'className']
     this.state = {
       loading: true,
       error: null,
@@ -96,7 +96,7 @@ export default class Tweet extends Component {
     entities.urls.forEach(url => {
       const urlMatch = _.toArray(text).slice(url.indices[0], url.indices[1]).join('')
       const expUrl = url.expanded_url
-      const displayExpUrl = expUrl.length > 37 ? `${expUrl.slice(0, 37)}...` : expUrl
+      const displayExpUrl = expUrl.length > (this.props.urlsLength || 37) ? `${expUrl.slice(0, (this.props.urlsLength || 37))}...` : expUrl
       const quotedScreenName = quote ? quote.user.screen_name : undefined
       const quotedId = quote ? quote.id_str : undefined
       const quotedUrl = `https://twitter.com/${quotedScreenName}/status/${quotedId}`

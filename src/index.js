@@ -14,13 +14,19 @@ class AppWrapper extends Component {
    * * * * * * * * * * * * * * * * */
   constructor (props) {
     super(props)
+    const initRem = 16
     this.state = {
-      rem: 16,
+      rem: initRem,
       width: window.innerWidth,
       height: window.innerHeight,
-      display: 'sm',
+      display_name: 'sm',
       nav_height: 0,
-      body_padding_top: 0
+      body_padding_top: 0,
+      breakpoints: {
+        lg: { min: 1 + 63 * initRem, max: Infinity },
+        md: { min: 1 + 40 * initRem, max: 63 * initRem },
+        sm: { min: 0, max: 40 * initRem }
+      }
     }
     this.storeViewportDimentions = this.storeViewportDimentions.bind(this)
     window.addEventListener('resize', this.storeViewportDimentions)
@@ -40,19 +46,15 @@ class AppWrapper extends Component {
       const bodyPaddingTop = $body ? parseFloat(window.getComputedStyle($body)['padding-top'].slice(0, -2)) : 0
       const width = window.innerWidth
       const height = window.innerHeight
-      const breakpoints = {
-        lg: { min: 1 + 63 * curr.rem, max: Infinity },
-        md: { min: 1 + 40 * curr.rem, max: 63 * curr.rem },
-        sm: { min: 0, max: 40 * curr.rem }
-      }
-      const display = Object.keys(breakpoints).find(name => {
-        const { min, max } = breakpoints[name]
+      const displayName = Object.keys(curr.breakpoints).find(name => {
+        const { min, max } = curr.breakpoints[name]
         return min <= width && max >= width
       })
       const returned = {
+        ...curr,
         width,
         height,
-        display,
+        display_name: displayName,
         nav_height: navHeight,
         body_padding_top: bodyPaddingTop
       }
