@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import chroma from 'chroma-js'
-import Photo from '../Photo2'
+import Photo2 from '../Photo2'
+import Video2 from '../Video2'
 import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
@@ -97,19 +98,21 @@ export default class TweetMedias extends Component {
           paddingTop: media.display_height }}>
           <div className={`${c}__media-inner`}>{
           media.type === 'photo'
-            ? <Photo
+            ? <Photo2
+              cover
               src={media.url}
               hdSrc={media.ulr}
-              expandable
-              description='Une description assez longue pour aller sur deux lignes quoi'
-              credit='une source certaine' />
+              expandable />
             : media.type === 'video'
-              ? ''/*<video width={media.width} height={media.height} controls>
-                <source src={media.url} type={media.contentType} />
-              </video>*/
-              : ''/*<video width={media.width} height={media.height} autoPlay loop>
-                <source src={media.url} type={media.contentType} />
-              </video>*/
+              ? <Video2
+                controls
+                url={media.url}
+                type={media.contentType} />
+              : <Video2
+                loop
+                autoPlay
+                url={media.url}
+                type={media.contentType} />
         }</div>
       </div>)
     }</div>

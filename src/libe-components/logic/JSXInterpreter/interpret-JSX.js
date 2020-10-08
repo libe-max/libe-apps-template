@@ -5,17 +5,21 @@ import { Parser } from 'html-to-react'
 import ArticleMeta from '../../blocks/ArticleMeta'
 import BottomNotes from '../../blocks/BottomNotes'
 import CopyValue from '../../blocks/CopyValue'
+import Diaporama from '../../blocks/Diaporama'
 import Hero from '../../blocks/Hero'
 import LibeLaboLogo from '../../blocks/LibeLaboLogo'
 import Loader from '../../blocks/Loader'
 import LoadingError from '../../blocks/LoadingError'
 import LogoGlyph from '../../blocks/LogoGlyph'
 import Photo from '../../blocks/Photo'
+import Photo2 from '../../blocks/Photo2'
 import Video from '../../blocks/Video'
+import Video2 from '../../blocks/Video2'
 import RasterMap from '../../blocks/RasterMap'
 import ReadAlso from '../../blocks/ReadAlso'
 import ShareArticle from '../../blocks/ShareArticle'
 import Tweet from '../../blocks/Tweet'
+import TweetMedias from '../../blocks/TweetMedias'
 
 import Grid from '../../layouts/Grid'
 import Slot from '../../layouts/Slot'
@@ -228,17 +232,21 @@ function recurseJson2JSX (input) {
     else if (tag === 'articlemeta') return chl ? <ArticleMeta {...att}>{chl}</ArticleMeta> : <ArticleMeta {...att} />
     else if (tag === 'bottomnotes') return chl ? <BottomNotes {...att}>{chl}</BottomNotes> : <BottomNotes {...att} />
     else if (tag === 'copyvalue') return chl ? <CopyValue {...att}>{chl}</CopyValue> : <CopyValue {...att} />
+    else if (tag === 'diaporama') return chl ? <Diaporama {...att}>{chl}</Diaporama> : <Diaporama {...att} />
     else if (tag === 'hero') return chl ? <Hero {...att}>{chl}</Hero> : <Hero {...att} />
     else if (tag === 'libelabologo') return chl ? <LibeLaboLogo {...att}>{chl}</LibeLaboLogo> : <LibeLaboLogo {...att} />
     else if (tag === 'loader') return chl ? <Loader {...att}>{chl}</Loader> : <Loader {...att} />
     else if (tag === 'loadingerror') return chl ? <LoadingError {...att}>{chl}</LoadingError> : <LoadingError {...att} />
     else if (tag === 'logoglyph') return chl ? <LogoGlyph {...att}>{chl}</LogoGlyph> : <LogoGlyph {...att} />
     else if (tag === 'photo') return chl ? <Photo {...att}>{chl}</Photo> : <Photo {...att} />
+    else if (tag === 'photo2') return chl ? <Photo2 {...att}>{chl}</Photo2> : <Photo2 {...att} />
     else if (tag === 'libevideo') return chl ? <Video {...att}>{chl}</Video> : <Video {...att} />
+    else if (tag === 'libevideo2') return chl ? <Video2 {...att}>{chl}</Video2> : <Video2 {...att} />
     else if (tag === 'rastermap') return chl ? <RasterMap {...att}>{chl}</RasterMap> : <RasterMap {...att} />
     else if (tag === 'readalso') return chl ? <ReadAlso {...att}>{chl}</ReadAlso> : <ReadAlso {...att} />
     else if (tag === 'sharearticle') return chl ? <ShareArticle {...att}>{chl}</ShareArticle> : <ShareArticle {...att} />
     else if (tag === 'tweet') return chl ? <Tweet {...att}>{chl}</Tweet> : <Tweet {...att} />
+    else if (tag === 'tweetmedias') return chl ? <TweetMedias {...att}>{chl}</TweetMedias> : <TweetMedias {...att} />
     else if (tag === 'grid') return chl ? <Grid {...att}>{chl}</Grid> : <Grid {...att} />
     else if (tag === 'slot') return chl ? <Slot {...att}>{chl}</Slot> : <Slot {...att} />
     else if (tag === 'libearticle') return chl ? <Article {...att}>{chl}</Article> : <Article {...att} />

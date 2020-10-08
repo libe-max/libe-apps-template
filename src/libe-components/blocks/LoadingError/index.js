@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Paragraph from '../../text-levels/Paragraph'
+import Annotation from '../../text-levels/Annotation'
 import LogoGlyph from '../../blocks/LogoGlyph'
 import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
@@ -12,7 +13,7 @@ import removeObjectKeys from '../../../libe-utils/remove-object-keys'
  *   page
  *
  *   PROPS
- *   small, big, huge
+ *   small, big, huge, message
  *
  */
 
@@ -25,7 +26,21 @@ export default class LoadingError extends Component {
   constructor () {
     super()
     this.c = 'lblb-loading-error'
-    this.usedProps = ['small', 'big', 'huge', 'className']
+    this.state = { show_message: false }
+    this.usedProps = ['small', 'big', 'huge', 'message', 'className']
+    this.toggleShowMessage = this.toggleShowMessage.bind(this)
+  }
+
+  /* * * * * * * * * * * * * * * *
+   *
+   * TOGGLE SHOW MESSAGE
+   *
+   * * * * * * * * * * * * * * * */
+  toggleShowMessage () {
+    this.setState(curr => ({
+      ...curr,
+      show_message: !curr.show_message
+    }))
   }
 
   /* * * * * * * * * * * * * * * *
@@ -34,7 +49,7 @@ export default class LoadingError extends Component {
    *
    * * * * * * * * * * * * * * * */
   render () {
-    const { c, props } = this
+    const { c, props, state } = this
 
     /* Assign classes */
     const classes = [c]
@@ -42,22 +57,37 @@ export default class LoadingError extends Component {
     if (props.small) classes.push(`${c}_small`)
     if (props.big) classes.push(`${c}_big`)
     if (props.huge) classes.push(`${c}_huge`)
+    if (state.show_message) classes.push(`${c}_show-message`)
 
     /* Passed props */
     const passedProps = removeObjectKeys(props, this.usedProps)
 
     return <div className={classes.join(' ')} {...passedProps}>
       <Paragraph
+        className={`${c}__reloader`}
         small={props.small}
         big={props.big}
-        huge={props.huge}>{props.children
+        huge={props.huge}>{
+        props.children
           ? props.children
-          : <span>
-          Une erreur de chargement est survenue,<br />
-            <a href={window.location}>recharger la page ?</a><br /><br />
-            <LogoGlyph />
-          </span>
-        }</Paragraph>
+          : <span>Une erreur de chargement est survenue,<br />
+            <a href={window.location}>recharger la page ?</a></span>
+      }</Paragraph>
+      <Annotation
+        className={`${c}__message`}
+        small={props.small}
+        big={props.big}
+        huge={props.huge}>
+        {props.message}
+      </Annotation>
+      <Paragraph
+        className={`${c}__glyph`}
+        onClick={this.toggleShowMessage}
+        small={props.small}
+        big={props.big}
+        huge={props.huge}>
+        <LogoGlyph />
+      </Paragraph>
     </div>
   }
 }

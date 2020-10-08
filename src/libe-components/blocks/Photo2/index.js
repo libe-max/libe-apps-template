@@ -8,7 +8,7 @@ import Annotation from '../../text-levels/Annotation'
 import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
- *   Photo component
+ *   Photo2 component
  *   ------------------------------------------------------
  *
  *   DESCRIPTION
@@ -21,7 +21,7 @@ import removeObjectKeys from '../../../libe-utils/remove-object-keys'
  *
  */
 
-export default class Photo extends Component {
+export default class Photo2 extends Component {
   /* * * * * * * * * * * * * * * * *
    *
    * CONSTRUCTOR
@@ -114,6 +114,7 @@ export default class Photo extends Component {
     if (props.cover) classes.push(`${c}_cover`)
     if (props.contain) classes.push(`${c}_contain`)
     if (props.expandable) classes.push(`${c}_expandable`)
+    if (!props.description && !props.credit) classes.push(`${c}_no-meta`)
     
     /* Inner logic */
     const passedProps = removeObjectKeys(props, this.usedProps)
@@ -146,5 +147,5 @@ export default class Photo extends Component {
 }
 
 /* * * * * Prop types * * * * */
-Photo.propTypes = {}
-Photo.defaultProps = {}
+Photo2.propTypes = {}
+Photo2.defaultProps = {}

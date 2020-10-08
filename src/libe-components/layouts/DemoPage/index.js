@@ -80,7 +80,7 @@ export default class DemoPage extends Component {
   }
 
   render () {
-    return <div style={{ margin: '0 1rem' }}>
+    return <div className='lblb-demo-page'>
 
       <SECTION>Icons</SECTION>
       <COMPONENT_BLOCK>down-arrow-head-icon_24</COMPONENT_BLOCK>

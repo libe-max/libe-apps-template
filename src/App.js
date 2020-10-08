@@ -5,12 +5,11 @@ import LoadingError from './libe-components/blocks/LoadingError'
 import ShareArticle from './libe-components/blocks/ShareArticle'
 import LibeLaboLogo from './libe-components/blocks/LibeLaboLogo'
 import ArticleMeta from './libe-components/blocks/ArticleMeta'
-import Paragraph from './libe-components/text-levels/Paragraph'
-import Tweet from './libe-components/blocks/Tweet'
-import Photo2 from './libe-components/blocks/Photo2'
 import Diaporama from './libe-components/blocks/Diaporama'
-import DemoPage from './libe-components/layouts/DemoPage'
+import Tweet from './libe-components/blocks/Tweet'
 import Svg from './libe-components/primitives/Svg'
+import InterTitle from './libe-components/text-levels/InterTitle'
+import Paragraph from './libe-components/text-levels/Paragraph'
 import AppContext from './context'
 
 export default class App extends Component {
@@ -37,7 +36,7 @@ export default class App extends Component {
     this.removeExpandableMedia = this.removeExpandableMedia.bind(this)
     this.expandMedia = this.expandMedia.bind(this)
     this.handleCloseExpandedMediasPanelClick = this.handleCloseExpandedMediasPanelClick.bind(this)
-    this.expandedMediaPanelEscKeyListener = this.expandedMediaPanelEscKeyListener.bind(this)
+    this.expandedMediaPanelKeyListener = this.expandedMediaPanelKeyListener.bind(this)
     this.fetchSheet = this.fetchSheet.bind(this)
   }
 
@@ -159,7 +158,7 @@ export default class App extends Component {
       const foundMedia = curr.expandable_medias.find(media => media.id === id)
       if (!foundMedia) {
         document.body.style.overflow = null
-        window.removeEventListener('keydown', this.expandedMediaPanelEscKeyListener)
+        window.removeEventListener('keydown', this.expandedMediaPanelKeyListener)
         return {
           ...curr,
           expanded_media_id: null,
@@ -167,7 +166,7 @@ export default class App extends Component {
         }  
       }
       document.body.style.overflow = 'hidden'
-      window.addEventListener('keydown', this.expandedMediaPanelEscKeyListener)
+      window.addEventListener('keydown', this.expandedMediaPanelKeyListener)
       return {
         ...curr,
         expanded_media_id: id,
@@ -183,7 +182,7 @@ export default class App extends Component {
    * * * * * * * * * * * * * * * * */
   handleCloseExpandedMediasPanelClick (e) {
     document.body.style.overflow = null
-    window.removeEventListener('keydown', this.expandedMediaPanelEscKeyListener)
+    window.removeEventListener('keydown', this.expandedMediaPanelKeyListener)
     this.setState(curr => ({
       show_expanded_medias_panel: false
     }))
@@ -194,8 +193,11 @@ export default class App extends Component {
    * EXPANDED MEDIA PANEL ESC KEY LISTENER
    *
    * * * * * * * * * * * * * * * * */
-  expandedMediaPanelEscKeyListener (e) {
-    if (e.key === 'Escape') this.handleCloseExpandedMediasPanelClick(e)
+  expandedMediaPanelKeyListener (e) {
+    if (e.key === 'Escape') return this.handleCloseExpandedMediasPanelClick(e)
+    if (!this.diaporama) return
+    if (e.key === 'ArrowLeft') return this.diaporama.handlePrevButtonClick(e)
+    if (e.key === 'ArrowRight') return this.diaporama.handleNextButtonClick(e)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -252,206 +254,45 @@ export default class App extends Component {
       expand_media: this.expandMedia
     }
 
-    /* Load & errors */
-    if (state.loading_sheet) {
-      return <AppContext.Provider value={passedContext}>
-        <div
-          id={props.meta.slug}
-          className={classes.join(' ')}>
-          <div className='lblb-default-apps-loader'>
-            <Loader />
-          </div>
-        </div>
-      </AppContext.Provider>
-    } else if (state.error_sheet) {
-      return <AppContext.Provider value={passedContext}>
-        <div
-          id={props.meta.slug}
-          className={classes.join(' ')}>
-          <div className='lblb-default-apps-error'>
-            <Paragraph>{state.error_sheet.message}</Paragraph>
-            <LoadingError />
-          </div>
-        </div>
-      </AppContext.Provider>
-    }
-
-    /* Display component */
     return <AppContext.Provider value={passedContext}>
       <div id={props.meta.slug} className={classes.join(' ')}>
-        <Paragraph literary>
+        {/* Header */}
+        <div className='lblb-default-apps-header'>
+          <InterTitle
+            level={1}
+            className='lblb-default-apps-header__title'>
+            Default title lorem ipsum dolor sit amet
+          </InterTitle>
+        </div>
+
+        {/* Loading */}
+        {state.loading_sheet && <div className='lblb-default-apps-loader'>
+          <Loader />
+        </div>}
+
+        {/* Error */}
+        {!state.loading_sheet && state.error_sheet && <div className='lblb-default-apps-error'>
+          <LoadingError message={state.error_sheet.message} />
+        </div>}
+
+        { /* App */ }
+        {!state.loading_sheet && !state.error_sheet && false && <Paragraph literary>
           App is ready.<br />
           - remove DemoPage component<br />
           - fill spreadsheet_id field in config.js<br />
           - display it's content via state.data_sheet
-        </Paragraph>
-        <br />
-        <br />
-        <br />
-        <br />
-        <Photo2
-          width='240px'
-          height='240px'
-          cover
-          expandable
-          src='https://www.easypano.com/images/pw/v3/banner.jpg'
-          description='Photo 1 - Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-        <br />
-        <Photo2
-          width='240px'
-          height='240px'
-          cover
-          expandable
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Photo 2 - Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-        <br />
-        <Photo2
-          width='240px'
-          height='240px'
-          cover
-          expandable
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Photo 3 - Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-        <br />
-        <Photo2
-          width='240px'
-          height='240px'
-          cover
-          expandable
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Photo 4 - Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-        <br />
-        <Photo2
-          width='240px'
-          height='240px'
-          cover
-          expandable
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Photo 5 - Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-        <br />
-        <Photo2
-          width='240px'
-          height='240px'
-          cover
-          expandable
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Photo 6 - Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-        <br />
-        <Photo2
-          width='240px'
-          height='240px'
-          cover
-          expandable
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Photo 7 - Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-        <br />
-        <Photo2
-          width='240px'
-          height='240px'
-          cover
-          expandable
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Photo 8 - Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-        <br />
-        <Photo2
-          width='240px'
-          height='240px'
-          cover
-          expandable
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Photo 9 - Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-        <br />
-        <Photo2
-          width='240px'
-          height='240px'
-          cover
-          expandable
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Photo 10 - Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-        <br />
-        <Photo2
-          width='240px'
-          height='240px'
-          cover
-          expandable
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Photo 11 - Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-        <br />
-        <Photo2
-          width='240px'
-          height='240px'
-          cover
-          expandable
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Photo 12 - Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah' />
-        <br />
-        <div style={{ width: '10rem' }}>
-          <Photo2
-            src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-            description='Une longue description qui fait plusieurs lignes'
-            credit='Un crédit qui est long aussi oulalah' />
-        </div>
-        <br />
-        <div style={{ width: '20rem', height: '20rem' }}>
-          <Photo2
-            cover
-            src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-            description='Une longue description qui fait plusieurs lignes'
-            credit='Un crédit qui est long aussi oulalah' />
-        </div>
-        <br />
-        <Photo2
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah'
-          style={{ width: '30rem' }} />
-        <br />
-        <Photo2
-          cover
-          position='center'
-          attachment='fixed'
-          src='https://upload.wikimedia.org/wikipedia/commons/6/6b/Tall_building_%284935391830%29.jpg'
-          description='Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah'
-          style={{ width: '100%', height: '30rem' }} />
-        <br />
-        <Photo2
-          src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg'
-          description='Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah'
-          width='30rem' />
-        <br />
-        <Photo2
-          src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg'
-          description='Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah'
-          width='30rem'
-          height='30rem' />
-        <br />
-        <Photo2
-          src='https://apod.nasa.gov/apod/image/1305/ngc6960_FinalPugh.jpg'
-          description='Une longue description qui fait plusieurs lignes'
-          credit='Un crédit qui est long aussi oulalah'
-          height='30rem' />
-        <br />
-        <br />
-        <br />
-        <br />
-        <DemoPage />
-        <br />
+        </Paragraph>}
 
+        { /* App */ }
+        {!state.loading_sheet && !state.error_sheet && <div style={{ maxWidth: 400 }}>
+          <Tweet url='https://twitter.com/dusttodigital/status/1306942442374082561' />
+          <Tweet url='https://twitter.com/stupidites/status/1308694766511685632' />
+          <Tweet url='https://twitter.com/StopCarnet/status/1308691981237977089' />
+          <Tweet url='https://twitter.com/thediaryofastay/status/1308746752229609473' />
+          <Tweet url='https://twitter.com/libe/status/1308764828673155073' />
+        </div>}
+
+        {/* Footer */}
         <div className='lblb-default-apps-footer'>
           <ShareArticle
             short
@@ -465,11 +306,13 @@ export default class App extends Component {
           <LibeLaboLogo target='blank' />
         </div>
 
+        {/* Expanded medias panel */}
         <div
           className='lblb-default-expanded-medias-panel'
           style={{ top: `${context.viewport.nav_height}px` }}>
           <Diaporama
             showThumbs
+            ref={n => this.diaporama = n}
             medias={state.expandable_medias}
             active={state.expanded_media_id}
             onChange={this.expandMedia} />
