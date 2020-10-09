@@ -268,44 +268,54 @@ export default class App extends Component {
           </InterTitle>
         </div>
 
-        {/* Loading */}
-        {state.loading_sheet
-        && <div className='lblb-default-apps-loader'>
-          <Loader />
-        </div>}
-
-        {/* Error */}
-        {!state.loading_sheet
-        && state.error_sheet
-        && <div className='lblb-default-apps-error'>
-          <LoadingError message={state.error_sheet.message} />
-        </div>}
+        {/* Intro */}
+        <div className={`${c}__intro`}>
+          <Paragraph literary>
+            Mauris tincidunt libero et urna eleifend, a ornare eros gravida. Quisque tincidunt condimentum nibh, vitae ullamcorper felis lacinia quis. Mauris vestibulum blandit orci, eu dignissim libero aliquet mattis.<br /><br />Integer et erat in lorem congue consequat nec ac elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi viverra commodo placerat.
+          </Paragraph>
+        </div>
 
         { /* App */ }
-        {!state.loading_sheet
-        && !state.error_sheet
-        && false
-        && <Paragraph literary>
-          App is ready.<br />
-          - remove DemoPage component<br />
-          - fill spreadsheet_id field in config.js<br />
-          - display it's content via state.data_sheet
-        </Paragraph>}
-
-        { /* App */ }
-        {!state.loading_sheet
-        && !state.error_sheet
-        && <MetroTiler gutters={[16, 8, 32]} columns={[4, 3, 1]} breakpoints={[1008, 640]}>
-          <Tweet small urlsLength={28} url='https://twitter.com/dusttodigital/status/1306942442374082561' />
-          <Tweet small urlsLength={28} url='https://twitter.com/stupidites/status/1308694766511685632' />
-          <Tweet small urlsLength={28} url='https://twitter.com/StopCarnet/status/1308691981237977089' />
-          <div  style={{ padding: '1.5rem' }}><Quote big author='Lao Tseu' decoration>
-            Nunc sollicitudin neque at orci consequat, eget hendrerit justo semper. Ut a eros condimentum nisi commodo lobortis quis ut tortor. Donec congue eros eget ultricies mattis.
-          </Quote></div>
-          <Tweet small urlsLength={28} url='https://twitter.com/thediaryofastay/status/1308746752229609473' />
-          <Tweet small urlsLength={28} url='https://twitter.com/libe/status/1308764828673155073' />
-          <Photo2 expandable src='https://weneedfun.com/wp-content/uploads/2016/07/Most-Beautiful-Sunset-Pictures-14.jpg' />
-        </MetroTiler>}
+        <div className={`${c}__content`}>
+          <MetroTiler gutters={[32, 16, 16]} columns={[3, 2, 1]}>
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/881503147168071680' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1199718185865535490' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1225174713992990721' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1207508280207011841' />
+          </MetroTiler>
+          <Paragraph literary>
+            Mauris tincidunt libero et urna eleifend, a ornare eros gravida. Quisque tincidunt condimentum nibh, vitae ullamcorper felis lacinia quis.
+          </Paragraph>
+          <MetroTiler gutters={[32, 16, 16]} columns={[3, 2, 1]}>
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1118876219381026818' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1235633381595066373' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1189601417469841409' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1261747580666552320' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1220536711031078913' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1081735898679701505' />
+          </MetroTiler>
+          <Paragraph literary>
+            Vestibulum blandit orci, eu dignissim libero aliquet mattis. Integer et erat in lorem congue consequat nec ac elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi viverra commodo placerat.
+          </Paragraph>
+          <MetroTiler gutters={[32, 16, 16]} columns={[3, 2, 1]}>
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1163603361423351808' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1058388700617498625' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1227040292060180481' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1170546650651271169' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1220463728535252992' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1292628551926263808' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1223640662689689602' />
+          </MetroTiler>
+          <Paragraph literary>
+            Quisque tincidunt condimentum nibh, vitae ullamcorper felis lacinia quis. Mauris vestibulum blandit orci, eu dignissim libero aliquet mattis. Integer et erat in lorem congue consequat nec ac elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi viverra commodo placerat.
+          </Paragraph>
+          <MetroTiler gutters={[32, 16, 16]} columns={[3, 2, 1]}>
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1170089069105340416' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1236778368533700609' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1265851644736081921' />
+            <Tweet small urlsLength={28} url='https://twitter.com/realdonaldtrump/status/1075846949427908608' />
+          </MetroTiler>
+        </div>
 
         {/* Footer */}
         <div className='lblb-default-apps-footer'>

@@ -2,6 +2,7 @@
   "name": "libe-apps-template",
   "version": "0.2.4",
   "private": true,
+  "homepage": "/apps/maxime/tweets-trump",
   "dependencies": {
     "chroma-js": "^2.1.0",
     "har-validator": "^5.1.5",
