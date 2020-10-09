@@ -128,7 +128,8 @@ export default class MetroTiler extends Component {
       <div
         className={`${c}__inner`}
         style={innerStyle}>
-        {props.children.map(child => <div
+        {props.children.map((child, i) => <div
+          key={i}
           className={`${c}__tile`}
           style={tileStyle}>
           {child}
