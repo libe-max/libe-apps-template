@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "chroma-js": "^2.1.0",
+    "d3": "^6.2.0",
     "har-validator": "^5.1.5",
     "html-to-react": "^1.4.3",
     "html2json": "^1.0.2",
