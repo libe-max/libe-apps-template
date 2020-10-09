@@ -18,7 +18,7 @@ import removeObjectKeys from '../../../libe-utils/remove-object-keys'
  *   Tweet embed component
  *
  *   PROPS
- *   data, url, urlsLength, small, big, huge, literary, quoted
+ *   data, url, urlsLength, expandableMedias, small, big, huge, literary, quoted
  *
  */
 
@@ -31,7 +31,10 @@ export default class Tweet extends Component {
   constructor () {
     super()
     this.c = 'lblb-tweet'
-    this.usedProps = ['data', 'url', 'urlsLength', 'small', 'big', 'huge', 'literary', 'quoted', 'className']
+    this.usedProps = [
+      'data', 'url', 'urlsLength', 'expandableMedias', 'small',
+      'big', 'huge', 'literary', 'quoted', 'className'
+    ]
     this.state = {
       loading: true,
       error: null,
@@ -190,6 +193,7 @@ export default class Tweet extends Component {
     if (props.huge) classes.push(`${c}_huge`)
     if (props.literary) classes.push(`${c}_literary`)
     if (props.quoted) classes.push(`${c}_quoted`)
+    if (!state.loading && !state.error && !textWithEntities) classes.push(`${c}_no-content`)
 
     /* Passed props */
     const passedProps = removeObjectKeys(props, this.usedProps)
@@ -220,7 +224,7 @@ export default class Tweet extends Component {
 
     /* Display component */
     return <div className={classes.join(' ')} {...passedProps}>
-      <TweetMedias data={tweetMedias.length === 4 ? tweetMedias.slice(1) : tweetMedias} />
+      <TweetMedias expandable={props.expandableMedias} data={tweetMedias.length === 4 ? tweetMedias.slice(1) : tweetMedias} />
       <div className={`${c}__content`}>
         <Paragraph small={props.small}
           big={props.big}
@@ -270,10 +274,12 @@ export default class Tweet extends Component {
 /* * * * * Prop types * * * * */
 Tweet.propTypes = {
   url: PropTypes.string,
-  quoted: PropTypes.bool
+  quoted: PropTypes.bool,
+  expandableMedias: PropTypes.bool
 }
 
 Tweet.defaultProps = {
   url: '20',
-  quoted: false
+  quoted: false,
+  expandableMedias: false
 }

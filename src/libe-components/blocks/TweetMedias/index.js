@@ -13,7 +13,7 @@ import removeObjectKeys from '../../../libe-utils/remove-object-keys'
  *   Displays medias associated with a tweet
  *
  *   PROPS
- *   data
+ *   data, expandable
  *
  */
 
@@ -26,26 +26,7 @@ export default class TweetMedias extends Component {
   constructor (props) {
     super(props)
     this.c = 'lblb-tweet-medias'
-    this.usedProps = ['data', 'className']
-    this.state = {
-      colors: props.data.map(e => chroma.random().hex())
-    }
-  }
-
-  /* * * * * * * * * * * * * * * * *
-   *
-   * DERIVED STATE FROM PROPS
-   *
-   * * * * * * * * * * * * * * * * */
-  static getDerivedStateFromProps (props, state) {
-    const newColors = props.data.map(e => chroma.random().hex())
-    return {
-      ...state,
-      colors: [
-        ...state.colors.slice(0, newColors.length),
-        ...newColors.slice(state.colors.length)
-      ]
-    }
+    this.usedProps = ['data', 'expandable', 'className']
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -93,7 +74,6 @@ export default class TweetMedias extends Component {
         key={media.id}
         className={`${c}__media`}
         style={{
-          backgroundColor: state.colors[i],
           width: media.display_width,
           paddingTop: media.display_height }}>
           <div className={`${c}__media-inner`}>{
@@ -102,7 +82,7 @@ export default class TweetMedias extends Component {
               cover
               src={media.url}
               hdSrc={media.ulr}
-              expandable />
+              expandable={props.expandable} />
             : media.type === 'video'
               ? <Video2
                 controls

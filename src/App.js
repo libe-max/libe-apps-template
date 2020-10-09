@@ -296,14 +296,14 @@ export default class App extends Component {
         {!state.loading_sheet
         && !state.error_sheet
         && <MetroTiler gutters={[16, 8, 32]} columns={[4, 3, 1]} breakpoints={[1008, 640]}>
-          <Tweet small urlsLength={28} url='https://twitter.com/dusttodigital/status/1306942442374082561' />
-          <Tweet small urlsLength={28} url='https://twitter.com/stupidites/status/1308694766511685632' />
-          <Tweet small urlsLength={28} url='https://twitter.com/StopCarnet/status/1308691981237977089' />
+          <Tweet expandableMedias small urlsLength={28} url='https://twitter.com/dusttodigital/status/1306942442374082561' />
+          <Tweet expandableMedias small urlsLength={28} url='https://twitter.com/stupidites/status/1308694766511685632' />
+          <Tweet expandableMedias small urlsLength={28} url='https://twitter.com/StopCarnet/status/1308691981237977089' />
           <div  style={{ padding: '1.5rem' }}><Quote big author='Lao Tseu' decoration>
             Nunc sollicitudin neque at orci consequat, eget hendrerit justo semper. Ut a eros condimentum nisi commodo lobortis quis ut tortor. Donec congue eros eget ultricies mattis.
           </Quote></div>
-          <Tweet small urlsLength={28} url='https://twitter.com/thediaryofastay/status/1308746752229609473' />
-          <Tweet small urlsLength={28} url='https://twitter.com/libe/status/1308764828673155073' />
+          <Tweet expandableMedias small urlsLength={28} url='https://twitter.com/thediaryofastay/status/1308746752229609473' />
+          <Tweet expandableMedias small urlsLength={28} url='https://twitter.com/libe/status/1308764828673155073' />
           <Photo2 expandable src='https://weneedfun.com/wp-content/uploads/2016/07/Most-Beautiful-Sunset-Pictures-14.jpg' />
         </MetroTiler>}
 
