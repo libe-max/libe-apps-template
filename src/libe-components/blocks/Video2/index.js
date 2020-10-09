@@ -68,18 +68,17 @@ export default class Video2 extends Component {
    * * * * * * * * * * * * * * * * */
   static guessSourcetype (url) {
     const ext = url.split('.').pop()
-    switch (ext) {
-      case 'mp4': return 'video/mp4'
-      case 'webm': return 'video/webm'
-      case 'ogg': return 'video/ogg'
-      case 'flv': return 'video/x-flv'
-      case 'm3u8': return 'application/x-mpegURL'
-      case 'ts': return 'video/MP2T'
-      case '3gp': return 'video/3gpp'
-      case 'mov': return 'video/quicktime'
-      case 'avi': return 'video/x-msvideo'
-      case 'wmv': return 'video/x-ms-wmv'
-    }
+    if (ext.includes('mp4')) return 'video/mp4'
+    if (ext.includes('webm')) return 'video/webm'
+    if (ext.includes('ogg')) return 'video/ogg'
+    if (ext.includes('flv')) return 'video/x-flv'
+    if (ext.includes('m3u8')) return 'application/x-mpegURL'
+    if (ext.includes('ts')) return 'video/MP2T'
+    if (ext.includes('3gp')) return 'video/3gpp'
+    if (ext.includes('mov')) return 'video/quicktime'
+    if (ext.includes('avi')) return 'video/x-msvideo'
+    if (ext.includes('wmv')) return 'video/x-ms-wmv'
+    return 'video/mp4'
   }
 
   /* * * * * * * * * * * * * * * * *

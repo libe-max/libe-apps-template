@@ -190,6 +190,7 @@ export default class Tweet extends Component {
     if (props.huge) classes.push(`${c}_huge`)
     if (props.literary) classes.push(`${c}_literary`)
     if (props.quoted) classes.push(`${c}_quoted`)
+    if (!state.loading && !state.error && !textWithEntities) classes.push(`${c}_no-content`)
 
     /* Passed props */
     const passedProps = removeObjectKeys(props, this.usedProps)

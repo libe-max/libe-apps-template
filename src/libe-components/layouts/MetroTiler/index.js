@@ -26,6 +26,7 @@ export default class MetroTiler extends Component {
     this.c = 'lblb-metro-tiler'
     this.usedProps = ['columns', 'breakpoints', 'gutters', 'noSideGutters', 'className']
     this.setTilesMargins = this.setTilesMargins.bind(this)
+    window.setInterval(this.setTilesMargins, 500)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -42,6 +43,15 @@ export default class MetroTiler extends Component {
    * * * * * * * * * * * * * * * * */
   componentDidUpdate () {
     this.setTilesMargins()
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * WILL UNMOUNT
+   *
+   * * * * * * * * * * * * * * * * */
+  componentWillUnmount () {
+    window.clearInterval(this.setTilesMargins)
   }
 
   /* * * * * * * * * * * * * * * * *

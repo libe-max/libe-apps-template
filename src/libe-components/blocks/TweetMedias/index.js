@@ -27,25 +27,6 @@ export default class TweetMedias extends Component {
     super(props)
     this.c = 'lblb-tweet-medias'
     this.usedProps = ['data', 'className']
-    this.state = {
-      colors: props.data.map(e => chroma.random().hex())
-    }
-  }
-
-  /* * * * * * * * * * * * * * * * *
-   *
-   * DERIVED STATE FROM PROPS
-   *
-   * * * * * * * * * * * * * * * * */
-  static getDerivedStateFromProps (props, state) {
-    const newColors = props.data.map(e => chroma.random().hex())
-    return {
-      ...state,
-      colors: [
-        ...state.colors.slice(0, newColors.length),
-        ...newColors.slice(state.colors.length)
-      ]
-    }
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -93,7 +74,6 @@ export default class TweetMedias extends Component {
         key={media.id}
         className={`${c}__media`}
         style={{
-          backgroundColor: state.colors[i],
           width: media.display_width,
           paddingTop: media.display_height }}>
           <div className={`${c}__media-inner`}>{
@@ -101,8 +81,7 @@ export default class TweetMedias extends Component {
             ? <Photo2
               cover
               src={media.url}
-              hdSrc={media.ulr}
-              expandable />
+              hdSrc={media.ulr} />
             : media.type === 'video'
               ? <Video2
                 controls
