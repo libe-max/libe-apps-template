@@ -11,7 +11,7 @@ import removeObjectKeys from '../../../libe-utils/remove-object-keys'
  *   Displays it's children as a metro paving
  *
  *   PROPS
- *   columns, breakpoints, noSideGutters, className
+ *   columns, breakpoints, gutters, noSideGutters, className
  *
  */
 
@@ -24,7 +24,7 @@ export default class MetroTiler extends Component {
   constructor () {
     super()
     this.c = 'lblb-metro-tiler'
-    this.usedProps = ['columns', 'breakpoints', 'noSideGutters', 'className']
+    this.usedProps = ['columns', 'breakpoints', 'gutters', 'noSideGutters', 'className']
     this.setTilesMargins = this.setTilesMargins.bind(this)
   }
 
@@ -99,10 +99,6 @@ export default class MetroTiler extends Component {
 
     /* Wrapper style */
     const wrapperSidePaddings = gutters[currBreakpointPos] / 2
-    const ownStyle = {
-      // paddingLeft: `${wrapperSidePaddings}px`,
-      // paddingRight: `${wrapperSidePaddings}px`
-    }
 
     /* Inner style */
     const innerStyle = {
@@ -123,7 +119,6 @@ export default class MetroTiler extends Component {
     
     /* Passed props */
     const passedProps = removeObjectKeys(props, this.usedProps)
-    passedProps.style = { ...ownStyle, ...props.style }
 
     /* Display component */
     return <div
