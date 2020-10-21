@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { statics_url as staticsUrl } from './config'
+import AppContext from './context'
+
 import Loader from './libe-components/blocks/Loader'
 import LoadingError from './libe-components/blocks/LoadingError'
 import ShareArticle from './libe-components/blocks/ShareArticle'
@@ -8,13 +10,16 @@ import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Diaporama from './libe-components/blocks/Diaporama'
 import Tweet from './libe-components/blocks/Tweet'
 import Photo2 from './libe-components/blocks/Photo2'
+
 import Svg from './libe-components/primitives/Svg'
+
 import InterTitle from './libe-components/text-levels/InterTitle'
 import Paragraph from './libe-components/text-levels/Paragraph'
 import Quote from './libe-components/text-levels/Quote'
+
 import MetroTiler from './libe-components/layouts/MetroTiler'
-import GraphViewport from './libe-components/graphs/GraphViewport'
-import AppContext from './context'
+
+import Graph from './libe-components/graphs/Graph'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -296,20 +301,24 @@ export default class App extends Component {
         { /* App */ }
         {!state.loading_sheet
         && !state.error_sheet
-        && <GraphViewport
-          xScale='band'
-          yScale='log'
-          xDomain={['velocity', 'test']}
-          yDomain={[12, 300]}
-          width={640}
-          height={480}
-          data={[
-            { value: 12, label: 'voiture', velocity: 76, weight: 13 },
-            { value: 5, label: 'camion', velocity: 49, weight: 31 },
-            { value: 6, label: 'vélo', velocity: 41, weight: 0.14 },
-            { value: 6, label: 'avion', velocity: 563, weight: 59 },
-            { value: 9, label: 'bateau', velocity: 32, weight: 405 },
-            { value: 10, label: 'train', velocity: 212, weight: 280 }]} />
+        && <div style={{ background: '#FAF2E6', padding: 40 }}>
+          <Graph
+            height={711}
+            headTop='1rem'
+            title='Un graphe<br />sur deux lignes'
+            titleAlign='end'
+            titleRight='1rem'
+            subtitle='avec des données dedans !<br />vraiment beaucoup de données'
+            subtitleAlign='end'
+            subtitleRight='1rem'
+            footBottom='1rem'
+            source='Source : Libé Labo et Big'
+            sourceAlign='start'
+            sourceLeft='1rem'
+            padding='3rem 1.5rem 1.5rem 3.5rem'
+            axisPadding='7rem 4.5rem 8rem 2.5rem'>
+          </Graph>
+          </div>
         }
 
         {/* Footer */}

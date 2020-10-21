@@ -1,0 +1,43 @@
+.lblb-graph {
+  display: inline-block;
+}
+
+.lblb-graph__bg-rect {
+  fill: violet;
+}
+
+.lblb-graph__head,
+.lblb-graph__foot {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+
+.lblb-graph:hover .lblb-graph__head,
+.lblb-graph:hover .lblb-graph__foot {
+  opacity: .05;
+}
+
+.lblb-graph__title {
+  font-family: 'Libe-Sans-Semicondensed';
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  font-weight: 800;
+  letter-spacing: .05rem;
+}
+
+.lblb-graph__subtitle {
+  font-family: 'Georgia';
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.lblb-graph__source {
+  font-family: 'Synthese';
+  font-size: .75rem;
+  line-height: 1rem;
+  font-weight: 400;
+}
+
+.lblb-graph-viewport__bg {
+  fill: crimson;
+}
