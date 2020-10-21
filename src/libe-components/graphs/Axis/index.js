@@ -52,6 +52,7 @@ export default class Axis extends Component {
         style={{ fill: 'purple' }}
         width={width}
         height={height} />
+        <text>Axis</text>
     </g>
   }
 }

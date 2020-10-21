@@ -1,5 +1,10 @@
 .lblb-graph {
-  display: inline-block;
+  display: block;
+}
+
+.lblb-graph svg {
+  display: block;
+  box-shadow: 0 0 2rem 0 rgba(33, 33,33, .2);
 }
 
 .lblb-graph__bg-rect {

@@ -104,7 +104,19 @@ export default class Viewport extends Component {
    * * * * * * * * * * * * * * * */
   render () {
     const { props, context, c } = this
-    const { x, y, width, height } = props
+    const { x, y } = props
+
+    /* Inner logic */
+    const { current_graph_viewport: currentGraphViewport } = this.context
+    const propsWidth = cssUnitToPx(props.width, currentGraphViewport.width, context.viewport)
+    const propsHeight = cssUnitToPx(props.height, currentGraphViewport.height, context.viewport)
+ 
+    const width = propsWidth !== undefined
+      ? propsWidth
+      : currentGraphViewport.width || 0
+    const height = propsHeight !== undefined
+      ? propsHeight
+      : currentGraphViewport.height || 0
     
     /* Inner logic */
     const axisPadding = `${props.axisPadding}`.split(' ')
@@ -170,10 +182,17 @@ export default class Viewport extends Component {
         y={0}
         width={width}
         height={height} />
-      <rect
-        className={`${c}__draw`}
-        style={{ fill: 'limegreen' }}
-        {...drawAttributes} />
+      <g
+        className={`${c}__draw-group`}
+        transform={`translate(${drawAttributes.x}, ${drawAttributes.y})`}>
+        <rect
+          className={`${c}__draw`}
+          style={{ fill: 'limegreen' }}
+          width={drawAttributes.width}
+          height={drawAttributes.height}>
+        </rect>
+        <text>Draw</text>
+      </g>
 
       <Axis top
         x={drawAttributes.x}
@@ -205,8 +224,8 @@ Viewport.propTypes = {}
 Viewport.defaultProps = {
   x: 0,
   y: 0,
-  width: 200,
-  height: 150,
+  width: 0,
+  height: 0,
   axisPadding: 0,
   xScale: 'linear',
   yScale: 'linear',

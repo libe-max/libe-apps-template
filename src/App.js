@@ -20,6 +20,7 @@ import Quote from './libe-components/text-levels/Quote'
 import MetroTiler from './libe-components/layouts/MetroTiler'
 
 import Graph from './libe-components/graphs/Graph'
+import Viewport from './libe-components/graphs/Viewport'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -302,24 +303,66 @@ export default class App extends Component {
         {!state.loading_sheet
         && !state.error_sheet
         && <div style={{ background: '#FAF2E6', padding: 40 }}>
-          <Graph
-            height={711}
-            headTop='1rem'
-            title='Un graphe<br />sur deux lignes'
-            titleAlign='end'
-            titleRight='1rem'
-            subtitle='avec des données dedans !<br />vraiment beaucoup de données'
-            subtitleAlign='end'
-            subtitleRight='1rem'
-            footBottom='1rem'
-            source='Source : Libé Labo et Big'
-            sourceAlign='start'
-            sourceLeft='1rem'
-            padding='3rem 1.5rem 1.5rem 3.5rem'
-            axisPadding='7rem 4.5rem 8rem 2.5rem'>
-          </Graph>
+          <div style={{ width: '25rem' }}>
+            <div style={{ width: '36rem' }}>
+              <Graph
+                height={911}
+                title='Un graphe<br />sur deux lignes'
+                subtitle='avec des données dedans !<br />vraiment beaucoup de données'
+                source='Source : Libé Labo et Big'
+                padding='.5rem'>
+                <Graph
+                  title='Un graphe<br />sur deux lignes'
+                  subtitle='avec des données dedans !<br />vraiment beaucoup de données'
+                  source='Source : Libé Labo et Big'
+                  padding='.5rem'>
+                  <Graph
+                    title='Un graphe<br />sur deux lignes'
+                    subtitle='avec des données dedans !<br />vraiment beaucoup de données'
+                    source='Source : Libé Labo et Big'
+                    padding='.5rem'>
+                    
+                  </Graph>
+                </Graph>
+              </Graph>
+            </div>
+            <Graph
+              height={311}
+              headTop='1rem'
+              title='Un graphe<br />sur deux lignes'
+              titleAlign='end'
+              titleRight='1rem'
+              subtitle='avec des données dedans !<br />vraiment beaucoup de données'
+              subtitleAlign='end'
+              subtitleRight='1rem'
+              footBottom='1rem'
+              source='Source : Libé Labo et Big'
+              sourceAlign='start'
+              sourceLeft='1rem'
+              padding='2.5rem .5rem 1.5rem 3.5rem'>
+              <rect x={'1rem'} y={'1rem'} width={'100px'} height={'.5rem'} style={{ fill: 'orange' }} />
+              <g transform={`translate(0, 0)`}>
+                <rect x={'1rem'} y={'1rem'} width={'100px'} height={'.5rem'} style={{ fill: 'orange' }} />
+              </g>
+            </Graph>
           </div>
-        }
+
+          <div style={{ width: '36rem' }}>
+            <Graph
+              height={911}
+              title='Un graphe<br />sur deux lignes'
+              subtitle='avec des données dedans !<br />vraiment beaucoup de données'
+              source='Source : Libé Labo et Big'
+              padding='3.5rem 1.5rem .5rem 1rem'>
+              <Viewport x={40} y={40} width='50%' height='50%' axisPadding='.5rem 4.5rem 8rem 2.5rem' />
+              <rect x={'1rem'} y={'1rem'} width={'100px'} height={'.5rem'} style={{ fill: 'orange' }} />
+              <g transform={`translate(0, 0)`}>
+                <rect x={'1rem'} y={'1rem'} width={'100px'} height={'.5rem'} style={{ fill: 'orange' }} />
+              </g>
+            </Graph>
+          </div>
+
+        </div>}
 
         {/* Footer */}
         <div className='lblb-default-apps-footer'>

@@ -4,7 +4,6 @@ import AppContext from '../../../context'
 import * as d3 from 'd3'
 import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 import cssUnitToPx from '../../../libe-utils/css-unit-to-px'
-import Viewport from '../Viewport'
 
 /*
  *   Graph component
@@ -15,10 +14,9 @@ import Viewport from '../Viewport'
  *   a foot (source), and a body (children)
  *
  *   PROPS
- *   height, headTop, headBottom, title, titleAlign, titleLeft, titleRight,
- *   subtitle, subtitleAlign, subtitleLeft, subtitleRight, footTop, footBottom,
- *   source, sourceAlign, sourceLeft, sourceRight, padding, axisPadding,
- *   className
+ *   width, height, headTop, title, titleAlign, titleLeft, titleRight,
+ *   subtitle, subtitleAlign, subtitleLeft, subtitleRight, footBottom,
+ *   source, sourceAlign, sourceLeft, sourceRight, padding, className
  *
  */
 
@@ -32,10 +30,9 @@ export default class Graph extends Component {
     super()
     this.c = 'lblb-graph'
     this.usedProps = [
-      'height', 'headTop', 'headBottom', 'title', 'titleAlign', 'titleLeft', 'titleRight',
-      'subtitle', 'subtitleAlign', 'subtitleLeft', 'subtitleRight', 'footTop', 'footBottom',
-      'source', 'sourceAlign', 'sourceLeft', 'sourceRight', 'padding', 'axisPadding',
-      'className'
+      'width', 'height', 'headTop', 'title', 'titleAlign', 'titleLeft', 'titleRight',
+      'subtitle', 'subtitleAlign', 'subtitleLeft', 'subtitleRight', 'footBottom',
+      'source', 'sourceAlign', 'sourceLeft', 'sourceRight', 'padding', 'className'
     ]
   }
 
@@ -52,66 +49,83 @@ export default class Graph extends Component {
    *
    * * * * * * * * * * * * * * * */
   render () {
-    const { props, context, c } = this
-    const width = props.width || 600
-    const height = props.height || 380
+    const { props, context, c, $wrapper } = this
 
     /* Inner logic */
-    const svgStyle = {
-      display: 'block',
-      boxShadow: '0 0 2rem 0 rgba(33, 33,33, .2)'
-    }
+    const containerWidth = $wrapper ? $wrapper.getBoundingClientRect().width : 0
+    const containerHeight = $wrapper ? $wrapper.getBoundingClientRect().width : 0
+ 
+    const propsWidth = cssUnitToPx(props.width, containerWidth, context.viewport)
+    const propsHeight = cssUnitToPx(props.height, containerHeight, context.viewport)
+ 
+    const width = propsWidth !== undefined
+      ? propsWidth
+      : context.current_graph_viewport && context.current_graph_viewport.width !== undefined
+        ? context.current_graph_viewport.width
+        : containerWidth || 0
+    const height = propsHeight !== undefined
+      ? propsHeight
+      : context.current_graph_viewport && context.current_graph_viewport.height !== undefined
+        ? context.current_graph_viewport.height
+        : containerHeight || 0
+    
     const titleLines = props.title.split(/<br\s?\/>/igm)
     const titleLineHeight = 2.5 * context.viewport.rem
     const titleMarginBottom = .5 * context.viewport.rem
     const titleTextAnchor = props.titleAlign
-    const titleX = props.titleRight !== undefined
-      ? width - cssUnitToPx(props.titleRight, width, context.viewport)
-      : cssUnitToPx(props.titleLeft, width, context.viewport)
+    const titleLeft = cssUnitToPx(props.titleLeft, width, context.viewport)
+    const titleRight = cssUnitToPx(props.titleRight, width, context.viewport)
+    const titleX = titleRight !== undefined
+      ? width - titleRight
+      : titleLeft || 0
 
     const subtitleLines = props.subtitle.split(/<br\s?\/>/igm)
     const subtitleLineHeight = 1 * context.viewport.rem
     const subtitleTextAnchor = props.subtitleAlign
-    const subtitleX = props.subtitleRight !== undefined
-      ? width - cssUnitToPx(props.subtitleRight, width, context.viewport)
-      : cssUnitToPx(props.subtitleLeft, width, context.viewport)
-
-    const headY = props.headBottom !== undefined
-      ? height - cssUnitToPx(props.headBottom, height, context.viewport)
-      : cssUnitToPx(props.headTop, height, context.viewport)
-    const headTransform = `translate(0, ${headY})`
+    const subtitleLeft = cssUnitToPx(props.subtitleLeft, width, context.viewport)
+    const subtitleRight = cssUnitToPx(props.subtitleRight, width, context.viewport)
+    const subtitleX = subtitleRight !== undefined
+      ? width - subtitleRight
+      : subtitleLeft || 0
 
     const sourceLines = props.source.split(/<br\s?\/>/igm)
     const sourceLineHeight = 1 * context.viewport.rem
     const sourceTextAnchor = props.sourceAlign
-    const sourceX = props.sourceRight !== undefined
-      ? width - cssUnitToPx(props.sourceRight, width, context.viewport)
-      : cssUnitToPx(props.sourceLeft, width, context.viewport)
+    const sourceLeft = cssUnitToPx(props.sourceLeft, width, context.viewport)
+    const sourceRight = cssUnitToPx(props.sourceRight, width, context.viewport)
+    const sourceX = sourceRight !== undefined
+      ? width - sourceRight
+      : sourceLeft || 0
 
-    const footY = props.footTop
-      ? cssUnitToPx(props.footBottom, height, context.viewport) - (0.5 + sourceLines.length) * sourceLineHeight
-      : height - cssUnitToPx(props.footBottom, height, context.viewport) - (0.5 + sourceLines.length) * sourceLineHeight
-    const footTransform = `translate(0, ${footY})`
+    const headTop = cssUnitToPx(props.headTop, height, context.viewport)
+    const headY = headTop || 0
+    const footBottom = cssUnitToPx(props.footBottom, height, context.viewport) || 0
+    const footY = height - footBottom - (sourceLines.length) * sourceLineHeight
 
-    const pxArrayPadding = `${props.padding}`.split(' ')
-      .map(e => cssUnitToPx(e, width, context.viewport))
-    const paddingLeft = pxArrayPadding[3] || pxArrayPadding[3] === 0
-      ? pxArrayPadding[3]
-      : pxArrayPadding[1] || pxArrayPadding[1] === 0
-        ? pxArrayPadding[1]
-        : pxArrayPadding[0] || 0
-    const paddingTop = pxArrayPadding[0] || 0
-    const paddingRight = pxArrayPadding[1] || pxArrayPadding[1] === 0
-      ? pxArrayPadding[1]
-      : pxArrayPadding[0] || 0
-    const paddingBottom = pxArrayPadding[2] || pxArrayPadding[2] === 0
-      ? pxArrayPadding[2]
-      : pxArrayPadding[0] || 0
-    const bodyAttributes = {
-      x: 0,
-      y: 0,
-      width: width - paddingLeft - paddingRight,
-      height: height - paddingTop - paddingBottom
+    const paddingArr = `${props.padding}`.split(' ').map(e => cssUnitToPx(e, width, context.viewport))
+    const padding = {
+      top: paddingArr[0] || 0,
+      right: paddingArr[1] || paddingArr[1] === 0
+        ? paddingArr[1]
+        : paddingArr[0] || 0,
+      bottom: paddingArr[2] || paddingArr[2] === 0
+        ? paddingArr[2]
+        : paddingArr[0] || 0,
+      left: paddingArr[3] || paddingArr[3] === 0
+        ? paddingArr[3]
+        : paddingArr[1] || paddingArr[1] === 0
+          ? paddingArr[1]
+          : paddingArr[0] || 0
+    }
+
+    const bodyWidth = Math.max(0, width - padding.left - padding.right)
+    const bodyHeight = Math.max(0, height - padding.top - padding.bottom)
+    const bodyContext = {
+      ...this.context,
+      current_graph_viewport: {
+        width: bodyWidth,
+        height: bodyHeight
+      }
     }
     
     /* Assign classes */
@@ -125,25 +139,28 @@ export default class Graph extends Component {
       className={classes.join(' ')}
       {...passedProps}
       ref={n => this.$wrapper = n}>
-      <svg width={width} height={height} style={svgStyle}>
-        <rect
-          className={`${c}__bg-rect`}
-          x={0}
-          y={0}
-          width={width}
-          height={height} />
+      <svg width={width} height={height}>
+        <rect className={`${c}__bg-rect`} width='100%' height='100%' />
         <g
           className={`${c}__body`}
-          transform={`translate(${paddingLeft} ${paddingTop})`}>
-          <Viewport
-            {...bodyAttributes}
-            axisPadding={props.axisPadding} />
+          transform={`translate(${padding.left} ${padding.top})`}>
+          <AppContext.Provider value={bodyContext}>
+            <svg width={bodyWidth} height={bodyHeight}>
+              <rect
+                className={`${c}__body-bg-rect`}
+                width='100%'
+                height='100%'
+                style={{ fill: 'crimson' }} />
+              {props.children}
+            </svg>
+          </AppContext.Provider>
         </g>
         <g
           className={`${c}__head`}
-          transform={headTransform}>
+          transform={`translate(0, ${headY})`}>
           <g className={`${c}__title`}>{
             titleLines.map((line, i) => <text
+              key={i}
               x={titleX}
               y={(i + 1) * titleLineHeight}
               textAnchor={titleTextAnchor}>
@@ -154,6 +171,7 @@ export default class Graph extends Component {
             className={`${c}__subtitle`}
             transform={`translate(0, ${titleMarginBottom + titleLines.length * titleLineHeight})`}>{
             subtitleLines.map((line, i) => <text
+              key={i}
               x={subtitleX}
               y={(i + 1) * subtitleLineHeight}
               textAnchor={subtitleTextAnchor}>
@@ -163,9 +181,10 @@ export default class Graph extends Component {
         </g>
         <g
           className={`${c}__foot`}
-          transform={footTransform}>
+          transform={`translate(0, ${footY})`}>
           <g className={`${c}__source`}>
             {sourceLines.map((line, i) => <text
+              key={i}
               x={sourceX}
               y={(i + 1) * sourceLineHeight}
               textAnchor={sourceTextAnchor}>
@@ -183,18 +202,15 @@ export default class Graph extends Component {
 Graph.propTypes = {}
 Graph.defaultProps = {
   headTop: 0,
-  headBottom: undefined,
   titleAlign: 'start',
   titleLeft: 0,
   titleRight: undefined,
   subtitleAlign: 'start',
   subtitleLeft: 0,
   subtitleRight: undefined,
-  footTop: undefined,
-  footBottom: 100,
+  footBottom: 0,
   sourceAlign: 'start',
   sourceLeft: 0,
   sourceRight: undefined,
-  padding: 0,
-  axisPadding: 0
+  padding: 0
 }
