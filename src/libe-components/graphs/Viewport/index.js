@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
+import GraphAsset from '../../primitives/GraphAsset'
 import PropTypes from 'prop-types'
+import chroma from 'chroma-js'
 import AppContext from '../../../context'
 import * as d3 from 'd3'
 import Axis from '../Axis'
-import removeObjectKeys from '../../../libe-utils/remove-object-keys'
-import cssUnitToPx from '../../../libe-utils/css-unit-to-px'
+import cssCalcToPx from '../../../libe-utils/css-calc-to-px'
 
 /*
  *   Viewport component
@@ -14,7 +15,7 @@ import cssUnitToPx from '../../../libe-utils/css-unit-to-px'
  *   Displays a graph viewport in which visual idioms are placed
  *
  *   PROPS
- *   x, y, width, height, axisPadding, xScale, yScale, xDomain, yDomain, className
+ *   axisPadding, xDomain, yDomain, data, render, className
  *
  */
 
@@ -35,16 +36,15 @@ import cssUnitToPx from '../../../libe-utils/css-unit-to-px'
  * point
  */
 
-export default class Viewport extends Component {
+export default class Viewport extends GraphAsset {
   /* * * * * * * * * * * * * * * *
    *
    * CONSTRUCTOR
    *
    * * * * * * * * * * * * * * * */
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.c = 'lblb-graph-viewport'
-    this.usedProps = ['x', 'y', 'width', 'height', 'axisPadding', 'xScale', 'yScale', 'xDomain', 'yDomain', 'className']
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -56,71 +56,18 @@ export default class Viewport extends Component {
 
   /* * * * * * * * * * * * * * * *
    *
-   * DRAW
-   *
-   * * * * * * * * * * * * * * * */
-  draw () {
-    const { props, c, $wrapper, $d3 } = this
-    if (!$wrapper || !$d3) return
-
-    console.log(this.$wrapper.getBoundingClientRect())
-    
-    // Define xScale
-    let xScale = undefined
-    if (typeof props.xScale === 'string') {
-      const xScaleMethodName = `scale${props.xScale.slice(0, 1).toUpperCase()}${props.xScale.slice(1)}`
-      const xScaleMethod = d3[xScaleMethodName]
-      xScale = xScaleMethod()
-        .domain(props.xDomain)
-        .range([0, props.width])
-    } else {
-      xScale = props.xScale
-    }
-
-    // Define yScale
-    let yScale = undefined
-    if (typeof props.yScale === 'string') {
-      const yScaleMethodName = `scale${props.yScale.slice(0, 1).toUpperCase()}${props.yScale.slice(1)}`
-      const yScaleMethod = d3[yScaleMethodName]
-      yScale = yScaleMethod()
-        .domain(props.yDomain)
-        .range([0, props.height])
-    } else {
-      yScale = props.yScale
-    }
-    
-    $d3.innerHTML = ''
-    const svg = d3.select(`.${c}__d3-wrapper`)
-      .append('svg')
-      .attr('width', props.width)
-      .attr('height', props.height)
-      .style('background', 'red')
-  }
-
-  /* * * * * * * * * * * * * * * *
-   *
    * RENDER
    *
    * * * * * * * * * * * * * * * */
   render () {
-    const { props, context, c } = this
-    const { x, y } = props
+    const { props, context, c, Wrapper } = this
 
     /* Inner logic */
-    const { current_graph_viewport: currentGraphViewport } = this.context
-    const propsWidth = cssUnitToPx(props.width, currentGraphViewport.width, context.viewport)
-    const propsHeight = cssUnitToPx(props.height, currentGraphViewport.height, context.viewport)
- 
-    const width = propsWidth !== undefined
-      ? propsWidth
-      : currentGraphViewport.width || 0
-    const height = propsHeight !== undefined
-      ? propsHeight
-      : currentGraphViewport.height || 0
+    const { width, height } = this.getDimensions()
     
-    /* Inner logic */
+    // [WIP] maybe deprecate the usage of cssCalcToPx outside <Graph /> ?
     const axisPadding = `${props.axisPadding}`.split(' ')
-      .map(e => cssUnitToPx(e, width, context.viewport))
+      .map(e => cssCalcToPx(e, width, context.viewport))
     axisPadding.left = axisPadding[3] || axisPadding[3] === 0
       ? axisPadding[3]
       : axisPadding[1] || axisPadding[1] === 0
@@ -133,88 +80,114 @@ export default class Viewport extends Component {
     axisPadding.bottom = axisPadding[2] || axisPadding[2] === 0
       ? axisPadding[2]
       : axisPadding[0] || 0
-    
-    const drawAttributes = {
+
+    const topAxisDimensions = {
       x: axisPadding.left,
+      y: 0,
+      width: Math.max(0, width - axisPadding.left - axisPadding.right),
+      height: Math.max(0, axisPadding.top)
+    }
+    const rightAxisDimensions = {
+      x: width - axisPadding.right,
       y: axisPadding.top,
-      width: width - axisPadding.left - axisPadding.right,
-      height: height - axisPadding.top - axisPadding.bottom
+      width: Math.max(0, axisPadding.right),
+      height: Math.max(0, height - axisPadding.top - axisPadding.bottom)
+    }
+    const bottomAxisDimensions = {
+      x: axisPadding.left,
+      y: height - axisPadding.bottom,
+      width: Math.max(0, width - axisPadding.left - axisPadding.right),
+      height: Math.max(0, axisPadding.bottom)
+    }
+    const leftAxisDimensions = {
+      x: 0,
+      y: axisPadding.top,
+      width: Math.max(0, axisPadding.left),
+      height: Math.max(0, height - axisPadding.top - axisPadding.bottom)
+    }
+    const assetsDimensions = {
+      x: leftAxisDimensions.width,
+      y: topAxisDimensions.height,
+      width: Math.max(0, width - leftAxisDimensions.width - rightAxisDimensions.width),
+      height: Math.max(0, height - topAxisDimensions.height - bottomAxisDimensions.height)
     }
 
-    // Define xScale
-    let xScale = undefined
-    if (typeof props.xScale === 'string') {
-      const xScaleMethodName = `scale${props.xScale.slice(0, 1).toUpperCase()}${props.xScale.slice(1)}`
-      const xScaleMethod = d3[xScaleMethodName]
-      xScale = xScaleMethod()
-        .domain(props.xDomain)
-        .range([0, props.width])
-    } else {
-      xScale = props.xScale
+    const data = props.data || context.current_graph_data || []
+    const xDomain = props.xDomain || [0, assetsDimensions.width]
+    const yDomain = props.yDomain || [0, assetsDimensions.height]
+    const xScale = d3.scaleLinear().domain(xDomain).range(0, width)
+    const yScale = d3.scaleLinear().domain(yDomain).range(0, height)
+
+    const contextWithData = {
+      ...context,
+      current_graph_data: data,
     }
 
-    // Define yScale
-    let yScale = undefined
-    if (typeof props.yScale === 'string') {
-      const yScaleMethodName = `scale${props.yScale.slice(0, 1).toUpperCase()}${props.yScale.slice(1)}`
-      const yScaleMethod = d3[yScaleMethodName]
-      yScale = yScaleMethod()
-        .domain(props.yDomain)
-        .range([0, props.height])
-    } else {
-      yScale = props.yScale
+    const contextForChildren = {
+      ...contextWithData,
+      current_graph_viewport: {
+        width: width - axisPadding.left - axisPadding.right,
+        height: height - axisPadding.top - axisPadding.bottom
+      }
     }
 
     /* Assign classes */
     const classes = [c]
-
-    /* Passed props */
-    const passedProps = removeObjectKeys(props, this.usedProps)
+    if (props.className) classes.push(props.className)
 
     /* Display */
-    return <g
-      className={classes.join(' ')}
-      transform={`translate(${x}, ${y})`}
-      {...passedProps}>
-      <rect
-        className={`${c}__bg`}
-        x={0}
-        y={0}
-        width={width}
-        height={height} />
-      <g
-        className={`${c}__draw-group`}
-        transform={`translate(${drawAttributes.x}, ${drawAttributes.y})`}>
-        <rect
-          className={`${c}__draw`}
-          style={{ fill: 'limegreen' }}
-          width={drawAttributes.width}
-          height={drawAttributes.height}>
-        </rect>
-        <text>Draw</text>
-      </g>
-
-      <Axis top
-        x={drawAttributes.x}
-        y={0}
-        width={drawAttributes.width}
-        height={drawAttributes.y} />
-      <Axis right
-        x={drawAttributes.x + drawAttributes.width}
-        y={drawAttributes.y}
-        width={width - drawAttributes.x - drawAttributes.width}
-        height={drawAttributes.height} />
-      <Axis bottom
-        x={drawAttributes.x}
-        y={drawAttributes.y + drawAttributes.height}
-        width={drawAttributes.width}
-        height={height - drawAttributes.y - drawAttributes.height} />
-      <Axis left
-        x={0}
-        y={drawAttributes.y}
-        width={drawAttributes.x}
-        height={drawAttributes.height} />
-    </g>
+    return <Wrapper className={classes.join(' ')}>
+      <AppContext.Provider value={contextWithData}>
+        <g
+          className={`${c}__assets`}
+          transform={`translate(${assetsDimensions.x}, ${assetsDimensions.y})`}>
+          <rect width={assetsDimensions.width} height={assetsDimensions.height} style={{ fill: '#F9F9F9' }} />
+          <text x={assetsDimensions.width / 2} y={6 + (assetsDimensions.height) / 2} textAnchor='middle'>Assets</text>
+          <AppContext.Provider value={contextForChildren}>
+            <g className={`${c}__assets-rendered`}>{props.render(data)}</g>
+            <g className={`${c}__assets-children`}>{props.children}</g>
+          </AppContext.Provider>
+        </g>
+        <g
+          className={`${c}__top-axis`}
+          transform={`translate(${topAxisDimensions.x}, ${topAxisDimensions.y})`}>
+          {props.showTopAxis
+          && <Axis
+            top
+            scale={xScale}
+            width={topAxisDimensions.width} />}
+        </g>
+        <g
+          className={`${c}__right-axis`}
+          transform={`translate(${rightAxisDimensions.x}, ${rightAxisDimensions.y})`}>
+          {props.showRightAxis
+          && <Axis
+            right
+            scale={yScale}
+            x={rightAxisDimensions.width}
+            height={rightAxisDimensions.height} />}
+        </g>
+        <g
+          className={`${c}__bottom-axis`}
+          transform={`translate(${bottomAxisDimensions.x}, ${bottomAxisDimensions.y})`}>
+          {props.showBottomAxis
+          && <Axis
+            bottom
+            scale={xScale}
+            y={bottomAxisDimensions.height}
+            width={bottomAxisDimensions.width} />}
+        </g>
+        <g
+          className={`${c}__left-axis`}
+          transform={`translate(${leftAxisDimensions.x}, ${leftAxisDimensions.y})`}>
+          {props.showLeftAxis
+          && <Axis
+            left
+            scale={yScale}
+            height={leftAxisDimensions.height} />}
+        </g>
+      </AppContext.Provider>
+    </Wrapper> 
   }
 }
 
@@ -222,13 +195,6 @@ export default class Viewport extends Component {
 
 Viewport.propTypes = {}
 Viewport.defaultProps = {
-  x: 0,
-  y: 0,
-  width: 0,
-  height: 0,
   axisPadding: 0,
-  xScale: 'linear',
-  yScale: 'linear',
-  xDomain: [],
-  yDomain: []
+  render: data => ''
 }

@@ -17,8 +17,8 @@
   transition: opacity 200ms;
 }
 
-.lblb-graph:hover .lblb-graph__head,
-.lblb-graph:hover .lblb-graph__foot {
+.lblb-graph:hover > .lblb-graph__head,
+.lblb-graph:hover > .lblb-graph__foot {
   opacity: .05;
 }
 

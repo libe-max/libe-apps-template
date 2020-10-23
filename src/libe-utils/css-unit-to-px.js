@@ -1,4 +1,4 @@
-function cssUnitToPx (_input, width = 100, viewport = { rem: 0, width: 0, height: 0 }) {
+function cssUnitToPx (_input, relativeSize = 100, viewport = { rem: 0, width: 0, height: 0 }) {
   if (typeof _input === 'number') return _input
   if (!_input || typeof _input !== 'string') return
   const inputMatch = _input.trim()
@@ -44,9 +44,9 @@ function cssUnitToPx (_input, width = 100, viewport = { rem: 0, width: 0, height
     case 'vmax':
       return number * Math.max(viewport.width, viewport.height) / 100
     case '%':
-      return number * width / 100
+      return number * relativeSize / 100
     default:
-      return
+      return number
   }
 }
 

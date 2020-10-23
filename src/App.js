@@ -264,6 +264,12 @@ export default class App extends Component {
       expand_media: this.expandMedia
     }
 
+    const data = [
+      { name: 'Zidane', year: 1972, start: 1989, end: 2006, trophies: 19, team: 'Real' }, 
+      { name: 'Serena Williams', year: 1981, start: 1999, end: 2022, trophies: 23, team: 'Nike' }, 
+      { name: 'Nadal', year: 1986, start: 2003, end: 2024, trophies: 21, team: 'Babolat' }
+    ]
+
     return <AppContext.Provider value={passedContext}>
       <div id={props.meta.slug} className={classes.join(' ')}>
         {/* Header */}
@@ -302,66 +308,30 @@ export default class App extends Component {
         { /* App */ }
         {!state.loading_sheet
         && !state.error_sheet
-        && <div style={{ background: '#FAF2E6', padding: 40 }}>
-          <div style={{ width: '25rem' }}>
-            <div style={{ width: '36rem' }}>
-              <Graph
-                height={911}
-                title='Un graphe<br />sur deux lignes'
-                subtitle='avec des données dedans !<br />vraiment beaucoup de données'
-                source='Source : Libé Labo et Big'
-                padding='.5rem'>
-                <Graph
-                  title='Un graphe<br />sur deux lignes'
-                  subtitle='avec des données dedans !<br />vraiment beaucoup de données'
-                  source='Source : Libé Labo et Big'
-                  padding='.5rem'>
-                  <Graph
-                    title='Un graphe<br />sur deux lignes'
-                    subtitle='avec des données dedans !<br />vraiment beaucoup de données'
-                    source='Source : Libé Labo et Big'
-                    padding='.5rem'>
-                    
-                  </Graph>
-                </Graph>
-              </Graph>
-            </div>
-            <Graph
-              height={311}
-              headTop='1rem'
-              title='Un graphe<br />sur deux lignes'
-              titleAlign='end'
-              titleRight='1rem'
-              subtitle='avec des données dedans !<br />vraiment beaucoup de données'
-              subtitleAlign='end'
-              subtitleRight='1rem'
-              footBottom='1rem'
-              source='Source : Libé Labo et Big'
-              sourceAlign='start'
-              sourceLeft='1rem'
-              padding='2.5rem .5rem 1.5rem 3.5rem'>
-              <rect x={'1rem'} y={'1rem'} width={'100px'} height={'.5rem'} style={{ fill: 'orange' }} />
-              <g transform={`translate(0, 0)`}>
-                <rect x={'1rem'} y={'1rem'} width={'100px'} height={'.5rem'} style={{ fill: 'orange' }} />
-              </g>
-            </Graph>
-          </div>
-
-          <div style={{ width: '36rem' }}>
-            <Graph
-              height={911}
-              title='Un graphe<br />sur deux lignes'
-              subtitle='avec des données dedans !<br />vraiment beaucoup de données'
-              source='Source : Libé Labo et Big'
-              padding='3.5rem 1.5rem .5rem 1rem'>
-              <Viewport x={40} y={40} width='50%' height='50%' axisPadding='.5rem 4.5rem 8rem 2.5rem' />
-              <rect x={'1rem'} y={'1rem'} width={'100px'} height={'.5rem'} style={{ fill: 'orange' }} />
-              <g transform={`translate(0, 0)`}>
-                <rect x={'1rem'} y={'1rem'} width={'100px'} height={'.5rem'} style={{ fill: 'orange' }} />
-              </g>
-            </Graph>
-          </div>
-
+        && <div style={{ width: '100%', maxWidth: '60rem' }}>
+          <Graph
+            name='root graph'
+            height='70rem'
+            padding='1rem'
+            title='Un graphe<br />sur deux lignes'
+            subtitle='avec des données dedans !<br />vraiment beaucoup de données'
+            source='Source : Libé Labo et Big'
+            showTopAxis
+            showLeftAxis
+            viewportPadding='11rem 4rem 6rem 2rem'
+            viewportAxisPadding='1rem'
+            data={data}
+            render={data => data ? <text y={50}>Data in here 🤓</text> : ''}
+            xDomain={[]}>
+            {data.map(d => <g key={d.name} transform={`translate(${(d.year - 1970) * 10}, ${(2030 - d.end) * 20})`}>
+              <circle
+                style={{ fill: 'blue' }}
+                cx={0}
+                cy={0}
+                r={d.trophies} />
+              <text y={6} textAnchor='middle' style={{ fill: 'white' }}>{d.name}</text>
+            </g>)}
+          </Graph>
         </div>}
 
         {/* Footer */}
