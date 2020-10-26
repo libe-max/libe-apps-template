@@ -22,8 +22,8 @@ export default class Axis extends GraphAsset {
    * CONSTRUCTOR
    *
    * * * * * * * * * * * * * * * */
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.c = 'lblb-graph-axis'
     this.draw = this.draw.bind(this)
   }
@@ -43,23 +43,27 @@ export default class Axis extends GraphAsset {
    * * * * * * * * * * * * * * * * */
   static contextType = AppContext
 
+  /* * * * * * * * * * * * * * * * *
+   *
+   * DRAW
+   *
+   * * * * * * * * * * * * * * * * */
   draw () {
-    const { props, context, $wrapper } = this
+    const { props, context, c, $wrapper } = this
     if (!$wrapper) return
     const { width, height } = this.getDimensions()
     const directionPosition = [props.top, props.right, props.bottom, props.left].findIndex(e => e)
     const scale = props.scale
     const axesList = [d3.axisTop, d3.axisRight, d3.axisBottom, d3.axisLeft]
     const axis = directionPosition > -1
-      ? axesList[directionPosition]().scale(scale)
+      ? axesList[directionPosition]()
       : width > height
-        ? axesList[2]().scale(scale)
-        : axesList[3]().scale(scale)
+        ? axesList[2]()
+        : axesList[3]()
 
-    const selection = d3
-      .select($wrapper)
-      .append('g')
-      .call(axis)
+    d3.select($wrapper)
+      .call(axis.scale(scale))
+
   }
 
   /* * * * * * * * * * * * * * * *
@@ -80,13 +84,6 @@ export default class Axis extends GraphAsset {
     /* Display */
     return <Wrapper
       className={classes.join(' ')}>
-      <line
-        x1={0}
-        y1={0}
-        x2={width}
-        y2={height}
-        style={{ strokeWidth: '2px', stroke: 'red' }} />
-      <text x={width/2} y={6 + height/2}>AAAXISSS</text>
       <g ref={n => this.$wrapper = n} />
     </Wrapper>
   }

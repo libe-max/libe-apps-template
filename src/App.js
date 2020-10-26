@@ -311,26 +311,28 @@ export default class App extends Component {
         && <div style={{ width: '100%', maxWidth: '60rem' }}>
           <Graph
             name='root graph'
-            height='70rem'
+            height='100vh'
             padding='1rem'
             title='Un graphe<br />sur deux lignes'
             subtitle='avec des données dedans !<br />vraiment beaucoup de données'
             source='Source : Libé Labo et Big'
             showTopAxis
             showLeftAxis
-            viewportPadding='11rem 4rem 6rem 2rem'
-            viewportAxisPadding='1rem'
+            viewportPadding='11rem 2rem 2rem 2rem'
+            viewportAxisPadding='2rem 0 0 2rem'
+            xDomain={[0, 10]}
+            yDomain={[20, 209]}
             data={data}
-            render={data => data ? <text y={50}>Data in here 🤓</text> : ''}
-            xDomain={[]}>
-            {data.map(d => <g key={d.name} transform={`translate(${(d.year - 1970) * 10}, ${(2030 - d.end) * 20})`}>
+            render={data => data.map(d => <g
+              key={d.name}
+              transform={`translate(${(d.year - 1970) * 10}, ${(2030 - d.end) * 20})`}>
               <circle
                 style={{ fill: 'blue' }}
                 cx={0}
                 cy={0}
                 r={d.trophies} />
               <text y={6} textAnchor='middle' style={{ fill: 'white' }}>{d.name}</text>
-            </g>)}
+            </g>)}>
           </Graph>
         </div>}
 

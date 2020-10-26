@@ -40,8 +40,8 @@ export default class GraphAsset extends Component {
    *
    * * * * * * * * * * * * * * * * */
   getDimensions () {
-    const { props, context, $wrapper } = this
-    const $parent = $wrapper ? $wrapper.parentElement : undefined
+    const { props, context, $assetWrapper } = this
+    const $parent = $assetWrapper ? $assetWrapper.parentElement : undefined
 
     const containerOutWidth = $parent ? $parent.getBoundingClientRect().width : 0
     const containerOutHeight = $parent ? $parent.getBoundingClientRect().height : 0
@@ -120,7 +120,7 @@ export default class GraphAsset extends Component {
    * * * * * * * * * * * * * * * * */
   Wrapper (wrapperProps) {
     const { props, context, c } = this
-    
+
     /* Inner logic */
     const {
       x,
@@ -140,14 +140,14 @@ export default class GraphAsset extends Component {
 
     /* Display */
     return context.current_graph_viewport
-      ? <g className={`lblb-graph-asset ${wrapperProps.className}`} ref={n => this.$wrapper = n}>
+      ? <g className={`${wrapperProps.className} lblb-graph-asset`} ref={n => this.$assetWrapper = n}>
         <g className='lblb-graph-asset__mar-and-pad' transform={`translate(${x + paddingLeft}, ${y + paddingTop})`}>
           <AppContext.Provider value={childrenContext}>
             {wrapperProps.children}
           </AppContext.Provider>
         </g>
       </g>
-      : <div className={`lblb-graph-asset ${wrapperProps.className}`} ref={n => this.$wrapper = n}>
+      : <div className={`${wrapperProps.className} lblb-graph-asset`} ref={n => this.$assetWrapper = n}>
         <svg width={outerWidth} height={outerHeight}>
           <g className='lblb-graph-asset__mar-and-pad' transform={`translate(${x + paddingLeft}, ${y + paddingTop})`}>
             <AppContext.Provider value={childrenContext}>

@@ -19,6 +19,155 @@ import cssCalcToPx from '../../../libe-utils/css-calc-to-px'
  *
  */
 
+/*
+ *   SCALES
+ *   
+ *   continuous.invert
+ *   continuous.domain
+ *   continuous.range
+ *   continuous.rangeRound
+ *   continuous.clamp
+ *   continuous.unknown
+ *   continuous.interpolate
+ *   continuous.ticks
+ *   continuous.tickFormat
+ *   continuous.nice
+ *   continuous.copy
+ *   
+ *   pow.invert
+ *   pow.exponent
+ *   pow.domain
+ *   pow.range
+ *   pow.rangeRound
+ *   pow.clamp
+ *   pow.interpolate
+ *   pow.ticks
+ *   pow.tickFormat
+ *   pow.nice
+ *   pow.copy
+ *   
+ *   log.invert
+ *   log.base
+ *   log.domain
+ *   log.range
+ *   log.rangeRound
+ *   log.clamp
+ *   log.interpolate
+ *   log.ticks
+ *   log.tickFormat
+ *   log.nice
+ *   log.copy
+ *   
+ *   symlog.invert
+ *   symlog.domain
+ *   symlog.range
+ *   symlog.rangeRound
+ *   symlog.clamp
+ *   symlog.unknown
+ *   symlog.interpolate
+ *   symlog.ticks
+ *   symlog.tickFormat
+ *   symlog.nice
+ *   symlog.copy
+ *   symlog.constant
+ *   
+ *   identity.invert
+ *   identity.domain
+ *   identity.range
+ *   identity.unknown
+ *   identity.ticks
+ *   identity.tickFormat
+ *   identity.nice
+ *   identity.copy
+ *   
+ *   radial.invert
+ *   radial.domain
+ *   radial.range
+ *   radial.rangeRound
+ *   radial.clamp
+ *   radial.unknown
+ *   radial.ticks
+ *   radial.tickFormat
+ *   radial.nice
+ *   radial.copy
+ *   
+ *   time.invert
+ *   time.domain
+ *   time.range
+ *   time.rangeRound
+ *   time.clamp
+ *   time.interpolate
+ *   time.ticks
+ *   time.tickFormat
+ *   time.nice
+ *   time.copy
+ *   
+ *   timeUtc.invert
+ *   timeUtc.domain
+ *   timeUtc.range
+ *   timeUtc.rangeRound
+ *   timeUtc.clamp
+ *   timeUtc.interpolate
+ *   timeUtc.ticks
+ *   timeUtc.tickFormat
+ *   timeUtc.nice
+ *   timeUtc.copy
+ *   
+ *   sequential.domain
+ *   sequential.clamp
+ *   sequential.interpolator
+ *   sequential.range
+ *   sequential.rangeRound
+ *   sequential.copy
+ *   
+ *   sequentialLog...
+ *   sequentialPow...
+ *   sequentialSqrt...
+ *   sequentialSymlog...
+ *   sequentialQuantile...
+ *   sequentialQuantile.quantiles
+ *   
+ *   diverging.domain
+ *   diverging.clamp
+ *   diverging.interpolator
+ *   diverging.range
+ *   diverging.rangeRound
+ *   diverging.copy
+ *   diverging.unknown
+ *   divergingLog...
+ *   divergingPow...
+ *   divergingSqrt...
+ *   divergingSymlog...
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ *   
+ */
+
 /* linear
  * pow
  * sqrt
@@ -42,8 +191,8 @@ export default class Viewport extends GraphAsset {
    * CONSTRUCTOR
    *
    * * * * * * * * * * * * * * * */
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.c = 'lblb-graph-viewport'
   }
 
@@ -115,8 +264,8 @@ export default class Viewport extends GraphAsset {
     const data = props.data || context.current_graph_data || []
     const xDomain = props.xDomain || [0, assetsDimensions.width]
     const yDomain = props.yDomain || [0, assetsDimensions.height]
-    const xScale = d3.scaleLinear().domain(xDomain).range(0, width)
-    const yScale = d3.scaleLinear().domain(yDomain).range(0, height)
+    const xScale = d3.scaleLinear().domain(xDomain).range([0, assetsDimensions.width])
+    const yScale = d3.scaleLinear().domain(yDomain).range([0, assetsDimensions.height])
 
     const contextWithData = {
       ...context,

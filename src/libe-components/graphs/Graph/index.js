@@ -29,8 +29,8 @@ export default class Graph extends GraphAsset {
    * CONSTRUCTOR
    *
    * * * * * * * * * * * * * * * */
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.c = 'lblb-graph'
   }
 
