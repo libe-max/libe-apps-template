@@ -20,7 +20,7 @@ import Quote from './libe-components/text-levels/Quote'
 import MetroTiler from './libe-components/layouts/MetroTiler'
 
 import Graph from './libe-components/graphs/Graph'
-import Viewport from './libe-components/graphs/Viewport'
+import Frame from './libe-components/graphs/Frame'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -311,15 +311,15 @@ export default class App extends Component {
         && <div style={{ width: '100%', maxWidth: '60rem' }}>
           <Graph
             name='root graph'
-            height='100vh'
-            padding='1rem'
+            height='120vh'
+            padding='1rem 2rem 4rem 1rem'
             title='Un graphe<br />sur deux lignes'
             subtitle='avec des données dedans !<br />vraiment beaucoup de données'
             source='Source : Libé Labo et Big'
+            framePadding='11rem 2rem 2rem 2rem'
+            frameAxisPadding='2rem 0 0 2rem'
             showTopAxis
             showLeftAxis
-            viewportPadding='11rem 2rem 2rem 2rem'
-            viewportAxisPadding='2rem 0 0 2rem'
             xDomain={[0, 10]}
             yDomain={[20, 209]}
             data={data}

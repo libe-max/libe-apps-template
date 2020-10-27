@@ -1,22 +1,26 @@
-import React from 'react'
-import GraphAsset from '../../primitives/GraphAsset'
-import PropTypes from 'prop-types'
-import AppContext from '../../../context'
+import React, { Component } from 'react'
 import * as d3 from 'd3'
+import asGraphAsset from '../asGraphAsset'
 
 /*
- *   Graph Axis component
+ *   Axis component
  *   ------------------------------------------------------
+ *
+ *   NOTICE
+ *   This component is rendered through the asGraphAsset HOC
  *
  *   DESCRIPTION
  *   Displays a d3 axis
+ *
+ *   IMPERATIVE PROPS (from asGraphAsset HOC)
+ *   width, height, calcWidth, calcHeight, data, render
  *
  *   PROPS
  *   top, right, bottom, left, scale, className
  *
  */
 
-export default class Axis extends GraphAsset {
+class Axis extends Component {
   /* * * * * * * * * * * * * * * *
    *
    * CONSTRUCTOR
@@ -38,20 +42,13 @@ export default class Axis extends GraphAsset {
 
   /* * * * * * * * * * * * * * * * *
    *
-   * MAKE CONTEXT ACCESSIBLE
-   *
-   * * * * * * * * * * * * * * * * */
-  static contextType = AppContext
-
-  /* * * * * * * * * * * * * * * * *
-   *
    * DRAW
    *
    * * * * * * * * * * * * * * * * */
   draw () {
-    const { props, context, c, $wrapper } = this
+    const { props, c, $wrapper } = this
     if (!$wrapper) return
-    const { width, height } = this.getDimensions()
+    const { width, height } = this.props
     const directionPosition = [props.top, props.right, props.bottom, props.left].findIndex(e => e)
     const scale = props.scale
     const axesList = [d3.axisTop, d3.axisRight, d3.axisBottom, d3.axisLeft]
@@ -72,22 +69,23 @@ export default class Axis extends GraphAsset {
    *
    * * * * * * * * * * * * * * * */
   render () {
-    const { props, context, c, Wrapper } = this
+    const { props, c } = this
 
     /* Inner logic */
-    const { width, height } = this.getDimensions()
+    const { width, height } = this.props
 
     /* Assign classes */
     const classes = [c]
     if (props.className) classes.push(props.className)
 
     /* Display */
-    return <Wrapper
-      className={classes.join(' ')}>
+    return <g className={classes.join(' ')}>
       <g ref={n => this.$wrapper = n} />
-    </Wrapper>
+    </g>
   }
 }
+
+export default asGraphAsset(Axis)
 
 /* * * * * Prop types * * * * */
 

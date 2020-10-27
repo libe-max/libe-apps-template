@@ -1,6 +1,6 @@
 import cssUnitToPx from './css-unit-to-px'
 
-function cssCalcToPx (_formula, relativeSize = 100, viewport = { rem: 0, width: 0, height: 0 }) {
+function cssCalcToPx (_formula, relativeSize = 0, viewport = { rem: 0, width: 0, height: 0 }) {
   if (typeof _formula === 'number') return cssUnitToPx(_formula, relativeSize, viewport)
   if (!_formula || typeof _formula !== 'string') return
   const formula = _formula.trim().replace(/[\s]+/igm, ' ')

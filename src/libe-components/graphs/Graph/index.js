@@ -1,34 +1,36 @@
-import React from 'react'
-import GraphAsset from '../../primitives/GraphAsset'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import asGraphAsset from '../asGraphAsset'
 import AppContext from '../../../context'
-import * as d3 from 'd3'
-import cssCalcToPx from '../../../libe-utils/css-calc-to-px'
-import Viewport from '../Viewport'
+import Frame from '../Frame'
 
 /*
  *   Graph component
  *   ------------------------------------------------------
  *
- *   DESCRIPTION
- *   Displays a graph wrapper, with a head (title, subtitle),
- *   a foot (source), and a body (children)
+ *   NOTICE
+ *   This component is rendered through the asGraphAsset HOC
  *
- *   PROPS
- *   headTop, title, titleAlign, titleLeft, titleRight,
+ *   DESCRIPTION
+ *   displays a Graph component with a head, a foot, and a body
+ *
+ *   IMPERATIVE PROPS (from asGraphAsset HOC)
+ *   width, height, calcWidth, calcHeight, data, render
+ *
+ *   OWN PROPS
+ *   children, headTop, title, titleAlign, titleLeft, titleRight,
  *   subtitle, subtitleAlign, subtitleLeft, subtitleRight, footBottom,
- *   source, sourceAlign, sourceLeft, sourceRight, viewportPadding, viewportAxisPadding,
- *   data, render, showTopAxis, showRightAxis, showBottomAxis, showLeftAxis,
- *   xDomain, yDomain, className
+ *   source, sourceAlign, sourceLeft, sourceRight, framePadding, frameAxisPadding,
+ *   showTopAxis, showRightAxis, showBottomAxis, showLeftAxis, xDomain, yDomain, 
+ *   className
  *
  */
 
-export default class Graph extends GraphAsset {
-  /* * * * * * * * * * * * * * * *
+class Graph extends Component {
+  /* * * * * * * * * * * * * * * * *
    *
    * CONSTRUCTOR
    *
-   * * * * * * * * * * * * * * * */
+   * * * * * * * * * * * * * * * * */
   constructor () {
     super()
     this.c = 'lblb-graph'
@@ -47,17 +49,16 @@ export default class Graph extends GraphAsset {
    *
    * * * * * * * * * * * * * * * * */
   render () {
-    const { props, context, c, Wrapper } = this
+    const { props, context, c } = this
 
     /* Inner logic */
-    const { width, height } = this.getDimensions()
-
+    const { width, height, calcWidth, calcHeight } = props
     const titleLines = props.title.split(/<br\s?\/>/igm)
     const titleLineHeight = 2.5 * context.viewport.rem
     const titleMarginBottom = .5 * context.viewport.rem
     const titleTextAnchor = props.titleAlign
-    const titleLeft = cssCalcToPx(props.titleLeft, width, context.viewport)
-    const titleRight = cssCalcToPx(props.titleRight, width, context.viewport)
+    const titleLeft = calcWidth(props.titleLeft)
+    const titleRight = calcWidth(props.titleRight)
     const titleX = titleRight !== undefined
       ? width - titleRight
       : titleLeft || 0
@@ -65,8 +66,8 @@ export default class Graph extends GraphAsset {
     const subtitleLines = props.subtitle.split(/<br\s?\/>/igm)
     const subtitleLineHeight = 1 * context.viewport.rem
     const subtitleTextAnchor = props.subtitleAlign
-    const subtitleLeft = cssCalcToPx(props.subtitleLeft, width, context.viewport)
-    const subtitleRight = cssCalcToPx(props.subtitleRight, width, context.viewport)
+    const subtitleLeft = calcWidth(props.subtitleLeft)
+    const subtitleRight = calcWidth(props.subtitleRight)
     const subtitleX = subtitleRight !== undefined
       ? width - subtitleRight
       : subtitleLeft || 0
@@ -74,27 +75,26 @@ export default class Graph extends GraphAsset {
     const sourceLines = props.source.split(/<br\s?\/>/igm)
     const sourceLineHeight = 1 * context.viewport.rem
     const sourceTextAnchor = props.sourceAlign
-    const sourceLeft = cssCalcToPx(props.sourceLeft, width, context.viewport)
-    const sourceRight = cssCalcToPx(props.sourceRight, width, context.viewport)
+    const sourceLeft = calcWidth(props.sourceLeft)
+    const sourceRight = calcWidth(props.sourceRight)
     const sourceX = sourceRight !== undefined
       ? width - sourceRight
       : sourceLeft || 0
 
-    const headTop = cssCalcToPx(props.headTop, height, context.viewport) || 0
+    const headTop = calcHeight(props.headTop) || 0
     const headY = headTop
-    const footBottom = cssCalcToPx(props.footBottom, height, context.viewport) || 0
+    const footBottom = calcHeight(props.footBottom) || 0
     const footY = height - footBottom - (sourceLines.length) * sourceLineHeight
 
     /* Assign classes */
     const classes = [c]
     if (props.className) classes.push(props.className)
 
-    return <Wrapper className={classes.join(' ')}>
+    return <g className={classes.join(' ')}>
       <g className={`${c}__body`}>
-        <Viewport
-          name='viewport'
-          padding={props.viewportPadding}
-          axisPadding={props.viewportAxisPadding}
+        <Frame
+          padding={props.framePadding}
+          axisPadding={props.frameAxisPadding}
           data={props.data}
           render={props.render}
           showTopAxis={props.showTopAxis}
@@ -104,7 +104,7 @@ export default class Graph extends GraphAsset {
           xDomain={props.xDomain}
           yDomain={props.yDomain}>
           {props.children}
-        </Viewport>
+        </Frame>
       </g>
       <g className={`${c}__head`} transform={`translate(0, ${headY})`}>
         <g className={`${c}__title`}>{
@@ -141,9 +141,11 @@ export default class Graph extends GraphAsset {
           </text>)}
         </g>
       </g>
-    </Wrapper>
+    </g>
   }
 }
+
+export default asGraphAsset(Graph)
 
 /* * * * * Prop types * * * * */
 
@@ -160,7 +162,6 @@ Graph.defaultProps = {
   source: '',
   sourceAlign: 'start',
   sourceLeft: 0,
-  viewportPadding: 0,
-  viewportAxisPadding: 0,
-  render: data => ''
+  framePadding: 0,
+  frameAxisPadding: 0
 }
