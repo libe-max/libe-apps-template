@@ -12,7 +12,7 @@ import asGraphAsset from '../asGraphAsset'
  *   Displays a graph viewport in which visual idioms are placed
  *
  *   IMPERATIVE PROPS (from asGraphAsset HOC)
- *   width, height, calcWidth, calcHeight, calcPadding, data, render
+ *   width, height, calcWidth, calcHeight, calcPadding, data, xScale, yScale, render
  *
  *   OWN PROPS
  *   children, className

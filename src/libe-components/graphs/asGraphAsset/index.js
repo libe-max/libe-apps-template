@@ -10,15 +10,15 @@ import d3ScaleNameToScale from '../../../libe-utils/d3-scale-name-to-scale'
  *   ------------------------------------------------------
  *
  *   DESCRIPTION
- *   Computes x, y, width, height, and padding props, checks
- *   in context if we're already in a SVG or not, and:
- *   - Updates the context for children with current viewport (this)
- *   - Renders a wrapper (Div > Svg > G or simply G depending on the context)
- *   - Fills the wrapper with the lower order component, with width and height
- *     props taking into account the padding
+ *   - Computes generig props for all graph components
+ *   - Checks in context if we're already in a SVG environment, and:
+ *     • Updates the context for children with current viewport values
+ *       (width, height, data, xScale, yScale)
+ *     • Renders a wrapper (Div > Svg > G or simply G depending on the context)
+ *     • Fills the wrapper with the lower order component and give them the props they need
  *
  *   PROPS
- *   x, y, width, height, padding
+ *   x, y, width, height, padding, data, xScale, xScaleConf, yScale, yScaleConf, render
  *
  */
 
@@ -70,13 +70,13 @@ const asGraphAsset = WrappedComponent => {
       // On the first rendering of the first asset in chain, width and height
       // will default to 0. Hoping for a subsequent render to get correct sizes.
       const containerDimensions = {
-        width: currentGraphAssetDimensions
-          ? currentGraphAssetDimensions.width
-          : $parent ? parentWidth : 0,
-        height: currentGraphAssetDimensions
-          ? currentGraphAssetDimensions.height
-          : $parent ? parentHeight : 0
+        width: currentGraphAssetDimensions ? currentGraphAssetDimensions.width : $parent ? parentWidth : 0,
+        height: currentGraphAssetDimensions ? currentGraphAssetDimensions.height : $parent ? parentHeight : 0
       }
+
+      // X, Y position
+      const x = cssCalcToPx(props.x, containerDimensions.width, context.viewport) || 0
+      const y = cssCalcToPx(props.y, containerDimensions.height, context.viewport) || 0
       
       // Interpret dimensions from props
       // can be: undefined, a 0 from a % value calculated on the basis of a 0x0 container
@@ -84,52 +84,53 @@ const asGraphAsset = WrappedComponent => {
       const propsWidth = cssCalcToPx(props.width, containerDimensions.width, context.viewport)
       const propsHeight = cssCalcToPx(props.height, containerDimensions.height, context.viewport)
 
-      // Asset outer width
-      const outerWidth = propsWidth === undefined
-        ? Math.max(containerDimensions.width, 0)
-        : Math.max(propsWidth, 0)
-      const outerHeight = propsHeight === undefined
-        ? Math.max(containerDimensions.height, 0)
-        : Math.max(propsHeight, 0)
+      // Outer width
+      const outerWidth = propsWidth === undefined ? Math.max(containerDimensions.width, 0) : Math.max(propsWidth, 0)
+      const outerHeight = propsHeight === undefined ? Math.max(containerDimensions.height, 0) : Math.max(propsHeight, 0)
 
-      // Asset x, y position
-      const x = cssCalcToPx(props.x, containerDimensions.width, context.viewport) || 0
-      const y = cssCalcToPx(props.y, containerDimensions.height, context.viewport) || 0
+      // Padding
+      const padding = cssPaddingExpressionToObject(props.padding, { width: outerWidth, height: outerHeight }, context.viewport)
 
-      // Asset padding
-      const padding = cssPaddingExpressionToObject(
-        props.padding,
-        { width: outerWidth, height: outerHeight },
-        context.viewport
-      )
-
-      // Asset inner width
+      // Dimensions
       const width = Math.max(outerWidth - padding.left - padding.right, 0)
       const height = Math.max(outerHeight - padding.top - padding.bottom, 0)
       const dimensions = { width, height }
 
-      // Scale props
+      // Data
+      const data = props.data || context.current_graph_asset.data
+
+      // Scales
       const xScale = typeof props.xScale === 'function'
         ? props.xScale
         : props.xScale
           ? d3ScaleNameToScale(props.xScale)
           : context.current_graph_asset
             ? context.current_graph_asset.x_scale
-            : scaleLinear([0, width], [0, width])
+            : scaleLinear()
       const yScale = typeof props.yScale === 'function'
         ? props.yScale
         : props.yScale
           ? d3ScaleNameToScale(props.yScale)
           : context.current_graph_asset
             ? context.current_graph_asset.y_scale
-            : scaleLinear([0, height], [0, height])
+            : scaleLinear()
 
-      // Asset data, render & rendered 
-      const data = props.data || context.current_graph_asset.data
-      const render = props.render || function (data) { return '' }
+      xScale.domain([0, width]).range([0, width])
+      yScale.domain([0, height]).range([0, height])
+      if (typeof props.xScaleConf === 'function') props.xScaleConf(xScale)
+      if (typeof props.yScaleConf === 'function') props.yScaleConf(xScale)
+
+      // Render
+      const render = typeof props.render === 'function' ? props.render : () => ''
 
       const childProps = {
-        ...props, width, height, data, render,
+        ...props,
+        width,
+        height,
+        data,
+        xScale,
+        yScale,
+        render,
         calcWidth: val => cssCalcToPx(val, width, context.viewport),
         calcHeight: val => cssCalcToPx(val, height, context.viewport),
         calcPadding: val => cssPaddingExpressionToObject(val,  dimensions, context.viewport),
@@ -142,9 +143,24 @@ const asGraphAsset = WrappedComponent => {
       const childrenAssetsContext = {
         ...context,
         current_graph_asset: {
-          width, height, data
+          ...context.current_graph_asset,
+          width,
+          height,
+          data,
+          x_scale: xScale,
+          y_scale: yScale
         }
       }
+
+      console.log('GRAPH ASSET')
+      console.log(new WrappedComponent().c)
+      console.log('width, height', width, height)
+      console.log('xScale.domain(), xScale.range()', xScale.domain(), xScale.range())
+      console.log('yScale.domain(), yScale.range()', yScale.domain(), yScale.range())
+      console.log('props.xScaleConf, props.yScaleConf', props.xScaleConf, props.yScaleConf)
+      console.log('childProps', childProps)
+      console.log('childrenAssetsContext', childrenAssetsContext)
+      console.log('\n\n\n')
 
       /* Display */
       return context.current_graph_asset
@@ -152,7 +168,6 @@ const asGraphAsset = WrappedComponent => {
           className={`lblb-graph-asset`}
           id={`lblb-graph-asset-id-${state.id}`}
           ref={n => this.$assetWrapper = n}>
-          <text y={16} style={{ fill: '#CCC' }}>{`${new WrappedComponent().c} ${JSON.stringify({ ...props, children: undefined })}`}</text>
           <g
             className='lblb-graph-asset__mar-and-pad'
             transform={`translate(${x + padding.left}, ${y + padding.top})`}>
@@ -168,7 +183,6 @@ const asGraphAsset = WrappedComponent => {
           <svg
             width={outerWidth}
             height={outerHeight}>
-            <text y={16} style={{ fill: '#CCC' }}>{`${new WrappedComponent().c} ${JSON.stringify({ ...props, children: undefined })}`}</text>
             <g
               className='lblb-graph-asset__mar-and-pad'
               transform={`translate(${x + padding.left}, ${y + padding.top})`}>

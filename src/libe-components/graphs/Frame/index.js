@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import * as d3 from 'd3'
 import asGraphAsset from '../asGraphAsset'
-import AppContext from '../../../context'
 import Axis from '../Axis'
 import Viewport from '../Viewport'
 
@@ -16,10 +15,10 @@ import Viewport from '../Viewport'
  *   Displays a graph frame in which visual idioms are placed
  *
  *   IMPERATIVE PROPS (from asGraphAsset HOC)
- *   width, height, calcWidth, calcHeight, calcPadding, data, render
+ *   width, height, calcWidth, calcHeight, calcPadding, data, xScale, yScale, render
  *
  *   OWN PROPS
- *   children, axisPadding, xDomain, yDomain, className
+ *   children, axisPadding, className
  *
  */
 
@@ -215,20 +214,13 @@ class Frame extends Component {
     this.c = 'lblb-graph-frame'
   }
 
-  /* * * * * * * * * * * * * * * * *
-   *
-   * MAKE CONTEXT ACCESSIBLE
-   *
-   * * * * * * * * * * * * * * * * */
-  static contextType = AppContext
-
   /* * * * * * * * * * * * * * * *
    *
    * RENDER
    *
    * * * * * * * * * * * * * * * */
   render () {
-    const { props, context, c } = this
+    const { props, c } = this
 
     /* Inner logic */
     const { width, height, calcPadding } = props
@@ -268,20 +260,6 @@ class Frame extends Component {
       height: Math.max(0, height - axesDimensions.top.height - axesDimensions.bottom.height)
     }
 
-    const xDomain = props.xDomain || [0, assetsDimensions.width]
-    const yDomain = props.yDomain || [0, assetsDimensions.height]
-    const xScale = d3.scaleLinear().domain(xDomain).range([0, assetsDimensions.width])
-    const yScale = d3.scaleLinear().domain(yDomain).range([0, assetsDimensions.height])
-
-    const childrenAssetsContext = {
-      ...context,
-      current_graph_asset: {
-        ...context.current_graph_asset,
-        width: Math.max(width - axisPadding.left - axisPadding.right, 0),
-        height: Math.max(height - axisPadding.top - axisPadding.bottom, 0)
-      }
-    }
-
     /* Assign classes */
     const classes = [c]
     if (props.className) classes.push(props.className)
@@ -296,48 +274,38 @@ class Frame extends Component {
         <Viewport render={props.render}>
           {props.children}
         </Viewport>
-
-        <AppContext.Provider value={childrenAssetsContext}>
-          
-        </AppContext.Provider>
       </g>
       <g
         className={`${c}__top-axis`}
         transform={`translate(${axesDimensions.top.x}, ${axesDimensions.top.y})`}>
         {props.showTopAxis
-        && <Axis
-          top
-          scale={xScale}
-          width={axesDimensions.top.width} />}
+        && <Axis top scale={props.xScale} width={axesDimensions.top.width} height={0}>
+          <text y={16}>{axesDimensions.top.width}</text>
+        </Axis>}
       </g>
       <g
         className={`${c}__right-axis`}
         transform={`translate(${axesDimensions.right.x}, ${axesDimensions.right.y})`}>
         {props.showRightAxis
-        && <Axis
-          right
-          scale={yScale}
-          x={axesDimensions.right.width}
-          height={axesDimensions.right.height} />}
+        && <Axis right scale={props.yScale} x={axesDimensions.right.width} width={0} height={axesDimensions.right.height}>
+            <text y={16}>{axesDimensions.right.height}</text>
+          </Axis>}
       </g>
       <g
         className={`${c}__bottom-axis`}
         transform={`translate(${axesDimensions.bottom.x}, ${axesDimensions.bottom.y})`}>
         {props.showBottomAxis
-        && <Axis
-          bottom
-          scale={xScale}
-          y={axesDimensions.bottom.height}
-          width={axesDimensions.bottom.width} />}
+        && <Axis bottom scale={props.xScale} y={axesDimensions.bottom.height} width={axesDimensions.bottom.width} height={0}>
+            <text y={16}>{axesDimensions.bottom.width}</text>
+          </Axis>}
       </g>
       <g
         className={`${c}__left-axis`}
         transform={`translate(${axesDimensions.left.x}, ${axesDimensions.left.y})`}>
         {props.showLeftAxis
-        && <Axis
-          left
-          scale={yScale}
-          height={axesDimensions.left.height} />}
+        && <Axis left scale={props.yScale} width={0} height={axesDimensions.left.height}>
+          <text y={16}>{axesDimensions.left.height}</text>
+        </Axis>}
       </g>
     </g> 
   }

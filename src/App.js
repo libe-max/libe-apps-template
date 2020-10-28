@@ -317,12 +317,12 @@ export default class App extends Component {
             subtitle='avec des données dedans !<br />vraiment beaucoup de données'
             source='Source : Libé Labo et Big'
             framePadding='11rem 2rem 2rem 2rem'
-            frameAxisPadding='2rem 0 0 2rem'
+            frameAxisPadding='2rem 12rem 0 2rem'
             showTopAxis
             showLeftAxis
-            xDomain={[0, 10]}
-            yDomain={[20, 209]}
             data={data}
+            xScaleConf={scale => scale.domain([0, 10])}
+            yScaleConf={scale => scale.domain([20, 209])}
             render={data => data.map(d => <g
               key={d.name}
               transform={`translate(${(d.year - 1970) * 10}, ${(2030 - d.end) * 20})`}>

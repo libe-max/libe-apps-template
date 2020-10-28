@@ -13,7 +13,7 @@ import asGraphAsset from '../asGraphAsset'
  *   Displays a d3 axis
  *
  *   IMPERATIVE PROPS (from asGraphAsset HOC)
- *   width, height, calcWidth, calcHeight, data, render
+ *   width, height, calcWidth, calcHeight, data, xScale, yScale, render
  *
  *   PROPS
  *   top, right, bottom, left, scale, className
@@ -52,14 +52,17 @@ class Axis extends Component {
     const directionPosition = [props.top, props.right, props.bottom, props.left].findIndex(e => e)
     const scale = props.scale
     const axesList = [d3.axisTop, d3.axisRight, d3.axisBottom, d3.axisLeft]
-    const axis = directionPosition > -1
+    const axisGenerator = directionPosition > -1
       ? axesList[directionPosition]()
       : width > height
         ? axesList[2]()
         : axesList[3]()
-
+    const axis = axisGenerator.scale(scale)
+    console.log(c)
+    console.log(scale.domain(), scale.range())
+    console.log(scale.ticks())
     d3.select($wrapper)
-      .call(axis.scale(scale))
+      .call(axis)
 
   }
 
@@ -80,6 +83,14 @@ class Axis extends Component {
 
     /* Display */
     return <g className={classes.join(' ')}>
+      {props.children}
+      <text y={32}>{Math.max(width, height)}</text>
+      <text y={48}>{props.top ? 'top' : props.right ? 'right' : props.bottom ? 'bottom' : props.left ? 'left' : '' }</text>
+      {new Array(11).fill(null).map((e, i) => {
+        return <g transform={`translate(${i * width / 10}, ${i * height / 10})`}>
+          <circle r={5} style={{ fill: 'yellow' }} />
+        </g>
+      })}
       <g ref={n => this.$wrapper = n} />
     </g>
   }

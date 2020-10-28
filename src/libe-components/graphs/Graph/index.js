@@ -14,14 +14,13 @@ import Frame from '../Frame'
  *   displays a Graph component with a head, a foot, and a body
  *
  *   IMPERATIVE PROPS (from asGraphAsset HOC)
- *   width, height, calcWidth, calcHeight, data, render
+ *   width, height, calcWidth, calcHeight, data, xScale, yScale, render
  *
  *   OWN PROPS
  *   children, headTop, title, titleAlign, titleLeft, titleRight,
  *   subtitle, subtitleAlign, subtitleLeft, subtitleRight, footBottom,
  *   source, sourceAlign, sourceLeft, sourceRight, framePadding, frameAxisPadding,
- *   showTopAxis, showRightAxis, showBottomAxis, showLeftAxis, xDomain, yDomain, 
- *   className
+ *   showTopAxis, showRightAxis, showBottomAxis, showLeftAxis, className
  *
  */
 
@@ -100,9 +99,7 @@ class Graph extends Component {
           showTopAxis={props.showTopAxis}
           showRightAxis={props.showRightAxis}
           showBottomAxis={props.showBottomAxis}
-          showLeftAxis={props.showLeftAxis}
-          xDomain={props.xDomain}
-          yDomain={props.yDomain}>
+          showLeftAxis={props.showLeftAxis}>
           {props.children}
         </Frame>
       </g>
