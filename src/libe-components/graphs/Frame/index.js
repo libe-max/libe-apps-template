@@ -18,7 +18,8 @@ import Viewport from '../Viewport'
  *   width, height, calcWidth, calcHeight, calcPadding, data, xScale, yScale, render
  *
  *   OWN PROPS
- *   children, axisPadding, className
+ *   children, axisPadding, showTopAxis, showRightAxis, showBottomAxis, showLeftAxis,
+ *   viewportXScale, viewportYScale, viewportXScaleConf, viewportYScaleConf, className
  *
  */
 
@@ -269,9 +270,16 @@ class Frame extends Component {
       <g
         className={`${c}__assets`}
         transform={`translate(${assetsDimensions.x}, ${assetsDimensions.y})`}>
-        <rect width={assetsDimensions.width} height={assetsDimensions.height} style={{ fill: '#F9F9F9' }} />
-        <text x={assetsDimensions.width / 2} y={6 + (assetsDimensions.height) / 2} textAnchor='middle'>Assets</text>
-        <Viewport render={props.render}>
+        <Viewport
+          width={assetsDimensions.width}
+          height={assetsDimensions.height}
+          xScale={props.xScale.domain([0, assetsDimensions.width]).range([0, assetsDimensions.width])}
+          yScale={props.yScale.domain([0, assetsDimensions.height]).range([0, assetsDimensions.height])}
+          xScaleDomain={props.xScaleDomain}
+          yScaleDomain={props.yScaleDomain}
+          xScaleConf={props.xScaleConf}
+          yScaleConf={props.yScaleConf}
+          render={props.render}>
           {props.children}
         </Viewport>
       </g>
@@ -279,33 +287,63 @@ class Frame extends Component {
         className={`${c}__top-axis`}
         transform={`translate(${axesDimensions.top.x}, ${axesDimensions.top.y})`}>
         {props.showTopAxis
-        && <Axis top scale={props.xScale} width={axesDimensions.top.width} height={0}>
-          <text y={16}>{axesDimensions.top.width}</text>
-        </Axis>}
+        && <Axis
+          top
+          width={axesDimensions.top.width}
+          height={axesDimensions.top.height}
+          xScale={props.xScale.domain([0, assetsDimensions.width]).range([0, assetsDimensions.width])}
+          yScale={props.yScale.domain([0, assetsDimensions.height]).range([0, assetsDimensions.height])}
+          xScaleDomain={props.xScaleDomain}
+          yScaleDomain={props.yScaleDomain}
+          xScaleConf={props.xScaleConf}
+          yScaleConf={props.yScaleConf} />}
       </g>
       <g
         className={`${c}__right-axis`}
         transform={`translate(${axesDimensions.right.x}, ${axesDimensions.right.y})`}>
         {props.showRightAxis
-        && <Axis right scale={props.yScale} x={axesDimensions.right.width} width={0} height={axesDimensions.right.height}>
-            <text y={16}>{axesDimensions.right.height}</text>
-          </Axis>}
+        && <Axis
+          right
+          x={axesDimensions.right.width}
+          width={axesDimensions.right.width}
+          height={axesDimensions.right.height}
+          xScale={props.xScale.domain([0, assetsDimensions.width]).range([0, assetsDimensions.width])}
+          yScale={props.yScale.domain([0, assetsDimensions.height]).range([0, assetsDimensions.height])}
+          xScaleDomain={props.xScaleDomain}
+          yScaleDomain={props.yScaleDomain}
+          xScaleConf={props.xScaleConf}
+          yScaleConf={props.yScaleConf} />}
       </g>
       <g
         className={`${c}__bottom-axis`}
         transform={`translate(${axesDimensions.bottom.x}, ${axesDimensions.bottom.y})`}>
         {props.showBottomAxis
-        && <Axis bottom scale={props.xScale} y={axesDimensions.bottom.height} width={axesDimensions.bottom.width} height={0}>
-            <text y={16}>{axesDimensions.bottom.width}</text>
-          </Axis>}
+        && <Axis
+          bottom
+          y={axesDimensions.bottom.height}
+          width={axesDimensions.bottom.width}
+          height={axesDimensions.bottom.height}
+          xScale={props.xScale.domain([0, assetsDimensions.width]).range([0, assetsDimensions.width])}
+          yScale={props.yScale.domain([0, assetsDimensions.height]).range([0, assetsDimensions.height])}
+          xScaleDomain={props.xScaleDomain}
+          yScaleDomain={props.yScaleDomain}
+          xScaleConf={props.xScaleConf}
+          yScaleConf={props.yScaleConf} />}
       </g>
       <g
         className={`${c}__left-axis`}
         transform={`translate(${axesDimensions.left.x}, ${axesDimensions.left.y})`}>
         {props.showLeftAxis
-        && <Axis left scale={props.yScale} width={0} height={axesDimensions.left.height}>
-          <text y={16}>{axesDimensions.left.height}</text>
-        </Axis>}
+        && <Axis
+          left
+          width={axesDimensions.left.width}
+          height={axesDimensions.left.height}
+          xScale={props.xScale.domain([0, assetsDimensions.width]).range([0, assetsDimensions.width])}
+          yScale={props.yScale.domain([0, assetsDimensions.height]).range([0, assetsDimensions.height])}
+          xScaleDomain={props.xScaleDomain}
+          yScaleDomain={props.yScaleDomain}
+          xScaleConf={props.xScaleConf}
+          yScaleConf={props.yScaleConf} />}
       </g>
     </g> 
   }

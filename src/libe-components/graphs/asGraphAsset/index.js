@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { scaleLinear } from 'd3'
+import chroma from 'chroma-js'
 import AppContext from '../../../context'
 import cssCalcToPx from '../../../libe-utils/css-calc-to-px'
 import cssPaddingExpressionToObject from '../../../libe-utils/css-padding-expression-to-object'
@@ -18,7 +19,7 @@ import d3ScaleNameToScale from '../../../libe-utils/d3-scale-name-to-scale'
  *     • Fills the wrapper with the lower order component and give them the props they need
  *
  *   PROPS
- *   x, y, width, height, padding, data, xScale, xScaleConf, yScale, yScaleConf, render
+ *   x, y, width, height, padding, data, xScale, xScaleDomain, xScaleConf, yScale, yScaleDomain, yScaleConf, render
  *
  */
 
@@ -100,36 +101,31 @@ const asGraphAsset = WrappedComponent => {
       const data = props.data || context.current_graph_asset.data
 
       // Scales
-      const xScale = typeof props.xScale === 'function'
-        ? props.xScale
-        : props.xScale
-          ? d3ScaleNameToScale(props.xScale)
-          : context.current_graph_asset
-            ? context.current_graph_asset.x_scale
-            : scaleLinear()
-      const yScale = typeof props.yScale === 'function'
-        ? props.yScale
-        : props.yScale
-          ? d3ScaleNameToScale(props.yScale)
-          : context.current_graph_asset
-            ? context.current_graph_asset.y_scale
-            : scaleLinear()
-
-      xScale.domain([0, width]).range([0, width])
-      yScale.domain([0, height]).range([0, height])
-      if (typeof props.xScaleConf === 'function') props.xScaleConf(xScale)
-      if (typeof props.yScaleConf === 'function') props.yScaleConf(xScale)
+      const unconfXScale = props.xScale
+        ? typeof props.xScale === 'function'
+          ? props.xScale.copy()
+          : d3ScaleNameToScale(props.xScale)([0, width], [0, width])
+        : scaleLinear([0, width], [0, width])
+      const unconfYScale = props.yScale
+        ? typeof props.yScale === 'function'
+          ? props.yScale.copy()
+          : d3ScaleNameToScale(props.yScale)([0, height], [0, height])
+        : scaleLinear([0, height], [0, height])
+      if (props.xScaleDomain) unconfXScale.domain(props.xScaleDomain)
+      if (props.yScaleDomain) unconfYScale.domain(props.yScaleDomain)
+      const xScale = props.xScaleConf ? props.xScaleConf({ scale: unconfXScale, width, height, data }) : unconfXScale
+      const yScale = props.yScaleConf ? props.yScaleConf({ scale: unconfYScale, width, height, data }) : unconfYScale
 
       // Render
-      const render = typeof props.render === 'function' ? props.render : () => ''
+      const render = props.render ? props.render : () => ''
 
       const childProps = {
         ...props,
         width,
         height,
         data,
-        xScale,
-        yScale,
+        xScale: xScale.copy(),
+        yScale: yScale.copy(),
         render,
         calcWidth: val => cssCalcToPx(val, width, context.viewport),
         calcHeight: val => cssCalcToPx(val, height, context.viewport),
@@ -146,46 +142,26 @@ const asGraphAsset = WrappedComponent => {
           ...context.current_graph_asset,
           width,
           height,
-          data,
-          x_scale: xScale,
-          y_scale: yScale
+          data
         }
       }
 
-      console.log('GRAPH ASSET')
-      console.log(new WrappedComponent().c)
-      console.log('width, height', width, height)
-      console.log('xScale.domain(), xScale.range()', xScale.domain(), xScale.range())
-      console.log('yScale.domain(), yScale.range()', yScale.domain(), yScale.range())
-      console.log('props.xScaleConf, props.yScaleConf', props.xScaleConf, props.yScaleConf)
-      console.log('childProps', childProps)
-      console.log('childrenAssetsContext', childrenAssetsContext)
-      console.log('\n\n\n')
-
       /* Display */
       return context.current_graph_asset
-        ? <g
-          className={`lblb-graph-asset`}
-          id={`lblb-graph-asset-id-${state.id}`}
-          ref={n => this.$assetWrapper = n}>
-          <g
-            className='lblb-graph-asset__mar-and-pad'
-            transform={`translate(${x + padding.left}, ${y + padding.top})`}>
+        ? <g className={`lblb-graph-asset`} id={`lblb-graph-asset-id-${state.id}`} ref={n => this.$assetWrapper = n}>
+          <rect width={outerWidth} height={outerHeight} style={{ fill: 'transparent', stroke: 'rgba(33, 33, 33, .1)', strokeWidth: 1, strokeLocation: 'inside' }} />
+          <g className='lblb-graph-asset__mar-and-pad' transform={`translate(${x + padding.left}, ${y + padding.top})`}>
+            <rect width={width} height={height} style={{ fill: 'rgba(33, 33, 33, .015)' }} />
             <AppContext.Provider value={childrenAssetsContext}>
               <WrappedComponent {...childProps} />
             </AppContext.Provider>
           </g>
         </g>
-        : <div
-          className={`lblb-graph-asset`}
-          id={`lblb-graph-asset-id-${state.id}`}
-          ref={n => this.$assetWrapper = n}>
-          <svg
-            width={outerWidth}
-            height={outerHeight}>
-            <g
-              className='lblb-graph-asset__mar-and-pad'
-              transform={`translate(${x + padding.left}, ${y + padding.top})`}>
+        : <div className={`lblb-graph-asset`} id={`lblb-graph-asset-id-${state.id}`} ref={n => this.$assetWrapper = n}>
+          <svg width={outerWidth} height={outerHeight}>
+            <rect width={outerWidth} height={outerHeight} style={{ fill: 'transparent', stroke: 'rgba(33, 33, 33, .1)', strokeWidth: 1, strokeLocation: 'inside' }} />
+            <g className='lblb-graph-asset__mar-and-pad' transform={`translate(${x + padding.left}, ${y + padding.top})`}>
+              <rect width={width} height={height} style={{ fill: 'rgba(33, 33, 33, .015)' }} />
               <AppContext.Provider value={childrenAssetsContext}>
                 <WrappedComponent {...childProps} />
               </AppContext.Provider>

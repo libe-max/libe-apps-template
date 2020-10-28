@@ -2,24 +2,24 @@ import React, { Component } from 'react'
 import asGraphAsset from '../asGraphAsset'
 
 /*
- *   Viewport component
+ *   Rect component
  *   ------------------------------------------------------
  *
  *   NOTICE
  *   This component is rendered through the asGraphAsset HOC
  *
  *   DESCRIPTION
- *   Displays a graph viewport in which visual idioms are placed
+ *   Returns a svg rect element
  *
  *   IMPERATIVE PROPS (from asGraphAsset HOC)
  *   width, height, calcWidth, calcHeight, calcPadding, data, xScale, yScale, render
  *
- *   OWN PROPS
- *   children, className
+ *   PROPS
+ *   className
  *
  */
 
-class Viewport extends Component {
+class Rect extends Component {
   /* * * * * * * * * * * * * * * *
    *
    * CONSTRUCTOR
@@ -27,7 +27,7 @@ class Viewport extends Component {
    * * * * * * * * * * * * * * * */
   constructor () {
     super()
-    this.c = 'lblb-graph-viewport'
+    this.c = 'lblb-graph-rect'
   }
 
   /* * * * * * * * * * * * * * * *
@@ -36,28 +36,30 @@ class Viewport extends Component {
    *
    * * * * * * * * * * * * * * * */
   render () {
-    const { props, context, c } = this
-
-    console.log('viewport', props.xScale.domain(), props.xScale.range(), props.yScale.domain(), props.yScale.range())
+    const { props, c } = this
 
     /* Inner logic */
-    const { width, height, data, render, children } = props
+    const { width, height } = this.props
 
     /* Assign classes */
     const classes = [c]
     if (props.className) classes.push(props.className)
 
     /* Display */
-    return <g className={classes.join(' ')}>
-      <g className={`${c}__rendered`}>{render(data)}</g>
-      <g className={`${c}__children`}>{children}</g>
-    </g> 
+    return <rect
+      style={{ fill: 'orange' }}
+      width={props.width}
+      height={props.height}
+      className={classes.join(' ')} />
   }
 }
 
-export default asGraphAsset(Viewport)
+export default asGraphAsset(Rect)
 
 /* * * * * Prop types * * * * */
 
-Viewport.propTypes = {}
-Viewport.defaultProps = {}
+Rect.propTypes = {}
+Rect.defaultProps = {
+  width: 0,
+  height: 0
+}

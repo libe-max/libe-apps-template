@@ -14,13 +14,14 @@ import Frame from '../Frame'
  *   displays a Graph component with a head, a foot, and a body
  *
  *   IMPERATIVE PROPS (from asGraphAsset HOC)
- *   width, height, calcWidth, calcHeight, data, xScale, yScale, render
+ *   width, height, calcWidth, calcHeight, calcPadding, data, xScale, yScale, render
  *
  *   OWN PROPS
  *   children, headTop, title, titleAlign, titleLeft, titleRight,
  *   subtitle, subtitleAlign, subtitleLeft, subtitleRight, footBottom,
  *   source, sourceAlign, sourceLeft, sourceRight, framePadding, frameAxisPadding,
- *   showTopAxis, showRightAxis, showBottomAxis, showLeftAxis, className
+ *   frameXScale, frameYScale, frameXScaleConf, frameYScaleConf, showTopAxis,
+ *   showRightAxis, showBottomAxis, showLeftAxis, className
  *
  */
 
@@ -94,12 +95,18 @@ class Graph extends Component {
         <Frame
           padding={props.framePadding}
           axisPadding={props.frameAxisPadding}
-          data={props.data}
-          render={props.render}
           showTopAxis={props.showTopAxis}
           showRightAxis={props.showRightAxis}
           showBottomAxis={props.showBottomAxis}
-          showLeftAxis={props.showLeftAxis}>
+          showLeftAxis={props.showLeftAxis}
+          data={props.data}
+          xScale={props.xScale}
+          yScale={props.xScale}
+          xScaleDomain={props.xScaleDomain}
+          yScaleDomain={props.xScaleDomain}
+          xScaleConf={props.xScaleConf}
+          yScaleConf={props.xScaleConf}
+          render={props.render}>
           {props.children}
         </Frame>
       </g>

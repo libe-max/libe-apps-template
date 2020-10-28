@@ -21,6 +21,9 @@ import MetroTiler from './libe-components/layouts/MetroTiler'
 
 import Graph from './libe-components/graphs/Graph'
 import Frame from './libe-components/graphs/Frame'
+import Rect from './libe-components/graphs/Rect'
+
+import { scaleBand } from 'd3-scale'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -310,29 +313,47 @@ export default class App extends Component {
         && !state.error_sheet
         && <div style={{ width: '100%', maxWidth: '60rem' }}>
           <Graph
-            name='root graph'
             height='120vh'
-            padding='1rem 2rem 4rem 1rem'
-            title='Un graphe<br />sur deux lignes'
-            subtitle='avec des données dedans !<br />vraiment beaucoup de données'
-            source='Source : Libé Labo et Big'
-            framePadding='11rem 2rem 2rem 2rem'
-            frameAxisPadding='2rem 12rem 0 2rem'
+            padding='1rem'
+            framePadding='13rem 50px 50px 50px'
+            title={'Un titre, parfois c\'est long<br />ça s\'étend sur 3 lignes<br />et tout, ça en fait des mots'}
+            subtitle={`
+              Et puis alors les sous-titres alors là c'est encore autre chose
+              <br />parce que les gens ils croient comme c'est tout petit on peut
+              <br />en mettre des tonnes mais au final c'est quand même bien long quoi`}
             showTopAxis
             showLeftAxis
-            data={data}
-            xScaleConf={scale => scale.domain([0, 10])}
-            yScaleConf={scale => scale.domain([20, 209])}
-            render={data => data.map(d => <g
-              key={d.name}
-              transform={`translate(${(d.year - 1970) * 10}, ${(2030 - d.end) * 20})`}>
-              <circle
-                style={{ fill: 'blue' }}
-                cx={0}
-                cy={0}
-                r={d.trophies} />
-              <text y={6} textAnchor='middle' style={{ fill: 'white' }}>{d.name}</text>
-            </g>)}>
+            xScale='pow'
+            yScale='pow'
+            data={data}>
+            <Frame
+              name='lol'
+              padding='50px'
+              xScale='band'
+              xScaleDomain={[0, 5]}
+              showTopAxis
+              showLeftAxis>
+              <Rect width={'calc(100% - 2rem)'} height={'100%'} style={{ fill: 'red' }} />
+              <Frame
+                padding='50px'
+                axisPadding='2rem 0 0 2rem'
+                xScale='band'
+                xScaleConf={({ scale, width, height, data }) => scale.domain(['lol', 'lal', 'lil'])}
+                yScale='band'
+                yScaleConf={({ scale, width, height, data }) => scale.domain(['lul', 'lyl', 'lœl'])}
+                showTopAxis
+                showLeftAxis
+                render={data => data.map(d => <g
+                  key={d.name}
+                  transform={`translate(${(d.year - 1970) * 10}, ${(2030 - d.end) * 20})`}>
+                  <circle
+                    style={{ fill: 'blue' }}
+                    cx={0}
+                    cy={0}
+                    r={d.trophies} />
+                  <text y={6} textAnchor='middle' style={{ fill: 'white' }}>{d.name}</text>
+                </g>)} />
+            </Frame>
           </Graph>
         </div>}
 
