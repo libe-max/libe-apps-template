@@ -1,48 +1,119 @@
-.lblb-graph {
-  display: block;
+.lblb-default-apps-header {
+  background: transparent;
+  flex-direction: column;
+  padding: 2rem 0 !important;
+  margin: 0 !important;
 }
 
-.lblb-graph svg {
-  display: block;
-  box-shadow: 0 0 2rem 0 rgba(33, 33,33, .2);
+.lblb-default-apps-header .lblb-inter-title {
+  margin-bottom: 1rem;
 }
 
-.lblb-graph__bg-rect {
-  fill: violet;
-}
+.lblb-default-apps-header .lblb-paragraph {
+  font-family: 'Libe-Typewriter';
+} 
 
-.lblb-graph__head,
-.lblb-graph__foot {
-  opacity: 1;
-  transition: opacity 200ms;
-}
-
-.lblb-graph:hover > .lblb-graph__head,
-.lblb-graph:hover > .lblb-graph__foot {
-  opacity: .05;
-}
-
-.lblb-graph__title {
+.lblb-default-apps-header__title {
+  color: #212121;
   font-family: 'Libe-Sans-Semicondensed';
-  font-size: 2.5rem;
-  line-height: 2.5rem;
-  font-weight: 800;
-  letter-spacing: .05rem;
 }
 
-.lblb-graph__subtitle {
-  font-family: 'Georgia';
-  font-size: 1rem;
-  line-height: 1.5rem;
+.elections-us-2020__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 .5rem;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.lblb-graph__source {
-  font-family: 'Synthese';
-  font-size: .75rem;
-  line-height: 1rem;
-  font-weight: 400;
+.elections-us-2020__intro {
+  text-align: center;
+  max-width: 40rem;
 }
 
-.lblb-graph-viewport__bg {
-  fill: crimson;
+@media screen and (max-width: 63rem) {
+  .elections-us-2020__intro {
+    max-width: 28rem;
+  }
+}
+
+.elections-us-2020__desktop,
+.elections-us-2020__mobile {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+}
+
+.elections-us-2020__desktop > *,
+.elections-us-2020__mobile > * {
+  flex-grow: 0;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.elections-us-2020__desktop > img,
+.elections-us-2020__mobile > img {
+  margin-bottom: 3rem;
+  width: 100%;
+}
+
+.elections-us-2020__desktop > .lblb-block-title,
+.elections-us-2020__mobile > .lblb-block-title {
+  margin-bottom: 1rem;
+  margin-top: 4rem;
+  font-family: 'Libe-Sans-Semicondensed';
+}
+
+.elections-us-2020__desktop > .lblb-paragraph,
+.elections-us-2020__mobile > .lblb-paragraph {
+  max-width: 40rem;
+  margin-bottom: 4rem;
+}
+
+.elections-us-2020__links {
+  display: flex;
+  flex-direction: column;
+  max-width: 40rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+.elections-us-2020__links .lblb-slug,
+.elections-us-2020__links .lblb-paragraph {
+  margin-bottom: .5rem;
+}
+
+@media screen and (max-width: 63rem) {
+  .elections-us-2020__desktop > img,
+  .elections-us-2020__mobile > img {
+    margin-bottom: 1.5rem;
+  }
+
+  .elections-us-2020__desktop > .lblb-block-title,
+  .elections-us-2020__mobile > .lblb-block-title {
+    margin-top: 3rem;
+  }
+
+  .elections-us-2020__desktop > .lblb-paragraph,
+  .elections-us-2020__mobile > .lblb-paragraph {
+    margin-bottom: 2rem;
+    max-width: 28rem;
+  }
+}
+
+.elections-us-2020__mobile {
+  display: none;
+}
+
+@media screen and (max-width: 40rem) {
+  .elections-us-2020__mobile {
+    display: flex;
+  }
+
+  .elections-us-2020__desktop {
+    display: none;
+  }
 }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { statics_url as staticsUrl } from './config'
 import AppContext from './context'
 
 import Loader from './libe-components/blocks/Loader'
@@ -8,22 +7,14 @@ import ShareArticle from './libe-components/blocks/ShareArticle'
 import LibeLaboLogo from './libe-components/blocks/LibeLaboLogo'
 import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Diaporama from './libe-components/blocks/Diaporama'
-import Tweet from './libe-components/blocks/Tweet'
-import Photo2 from './libe-components/blocks/Photo2'
-
+import ReadAlso from './libe-components/blocks/ReadAlso'
 import Svg from './libe-components/primitives/Svg'
-
 import InterTitle from './libe-components/text-levels/InterTitle'
+import Annotation from './libe-components/text-levels/Annotation'
 import Paragraph from './libe-components/text-levels/Paragraph'
-import Quote from './libe-components/text-levels/Quote'
-
-import MetroTiler from './libe-components/layouts/MetroTiler'
-
-import Graph from './libe-components/graphs/Graph'
-import Frame from './libe-components/graphs/Frame'
-import Rect from './libe-components/graphs/Rect'
-
-import { scaleBand } from 'd3-scale'
+import BlockTitle from './libe-components/text-levels/BlockTitle'
+import Slug from './libe-components/text-levels/Slug'
+import JSXInterpreter from './libe-components/logic/JSXInterpreter'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -227,7 +218,11 @@ export default class App extends Component {
       if (!reach.ok) throw reach
       const { data, err } = await reach.json()
       if (err) throw err
-      const parsedData = data // Parse sheet here
+      const parsedData = {}
+      data.forEach(elem => {
+        if (elem.length < 3) parsedData[elem[0]] = elem[1]
+        else parsedData[elem[0]] = elem.slice(1)
+      })
       this.setState({ loading_sheet: false, error_sheet: null, data_sheet: parsedData })
       return data
     } catch (error) {
@@ -253,11 +248,11 @@ export default class App extends Component {
     const { state, props, context, c } = this
 
     /* Assign classes */
-    const classes = [c]
-    if (state.loading_sheet) classes.push(`${c}_loading`)
-    if (state.error_sheet) classes.push(`${c}_error`)
-    if (state.konami_mode) classes.push(`${c}_konami`)
-    if (state.show_expanded_medias_panel) classes.push(`${c}_expanded-medias`)
+    const classes = [c, props.meta.slug]
+    if (state.loading_sheet) classes.push(`${props.meta.slug}_loading`)
+    if (state.error_sheet) classes.push(`${props.meta.slug}_error`)
+    if (state.konami_mode) classes.push(`${props.meta.slug}_konami`)
+    if (state.show_expanded_medias_panel) classes.push(`${props.meta.slug}_expanded-medias`)
 
     const passedContext = {
       ...this.context,
@@ -267,23 +262,8 @@ export default class App extends Component {
       expand_media: this.expandMedia
     }
 
-    const data = [
-      { name: 'Zidane', year: 1972, start: 1989, end: 2006, trophies: 19, team: 'Real' }, 
-      { name: 'Serena Williams', year: 1981, start: 1999, end: 2022, trophies: 23, team: 'Nike' }, 
-      { name: 'Nadal', year: 1986, start: 2003, end: 2024, trophies: 21, team: 'Babolat' }
-    ]
-
     return <AppContext.Provider value={passedContext}>
       <div id={props.meta.slug} className={classes.join(' ')}>
-        {/* Header */}
-        <div className='lblb-default-apps-header'>
-          <InterTitle
-            level={1}
-            className='lblb-default-apps-header__title'>
-            Default title lorem ipsum dolor sit amet
-          </InterTitle>
-        </div>
-
         {/* Loading */}
         {state.loading_sheet
         && <div className='lblb-default-apps-loader'>
@@ -300,61 +280,93 @@ export default class App extends Component {
         { /* App */ }
         {!state.loading_sheet
         && !state.error_sheet
-        && false
-        && <Paragraph literary>
-          App is ready.<br />
-          - remove DemoPage component<br />
-          - fill spreadsheet_id field in config.js<br />
-          - display it's content via state.data_sheet
-        </Paragraph>}
+        && <div className={`${props.meta.slug}__content`}>
+          <div className='lblb-default-apps-header'>
+            {state.data_sheet.title && <InterTitle
+              level={1}
+              big
+              className='lblb-default-apps-header__title'>
+              <JSXInterpreter content={state.data_sheet.title} />
+            </InterTitle>}
+            {state.data_sheet.subtitle && <Paragraph big>
+              <JSXInterpreter content={state.data_sheet.subtitle} />
+            </Paragraph>}
+          </div>
+          {state.data_sheet.intro && <div className={`${props.meta.slug}__intro`}>
+            <Paragraph literary>
+              <JSXInterpreter content={state.data_sheet.intro} />
+            </Paragraph>
+          </div>}
+          <div
+            className={`${props.meta.slug}__desktop`}
+            style={{ width: 'calc(100% - 1rem)' }}>
+            {state.data_sheet.infog_1_title && <BlockTitle huge>
+              <JSXInterpreter content={state.data_sheet.infog_1_title} />
+            </BlockTitle>}
+            {state.data_sheet.infog_1_text && <Paragraph literary>
+              <JSXInterpreter content={state.data_sheet.infog_1_text} />
+            </Paragraph>}
+            {state.data_sheet.infog_1_legende_img_desktop && <img style={{ width: '67%', maxWidth: '663px' }} src={state.data_sheet.infog_1_legende_img_desktop} />}
+            {state.data_sheet.infog_1_img_desktop && <img style={{ width: '100%', maxWidth: '979px' }} src={state.data_sheet.infog_1_img_desktop} />}
 
-        { /* App */ }
-        {!state.loading_sheet
-        && !state.error_sheet
-        && <div style={{ width: '100%', maxWidth: '60rem' }}>
-          <Graph
-            height='120vh'
-            padding='1rem'
-            framePadding='13rem 50px 50px 50px'
-            title={'Un titre, parfois c\'est long<br />ça s\'étend sur 3 lignes<br />et tout, ça en fait des mots'}
-            subtitle={`
-              Et puis alors les sous-titres alors là c'est encore autre chose
-              <br />parce que les gens ils croient comme c'est tout petit on peut
-              <br />en mettre des tonnes mais au final c'est quand même bien long quoi`}
-            showTopAxis
-            showLeftAxis
-            xScale='pow'
-            yScale='pow'
-            data={data}>
-            <Frame
-              name='lol'
-              padding='50px'
-              xScale='band'
-              xScaleDomain={[0, 5]}
-              showTopAxis
-              showLeftAxis>
-              <Rect width={'calc(100% - 2rem)'} height={'100%'} style={{ fill: 'red' }} />
-              <Frame
-                padding='50px'
-                axisPadding='2rem 0 0 2rem'
-                xScale='band'
-                xScaleConf={({ scale, width, height, data }) => scale.domain(['lol', 'lal', 'lil'])}
-                yScale='band'
-                yScaleConf={({ scale, width, height, data }) => scale.domain(['lul', 'lyl', 'lœl'])}
-                showTopAxis
-                showLeftAxis
-                render={data => data.map(d => <g
-                  key={d.name}
-                  transform={`translate(${(d.year - 1970) * 10}, ${(2030 - d.end) * 20})`}>
-                  <circle
-                    style={{ fill: 'blue' }}
-                    cx={0}
-                    cy={0}
-                    r={d.trophies} />
-                  <text y={6} textAnchor='middle' style={{ fill: 'white' }}>{d.name}</text>
-                </g>)} />
-            </Frame>
-          </Graph>
+            {state.data_sheet.infog_2_title && <BlockTitle huge>
+              <JSXInterpreter content={state.data_sheet.infog_2_title} />
+            </BlockTitle>}
+            {state.data_sheet.infog_2_text && <Paragraph literary>
+              <JSXInterpreter content={state.data_sheet.infog_2_text} />
+            </Paragraph>}
+            {state.data_sheet.infog_2_legende_img_desktop && <img style={{ width: '100%', maxWidth: '510px' }} src={state.data_sheet.infog_2_legende_img_desktop} />}
+            {state.data_sheet.infog_2_img_desktop && <img style={{ width: '100%', maxWidth: '70rem' }} src={state.data_sheet.infog_2_img_desktop} />}
+
+            {state.data_sheet.infog_3_title && <BlockTitle huge>
+              <JSXInterpreter content={state.data_sheet.infog_3_title} />
+            </BlockTitle>}
+            {state.data_sheet.infog_3_text && <Paragraph literary>
+              <JSXInterpreter content={state.data_sheet.infog_3_text} />
+            </Paragraph>}
+            {state.data_sheet.infog_3_legende_img_desktop && <img style={{ width: '100%', maxWidth: '236px' }} src={state.data_sheet.infog_3_legende_img_desktop} />}
+            {state.data_sheet.infog_3_img_desktop && <img style={{ width: '100%', maxWidth: '70rem' }} src={state.data_sheet.infog_3_img_desktop} />}
+          </div>
+          <div
+            className={`${props.meta.slug}__mobile`}
+            style={{ width: 'calc(100% - 1rem)' }}>
+            {state.data_sheet.infog_1_title && <BlockTitle huge>
+              <JSXInterpreter content={state.data_sheet.infog_1_title} />
+            </BlockTitle>}
+            {state.data_sheet.infog_1_text && <Paragraph literary>
+              <JSXInterpreter content={state.data_sheet.infog_1_text} />
+            </Paragraph>}
+            {state.data_sheet.infog_1_legende_img_mobile && <img style={{ width: '69%', maxWidth: '277px' }} src={state.data_sheet.infog_1_legende_img_mobile} />}
+            {state.data_sheet.infog_1_img_mobile && <img style={{ width: '100%', maxWidth: '400px' }} src={state.data_sheet.infog_1_img_mobile} />}
+
+            {state.data_sheet.infog_2_title && <BlockTitle huge>
+              <JSXInterpreter content={state.data_sheet.infog_2_title} />
+            </BlockTitle>}
+            {state.data_sheet.infog_2_text && <Paragraph literary>
+              <JSXInterpreter content={state.data_sheet.infog_2_text} />
+            </Paragraph>}
+            {state.data_sheet.infog_2_legende_img_mobile && <img style={{ width: '100%', maxWidth: '365px' }} src={state.data_sheet.infog_2_legende_img_mobile} />}
+            {state.data_sheet.infog_2_img_mobile && <img style={{ width: '100%', maxWidth: '400px' }} src={state.data_sheet.infog_2_img_mobile} />}
+
+            {state.data_sheet.infog_3_title && <BlockTitle huge>
+              <JSXInterpreter content={state.data_sheet.infog_3_title} />
+            </BlockTitle>}
+            {state.data_sheet.infog_3_text && <Paragraph literary>
+              <JSXInterpreter content={state.data_sheet.infog_3_text} />
+            </Paragraph>}
+            {state.data_sheet.infog_3_legende_img_mobile && <img style={{ width: '100%', maxWidth: '225px' }} src={state.data_sheet.infog_3_legende_img_mobile} />}
+            {state.data_sheet.infog_3_img_mobile && <img style={{ width: '100%', maxWidth: '400px' }} src={state.data_sheet.infog_3_img_mobile} />}
+          </div>
+
+          <div className={`${props.meta.slug}__links`}>
+            <Slug noBg>A lire aussi</Slug>{
+              state.data_sheet.links_title.map((title, i) => <Annotation key={title}>
+                <a href={state.data_sheet.links_url[i]}>
+                  <JSXInterpreter content={title} />
+                </a>
+              </Annotation>)
+            }
+          </div>
         </div>}
 
         {/* Footer */}
@@ -384,7 +396,7 @@ export default class App extends Component {
           <button
             className='lblb-default-expanded-medias-panel__close-button'
             onClick={this.handleCloseExpandedMediasPanelClick}>
-            <Svg src={`${staticsUrl}/assets/tilted-cross-icon_40.svg`} />
+            <Svg src={`${props.statics_url}/assets/tilted-cross-icon_40.svg`} />
           </button>
         </div>
       </div>

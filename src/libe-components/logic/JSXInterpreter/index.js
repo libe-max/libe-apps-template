@@ -38,7 +38,7 @@ export default class JSXInterpreter extends Component {
     const { props, c } = this
 
     /* Inner logic */
-    const interpreted = interpretJSX(props.content)
+    const interpreted = interpretJSX(props.content || '')
 
     /* Assign classes */
     const classes = [c]

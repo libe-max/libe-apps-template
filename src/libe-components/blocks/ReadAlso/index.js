@@ -12,7 +12,7 @@ import removeObjectKeys from '../../../libe-utils/remove-object-keys'
  *   A block containing a link
  *
  *   PROPS
- *   title, url, small, big, huge
+ *   title, url, small, big, huge, children, className
  *
  */
 
@@ -60,6 +60,7 @@ export default class ReadAlso extends Component {
         huge={props.huge}>
         <a href={props.url}>{props.title}</a>
       </Paragraph>
+      {props.children}
     </div>
   }
 }
