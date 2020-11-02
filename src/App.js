@@ -380,7 +380,6 @@ export default class App extends Component {
             publishedOn={props.meta.published_on}
             updatedOn={props.meta.updated_on}
             authors={props.meta.authors} />
-          <LibeLaboLogo target='blank' />
         </div>
 
         {/* Expanded medias panel */}
