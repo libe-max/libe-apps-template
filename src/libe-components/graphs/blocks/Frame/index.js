@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as d3 from 'd3'
-import asGraphAsset from '../asGraphAsset'
-import AppContext from '../../../context'
+import asGraphAsset from '../../primitives/asGraphAsset'
+import AppContext from '../../../../context'
 import Axis from '../Axis'
 import Viewport from '../Viewport'
 
@@ -31,7 +31,7 @@ import Viewport from '../Viewport'
  *   tickValues, topTickValues, rightTickValues, bottomTickValues, leftTickValues,
  *   tickFormat, topTickFormat, rightTickFormat, bottomTickFormat, leftTickFormat,
  *   tickStyle, topTickStyle, rightTickStyle, bottomTickStyle, leftTickStyle,
- *   tickLabelOffset, topTickLabelOffset, rightTickLabelOffset, bottomTickLabelOffset, leftTickLabelOffset,
+ *   labelOffset, topLabelOffset, rightLabelOffset, bottomLabelOffset, leftLabelOffset,
  *   className
  *
  */
@@ -114,10 +114,10 @@ class Frame extends Component {
     const bottomTickFormat = props.bottomTickFormat ? props.bottomTickFormat : props.tickFormat
     const leftTickFormat = props.leftTickFormat ? props.leftTickFormat : props.tickFormat
     /* Tick padding */
-    const topTickLabelOffset = props.topTickLabelOffset !== undefined ? calcHeight(props.topTickLabelOffset) : calcHeight(props.tickLabelOffset)
-    const rightTickLabelOffset = props.rightTickLabelOffset !== undefined ? calcWidth(props.rightTickLabelOffset) : calcWidth(props.tickLabelOffset)
-    const bottomTickLabelOffset = props.bottomTickLabelOffset !== undefined ? calcHeight(props.bottomTickLabelOffset) : calcHeight(props.tickLabelOffset)
-    const leftTickLabelOffset = props.leftTickLabelOffset !== undefined ? calcWidth(props.leftTickLabelOffset) : calcWidth(props.tickLabelOffset)
+    const topLabelOffset = props.topLabelOffset !== undefined ? calcHeight(props.topLabelOffset) : calcHeight(props.labelOffset)
+    const rightLabelOffset = props.rightLabelOffset !== undefined ? calcWidth(props.rightLabelOffset) : calcWidth(props.labelOffset)
+    const bottomLabelOffset = props.bottomLabelOffset !== undefined ? calcHeight(props.bottomLabelOffset) : calcHeight(props.labelOffset)
+    const leftLabelOffset = props.leftLabelOffset !== undefined ? calcWidth(props.leftLabelOffset) : calcWidth(props.labelOffset)
     /* Tick style */
     const tickStyle = props.tickStyle || {}
     const topTickStyle = props.topTickStyle ? { ...props.tickStyle, ...props.topTickStyle } : props.tickStyle
@@ -167,7 +167,7 @@ class Frame extends Component {
           tickValues={topTickValues}
           tickFormat={topTickFormat}
           tickStyle={topTickStyle}
-          tickLabelOffset={topTickLabelOffset} />}
+          labelOffset={topLabelOffset} />}
       </g>
       <g
         className={`${c}__right-axis`}
@@ -191,7 +191,7 @@ class Frame extends Component {
           tickValues={rightTickValues}
           tickFormat={rightTickFormat}
           tickStyle={rightTickStyle}
-          tickLabelOffset={rightTickLabelOffset} />}
+          labelOffset={rightLabelOffset} />}
       </g>
       <g
         className={`${c}__bottom-axis`}
@@ -215,7 +215,7 @@ class Frame extends Component {
           tickValues={bottomTickValues}
           tickFormat={bottomTickFormat}
           tickStyle={bottomTickStyle}
-          tickLabelOffset={bottomTickLabelOffset} />}
+          labelOffset={bottomLabelOffset} />}
       </g>
       <g
         className={`${c}__left-axis`}
@@ -238,7 +238,7 @@ class Frame extends Component {
           tickValues={leftTickValues}
           tickFormat={leftTickFormat}
           tickStyle={leftTickStyle}
-          tickLabelOffset={leftTickLabelOffset} />}
+          labelOffset={leftLabelOffset} />}
       </g>
     </g> 
   }

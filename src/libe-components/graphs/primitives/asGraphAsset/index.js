@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { scaleLinear } from 'd3'
-import AppContext from '../../../context'
-import cssCalcToPx from '../../../libe-utils/css-calc-to-px'
-import cssPaddingExpressionToObject from '../../../libe-utils/css-padding-expression-to-object'
-import d3ScaleNameToScale from '../../../libe-utils/d3-scale-name-to-scale'
-import d3ScaleToScaleType from '../../../libe-utils/d3-scale-to-scale-type'
-import d3CopyTypedScale from '../../../libe-utils/d3-copy-typed-scale'
+import AppContext from '../../../../context'
+import cssCalcToPx from '../../../../libe-utils/css-calc-to-px'
+import cssPaddingExpressionToObject from '../../../../libe-utils/css-padding-expression-to-object'
+import d3ScaleNameToScale from '../../../../libe-utils/d3-scale-name-to-scale'
+import d3ScaleToScaleType from '../../../../libe-utils/d3-scale-to-scale-type'
+import d3CopyTypedScale from '../../../../libe-utils/d3-copy-typed-scale'
 
 /*
  *   GraphAsset higher order component
@@ -148,8 +148,8 @@ const asGraphAsset = WrappedComponent => {
           width,
           height,
           data,
-          xScale: xScale,
-          yScale: yScale,
+          xScale,
+          yScale,
           calcWidth: val => cssCalcToPx(val, width, context.viewport),
           calcHeight: val => cssCalcToPx(val, height, context.viewport),
           calcPadding: val => cssPaddingExpressionToObject(val,  dimensions, context.viewport)

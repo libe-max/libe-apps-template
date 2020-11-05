@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
-import asGraphBasicShape from '../asGraphBasicShape'
-import AppContext from '../../../context'
+import asGraphBasicShape from '../../primitives/asGraphBasicShape'
 
 /*
- *   Rect component
+ *   Circle component
  *   ------------------------------------------------------
  *
  *   NOTICE
  *   This component is rendered through the asGraphBasicShape HOC
  *
  *   DESCRIPTION
- *   Returns a svg rect element
+ *   Returns a svg circle element
  *
  *   IMPERATIVE PROPS (from asGraphBasicShape HOC)
  *   width, height, calcWidth, calcHeight, calcPadding, data, xScale, yScale,
@@ -21,7 +20,7 @@ import AppContext from '../../../context'
  *
  */
 
-class Rect extends Component {
+class Circle extends Component {
   /* * * * * * * * * * * * * * * *
    *
    * CONSTRUCTOR
@@ -29,15 +28,8 @@ class Rect extends Component {
    * * * * * * * * * * * * * * * */
   constructor () {
     super()
-    this.c = 'lblb-graph-rect'
+    this.c = 'lblb-graph-circle'
   }
-
-  /* * * * * * * * * * * * * * * * *
-   *
-   * MAKE CONTEXT ACCESSIBLE
-   *
-   * * * * * * * * * * * * * * * * */
-  static contextType = AppContext
 
   /* * * * * * * * * * * * * * * *
    *
@@ -45,23 +37,20 @@ class Rect extends Component {
    *
    * * * * * * * * * * * * * * * */
   render () {
-    const { props, context, c } = this
+    const { props, c } = this
 
     /* Assign classes */
     const classes = [c]
     if (props.className) classes.push(props.className)
 
     /* Display */
-    return <rect {...props} className={classes.join(' ')} />
+    return <circle {...props} className={classes.join(' ')} />
   }
 }
 
-export default asGraphBasicShape(Rect)
+export default asGraphBasicShape(Circle)
 
 /* * * * * Prop types * * * * */
 
-Rect.propTypes = {}
-Rect.defaultProps = {
-  width: 0,
-  height: 0
-}
+Circle.propTypes = {}
+Circle.defaultProps = {}

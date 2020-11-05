@@ -5,8 +5,8 @@ import {
   axisRight as d3AxisRight, 
   axisBottom as d3AxisBottom, 
   axisLeft as d3AxisLeft } from 'd3-axis'
-import asGraphAsset from '../asGraphAsset'
-import AppContext from '../../../context'
+import asGraphAsset from '../../primitives/asGraphAsset'
+import AppContext from '../../../../context'
 
 /*
  *   Axis component
@@ -26,8 +26,8 @@ import AppContext from '../../../context'
  *
  *   PROPS
  *   direction, scale, hideDomain, domainStyle,
- *   tickSize, tickOffset, tickValues, tickFormat, tickLabelOffset, tickStyle
- *   className
+ *   tickSize, tickOffset, tickValues, tickFormat, tickStyle,
+ *   labelOffset, className
  *
  */
 
@@ -192,15 +192,20 @@ class Axis extends Component {
     const { props, $ticksWrapper, getAxis, getDomainStrokeWidth, getTickSize, getTickOffset } = this
     if (!$ticksWrapper) return
     const axis = getAxis()
+    // Setup ticks
     if (props.tickValues) axis.tickValues(props.tickValues)
     if (props.tickFormat) axis.ticks(...props.tickFormat)
-    if (props.tickLabelOffset) axis.tickPadding(props.tickLabelOffset)
     const domainStrokeWidth = getDomainStrokeWidth()
     const tickSize = getTickSize()
     const tickOffset = getTickOffset()
     axis.tickSize(-1 * (tickSize + tickOffset + domainStrokeWidth))
+    // Setup label
+    if (props.labelOffset) axis.tickPadding(props.labelOffset)
+    // Render axis and remove domain path (rendered in render method)
     d3Select($ticksWrapper).call(axis)
     const $domain = $ticksWrapper.querySelector('.domain')
+    $ticksWrapper.removeChild($domain)
+    // Apply styles
     const $ticks = $ticksWrapper.querySelectorAll('.tick line')
     if (props.tickStyle) {
       $ticks.forEach($tick => {
@@ -209,7 +214,6 @@ class Axis extends Component {
         })
       })
     }
-    $ticksWrapper.removeChild($domain)
   }
 
   /* * * * * * * * * * * * * * * *

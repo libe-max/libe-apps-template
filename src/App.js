@@ -10,9 +10,14 @@ import Diaporama from './libe-components/blocks/Diaporama'
 import Svg from './libe-components/primitives/Svg'
 import InterTitle from './libe-components/text-levels/InterTitle'
 import Paragraph from './libe-components/text-levels/Paragraph'
-import Graph from './libe-components/graphs/Graph'
-import Frame from './libe-components/graphs/Frame'
-import Rect from './libe-components/graphs/Rect'
+import Graph from './libe-components/graphs/blocks/Graph'
+import Frame from './libe-components/graphs/blocks/Frame'
+import Rect from './libe-components/graphs/shapes/Rect'
+import Circle from './libe-components/graphs/shapes/Circle'
+import Ellipse from './libe-components/graphs/shapes/Ellipse'
+import Line from './libe-components/graphs/shapes/Line'
+import Polyline from './libe-components/graphs/shapes/Polyline'
+import Path from './libe-components/graphs/shapes/Path'
   
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -305,15 +310,20 @@ export default class App extends Component {
             x={0}
             y={10}
             height='90vw'
-            padding='1rem'
+            padding='2rem'
             data={data}
             xScale='pow'
             yScale='pow'
             xScaleDomain={[0, 5e6]}
             yScaleDomain={[0, 11]}
             xScaleConf={({ scale, width, height, data }) => scale.exponent(.5).domain([0, width * 4100]) }
-            render={({ scale, width, height, data }) => <g><Rect xValue={10} widthValue={66000} height={10} style={{ fill: 'orange' }} /></g>}
-            style={{ fill: 'rgba(20, 20, 220, .7)' }}
+            render={({ scale, width, height, data }) => <g>
+              <Rect xValue={1000} widthValue={66000} height={10} style={{ fill: 'orange' }} />
+              <Circle cxValue={1e6} cyValue={3} rValue={2e4} style={{ fill: 'purple' }} />
+              <Ellipse cxValue={2e6} cyValue={7} rxValue={1e5} style={{ fill: 'blue' }} />
+              <Line x1={0} y1={height} x2={width} y2={0} style={{ strokeWidth: width / 8, stroke: 'limegreen' }} />
+            </g>}
+            style={{ fill: 'rgba(20, 20, 220, .05)' }}
             innerStyle={{}}
             title={'Un titre, parfois c\'est long<br />ça s\'étend sur 3 lignes<br />et tout, ça en fait des mots'}
             subtitle={`
@@ -332,7 +342,7 @@ export default class App extends Component {
             subtitleRight='50%'
             sourceLeft='Not read because titleRight'
             sourceRight='50%'
-            framePadding='16rem 4rem 4rem 4rem'
+            framePadding='14rem 4rem 4rem 4rem'
             frameStyle={{ fill: 'rgba(255, 255, 255, 1)' }}
             frameInnerStyle={{}}
             frameClipContent={false}
@@ -372,16 +382,16 @@ export default class App extends Component {
             rightTickFormat={undefined}
             bottomTickFormat={undefined}
             leftTickFormat={undefined}
-            tickStyle={{ strokeWidth: '.125rem', stroke: 'rgba(33, 33, 33, .2)' }}
+            tickStyle={{}}
             topTickStyle={{}}
             rightTickStyle={{}}
             bottomTickStyle={{}}
             leftTickStyle={{}}
-            tickLabelOffset={'.5rem'}
-            topTickLabelOffset={undefined}
-            rightTickLabelOffset={undefined}
-            bottomTickLabelOffset={undefined}
-            leftTickLabelOffset={undefined} />
+            labelOffset={'.5rem'}
+            topLabelOffset={undefined}
+            rightLabelOffset={undefined}
+            bottomLabelOffset={undefined}
+            leftLabelOffset={undefined} />
         </div>}
 
         {/* Footer */}

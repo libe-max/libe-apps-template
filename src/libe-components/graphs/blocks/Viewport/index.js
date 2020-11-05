@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import asGraphAsset from '../asGraphAsset'
-import AppContext from '../../../context'
+import asGraphAsset from '../../primitives/asGraphAsset'
+import AppContext from '../../../../context'
 
 /*
  *   Viewport component

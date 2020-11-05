@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import asGraphAsset from '../asGraphAsset'
-import AppContext from '../../../context'
+import asGraphAsset from '../../primitives/asGraphAsset'
+import AppContext from '../../../../context'
 import Frame from '../Frame'
 
 /*
@@ -32,7 +32,7 @@ import Frame from '../Frame'
  *   tickValues, topTickValues, rightTickValues, bottomTickValues, leftTickValues,
  *   tickFormat, topTickFormat, rightTickFormat, bottomTickFormat, leftTickFormat,
  *   tickStyle, topTickStyle, rightTickStyle, bottomTickStyle, leftTickStyle,
- *   tickLabelPadding, topTickLabelPadding, rightTickLabelPadding, bottomTickLabelPadding, leftTickLabelPadding,
+ *   labelOffset, topLabelOffset, rightLabelOffset, bottomLabelOffset, leftLabelOffset,
  *   className
  *
  */
@@ -154,11 +154,11 @@ class Graph extends Component {
         rightTickFormat={props.rightTickFormat}
         bottomTickFormat={props.bottomTickFormat}
         leftTickFormat={props.leftTickFormat}
-        tickLabelOffset={props.tickLabelOffset}
-        topTickLabelOffset={props.topTickLabelOffset}
-        rightTickLabelOffset={props.rightTickLabelOffset}
-        bottomTickLabelOffset={props.bottomTickLabelOffset}
-        leftTickLabelOffset={props.leftTickLabelOffset}
+        labelOffset={props.labelOffset}
+        topLabelOffset={props.topLabelOffset}
+        rightLabelOffset={props.rightLabelOffset}
+        bottomLabelOffset={props.bottomLabelOffset}
+        leftLabelOffset={props.leftLabelOffset}
         tickStyle={props.tickStyle}
         topTickStyle={props.topTickStyle}
         rightTickStyle={props.rightTickStyle}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AppContext from '../../../context'
+import AppContext from '../../../../context'
 
 /*
  *   GraphBasicShape higher order component
@@ -7,7 +7,7 @@ import AppContext from '../../../context'
  *
  *   DESCRIPTION
  *
- *   CONTEXT (from asGraphAsset HOC)
+ *   CONTEXT (setup by nearest parent asGraphAsset HOC)
  *   width, height, data, xScale, yScale, calcWidth, calcHeight, calcPadding
  *
  *   PROPS
@@ -53,14 +53,15 @@ const asGraphBasicShape = WrappedComponent => {
       const y2 = props.y2 !== undefined ? calcHeightFromParent(props.y2) : props.y2Value !== undefined ? yScale(props.y2Value) : undefined
       const cx = props.cx !== undefined ? calcWidthFromParent(props.cx) : props.cxValue !== undefined ? xScale(props.cxValue) : undefined
       const cy = props.cy !== undefined ? calcHeightFromParent(props.cy) : props.cyValue !== undefined ? yScale(props.cyValue) : undefined
-      const rx = props.rx !== undefined ? calcWidthFromParent(props.rx) : undefined
-      const ry = props.ry !== undefined ? calcHeightFromParent(props.ry) : undefined
-      const r = props.r !== undefined ? calcWidthFromParent(props.r) : undefined
-      const width = props.width !== undefined ? calcWidthFromParent(props.width) : props.widthValue ? xScale(props.widthValue + xScale.invert(x)) - x : undefined // [WIP] should depend on scale type
-      const height = props.height !== undefined ? calcHeightFromParent(props.height) : props.heightValue ? yScale(props.heightValue + yScale.invert(y)) - y : undefined  // [WIP] should depend on scale type
+      const rx = props.rx !== undefined ? calcWidthFromParent(props.rx) : props.rxValue !== undefined ? xScale(props.rxValue) : undefined
+      const ry = props.ry !== undefined ? calcHeightFromParent(props.ry) : props.ryValue !== undefined ? yScale(props.ryValue) : undefined
+      const r = props.r !== undefined ? calcWidthFromParent(props.r) : props.rValue !== undefined ? xScale(props.rValue) : undefined
+      const width = props.width !== undefined ? calcWidthFromParent(props.width) : props.widthValue  !== undefined ? (xScale(props.widthValue + xScale.invert(x)) - x) : undefined // [WIP] should depend on scale type
+      const height = props.height !== undefined ? calcHeightFromParent(props.height) : props.heightValue !== undefined  ?( yScale(props.heightValue + yScale.invert(y)) - y) : undefined  // [WIP] should depend on scale type
       const points = props.points
       const d = props.d
       const pathLength = props.pathLength
+
       const style = props.style
 
       const childProps = {
@@ -74,6 +75,9 @@ const asGraphBasicShape = WrappedComponent => {
       delete childProps.y2Value
       delete childProps.cxValue
       delete childProps.cyValue
+      delete childProps.rxValue
+      delete childProps.ryValue
+      delete childProps.rValue
       delete childProps.widthValue
       delete childProps.heightValue
 
