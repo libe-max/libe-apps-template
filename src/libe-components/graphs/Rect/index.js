@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
-import asGraphAsset from '../asGraphAsset'
+import asGraphBasicShape from '../asGraphBasicShape'
+import AppContext from '../../../context'
 
 /*
  *   Rect component
  *   ------------------------------------------------------
  *
  *   NOTICE
- *   This component is rendered through the asGraphAsset HOC
+ *   This component is rendered through the asGraphBasicShape HOC
  *
  *   DESCRIPTION
  *   Returns a svg rect element
  *
- *   IMPERATIVE PROPS (from asGraphAsset HOC)
- *   width, height, calcWidth, calcHeight, calcPadding, data, xScale, yScale, render
+ *   IMPERATIVE PROPS (from asGraphBasicShape HOC)
+ *   width, height, calcWidth, calcHeight, calcPadding, data, xScale, yScale,
+ *   render, renderer
  *
  *   PROPS
  *   className
@@ -30,31 +32,31 @@ class Rect extends Component {
     this.c = 'lblb-graph-rect'
   }
 
+  /* * * * * * * * * * * * * * * * *
+   *
+   * MAKE CONTEXT ACCESSIBLE
+   *
+   * * * * * * * * * * * * * * * * */
+  static contextType = AppContext
+
   /* * * * * * * * * * * * * * * *
    *
    * RENDER
    *
    * * * * * * * * * * * * * * * */
   render () {
-    const { props, c } = this
-
-    /* Inner logic */
-    const { width, height } = this.props
+    const { props, context, c } = this
 
     /* Assign classes */
     const classes = [c]
     if (props.className) classes.push(props.className)
 
     /* Display */
-    return <rect
-      style={{ fill: 'orange' }}
-      width={props.width}
-      height={props.height}
-      className={classes.join(' ')} />
+    return <rect {...props} className={classes.join(' ')} />
   }
 }
 
-export default asGraphAsset(Rect)
+export default asGraphBasicShape(Rect)
 
 /* * * * * Prop types * * * * */
 

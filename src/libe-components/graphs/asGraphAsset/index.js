@@ -1,25 +1,28 @@
 import React, { Component } from 'react'
 import { scaleLinear } from 'd3'
-import chroma from 'chroma-js'
 import AppContext from '../../../context'
 import cssCalcToPx from '../../../libe-utils/css-calc-to-px'
 import cssPaddingExpressionToObject from '../../../libe-utils/css-padding-expression-to-object'
 import d3ScaleNameToScale from '../../../libe-utils/d3-scale-name-to-scale'
+import d3ScaleToScaleType from '../../../libe-utils/d3-scale-to-scale-type'
+import d3CopyTypedScale from '../../../libe-utils/d3-copy-typed-scale'
 
 /*
  *   GraphAsset higher order component
  *   ------------------------------------------------------
  *
  *   DESCRIPTION
- *   - Computes generig props for all graph components
+ *   - Computes generic props for all graph components
  *   - Checks in context if we're already in a SVG environment, and:
  *     • Updates the context for children with current viewport values
  *       (width, height, data, xScale, yScale)
  *     • Renders a wrapper (Div > Svg > G or simply G depending on the context)
- *     • Fills the wrapper with the lower order component and give them the props they need
+ *     • Fills the wrapper with the lower order component and give them the
+ *       props and context they need
  *
  *   PROPS
- *   x, y, width, height, padding, data, xScale, xScaleDomain, xScaleConf, yScale, yScaleDomain, yScaleConf, render
+ *   x, y, width, height, padding, data, xScale, xScaleDomain, xScaleConf,
+ *   yScale, yScaleDomain, yScaleConf, render, style, clipContent
  *
  */
 
@@ -33,7 +36,8 @@ const asGraphAsset = WrappedComponent => {
     constructor () {
       super()
       this.state = {
-        id: Math.random().toString(36).slice(2)
+        inner_clip_id: `lblb-clip__${Math.random().toString(36).slice(2)}`,
+        outer_clip_id: `lblb-clip__${Math.random().toString(36).slice(2)}`
       }
     }
 
@@ -98,43 +102,44 @@ const asGraphAsset = WrappedComponent => {
       const dimensions = { width, height }
 
       // Data
-      const data = props.data || context.current_graph_asset.data
+      const data = props.data || (context.current_graph_asset ? context.current_graph_asset.data : undefined)
 
       // Scales
       const unconfXScale = props.xScale
         ? typeof props.xScale === 'function'
-          ? props.xScale.copy()
+          ? d3CopyTypedScale(props.xScale).domain([0, width]).range([0, width])
           : d3ScaleNameToScale(props.xScale)([0, width], [0, width])
-        : scaleLinear([0, width], [0, width])
+        : context.current_graph_asset && context.current_graph_asset.xScale
+          ? d3CopyTypedScale(context.current_graph_asset.xScale).domain([0, width]).range([0, width])
+          : scaleLinear([0, width], [0, width])
       const unconfYScale = props.yScale
         ? typeof props.yScale === 'function'
-          ? props.yScale.copy()
+          ? d3CopyTypedScale(props.yScale).domain([0, height]).range([0, height])
           : d3ScaleNameToScale(props.yScale)([0, height], [0, height])
-        : scaleLinear([0, height], [0, height])
+        : context.current_graph_asset && context.current_graph_asset.yScale
+          ? d3CopyTypedScale(context.current_graph_asset.yScale).domain([0, height]).range([0, height])
+          : scaleLinear([0, height], [0, height])
       if (props.xScaleDomain) unconfXScale.domain(props.xScaleDomain)
       if (props.yScaleDomain) unconfYScale.domain(props.yScaleDomain)
-      const xScale = props.xScaleConf ? props.xScaleConf({ scale: unconfXScale, width, height, data }) : unconfXScale
-      const yScale = props.yScaleConf ? props.yScaleConf({ scale: unconfYScale, width, height, data }) : unconfYScale
+      const xScale = props.xScaleConf ? props.xScaleConf({ width, height, data, scale: unconfXScale }) : unconfXScale
+      const yScale = props.yScaleConf ? props.yScaleConf({ width, height, data, scale: unconfYScale }) : unconfYScale
+      xScale._type = xScale._type || d3ScaleToScaleType(xScale)
+      yScale._type = yScale._type || d3ScaleToScaleType(yScale)
 
       // Render
-      const render = props.render ? props.render : () => ''
+      const render = props.render || (() => '')
+      const _renderer = () => render({ data, width, height, xScale, yScale })
 
-      const childProps = {
-        ...props,
-        width,
-        height,
-        data,
-        xScale: xScale.copy(),
-        yScale: yScale.copy(),
-        render,
-        calcWidth: val => cssCalcToPx(val, width, context.viewport),
-        calcHeight: val => cssCalcToPx(val, height, context.viewport),
-        calcPadding: val => cssPaddingExpressionToObject(val,  dimensions, context.viewport),
-        x: undefined,
-        y: undefined,
-        padding: undefined,
-        name: undefined
-      }
+      const childProps = { ...props, render, _renderer }
+      delete childProps.x
+      delete childProps.y
+      delete childProps.width
+      delete childProps.height
+      delete childProps.padding
+      delete childProps.data
+      delete childProps.xScale
+      delete childProps.yScale
+      delete childProps.style
 
       const childrenAssetsContext = {
         ...context,
@@ -142,30 +147,77 @@ const asGraphAsset = WrappedComponent => {
           ...context.current_graph_asset,
           width,
           height,
-          data
+          data,
+          xScale: xScale,
+          yScale: yScale,
+          calcWidth: val => cssCalcToPx(val, width, context.viewport),
+          calcHeight: val => cssCalcToPx(val, height, context.viewport),
+          calcPadding: val => cssPaddingExpressionToObject(val,  dimensions, context.viewport)
         }
       }
 
+      const wrappedWithContext = <AppContext.Provider value={childrenAssetsContext}>
+        <WrappedComponent {...childProps} />
+      </AppContext.Provider>
+
+      const paddedBox = <g transform={`translate(${padding.left}, ${padding.top})`}>
+        <rect
+          width={width}
+          height={height}
+          style={{ ...props.innerStyle }} />
+        {props.innerClipContent
+          && <clipPath id={state.inner_clip_id}>
+          <rect
+            width={width}
+            height={height} />
+        </clipPath>}
+        {!props.clipContent
+          && props.clipContent
+          && <clipPath id={state.outer_clip_id}>
+          <rect
+            x={-1 * padding.left}
+            y={-1 * padding.top}
+            width={outerWidth}
+            height={outerHeight} />
+        </clipPath>}
+        {props.innerClipContent
+          && <g clipPath={`url(#${state.inner_clip_id})`}>
+          {wrappedWithContext}
+        </g>}
+        {!props.innerClipContent
+          && props.clipContent
+          && <g clipPath={`url(#${state.outer_clip_id})`}>
+          {wrappedWithContext}
+        </g>}
+        {!props.innerClipContent
+          && !props.clipContent
+          && <g>{wrappedWithContext}</g>}
+      </g>
+
       /* Display */
       return context.current_graph_asset
-        ? <g className={`lblb-graph-asset`} id={`lblb-graph-asset-id-${state.id}`} ref={n => this.$assetWrapper = n}>
-          <rect width={outerWidth} height={outerHeight} style={{ fill: 'transparent', stroke: 'rgba(33, 33, 33, .1)', strokeWidth: 1, strokeLocation: 'inside' }} />
-          <g className='lblb-graph-asset__mar-and-pad' transform={`translate(${x + padding.left}, ${y + padding.top})`}>
-            <rect width={width} height={height} style={{ fill: 'rgba(33, 33, 33, .015)' }} />
-            <AppContext.Provider value={childrenAssetsContext}>
-              <WrappedComponent {...childProps} />
-            </AppContext.Provider>
-          </g>
+        ? <g
+          className={`lblb-graph-asset`}
+          transform={`translate(${x}, ${y})`}
+          ref={n => this.$assetWrapper = n}>
+          <rect
+            width={outerWidth}
+            height={outerHeight}
+            style={{ ...props.style }} />
+          {paddedBox}
         </g>
-        : <div className={`lblb-graph-asset`} id={`lblb-graph-asset-id-${state.id}`} ref={n => this.$assetWrapper = n}>
-          <svg width={outerWidth} height={outerHeight}>
-            <rect width={outerWidth} height={outerHeight} style={{ fill: 'transparent', stroke: 'rgba(33, 33, 33, .1)', strokeWidth: 1, strokeLocation: 'inside' }} />
-            <g className='lblb-graph-asset__mar-and-pad' transform={`translate(${x + padding.left}, ${y + padding.top})`}>
-              <rect width={width} height={height} style={{ fill: 'rgba(33, 33, 33, .015)' }} />
-              <AppContext.Provider value={childrenAssetsContext}>
-                <WrappedComponent {...childProps} />
-              </AppContext.Provider>
-            </g>
+        : <div
+          className={`lblb-graph-asset`}
+          style={{ marginLeft: `${x}px`, marginTop: `${y}px` }}
+          ref={n => this.$assetWrapper = n}>
+          <svg
+            width={outerWidth}
+            height={outerHeight}>
+            <rect
+              width={outerWidth}
+              height={outerHeight}
+              style={{ ...props.style }} />
+            {paddedBox}
           </svg>
         </div>
     }

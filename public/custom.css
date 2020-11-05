@@ -1,25 +1,9 @@
-.lblb-graph {
-  display: block;
+.lblb-graph-asset * {
+  fill: transparent;
 }
 
-.lblb-graph svg {
-  display: block;
-  box-shadow: 0 0 2rem 0 rgba(33, 33,33, .2);
-}
-
-.lblb-graph__bg-rect {
-  fill: violet;
-}
-
-.lblb-graph__head,
-.lblb-graph__foot {
-  opacity: 1;
-  transition: opacity 200ms;
-}
-
-.lblb-graph:hover > .lblb-graph__head,
-.lblb-graph:hover > .lblb-graph__foot {
-  opacity: .05;
+.lblb-graph-asset text {
+  fill: #212121;
 }
 
 .lblb-graph__title {
@@ -43,6 +27,14 @@
   font-weight: 400;
 }
 
-.lblb-graph-viewport__bg {
-  fill: crimson;
+.lblb-graph-axis__domain line {
+  stroke: #212121;
+}
+
+.lblb-graph-axis__ticks line {
+  stroke: #212121;
+}
+
+.lblb-graph-axis__ticks text {
+  font-family: 'Synthese';
 }

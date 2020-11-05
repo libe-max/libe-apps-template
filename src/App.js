@@ -1,30 +1,19 @@
 import React, { Component } from 'react'
 import { statics_url as staticsUrl } from './config'
 import AppContext from './context'
-
 import Loader from './libe-components/blocks/Loader'
 import LoadingError from './libe-components/blocks/LoadingError'
 import ShareArticle from './libe-components/blocks/ShareArticle'
 import LibeLaboLogo from './libe-components/blocks/LibeLaboLogo'
 import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Diaporama from './libe-components/blocks/Diaporama'
-import Tweet from './libe-components/blocks/Tweet'
-import Photo2 from './libe-components/blocks/Photo2'
-
 import Svg from './libe-components/primitives/Svg'
-
 import InterTitle from './libe-components/text-levels/InterTitle'
 import Paragraph from './libe-components/text-levels/Paragraph'
-import Quote from './libe-components/text-levels/Quote'
-
-import MetroTiler from './libe-components/layouts/MetroTiler'
-
 import Graph from './libe-components/graphs/Graph'
 import Frame from './libe-components/graphs/Frame'
 import Rect from './libe-components/graphs/Rect'
-
-import { scaleBand } from 'd3-scale'
-
+  
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
    *
@@ -311,50 +300,88 @@ export default class App extends Component {
         { /* App */ }
         {!state.loading_sheet
         && !state.error_sheet
-        && <div style={{ width: '100%', maxWidth: '60rem' }}>
+        && <div style={{ width: '100%' }}>
           <Graph
-            height='120vh'
+            x={0}
+            y={10}
+            height='90vw'
             padding='1rem'
-            framePadding='13rem 50px 50px 50px'
+            data={data}
+            xScale='pow'
+            yScale='pow'
+            xScaleDomain={[0, 5e6]}
+            yScaleDomain={[0, 11]}
+            xScaleConf={({ scale, width, height, data }) => scale.exponent(.5).domain([0, width * 4100]) }
+            render={({ scale, width, height, data }) => <g><Rect xValue={10} widthValue={66000} height={10} style={{ fill: 'orange' }} /></g>}
+            style={{ fill: 'rgba(20, 20, 220, .7)' }}
+            innerStyle={{}}
             title={'Un titre, parfois c\'est long<br />ça s\'étend sur 3 lignes<br />et tout, ça en fait des mots'}
             subtitle={`
               Et puis alors les sous-titres alors là c'est encore autre chose
               <br />parce que les gens ils croient comme c'est tout petit on peut
               <br />en mettre des tonnes mais au final c'est quand même bien long quoi`}
+            source='Source : Big'
+            titleAlign='middle'
+            subtitleAlign='middle'
+            sourceAlign='middle'
+            headTop='0rem'
+            footBottom='0rem'
+            titleLeft='Not read because titleRight'
+            titleRight='50%'
+            subtitleLeft='Not read because titleRight'
+            subtitleRight='50%'
+            sourceLeft='Not read because titleRight'
+            sourceRight='50%'
+            framePadding='16rem 4rem 4rem 4rem'
+            frameStyle={{ fill: 'rgba(255, 255, 255, 1)' }}
+            frameInnerStyle={{}}
+            frameClipContent={false}
+            frameInnerClipContent={false}
+            viewportPadding='1rem'
+            viewportStyle={{}}
+            viewportInnerStyle={{ fill: 'coral' }}
+            viewportClipContent={false}
+            viewportInnerClipContent={false}
             showTopAxis
             showLeftAxis
-            xScale='pow'
-            yScale='pow'
-            data={data}>
-            <Frame
-              name='lol'
-              padding='50px'
-              xScale='band'
-              xScaleDomain={[0, 5]}
-              showTopAxis
-              showLeftAxis>
-              <Rect width={'calc(100% - 2rem)'} height={'100%'} style={{ fill: 'red' }} />
-              <Frame
-                padding='50px'
-                axisPadding='2rem 0 0 2rem'
-                xScale='band'
-                xScaleConf={({ scale, width, height, data }) => scale.domain(['lol', 'lal', 'lil'])}
-                yScale='band'
-                yScaleConf={({ scale, width, height, data }) => scale.domain(['lul', 'lyl', 'lœl'])}
-                showTopAxis
-                showLeftAxis
-                render={data => data.map(d => <g
-                  key={d.name}
-                  transform={`translate(${(d.year - 1970) * 10}, ${(2030 - d.end) * 20})`}>
-                  <circle
-                    style={{ fill: 'blue' }}
-                    cx={0}
-                    cy={0}
-                    r={d.trophies} />
-                  <text y={6} textAnchor='middle' style={{ fill: 'white' }}>{d.name}</text>
-                </g>)} />
-            </Frame>
-          </Graph>
+            hideDomain={false}
+            hideTopDomain={false}
+            hideRightDomain={false}
+            hideBottomDomain={false}
+            hideLeftDomain={false}
+            domainStyle={{ strokeWidth: '.25rem', strokeLinecap: 'butt' }}
+            topDomainStyle={{}}
+            rightDomainStyle={{}}
+            bottomDomainStyle={{}}
+            leftDomainStyle={{}}
+            tickSize='3'
+            topTickSize='calc(100% - 1rem)'
+            leftTickSize='calc(100% - 1rem)'
+            tickOffset={2}
+            topTickOffset={0}
+            rightTickOffset={0}
+            bottomTickOffset={0}
+            leftTickOffset={0}
+            tickValues={undefined}
+            topTickValues={[0, 3e4, 1e5, 3e5, 1e6, 3e6]}
+            rightTickValues={undefined}
+            bottomTickValues={undefined}
+            leftTickValues={undefined}
+            tickFormat={[10, 's']}
+            topTickFormat={undefined}
+            rightTickFormat={undefined}
+            bottomTickFormat={undefined}
+            leftTickFormat={undefined}
+            tickStyle={{ strokeWidth: '.125rem', stroke: 'rgba(33, 33, 33, .2)' }}
+            topTickStyle={{}}
+            rightTickStyle={{}}
+            bottomTickStyle={{}}
+            leftTickStyle={{}}
+            tickLabelOffset={'.5rem'}
+            topTickLabelOffset={undefined}
+            rightTickLabelOffset={undefined}
+            bottomTickLabelOffset={undefined}
+            leftTickLabelOffset={undefined} />
         </div>}
 
         {/* Footer */}

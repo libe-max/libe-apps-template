@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import asGraphAsset from '../asGraphAsset'
+import AppContext from '../../../context'
 
 /*
  *   Viewport component
@@ -11,8 +12,11 @@ import asGraphAsset from '../asGraphAsset'
  *   DESCRIPTION
  *   Displays a graph viewport in which visual idioms are placed
  *
- *   IMPERATIVE PROPS (from asGraphAsset HOC)
- *   width, height, calcWidth, calcHeight, calcPadding, data, xScale, yScale, render
+ *   CONTEXT (from asGraphAsset HOC)
+ *   width, height, data, xScale, yScale, calcWidth, calcHeight, calcPadding
+ *   
+ *   PROPS (from asGraphAsset HOC)
+ *   render, _renderer
  *
  *   OWN PROPS
  *   children, className
@@ -30,6 +34,13 @@ class Viewport extends Component {
     this.c = 'lblb-graph-viewport'
   }
 
+  /* * * * * * * * * * * * * * * * *
+   *
+   * MAKE CONTEXT ACCESSIBLE
+   *
+   * * * * * * * * * * * * * * * * */
+  static contextType = AppContext
+
   /* * * * * * * * * * * * * * * *
    *
    * RENDER
@@ -37,11 +48,7 @@ class Viewport extends Component {
    * * * * * * * * * * * * * * * */
   render () {
     const { props, context, c } = this
-
-    console.log('viewport', props.xScale.domain(), props.xScale.range(), props.yScale.domain(), props.yScale.range())
-
-    /* Inner logic */
-    const { width, height, data, render, children } = props
+    const { children, _renderer } = props
 
     /* Assign classes */
     const classes = [c]
@@ -49,8 +56,8 @@ class Viewport extends Component {
 
     /* Display */
     return <g className={classes.join(' ')}>
-      <g className={`${c}__rendered`}>{render(data)}</g>
-      <g className={`${c}__children`}>{children}</g>
+      {children}
+      {_renderer()}
     </g> 
   }
 }

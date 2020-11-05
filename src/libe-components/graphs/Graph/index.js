@@ -13,15 +13,27 @@ import Frame from '../Frame'
  *   DESCRIPTION
  *   displays a Graph component with a head, a foot, and a body
  *
- *   IMPERATIVE PROPS (from asGraphAsset HOC)
- *   width, height, calcWidth, calcHeight, calcPadding, data, xScale, yScale, render
+ *   CONTEXT (from asGraphAsset HOC)
+ *   width, height, data, xScale, yScale, calcWidth, calcHeight, calcPadding
+ *   
+ *   PROPS (from asGraphAsset HOC)
+ *   render, _renderer
  *
  *   OWN PROPS
- *   children, headTop, title, titleAlign, titleLeft, titleRight,
- *   subtitle, subtitleAlign, subtitleLeft, subtitleRight, footBottom,
- *   source, sourceAlign, sourceLeft, sourceRight, framePadding, frameAxisPadding,
- *   frameXScale, frameYScale, frameXScaleConf, frameYScaleConf, showTopAxis,
- *   showRightAxis, showBottomAxis, showLeftAxis, className
+ *   children, title, subtitle, source, titleAlign, subtitleAlign, sourceAlign, 
+ *   headTop, footBottom, titleLeft, titleRight, subtitleLeft, subtitleRight, sourceLeft, sourceRight,
+ *   framePadding, frameStyle, frameInnerStyle, frameClipContent, frameInnerClipContent,
+ *   viewportPadding, viewportStyle, viewportInnerStyle, viewportClipContent, viewportInnerClipContent,
+ *   showTopAxis, showRightAxis, showBottomAxis, showLeftAxis,
+ *   hideDomain, hideTopDomain, hideRightDomain, hideBottomDomain, hideLeftDomain,
+ *   domainStyle, topDomainStyle, rightDomainStyle, bottomDomainStyle, leftDomainStyle,
+ *   tickSize, topTickSize, rightTickSize, bottomTickSize, leftTickSize,
+ *   tickOffset, topTickOffset, rightTickOffset, bottomTickOffset, leftTickOffset,
+ *   tickValues, topTickValues, rightTickValues, bottomTickValues, leftTickValues,
+ *   tickFormat, topTickFormat, rightTickFormat, bottomTickFormat, leftTickFormat,
+ *   tickStyle, topTickStyle, rightTickStyle, bottomTickStyle, leftTickStyle,
+ *   tickLabelPadding, topTickLabelPadding, rightTickLabelPadding, bottomTickLabelPadding, leftTickLabelPadding,
+ *   className
  *
  */
 
@@ -52,7 +64,8 @@ class Graph extends Component {
     const { props, context, c } = this
 
     /* Inner logic */
-    const { width, height, calcWidth, calcHeight } = props
+    const { width, height, calcWidth, calcHeight } = context.current_graph_asset
+
     const titleLines = props.title.split(/<br\s?\/>/igm)
     const titleLineHeight = 2.5 * context.viewport.rem
     const titleMarginBottom = .5 * context.viewport.rem
@@ -91,26 +104,71 @@ class Graph extends Component {
     if (props.className) classes.push(props.className)
 
     return <g className={classes.join(' ')}>
-      <g className={`${c}__body`}>
-        <Frame
-          padding={props.framePadding}
-          axisPadding={props.frameAxisPadding}
-          showTopAxis={props.showTopAxis}
-          showRightAxis={props.showRightAxis}
-          showBottomAxis={props.showBottomAxis}
-          showLeftAxis={props.showLeftAxis}
-          data={props.data}
-          xScale={props.xScale}
-          yScale={props.xScale}
-          xScaleDomain={props.xScaleDomain}
-          yScaleDomain={props.xScaleDomain}
-          xScaleConf={props.xScaleConf}
-          yScaleConf={props.xScaleConf}
-          render={props.render}>
-          {props.children}
-        </Frame>
-      </g>
-      <g className={`${c}__head`} transform={`translate(0, ${headY})`}>
+      <Frame
+        padding={props.framePadding}
+        showTopAxis={props.showTopAxis}
+        showRightAxis={props.showRightAxis}
+        showBottomAxis={props.showBottomAxis}
+        showLeftAxis={props.showLeftAxis}
+        xScaleDomain={props.xScaleDomain}
+        yScaleDomain={props.yScaleDomain}
+        xScaleConf={props.xScaleConf}
+        yScaleConf={props.yScaleConf}
+        render={props.render}
+        style={props.frameStyle}
+        innerStyle={props.frameInnerStyle}
+        clipContent={props.frameClipContent}
+        innerClipContent={props.frameInnerClipContent}
+        viewportPadding={props.viewportPadding}
+        viewportStyle={props.viewportStyle}
+        viewportInnerStyle={props.viewportInnerStyle}
+        viewportClipContent={props.viewportClipContent}
+        viewportInnerClipContent={props.viewportInnerClipContent}
+        hideDomain={props.hideDomain}
+        hideTopDomain={props.hideTopDomain}
+        hideRightDomain={props.hideRightDomain}
+        hideBottomDomain={props.hideBottomDomain}
+        hideLeftDomain={props.hideLeftDomain}
+        domainStyle={props.domainStyle}
+        topDomainStyle={props.topDomainStyle}
+        rightDomainStyle={props.rightDomainStyle}
+        bottomDomainStyle={props.bottomDomainStyle}
+        leftDomainStyle={props.leftDomainStyle}
+        tickSize={props.tickSize}
+        topTickSize={props.topTickSize}
+        rightTickSize={props.rightTickSize}
+        bottomTickSize={props.bottomTickSize}
+        leftTickSize={props.leftTickSize}
+        tickOffset={props.tickOffset}
+        topTickOffset={props.topTickOffset}
+        rightTickOffset={props.rightTickOffset}
+        bottomTickOffset={props.bottomTickOffset}
+        leftTickOffset={props.leftTickOffset}
+        tickValues={props.tickValues}
+        topTickValues={props.topTickValues}
+        rightTickValues={props.rightTickValues}
+        bottomTickValues={props.bottomTickValues}
+        leftTickValues={props.leftTickValues}
+        tickFormat={props.tickFormat}
+        topTickFormat={props.topTickFormat}
+        rightTickFormat={props.rightTickFormat}
+        bottomTickFormat={props.bottomTickFormat}
+        leftTickFormat={props.leftTickFormat}
+        tickLabelOffset={props.tickLabelOffset}
+        topTickLabelOffset={props.topTickLabelOffset}
+        rightTickLabelOffset={props.rightTickLabelOffset}
+        bottomTickLabelOffset={props.bottomTickLabelOffset}
+        leftTickLabelOffset={props.leftTickLabelOffset}
+        tickStyle={props.tickStyle}
+        topTickStyle={props.topTickStyle}
+        rightTickStyle={props.rightTickStyle}
+        bottomTickStyle={props.bottomTickStyle}
+        leftTickStyle={props.leftTickStyle}>
+        {props.children}
+      </Frame>
+      <g
+        className={`${c}__head`}
+        transform={`translate(0, ${headY})`}>
         <g className={`${c}__title`}>{
           titleLines.map((line, i) => <text
             key={i}
@@ -154,18 +212,4 @@ export default asGraphAsset(Graph)
 /* * * * * Prop types * * * * */
 
 Graph.propTypes = {}
-Graph.defaultProps = {
-  headTop: 0,
-  title: '',
-  titleAlign: 'start',
-  titleLeft: 0,
-  subtitle: '',
-  subtitleAlign: 'start',
-  subtitleLeft: 0,
-  footBottom: 0,
-  source: '',
-  sourceAlign: 'start',
-  sourceLeft: 0,
-  framePadding: 0,
-  frameAxisPadding: 0
-}
+Graph.defaultProps = {}
