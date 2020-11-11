@@ -66,7 +66,7 @@ class Graph extends Component {
     /* Inner logic */
     const { width, height, calcWidth, calcHeight } = context.current_graph_asset
 
-    const titleLines = props.title.split(/<br\s?\/>/igm)
+    const titleLines = (props.title || '').split(/<br\s?\/>/igm)
     const titleLineHeight = 2.5 * context.viewport.rem
     const titleMarginBottom = .5 * context.viewport.rem
     const titleTextAnchor = props.titleAlign
@@ -76,7 +76,7 @@ class Graph extends Component {
       ? width - titleRight
       : titleLeft || 0
 
-    const subtitleLines = props.subtitle.split(/<br\s?\/>/igm)
+    const subtitleLines = (props.subtitle || '').split(/<br\s?\/>/igm)
     const subtitleLineHeight = 1 * context.viewport.rem
     const subtitleTextAnchor = props.subtitleAlign
     const subtitleLeft = calcWidth(props.subtitleLeft)
@@ -85,7 +85,7 @@ class Graph extends Component {
       ? width - subtitleRight
       : subtitleLeft || 0
 
-    const sourceLines = props.source.split(/<br\s?\/>/igm)
+    const sourceLines = (props.source || '').split(/<br\s?\/>/igm)
     const sourceLineHeight = 1 * context.viewport.rem
     const sourceTextAnchor = props.sourceAlign
     const sourceLeft = calcWidth(props.sourceLeft)

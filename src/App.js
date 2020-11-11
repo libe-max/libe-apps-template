@@ -12,12 +12,15 @@ import InterTitle from './libe-components/text-levels/InterTitle'
 import Paragraph from './libe-components/text-levels/Paragraph'
 import Graph from './libe-components/graphs/blocks/Graph'
 import Frame from './libe-components/graphs/blocks/Frame'
+import Viewport from './libe-components/graphs/blocks/Viewport'
 import Rect from './libe-components/graphs/shapes/Rect'
 import Circle from './libe-components/graphs/shapes/Circle'
 import Ellipse from './libe-components/graphs/shapes/Ellipse'
 import Line from './libe-components/graphs/shapes/Line'
 import Polyline from './libe-components/graphs/shapes/Polyline'
 import Path from './libe-components/graphs/shapes/Path'
+import Text from './libe-components/graphs/text/Text'
+import TextLine from './libe-components/graphs/text/Line'
   
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -306,6 +309,23 @@ export default class App extends Component {
         {!state.loading_sheet
         && !state.error_sheet
         && <div style={{ width: '100%' }}>
+          <Graph
+            height='6000px'
+            background='rgba(240, 240, 255, .9)'>
+            <Text level={0} family='Libe-Typewriter' align='right'>
+              <TextLine weight={800} lineLevel={6}>En première ligne lol</TextLine>
+              1 line
+              <tspan>2 tspan</tspan>
+              <tspan>3 tspan <tspan>4 nested tspan</tspan></tspan>
+              <TextLine>En première ligne lol</TextLine>
+              1 line
+              <tspan>2 tspan</tspan>
+              <tspan>3 tspan <tspan>4 nested tspan</tspan></tspan>
+              5 line
+              <TextLine>6 textline <tspan>7 nested tspan</tspan></TextLine>
+              <tspan>8 tspan</tspan>
+            </Text>
+          </Graph>
           <Graph
             x={0}
             y={10}

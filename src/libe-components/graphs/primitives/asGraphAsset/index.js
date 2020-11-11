@@ -22,7 +22,7 @@ import d3CopyTypedScale from '../../../../libe-utils/d3-copy-typed-scale'
  *
  *   PROPS
  *   x, y, width, height, padding, data, xScale, xScaleDomain, xScaleConf,
- *   yScale, yScaleDomain, yScaleConf, render, style, clipContent
+ *   yScale, yScaleDomain, yScaleConf, render, style, background, clipContent
  *
  */
 
@@ -126,10 +126,11 @@ const asGraphAsset = WrappedComponent => {
       xScale._type = xScale._type || d3ScaleToScaleType(xScale)
       yScale._type = yScale._type || d3ScaleToScaleType(yScale)
 
-      // Render
+      // Renderer
       const render = props.render || (() => '')
       const _renderer = () => render({ data, width, height, xScale, yScale })
 
+      // Passed props
       const childProps = { ...props, render, _renderer }
       delete childProps.x
       delete childProps.y
@@ -141,6 +142,7 @@ const asGraphAsset = WrappedComponent => {
       delete childProps.yScale
       delete childProps.style
 
+      // Passed context
       const childrenAssetsContext = {
         ...context,
         current_graph_asset: {
@@ -156,46 +158,49 @@ const asGraphAsset = WrappedComponent => {
         }
       }
 
-      const wrappedWithContext = <AppContext.Provider value={childrenAssetsContext}>
-        <WrappedComponent {...childProps} />
-      </AppContext.Provider>
-
-      const paddedBox = <g transform={`translate(${padding.left}, ${padding.top})`}>
-        <rect
-          width={width}
-          height={height}
-          style={{ ...props.innerStyle }} />
-        {props.innerClipContent
-          && <clipPath id={state.inner_clip_id}>
+      // Inner stuff
+      const innerStyle = { ...props.innerStyle }
+      if (props.innerBackground) innerStyle.fill = props.innerBackground
+      const innerBox = <AppContext.Provider value={childrenAssetsContext}>
+        <g transform={`translate(${padding.left}, ${padding.top})`}>
           <rect
             width={width}
-            height={height} />
-        </clipPath>}
-        {!props.clipContent
-          && props.clipContent
-          && <clipPath id={state.outer_clip_id}>
-          <rect
-            x={-1 * padding.left}
-            y={-1 * padding.top}
-            width={outerWidth}
-            height={outerHeight} />
-        </clipPath>}
-        {props.innerClipContent
-          && <g clipPath={`url(#${state.inner_clip_id})`}>
-          {wrappedWithContext}
-        </g>}
-        {!props.innerClipContent
-          && props.clipContent
-          && <g clipPath={`url(#${state.outer_clip_id})`}>
-          {wrappedWithContext}
-        </g>}
-        {!props.innerClipContent
-          && !props.clipContent
-          && <g>{wrappedWithContext}</g>}
-      </g>
+            height={height}
+            style={innerStyle} />
+          {props.innerClipContent
+            && <clipPath id={state.inner_clip_id}>
+            <rect
+              width={width}
+              height={height} />
+          </clipPath>}
+          {!props.clipContent
+            && props.clipContent
+            && <clipPath id={state.outer_clip_id}>
+            <rect
+              x={-1 * padding.left}
+              y={-1 * padding.top}
+              width={outerWidth}
+              height={outerHeight} />
+          </clipPath>}
+          {props.innerClipContent
+            && <g clipPath={`url(#${state.inner_clip_id})`}>
+            <WrappedComponent {...childProps} />
+          </g>}
+          {!props.innerClipContent
+            && props.clipContent
+            && <g clipPath={`url(#${state.outer_clip_id})`}>
+            <WrappedComponent {...childProps} />
+          </g>}
+          {!props.innerClipContent
+            && !props.clipContent
+            && <g><WrappedComponent {...childProps} /></g>}
+        </g>
+      </AppContext.Provider>
 
-      /* Display */
-      return context.current_graph_asset
+      // Outer stuff
+      const style = { ...props.style }
+      if (props.background) style.fill = props.background
+      const outerBox = context.current_graph_asset
         ? <g
           className={`lblb-graph-asset`}
           transform={`translate(${x}, ${y})`}
@@ -203,8 +208,8 @@ const asGraphAsset = WrappedComponent => {
           <rect
             width={outerWidth}
             height={outerHeight}
-            style={{ ...props.style }} />
-          {paddedBox}
+            style={style} />
+          {innerBox}
         </g>
         : <div
           className={`lblb-graph-asset`}
@@ -216,10 +221,13 @@ const asGraphAsset = WrappedComponent => {
             <rect
               width={outerWidth}
               height={outerHeight}
-              style={{ ...props.style }} />
-            {paddedBox}
+              style={style} />
+            {innerBox}
           </svg>
         </div>
+
+      /* Display */
+      return outerBox
     }
   }
 

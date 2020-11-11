@@ -2,7 +2,8 @@
   fill: transparent;
 }
 
-.lblb-graph-asset text {
+.lblb-graph-asset text,
+.lblb-graph-asset tspan {
   fill: #212121;
 }
 
