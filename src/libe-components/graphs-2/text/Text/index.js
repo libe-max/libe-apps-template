@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AppContext from '../../../../context'
 import TextLine from '../Line'
 import computeTextLevels from '../../../../libe-utils/text-levels-to-font-size-and-line-heights'
+import alignToAnchor from '../../../../libe-utils/css-text-align-to-text-anchor'
 
 /*
  *   Text component
@@ -20,7 +21,8 @@ import computeTextLevels from '../../../../libe-utils/text-levels-to-font-size-a
  *   None (no HOC)
  *
  *   OWN PROPS
- *   x, y, children, level, lineLevel, family, weight, spacing, align, style, className
+ *   x, y, children, level, lineLevel, family, weight, spacing,
+ *   align, blockAlign, outline, outlineWidth, style, className
  *
  */
 
@@ -33,6 +35,7 @@ class Text extends Component {
   constructor () {
     super()
     this.c = 'lblb-svg-text'
+    this.alignBlock = this.alignBlock.bind(this)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -41,6 +44,41 @@ class Text extends Component {
    *
    * * * * * * * * * * * * * * * * */
   static contextType = AppContext
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * DID MOUNT & DID UPDATE
+   *
+   * * * * * * * * * * * * * * * * */
+  componentDidMount () { this.alignBlock() }
+  componentDidUpdate () { this.alignBlock() }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * ALIGN BLOCK
+   *
+   * * * * * * * * * * * * * * * * */
+  alignBlock () {
+    const { props, $wrapper } = this
+    if (!$wrapper) return
+    const blockAlign = props.blockAlign !== undefined ? props.blockAlign : 'start'
+    const startVals = ['left', 'start']
+    const centerVals = ['center', 'middle', 'justify', 'justify-all']
+    const endVals = ['right', 'end']
+    const percentBlockAlign = startVals.includes(blockAlign)
+      ? 0
+      : centerVals.includes(blockAlign)
+        ? .5
+        : endVals.includes(blockAlign)
+          ? 1
+          : parseFloat(blockAlign) / 100
+    if (Number.isNaN(percentBlockAlign)) return
+    const blockWidth = $wrapper.getBoundingClientRect().width
+    const propsX = props.x || 0
+    const alignOffset = propsX + blockWidth * percentBlockAlign
+    const transform = `translate(${alignOffset}, ${props.y || 0})`
+    $wrapper.setAttribute('transform', transform)
+  }
 
   /* * * * * * * * * * * * * * * * *
    *
@@ -81,6 +119,7 @@ class Text extends Component {
           key={i}
           y={currentOffsetTop}
           level={level}
+          align={props.align}
           lineLevel={lineLevel}>
           {line}
         </TextLine>
@@ -95,6 +134,7 @@ class Text extends Component {
           level: thisLevel,
           lineLevel: thisLineLevel,
           key: i,
+          align: line.props.align || props.align,
           y: currentOffsetTop + lineY
         })
         currentOffsetTop += lineHeight
@@ -107,7 +147,10 @@ class Text extends Component {
       fontFamily: props.family,
       fontWeight: props.weight,
       letterSpacing: props.spacing,
-      textAlign: props.align, // [WIP] do some conversion to text-anchor here
+      paintOrder: 'stroke',
+      stroke: props.outline,
+      strokeWidth: props.outlineWidth !== undefined ? props.outlineWidth : props.outline ? 1 : 0,
+      strokeLinejoin: props.outline || props.outlineWidth ? 'round' : undefined,
       ...props.style
     }
 
@@ -115,13 +158,16 @@ class Text extends Component {
     const classes = [c]
     if (props.className) classes.push(props.className)
 
-    return <text
-      x={props.x}
-      y={props.y}
-      style={style}
-      className={classes.join(' ')}>
-      {lines}
-    </text>
+    return <g
+      className={classes.join(' ')}
+      ref={n => this.$wrapper = n}
+      transform={`translate(${props.x || 0}, ${props.y || 0})`}>
+      <text
+        style={style}
+        textAnchor={alignToAnchor(props.align)}>
+        {lines}
+      </text>
+    </g>
   }
 }
 

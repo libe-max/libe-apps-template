@@ -22,7 +22,8 @@ import d3CopyTypedScale from '../../../../libe-utils/d3-copy-typed-scale'
  *
  *   PROPS
  *   x, y, width, height, padding, data, xScale, xScaleDomain, xScaleConf,
- *   yScale, yScaleDomain, yScaleConf, render, style, background, clipContent
+ *   yScale, yScaleDomain, yScaleConf, render, style, background, innerBackground
+ *   clipContent, innerClipContent
  *
  */
 

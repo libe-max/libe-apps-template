@@ -10,17 +10,27 @@ import Diaporama from './libe-components/blocks/Diaporama'
 import Svg from './libe-components/primitives/Svg'
 import InterTitle from './libe-components/text-levels/InterTitle'
 import Paragraph from './libe-components/text-levels/Paragraph'
-import Graph from './libe-components/graphs/blocks/Graph'
-import Frame from './libe-components/graphs/blocks/Frame'
-import Viewport from './libe-components/graphs/blocks/Viewport'
-import Rect from './libe-components/graphs/shapes/Rect'
-import Circle from './libe-components/graphs/shapes/Circle'
-import Ellipse from './libe-components/graphs/shapes/Ellipse'
-import Line from './libe-components/graphs/shapes/Line'
-import Polyline from './libe-components/graphs/shapes/Polyline'
-import Path from './libe-components/graphs/shapes/Path'
-import Text from './libe-components/graphs/text/Text'
-import TextLine from './libe-components/graphs/text/Line'
+
+import Graph from './libe-components/graphs/Graph'
+
+// import Graph from './libe-components/graphs/blocks/Graph'
+// import Frame from './libe-components/graphs/blocks/Frame'
+// import Viewport from './libe-components/graphs/blocks/Viewport'
+// import Rect from './libe-components/graphs/shapes/Rect'
+// import Circle from './libe-components/graphs/shapes/Circle'
+// import Ellipse from './libe-components/graphs/shapes/Ellipse'
+// import Line from './libe-components/graphs/shapes/Line'
+// import Polyline from './libe-components/graphs/shapes/Polyline'
+// import Path from './libe-components/graphs/shapes/Path'
+// import Text from './libe-components/graphs/text/Text'
+// import TextLine from './libe-components/graphs/text/Line'
+
+class Lol extends Component {
+  static contextType = AppContext
+  render () {
+    return <text y='200' dominantBaseline='hanging'>LOL</text>
+  }
+}
   
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -304,15 +314,112 @@ export default class App extends Component {
           - fill spreadsheet_id field in config.js<br />
           - display it's content via state.data_sheet
         </Paragraph>}
-
+        
         { /* App */ }
         {!state.loading_sheet
         && !state.error_sheet
         && <div style={{ width: '100%' }}>
           <Graph
+            x={0}
+            y={0}
+            width={'calc(100% - 1rem)'}
+            height={500}
+            clip={true}
+            bg='coral'
+            padding='2rem'
+            clipInner={false}
+            bgInner='aliceblue'
+            data={[1, 2, 3]}
+            xScale='pow'
+            xScaleDomain={[14, 100]}
+            xScaleConf={({ scale }) => scale}
+            render={() => ''}
+            title={'Un titre, parfois c\'est long<br />ça s\'étend sur 3 lignes<br />et tout, ça en fait des mots'}
+            subtitle={`
+              Et puis alors les sous-titres alors là c'est encore autre chose
+              <br />parce que les gens ils croient comme c'est tout petit on peut
+              <br />en mettre des tonnes mais au final c'est quand même bien long quoi`}
+            source='Source : Big'
+            titleAlign='middle'
+            subtitleAlign='middle'
+            sourceAlign='middle'
+            headTop='0rem'
+            footBottom='0rem'
+            titleLeft='Not read because titleRight'
+            titleRight='50%'
+            subtitleLeft='Not read because titleRight'
+            subtitleRight='50%'
+            sourceLeft='Not read because titleRight'
+            sourceRight='50%'
+            framePadding='14rem 4rem 4rem 4rem'
+            frameStyle={{ fill: 'rgba(255, 255, 255, 1)' }}
+            frameInnerStyle={{}}
+            frameClipContent={false}
+            frameInnerClipContent={false}
+            viewportPadding='1rem'
+            viewportStyle={{}}
+            viewportInnerStyle={{ fill: 'coral' }}
+            viewportClipContent={false}
+            viewportInnerClipContent={false}
+            showTopAxis
+            showLeftAxis
+            hideDomain={false}
+            hideTopDomain={false}
+            hideRightDomain={false}
+            hideBottomDomain={false}
+            hideLeftDomain={false}
+            domainStyle={{ strokeWidth: '.25rem', strokeLinecap: 'butt' }}
+            topDomainStyle={{}}
+            rightDomainStyle={{}}
+            bottomDomainStyle={{}}
+            leftDomainStyle={{}}
+            tickSize='3'
+            topTickSize='calc(100% - 1rem)'
+            leftTickSize='calc(100% - 1rem)'
+            tickOffset={2}
+            topTickOffset={0}
+            rightTickOffset={0}
+            bottomTickOffset={0}
+            leftTickOffset={0}
+            tickValues={undefined}
+            topTickValues={[0, 3e4, 1e5, 3e5, 1e6, 3e6]}
+            rightTickValues={undefined}
+            bottomTickValues={undefined}
+            leftTickValues={undefined}
+            tickFormat={[10, 's']}
+            topTickFormat={undefined}
+            rightTickFormat={undefined}
+            bottomTickFormat={undefined}
+            leftTickFormat={undefined}
+            tickStyle={{}}
+            topTickStyle={{}}
+            rightTickStyle={{}}
+            bottomTickStyle={{}}
+            leftTickStyle={{}}
+            labelOffset={'.5rem'}
+            topLabelOffset={undefined}
+            rightLabelOffset={undefined}
+            bottomLabelOffset={undefined}
+            leftLabelOffset={undefined}>
+            <Lol />
+          </Graph>
+        </div>}
+
+        { /* App */ }
+        {!state.loading_sheet
+        && !state.error_sheet
+        && false
+        && <div style={{ width: '100%' }}>
+          {/*<Graph
             height='6000px'
-            background='rgba(240, 240, 255, .9)'>
-            <Text level={0} family='Libe-Typewriter' align='right'>
+            background='rgba(240, 240, 255, 1)'>
+            <Text
+              level={1}
+              align='center'
+              blockAlign='center'
+              family='Libe-Typewriter'
+              outline='white'
+              outlineWidth='2'>
               <TextLine weight={800} lineLevel={6}>En première ligne lol</TextLine>
               1 line
               <tspan>2 tspan</tspan>
@@ -412,6 +519,7 @@ export default class App extends Component {
             rightLabelOffset={undefined}
             bottomLabelOffset={undefined}
             leftLabelOffset={undefined} />
+          */}
         </div>}
 
         {/* Footer */}

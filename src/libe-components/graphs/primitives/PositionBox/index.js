@@ -1,0 +1,75 @@
+import React, { Component } from 'react'
+import { v4 as uuid } from 'uuid'
+import AppContext from '../../../../context'
+import cssCalc from '../../../../libe-utils/css-calc-to-px'
+import cssPadding from '../../../../libe-utils/css-padding-expression-to-object'
+
+/*
+ *   PositionBox component
+ *   ------------------------------------------------------
+ *
+ *   DESCRIPTION
+ *   Captates positional props and renders an accordingly positioned box
+ *   
+ *   PROPS
+ *   x, y, width, height, clip, bg, children
+ *
+ */
+
+class PositionBox extends Component {
+  /* * * * * * * * * * * * * * * * *
+   *
+   * CONSTRUCTOR
+   *
+   * * * * * * * * * * * * * * * * */
+  constructor () {
+    super()
+    this.state = { clip_id: uuid() }
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * MAKE CONTEXT ACCESSIBLE
+   *
+   * * * * * * * * * * * * * * * * */
+  static contextType = AppContext
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * RENDER
+   *
+   * * * * * * * * * * * * * * * * */
+  render () {
+    const { props, state, context, c } = this
+
+    /* Inner logic */
+    const { x: propsX, y: propsY, width: propsWidth, height: propsHeight } = props
+    const { viewport, current_graph: currentGraph } = context
+    const { width: contextWidth, height: contextHeight } = currentGraph
+    const x = cssCalc(propsX, contextWidth, viewport) || 0
+    const y = cssCalc(propsY, contextHeight, viewport) || 0
+    const width = propsWidth !== undefined ? Math.max(cssCalc(propsWidth, contextWidth, viewport), 0) : contextWidth
+    const height = propsHeight !== undefined ? Math.max(cssCalc(propsHeight, contextHeight, viewport), 0) : contextHeight
+    const clipPath = props.clip ? `url(#${state.clip_id})` : undefined
+    const childContext = {
+      ...context,
+      current_graph: {
+        ...currentGraph,
+        width: width,
+        height: height
+      }
+    }
+
+    /* Display */
+    return <AppContext.Provider value={childContext}>
+      <g
+        transform={`translate(${x}, ${y})`}>
+        {props.bg && <rect width={width} height={height} fill={props.bg || 'transparent'} />}
+        <clipPath id={state.clip_id}><rect width={width} height={height} /></clipPath>
+        <g clipPath={clipPath}>{props.children}</g>
+      </g>
+    </AppContext.Provider>
+  }
+}
+
+export default PositionBox

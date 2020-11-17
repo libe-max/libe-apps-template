@@ -3,7 +3,7 @@ import AppContext from '../../../../context'
 import asContainer from '../../primitives/asContainer'
 
 /*
- *   Axis component
+ *   Viewport component
  *   ------------------------------------------------------
  *
  *   DESCRIPTION
@@ -14,7 +14,7 @@ import asContainer from '../../primitives/asContainer'
  *
  */
 
-class Axis extends Component {
+class Viewport extends Component {
   /* * * * * * * * * * * * * * * *
    *
    * CONSTRUCTOR
@@ -22,7 +22,7 @@ class Axis extends Component {
    * * * * * * * * * * * * * * * */
   constructor () {
     super()
-    this.c = 'lblb-axis'
+    this.c = 'lblb-viewport'
   }
 
   /* * * * * * * * * * * * * * * *
@@ -38,8 +38,8 @@ class Axis extends Component {
    *
    * * * * * * * * * * * * * * * */
   render () {
-    return <text dominantBaseline='hanging'>Axis</text>
+    return <text dominantBaseline='hanging'>Viewport</text>
   }
 }
 
-export default asContainer(Axis)
+export default asContainer(Viewport)

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AppContext from '../../../../context'
 import computeTextLevels from '../../../../libe-utils/text-levels-to-font-size-and-line-heights'
+import alignToAnchor from '../../../../libe-utils/css-text-align-to-text-anchor'
 
 /*
  *   TextLine component
@@ -59,7 +60,6 @@ class Line extends Component {
       fontFamily: props.family,
       fontWeight: props.weight,
       letterSpacing: props.spacing,
-      textAlign: props.align, // [WIP] do some conversion to text-anchor here
       ...props.style
     }
 
@@ -73,6 +73,7 @@ class Line extends Component {
       style={style}
       dominantBaseline='hanging'
       ref={n => this.$node = n}
+      textAnchor={alignToAnchor(props.align)}
       className={classes.join(' ')}>
       <tspan>{props.children}</tspan>
     </tspan>
