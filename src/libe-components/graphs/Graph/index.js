@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import AppContext from '../../../context'
-import PaddingBox from '../primitives/PaddingBox'
-import DataBox from '../primitives/DataBox'
 import ContainedGraph from '../containers/Graph'
 
 /*
@@ -12,7 +10,9 @@ import ContainedGraph from '../containers/Graph'
  *   displays a svg, and renders a ContainedGraph inside, with forwarded props
  *   
  *   PROPS
- *   ...asContainer.props
+ *   ...asContainer.props,
+ *   ...containers/Graph.props,
+ *   className
  *
  */
 
@@ -50,6 +50,7 @@ class Graph extends Component {
    *
    * * * * * * * * * * * * * * * * */
   render () {
+    console.log('\n==\n')
     const { props, state, context, c, $wrapper } = this
 
     /* Inner logic */
@@ -68,6 +69,7 @@ class Graph extends Component {
     const classes = [c]
     if (props.className) classes.push(props.className)
 
+    /* Display */
     return <AppContext.Provider value={childContext}>
       <svg
         width={width}

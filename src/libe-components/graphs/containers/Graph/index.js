@@ -36,7 +36,7 @@ class Graph extends Component {
    * * * * * * * * * * * * * * * * */
   constructor () {
     super()
-    this.c = 'lblb-graph'
+    this.c = 'lblb-graph-graph'
   }
 
   /* * * * * * * * * * * * * * * * *

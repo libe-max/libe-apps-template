@@ -13,24 +13,22 @@ import Paragraph from './libe-components/text-levels/Paragraph'
 
 import Graph from './libe-components/graphs/Graph'
 
-// import Graph from './libe-components/graphs/blocks/Graph'
-// import Frame from './libe-components/graphs/blocks/Frame'
-// import Viewport from './libe-components/graphs/blocks/Viewport'
-// import Rect from './libe-components/graphs/shapes/Rect'
-// import Circle from './libe-components/graphs/shapes/Circle'
-// import Ellipse from './libe-components/graphs/shapes/Ellipse'
-// import Line from './libe-components/graphs/shapes/Line'
-// import Polyline from './libe-components/graphs/shapes/Polyline'
-// import Path from './libe-components/graphs/shapes/Path'
-// import Text from './libe-components/graphs/text/Text'
-// import TextLine from './libe-components/graphs/text/Line'
+import Rect from './libe-components/graphs/shapes/Rect'
+import Circle from './libe-components/graphs/shapes/Circle'
+import Ellipse from './libe-components/graphs/shapes/Ellipse'
+import Line from './libe-components/graphs/shapes/Line'
+import Polyline from './libe-components/graphs/shapes/Polyline'
+import Polygon from './libe-components/graphs/shapes/Polygon'
+import Path from './libe-components/graphs/shapes/Path'
 
-class Lol extends Component {
-  static contextType = AppContext
-  render () {
-    return <text y='200' dominantBaseline='hanging'>LOL</text>
-  }
-}
+import Text from './libe-components/graphs/text/Text'
+import TextLine from './libe-components/graphs/text/Line'
+import H1 from './libe-components/graphs/text/H1'
+import H2 from './libe-components/graphs/text/H2'
+import H3 from './libe-components/graphs/text/H3'
+import H4 from './libe-components/graphs/text/H4'
+import H5 from './libe-components/graphs/text/H5'
+import H6 from './libe-components/graphs/text/H6'
   
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -314,25 +312,54 @@ export default class App extends Component {
           - fill spreadsheet_id field in config.js<br />
           - display it's content via state.data_sheet
         </Paragraph>}
-        
+
         { /* App */ }
         {!state.loading_sheet
         && !state.error_sheet
         && <div style={{ width: '100%' }}>
+          <Graph
+            height='100rem'
+            padding='1rem'
+            background='coral'
+            backgroundInner='purple'>
+            <Text style={{ fill: 'white' }} level={1.5}>
+              <H1 lineLevel={10}>This is a title for the graph</H1>
+              <TextLine level={4}>Lorem ipsum</TextLine>
+              <TextLine></TextLine>
+              <H2>This is a subtitle</H2>
+              <TextLine>Lorem ipsum</TextLine>
+              <TextLine></TextLine>
+              <H3>I am a h3, I have no soul</H3>
+              <TextLine>Lorem ipsum</TextLine>
+              <TextLine></TextLine>
+              <H4>Bold be thy braves</H4>
+              <TextLine>Lorem ipsum</TextLine>
+              <TextLine></TextLine>
+              <H5>Twinklidy, twinlkidou</H5>
+              <TextLine>Lorem ipsum</TextLine>
+              <TextLine></TextLine>
+              <H6>Bit rude to put thot knoife in me chest innit ?</H6>
+              <TextLine>Lorem ipsum</TextLine>
+              <TextLine></TextLine>
+            </Text>
+          </Graph>
           <Graph
             x={0}
             y={0}
             width={'calc(100% - 1rem)'}
             height={500}
             clip={true}
-            bg='coral'
+            background='coral'
             padding='2rem'
             clipInner={false}
-            bgInner='aliceblue'
+            backgroundInner='aliceblue'
             data={[1, 2, 3]}
             xScale='pow'
-            xScaleDomain={[14, 100]}
-            xScaleConf={({ scale }) => scale}
+            yScale='pow'
+            xScaleDomain={undefined}
+            yScaleDomain={[0, 11]}
+            xScaleConf={({ scale, width, height, data }) => scale.exponent(.5).domain([0, width * 4100]).nice() }
+            yScaleConf={({ scale }) => scale.nice() }
             render={() => ''}
             title={'Un titre, parfois c\'est long<br />ça s\'étend sur 3 lignes<br />et tout, ça en fait des mots'}
             subtitle={`
@@ -368,26 +395,26 @@ export default class App extends Component {
             hideRightDomain={false}
             hideBottomDomain={false}
             hideLeftDomain={false}
-            domainStyle={{ strokeWidth: '.25rem', strokeLinecap: 'butt' }}
+            domainStyle={{ strokeWidth: '.25rem', strokeLinecap: 'round' }}
             topDomainStyle={{}}
             rightDomainStyle={{}}
             bottomDomainStyle={{}}
             leftDomainStyle={{}}
             tickSize='3'
-            topTickSize='calc(100% - 1rem)'
-            leftTickSize='calc(100% - 1rem)'
-            tickOffset={2}
-            topTickOffset={0}
-            rightTickOffset={0}
-            bottomTickOffset={0}
-            leftTickOffset={0}
+            topTickSize='.5rem'
+            leftTickSize='.5rem'
+            tickOffset={'.25rem'}
+            topTickOffset={undefined}
+            rightTickOffset={undefined}
+            bottomTickOffset={undefined}
+            leftTickOffset={undefined}
             tickValues={undefined}
-            topTickValues={[0, 3e4, 1e5, 3e5, 1e6, 3e6]}
+            topTickValues={undefined}
             rightTickValues={undefined}
             bottomTickValues={undefined}
             leftTickValues={undefined}
-            tickFormat={[10, 's']}
-            topTickFormat={undefined}
+            tickFormat={undefined}
+            topTickFormat={[10, 's']}
             rightTickFormat={undefined}
             bottomTickFormat={undefined}
             leftTickFormat={undefined}
@@ -401,7 +428,22 @@ export default class App extends Component {
             rightLabelOffset={undefined}
             bottomLabelOffset={undefined}
             leftLabelOffset={undefined}>
-            <Lol />
+            {/*<Rect x={0} y={0} width={200} height={200} style={{ fill: 'blue' }} />
+            <Circle x={100} cy={100} r={100} style={{ fill: 'coral' }} />
+            <Ellipse x={100} cy={100} rx={100} ry={80} style={{ fill: 'aliceblue' }} />
+            <Line x1={0} y1={0} x2={200} y2={200} style={{ strokeWidth: 8, strokeLinecap: 'round', stroke: 'violet' }} />
+            <Polyline
+              points='0,0 0,40 40,40 40,80 80,80 80,120 120,120 120,160 160,160 160,200 200,200'
+              style={{ strokeWidth: 8, strokeLinecap: 'round', stroke: 'purple', fill: 'transparent' }} />
+            <Polygon
+              points='200,0 200,50 100,100 150,0'
+              style={{ strokeWidth: 2, strokeLinecap: 'round', stroke: 'purple', fill: 'green' }} />
+            <Path
+              d='M0,0l20,20l20,0Z'
+              style={{ strokeWidth: 2, strokeLinecap: 'round', stroke: 'purple', fill: 'green' }} />
+            <Path />*/}
+            <Circle x={0} y={0} r={50} style={{ fill: 'blue' }} />
+
           </Graph>
         </div>}
 

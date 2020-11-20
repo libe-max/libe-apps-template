@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import asContainer from '../../primitives/asContainer'
+import asShape from '../../primitives/asShape'
 
 /*
- *   Viewport component
+ *   Polyline component
  *   ------------------------------------------------------
  *
  *   DESCRIPTION
- *   Displays a graph viewport in which visual idioms are placed
+ *   Returns a svg polyline element
  *
  *   PROPS
- *   children, className
+ *   className
  *
  */
 
-class Viewport extends Component {
+class Polyline extends Component {
   /* * * * * * * * * * * * * * * *
    *
    * CONSTRUCTOR
@@ -21,7 +21,7 @@ class Viewport extends Component {
    * * * * * * * * * * * * * * * */
   constructor () {
     super()
-    this.c = 'lblb-graph-viewport'
+    this.c = 'lblb-graph-polyline'
   }
 
   /* * * * * * * * * * * * * * * *
@@ -31,17 +31,14 @@ class Viewport extends Component {
    * * * * * * * * * * * * * * * */
   render () {
     const { props, c } = this
-    const { children } = props
 
     /* Assign classes */
     const classes = [c]
     if (props.className) classes.push(props.className)
 
     /* Display */
-    return <g className={classes.join(' ')}>
-      {children}
-    </g> 
+    return <polyline {...props} className={classes.join(' ')} />
   }
 }
 
-export default asContainer(Viewport)
+export default asShape(Polyline)

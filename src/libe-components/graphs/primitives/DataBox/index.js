@@ -58,10 +58,16 @@ class DataBox extends Component {
       : currentGraph.yScale
         ? d3CopyTypedScale(currentGraph.yScale).domain([0, height]).range([0, height])
         : scaleLinear([0, height], [0, height])
-    if (props.xScaleDomain) unconfXScale.domain(props.xScaleDomain)
-    if (props.yScaleDomain) unconfYScale.domain(props.yScaleDomain)
-    const xScale = props.xScaleConf ? props.xScaleConf({ width, height, data, scale: unconfXScale }) : unconfXScale
-    const yScale = props.yScaleConf ? props.yScaleConf({ width, height, data, scale: unconfYScale }) : unconfYScale
+
+    const xScaleDomain = props.xScaleDomain || currentGraph.xScaleDomain
+    const yScaleDomain = props.yScaleDomain || currentGraph.yScaleDomain
+    if (xScaleDomain) unconfXScale.domain(xScaleDomain)
+    if (yScaleDomain) unconfYScale.domain(yScaleDomain)
+
+    const xScaleConf = props.xScaleConf || currentGraph.xScaleConf
+    const yScaleConf = props.yScaleConf || currentGraph.yScaleConf
+    const xScale = xScaleConf ? xScaleConf({ width, height, data, scale: unconfXScale }) : unconfXScale
+    const yScale = yScaleConf ? yScaleConf({ width, height, data, scale: unconfYScale }) : unconfYScale
     xScale._type = xScale._type || d3ScaleToScaleType(xScale)
     yScale._type = yScale._type || d3ScaleToScaleType(yScale)
     
@@ -77,6 +83,10 @@ class DataBox extends Component {
         data,
         xScale,
         yScale,
+        xScaleDomain,
+        yScaleDomain,
+        xScaleConf,
+        yScaleConf,
         calcWidth: val => cssCalcToPx(val, width, viewport),
         calcHeight: val => cssCalcToPx(val, height, viewport),
         calcPadding: val => cssPaddingExpressionToObject(val,  { width, height }, viewport)

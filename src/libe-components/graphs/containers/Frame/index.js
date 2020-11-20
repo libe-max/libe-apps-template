@@ -34,7 +34,7 @@ class Frame extends Component {
    * * * * * * * * * * * * * * * */
   constructor () {
     super()
-    this.c = 'lblb-frame'
+    this.c = 'lblb-graph-frame'
   }
 
   /* * * * * * * * * * * * * * * *
@@ -141,7 +141,6 @@ class Frame extends Component {
         className={`${c}__top-axis`}
         transform={`translate(${axesDimensions.top.x}, ${axesDimensions.top.y})`}>
         <Axis
-          direction='top'
           width={axesDimensions.top.width}
           height={axesDimensions.top.height}
           xScale={props.xScale}
@@ -150,6 +149,7 @@ class Frame extends Component {
           yScaleDomain={props.yScaleDomain}
           xScaleConf={props.xScaleConf}
           yScaleConf={props.yScaleConf}
+          direction='top'
           hideDomain={props.hideTopDomain || props.hideDomain}
           domainStyle={{ ...props.domainStyle, ...props.topDomainStyle }}
           tickSize={topTickSize}
@@ -164,7 +164,6 @@ class Frame extends Component {
         className={`${c}__right-axis`}
         transform={`translate(${axesDimensions.right.x}, ${axesDimensions.right.y})`}>
         <Axis
-          direction='right'
           x={axesDimensions.right.width}
           width={axesDimensions.right.width}
           height={axesDimensions.right.height}
@@ -174,6 +173,7 @@ class Frame extends Component {
           yScaleDomain={props.yScaleDomain}
           xScaleConf={props.xScaleConf}
           yScaleConf={props.yScaleConf}
+          direction='right'
           hideDomain={props.hideRightDomain || props.hideDomain}
           domainStyle={{ ...props.domainStyle, ...props.rightDomainStyle }}
           tickSize={rightTickSize}
@@ -188,7 +188,6 @@ class Frame extends Component {
         className={`${c}__bottom-axis`}
         transform={`translate(${axesDimensions.bottom.x}, ${axesDimensions.bottom.y})`}>
         <Axis
-          direction='bottom'
           y={axesDimensions.bottom.height}
           width={axesDimensions.bottom.width}
           height={axesDimensions.bottom.height}
@@ -198,6 +197,7 @@ class Frame extends Component {
           yScaleDomain={props.yScaleDomain}
           xScaleConf={props.xScaleConf}
           yScaleConf={props.yScaleConf}
+          direction='bottom'
           hideDomain={props.hideBottomDomain || props.hideDomain}
           domainStyle={{ ...props.domainStyle, ...props.bottomDomainStyle }}
           tickSize={bottomTickSize}
@@ -212,7 +212,6 @@ class Frame extends Component {
         className={`${c}__left-axis`}
         transform={`translate(${axesDimensions.left.x}, ${axesDimensions.left.y})`}>
         <Axis
-          direction='left'
           width={axesDimensions.left.width}
           height={axesDimensions.left.height}
           xScale={props.xScale}
@@ -221,6 +220,7 @@ class Frame extends Component {
           yScaleDomain={props.yScaleDomain}
           xScaleConf={props.xScaleConf}
           yScaleConf={props.yScaleConf}
+          direction='left'
           hideDomain={props.hideLeftDomain || props.hideDomain}
           domainStyle={{ ...props.domainStyle, ...props.leftDomainStyle }}
           tickSize={leftTickSize}

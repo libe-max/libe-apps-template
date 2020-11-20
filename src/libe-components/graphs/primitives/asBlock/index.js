@@ -4,11 +4,11 @@ import PaddingBox from '../../primitives/PaddingBox'
 import DataBox from '../../primitives/DataBox'
 
 /*
- *   asContainer HOC
+ *   asBlock HOC
  *   ------------------------------------------------------
  *
  *   DESCRIPTION
- *   Captates generic props for containers, then renders the
+ *   Captates generic props for blocks, then renders the
  *   provided wrapped component
  *   
  *   PROPS
@@ -18,8 +18,8 @@ import DataBox from '../../primitives/DataBox'
  *
  */
 
-const asContainer = Wrapped => {
-  class AsContainer extends Component {
+const asBlock = Wrapped => {
+  class AsBlock extends Component {
     /* * * * * * * * * * * * * * * * *
      *
      * RENDER
@@ -75,7 +75,7 @@ const asContainer = Wrapped => {
       </PositionBox>
     }
   }
-  return AsContainer
+  return AsBlock
 }
 
-export default asContainer
+export default asBlock

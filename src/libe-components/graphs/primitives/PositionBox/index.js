@@ -12,7 +12,7 @@ import cssPadding from '../../../../libe-utils/css-padding-expression-to-object'
  *   Captates positional props and renders an accordingly positioned box
  *   
  *   PROPS
- *   x, y, width, height, clip, bg, children
+ *   x, y, width, height, clip, background, children
  *
  */
 
@@ -25,6 +25,7 @@ class PositionBox extends Component {
   constructor () {
     super()
     this.state = { clip_id: uuid() }
+    this.c = 'lblb-graph-position-box'
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -63,10 +64,12 @@ class PositionBox extends Component {
     /* Display */
     return <AppContext.Provider value={childContext}>
       <g
+        className={c}
         transform={`translate(${x}, ${y})`}>
-        {props.bg && <rect width={width} height={height} fill={props.bg || 'transparent'} />}
-        <clipPath id={state.clip_id}><rect width={width} height={height} /></clipPath>
-        <g clipPath={clipPath}>{props.children}</g>
+        {props.background && <rect width={width} height={height} style={{ fill: props.background || 'transparent' }} />}
+        {props.clip && <clipPath id={state.clip_id}><rect width={width} height={height} /></clipPath>}
+        {props.clip && <g clipPath={clipPath}>{props.children}</g>}
+        {!props.clip && props.children}
       </g>
     </AppContext.Provider>
   }

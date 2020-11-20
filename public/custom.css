@@ -1,13 +1,18 @@
-.lblb-graph-asset * {
+.lblb-graph {
+  font-family: 'Georgia';
+}
+
+.lblb-graph text,
+.lblb-graph tspan {
+  /*fill: #212121;*/
+  dominant-baseline: middle;
+}
+
+.lblb-graph rect {
   fill: transparent;
 }
 
-.lblb-graph-asset text,
-.lblb-graph-asset tspan {
-  fill: #212121;
-}
-
-.lblb-graph__title {
+.lblb-graph-graph__title {
   font-family: 'Libe-Sans-Semicondensed';
   font-size: 2.5rem;
   line-height: 2.5rem;
@@ -15,17 +20,46 @@
   letter-spacing: .05rem;
 }
 
-.lblb-graph__subtitle {
+.lblb-graph-graph__subtitle {
   font-family: 'Georgia';
   font-size: 1rem;
   line-height: 1.5rem;
 }
 
-.lblb-graph__source {
+.lblb-graph-graph__source {
   font-family: 'Synthese';
   font-size: .75rem;
   line-height: 1rem;
   font-weight: 400;
+}
+
+.lblb-graph-axis__ticks text {
+  font-family: 'Synthese';
+}
+
+.lblb-graph-heading {
+  font-family: 'Libe-Sans-Semicondensed';
+  font-weight: 800;
+}
+
+.lblb-graph-heading.lblb-graph-h4,
+.lblb-graph-heading.lblb-graph-h5,
+.lblb-graph-heading.lblb-graph-h6 {
+  font-family: 'Synthese';
+}
+
+.lblb-graph-heading.lblb-graph-h6 {
+  font-weight: 600;
+}
+
+
+/*.lblb-graph-asset * {
+  fill: transparent;
+}
+
+.lblb-graph-asset text,
+.lblb-graph-asset tspan {
+  fill: #212121;
 }
 
 .lblb-graph-axis__domain line {
@@ -39,3 +73,4 @@
 .lblb-graph-axis__ticks text {
   font-family: 'Synthese';
 }
+*/
