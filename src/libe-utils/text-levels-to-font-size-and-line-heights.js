@@ -28,7 +28,7 @@ function lineHeightLevelToLineHeight (
   const rawDisplayPosition = displays.indexOf(display)
   const displayPosition = rawDisplayPosition > -1 && rawDisplayPosition < 3 ? rawDisplayPosition : 0
   const lineHeightFactor = lineHeightFactors[displayPosition]
-  const height = Math.round(0.125 * fontSize * lineHeightFactor) * 8
+  const height = Math.ceil(0.125 * fontSize * lineHeightFactor) * 8
   return height
 }
 
