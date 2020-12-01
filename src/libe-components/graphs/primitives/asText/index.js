@@ -114,23 +114,6 @@ const asText = (Wrapped, defaultLevel, defaultLineLevel) => {
         }
       }
 
-      console.log(Wrapped.name, {
-        contextLevel,
-        contextLineLevel,
-        propsLevel: props.level,
-        propsLineLevel: props.lineLevel,
-        level,
-        lineLevel,
-        computedLevel,
-        computedLineLevel,
-        defaultLevel,
-        defaultLineLevel,
-        fontSize,
-        lineHeight
-      })
-      console.log(currentText)
-      console.log(childContext.current_graph_text_element)
-
       /* Display */
       return <AppContext.Provider value={childContext}>
         <PositionBox x={x} y={y}>

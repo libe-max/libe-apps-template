@@ -48,9 +48,10 @@ class Text extends Component {
     const lines = React.Children.map(props.children, child => {
       
       // Line levels
-      const childPropsLevel = child.props.level
-      const childPropsLineLevel = child.props.lineLevel !== undefined
-        ? child.props.lineLevel
+      const childProps = child.props !== undefined ? child.props : {}
+      const childPropsLevel = childProps.level
+      const childPropsLineLevel = childProps.lineLevel !== undefined
+        ? childProps.lineLevel
         : childPropsLevel
       const childDefaultLevel = typeof child.type === 'function'
         ? child.type.defaultLevel
@@ -81,8 +82,8 @@ class Text extends Component {
         fontSize: computedChildLevel,
         lineHeight: computedChildLineLevel
       } = computeTextLevels(childLevel, childLineLevel)
-      const childPropsFontSize = child.props.fontSize
-      const childPropsLineHeight = child.props.lineHeight
+      const childPropsFontSize = childProps.fontSize
+      const childPropsLineHeight = childProps.lineHeight
       const childFontSize = childPropsFontSize !== undefined
         ? childPropsFontSize
         : computedChildLevel
@@ -98,10 +99,10 @@ class Text extends Component {
       // Style & render child
       const childStyle = {
         ...props.style,
-        ...child.props.style
+        ...childProps.style
       }
       
-      const renderedChild = React.cloneElement(child, { style: childStyle })
+      const renderedChild = typeof child === 'string' ? child : React.cloneElement(child, { style: childStyle })
       
       if (typeof child.type === 'function') return <g
         className={'lblb-graph-text__line'}

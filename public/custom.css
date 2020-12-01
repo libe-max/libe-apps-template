@@ -42,6 +42,10 @@
   font-weight: 800;
 }
 
+.lblb-graph-heading._ff_lbssc {
+  letter-spacing: .05em;
+}
+
 .lblb-graph-heading.lblb-graph-h4,
 .lblb-graph-heading.lblb-graph-h5,
 .lblb-graph-heading.lblb-graph-h6 {

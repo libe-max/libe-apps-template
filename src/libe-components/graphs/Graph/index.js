@@ -50,7 +50,6 @@ class Graph extends Component {
    *
    * * * * * * * * * * * * * * * * */
   render () {
-    console.log('\n==\n')
     const { props, state, context, c, $wrapper } = this
 
     /* Inner logic */
