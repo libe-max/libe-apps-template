@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { v4 as uuid } from 'uuid'
 import AppContext from '../../../../context'
 import cssCalc from '../../../../libe-utils/css-calc-to-px'
-import cssPadding from '../../../../libe-utils/css-padding-expression-to-object'
 
 /*
  *   PositionBox component

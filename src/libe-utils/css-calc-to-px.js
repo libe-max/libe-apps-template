@@ -4,7 +4,7 @@ function cssCalcToPx (_formula, relativeSize = 0, viewport = { rem: 0, width: 0,
   if (typeof _formula === 'number') return cssUnitToPx(_formula, relativeSize, viewport)
   if (!_formula || typeof _formula !== 'string') return
   const formula = _formula.trim().replace(/[\s]+/igm, ' ')
-  const fullFormulaRegex = /^calc\([a-zA-Z0-9\.\+\-\*\%\/\(\)\s]*\)$/
+  const fullFormulaRegex = /^calc\([a-zA-Z0-9.+\-*%/()\s]*\)$/
   if (!formula.match(fullFormulaRegex)) {
     return cssUnitToPx(formula, relativeSize, viewport)
   }
@@ -12,9 +12,9 @@ function cssCalcToPx (_formula, relativeSize = 0, viewport = { rem: 0, width: 0,
   const calcRegex = /^calc/
   const startOfBlockRegex = /^\(/
   const endOfBlockRegex = /^\)/
-  const operatorRegex = /^\s[\+\-\*\/]\s/
-  const valueRegex = /^[\+\-]?(\.[0-9]+|[0-9]+(\.[0-9]*)?)(cm|mm|Q|in|ip|pt|px|em|ex|ch|rem|lh|vw|vh|vmin|vmax|%)/
-  const nakedValueRegex = /^[\+\-]?(\.[0-9]+|[0-9]+(\.[0-9]*)?)/
+  const operatorRegex = /^\s[+\-*/]\s/
+  const valueRegex = /^[+-]?(\.[0-9]+|[0-9]+(\.[0-9]*)?)(cm|mm|Q|in|ip|pt|px|em|ex|ch|rem|lh|vw|vh|vmin|vmax|%)/
+  const nakedValueRegex = /^[+-]?(\.[0-9]+|[0-9]+(\.[0-9]*)?)/
   const spaceRegex = /^\s/
 
   const semanticsBlock = []

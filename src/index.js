@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet'
 import App from './App'
 import config from './config'
 import 'whatwg-fetch'
-import AppContext from './context'
 
 class AppWrapper extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -14,20 +13,7 @@ class AppWrapper extends Component {
    * * * * * * * * * * * * * * * * */
   constructor (props) {
     super(props)
-    const initRem = 16
-    this.state = {
-      rem: initRem,
-      width: window.innerWidth,
-      height: window.innerHeight,
-      display_name: 'sm',
-      nav_height: 0,
-      body_padding_top: 0,
-      breakpoints: {
-        lg: { min: 1 + 63 * initRem, max: Infinity },
-        md: { min: 1 + 40 * initRem, max: 63 * initRem },
-        sm: { min: 0, max: 40 * initRem }
-      }
-    }
+    this.state = config.viewport
     this.storeViewportDimentions = this.storeViewportDimentions.bind(this)
     window.addEventListener('resize', this.storeViewportDimentions)
     window.setInterval(this.storeViewportDimentions, 250)
@@ -101,7 +87,7 @@ class AppWrapper extends Component {
     const { props, state } = this
     const { meta, statics_url: staticsUrl } = props
     const { title, url, description, author, image } = meta
-    const passedContext = { viewport: state }
+    const passedProps = { ...props, viewport: { ...state } }
     return <div id='libe-labo-app-wrapper'>
       <Helmet>
         <title>Libération.fr – {title}</title>
@@ -131,9 +117,7 @@ class AppWrapper extends Component {
         {/* This app styles */}
         <link rel='stylesheet' href='./custom.css' />
       </Helmet>
-      <AppContext.Provider value={passedContext}>
-        <App {...props} />
-      </AppContext.Provider>
+      <App {...passedProps} />
     </div>
   }
 }

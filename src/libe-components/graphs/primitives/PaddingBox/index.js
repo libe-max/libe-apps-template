@@ -45,7 +45,7 @@ class PaddingBox extends Component {
     /* Inner logic */
     const { viewport, current_graph: currentGraph } = context
     const { width: contextWidth, height: contextHeight } = currentGraph
-    const { top, right, bottom, left } = cssPadding(props.padding, { width, height }, context.viewport)
+    const { top, right, bottom, left } = cssPadding(props.padding, currentGraph, viewport)
     const width = Math.max(contextWidth - left - right, 0)
     const height = Math.max(contextHeight - top - bottom, 0)
     const clipPath = props.clip ? `url(#${state.clip_id})` : undefined

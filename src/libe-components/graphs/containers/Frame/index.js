@@ -110,10 +110,10 @@ class Frame extends Component {
     const leftLabelOffset = props.leftLabelOffset !== undefined ? calcWidth(props.leftLabelOffset) : calcWidth(props.labelOffset)
     /* Tick style */
     const tickStyle = props.tickStyle || {}
-    const topTickStyle = props.topTickStyle ? { ...props.tickStyle, ...props.topTickStyle } : props.tickStyle
-    const rightTickStyle = props.rightTickStyle ? { ...props.tickStyle, ...props.rightTickStyle } : props.tickStyle
-    const bottomTickStyle = props.bottomTickStyle ? { ...props.tickStyle, ...props.bottomTickStyle } : props.tickStyle
-    const leftTickStyle = props.leftTickStyle ? { ...props.tickStyle, ...props.leftTickStyle } : props.tickStyle
+    const topTickStyle = props.topTickStyle ? { ...tickStyle, ...props.topTickStyle } : tickStyle
+    const rightTickStyle = props.rightTickStyle ? { ...tickStyle, ...props.rightTickStyle } : tickStyle
+    const bottomTickStyle = props.bottomTickStyle ? { ...tickStyle, ...props.bottomTickStyle } : tickStyle
+    const leftTickStyle = props.leftTickStyle ? { ...tickStyle, ...props.leftTickStyle } : tickStyle
 
     /* Assign classes */
     const classes = [c]

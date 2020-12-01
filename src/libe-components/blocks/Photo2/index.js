@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { v4 as uuid } from 'uuid'
 import { statics_url as staticsUrl } from '../../../config'
 import AppContext from '../../../context'
@@ -94,7 +93,7 @@ export default class Photo2 extends Component {
    *
    * * * * * * * * * * * * * * * * */
   handleExpandClick (e) {
-    const { props, state, context } = this
+    const { props, context } = this
     if (!props.expandable) return
     const { expand_media: expandMedia } = context
     expandMedia(this.state.id)
@@ -106,7 +105,7 @@ export default class Photo2 extends Component {
    *
    * * * * * * * * * * * * * * * * */
   render () {
-    const { c, props, state } = this
+    const { c, props } = this
 
     /* Assign classes */
     const classes = [c]
@@ -131,7 +130,10 @@ export default class Photo2 extends Component {
       className={classes.join(' ')}
       onClick={this.handleExpandClick}
       {...passedProps}>
-      <img className={`${c}__image`} src={props.src} />
+      <img
+        src={props.src}
+        className={`${c}__image`}
+        alt={`${props.description}, credit: ${props.credit}`} />
       <div
         className={`${c}__background-image`}
         style={bgImageStyle} />

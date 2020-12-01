@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import asText from '../../primitives/asText'
-import computeTextLevels from '../../../../libe-utils/text-levels-to-font-size-and-line-heights'
 
 /*
  *   TextLine component

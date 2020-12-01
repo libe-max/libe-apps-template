@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import AppContext from '../../../../context'
 import asText from '../../primitives/asText'
-import computeTextLevels from '../../../../libe-utils/text-levels-to-font-size-and-line-heights'
 
 /*
  *   Text component
@@ -39,10 +38,10 @@ class Text extends Component {
    *
    * * * * * * * * * * * * * * * * */
   render () {
-    const { props, context, c, $wrapper } = this
+    const { props, context, c } = this
 
     /* Inner logic */
-    const { fontSize, lineHeight, computeTextLevels } = props
+    const { computeTextLevels } = props
     const { level: contextLevel, line_level: contextLineLevel } = context.current_graph_text_element
     let currentOffset = 0
     const lines = React.Children.map(props.children, child => {
@@ -79,14 +78,9 @@ class Text extends Component {
 
       // Line sizes
       const {
-        fontSize: computedChildLevel,
         lineHeight: computedChildLineLevel
       } = computeTextLevels(childLevel, childLineLevel)
-      const childPropsFontSize = childProps.fontSize
       const childPropsLineHeight = childProps.lineHeight
-      const childFontSize = childPropsFontSize !== undefined
-        ? childPropsFontSize
-        : computedChildLevel
       const childLineHeight = childPropsLineHeight !== undefined
         ? childPropsLineHeight
         : computedChildLineLevel

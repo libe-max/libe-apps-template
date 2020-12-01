@@ -2,10 +2,10 @@ function cssUnitToPx (_input, relativeSize = 0, viewport = { rem: 0, width: 0, h
   if (typeof _input === 'number') return _input
   if (!_input || typeof _input !== 'string') return
   const inputMatch = _input.trim()
-    .match(/^[\+\-]?(\.[0-9]+|[0-9]+(\.[0-9]*)?)(cm|mm|Q|in|ip|pt|px|em|ex|ch|rem|lh|vw|vh|vmin|vmax|%)?$/igm)
+    .match(/^[+-]?(\.[0-9]+|[0-9]+(\.[0-9]*)?)(cm|mm|Q|in|ip|pt|px|em|ex|ch|rem|lh|vw|vh|vmin|vmax|%)?$/igm)
   if (!inputMatch) return
   const input = inputMatch[0]
-  const numberMatch = input.match(/^[\+\-]?(\.[0-9]+|[0-9]+(\.[0-9]*)?)/igm)
+  const numberMatch = input.match(/^[+-]?(\.[0-9]+|[0-9]+(\.[0-9]*)?)/igm)
   const unitMatch = input.match(/(cm|mm|Q|in|ip|pt|px|em|ex|ch|rem|lh|vw|vh|vmin|vmax|%)?$/igm)
   if (!numberMatch || !unitMatch) return
   const number = Number(numberMatch[0])

@@ -54,7 +54,7 @@ const asText = (Wrapped, defaultLevel, defaultLineLevel) => {
       const defaultLevel = this.constructor.defaultLevel
       const defaultLineLevel = this.constructor.defaultLineLevel !== undefined
         ? this.constructor.defaultLineLevel
-        : defaultLineLevel
+        : defaultLevel
       const contextLevel = currentText
         && currentText.level !== undefined
         ? currentText.level

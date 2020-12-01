@@ -12,25 +12,6 @@ import InterTitle from './libe-components/text-levels/InterTitle'
 import Paragraph from './libe-components/text-levels/Paragraph'
 
 import GraphsPage from './pages/graphs'
-
-import Graph from './libe-components/graphs/Graph'
-
-import Rect from './libe-components/graphs/shapes/Rect'
-import Circle from './libe-components/graphs/shapes/Circle'
-import Ellipse from './libe-components/graphs/shapes/Ellipse'
-import Line from './libe-components/graphs/shapes/Line'
-import Polyline from './libe-components/graphs/shapes/Polyline'
-import Polygon from './libe-components/graphs/shapes/Polygon'
-import Path from './libe-components/graphs/shapes/Path'
-
-import Text from './libe-components/graphs/text/Text'
-import TextLine from './libe-components/graphs/text/Line'
-import H1 from './libe-components/graphs/text/H1'
-import H2 from './libe-components/graphs/text/H2'
-import H3 from './libe-components/graphs/text/H3'
-import H4 from './libe-components/graphs/text/H4'
-import H5 from './libe-components/graphs/text/H5'
-import H6 from './libe-components/graphs/text/H6'
   
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -257,7 +238,7 @@ export default class App extends Component {
    *
    * * * * * * * * * * * * * * * * */
   render () {
-    const { state, props, context, c } = this
+    const { state, props, c } = this
 
     /* Assign classes */
     const classes = [c]
@@ -267,7 +248,15 @@ export default class App extends Component {
     if (state.show_expanded_medias_panel) classes.push(`${c}_expanded-medias`)
 
     const passedContext = {
-      ...this.context,
+      viewport: {
+        ...props.viewport,
+        responsive_value_getter: obj => {
+          const displayName = props.viewport.display_name
+          return obj[displayName] !== undefined
+            ? obj[displayName]
+            : obj.default
+        }
+      },
       add_expandable_media: this.addExpandableMedia,
       update_expandable_media: this.updateExpandableMedia,
       remove_expandable_media: this.removeExpandableMedia,
@@ -331,7 +320,7 @@ export default class App extends Component {
         {/* Expanded medias panel */}
         <div
           className='lblb-default-expanded-medias-panel'
-          style={{ top: `${context.viewport.nav_height}px` }}>
+          style={{ top: `${props.viewport.nav_height}px` }}>
           <Diaporama
             showThumbs
             ref={n => this.diaporama = n}

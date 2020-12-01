@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import asText from '../../primitives/asText'
-import Line from '../Line'
 
 const defaultLevel = 3
 const defaultLineLevel = 3

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { statics_url as staticsUrl } from '../../../config'
 import Photo from '../Photo2'
 import Svg from '../../primitives/Svg'
@@ -104,7 +103,6 @@ export default class Diaporama extends Component {
         const width = $media.offsetWidth
         const style = window.getComputedStyle ? window.getComputedStyle($media, null) : $media.currentStyle
         const marginLeft = parseInt(style.marginLeft) || 0
-        const marginRight = parseInt(style.marginRight) || 0
         offset += marginLeft
         offset -= (parentWidth - width) / 2
         stop = true
@@ -218,7 +216,7 @@ export default class Diaporama extends Component {
    *
    * * * * * * * * * * * * * * * * */
   render () {
-    const { c, props, state, context } = this
+    const { c, props, state } = this
 
     /* Assign classes */
     const classes = [c]

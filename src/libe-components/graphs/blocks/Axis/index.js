@@ -159,10 +159,9 @@ class Axis extends Component {
    *
    * * * * * * * * * * * * * * * * */
   getTicksTransform () {
-    const { props, getDirection, getDomainStrokeWidth, getTickSize, getTickOffset } = this
+    const { getDirection, getDomainStrokeWidth, getTickOffset } = this
     const direction = getDirection()
     const strokeWidth = getDomainStrokeWidth()
-    const tickSize = getTickSize()
     const tickOffset = getTickOffset()
     const offset = strokeWidth + tickOffset
     return direction === 'top'
@@ -183,7 +182,6 @@ class Axis extends Component {
     const { props, $ticksWrapper, getAxis, getDomainStrokeWidth, getTickSize, getTickOffset } = this
     if (!$ticksWrapper) return
     const axis = getAxis()
-    const scale = this.getScale()
     
     // Setup ticks
     if (props.tickValues) axis.tickValues(props.tickValues)
@@ -216,12 +214,11 @@ class Axis extends Component {
    * * * * * * * * * * * * * * * */
   render () {
     const {
-      props, context, c, getScale, getDirection,
+      props, c, getScale, getDirection,
       getDomainStrokeWidth, getTicksTransform
     } = this
 
     /* Inner logic */
-    const { current_graph: { width, height } } = context
     const direction = getDirection()
     const range = getScale().range()
 
