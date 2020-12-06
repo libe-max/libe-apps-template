@@ -12,7 +12,7 @@ import DataBox from '../../primitives/DataBox'
  *   provided wrapped component
  *   
  *   PROPS
- *   x, y, width, height,
+ *   x, y, width, height, anchor, translate, rotate, skew, scale
  *   padding, background, clip, backgroundInner, clipInner,
  *   data, xScale, xScaleDomain, xScaleConf, yScale, yScaleDomain, yScaleConf, render
  *
@@ -47,20 +47,33 @@ const asBlock = Wrapped => {
       delete childProps.yScaleDomain
       delete childProps.yScaleConf
       delete childProps.render
+      delete childProps.anchor
+      delete childProps.translate
+      delete childProps.rotate
+      delete childProps.skew
+      delete childProps.scale
 
       /* Display */
       return <PositionBox
+        name={props.name}
         x={props.x}
         y={props.y}
         width={props.width}
         height={props.height}
         background={props.background}
-        clip={props.clip}>
+        clip={props.clip}
+        anchor={props.anchor}
+        translate={props.translate}
+        rotate={props.rotate}
+        skew={props.skew}
+        scale={props.scale}>
         <PaddingBox
+          name={props.name}
           padding={props.padding}
           clip={props.clipInner}
           background={props.backgroundInner}>
           <DataBox
+            name={props.name}
             data={props.data}
             xScale={props.xScale}
             xScaleDomain={props.xScaleDomain}

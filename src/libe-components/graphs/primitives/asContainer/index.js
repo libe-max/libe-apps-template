@@ -50,6 +50,7 @@ const asContainer = Wrapped => {
 
       /* Display */
       return <PositionBox
+        name={props.name}
         x={props.x}
         y={props.y}
         width={props.width}
@@ -57,10 +58,12 @@ const asContainer = Wrapped => {
         background={props.background}
         clip={props.clip}>
         <PaddingBox
+          name={props.name}
           padding={props.padding}
           clip={props.clipInner}
           background={props.backgroundInner}>
           <DataBox
+            name={props.name}
             data={props.data}
             xScale={props.xScale}
             xScaleDomain={props.xScaleDomain}

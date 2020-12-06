@@ -1,0 +1,127 @@
+import React, { Component } from 'react'
+import AppContext from '../../../../context'
+import Graph from '../../../../libe-components/graphs/Graph'
+import Rect from '../../../../libe-components/graphs/shapes/Rect'
+import Text from '../../../../libe-components/graphs/text/Text'
+import TextLine from '../../../../libe-components/graphs/text/Line'
+
+class Test extends Component {
+  /* * * * * * * * * * * * * * * * *
+   *
+   * MAKE CONTEXT ACCESSIBLE
+   *
+   * * * * * * * * * * * * * * * * */
+  static contextType = AppContext
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * RENDER
+   *
+   * * * * * * * * * * * * * * * * */
+  render () {
+    const { context } = this
+    const { viewport } = context
+
+    return <div>
+      <Graph
+        name='daddy'
+        width='100vw'
+        height='20rem'
+        background='blue'
+        padding='1rem'
+        backgroundInner='red'
+        clipInner>
+
+        <Rect
+          name='shape'
+          x='150'
+          y='75'
+          width='100'
+          height='100'
+          style={{ fill: 'transparent', stroke: 'black' }}
+          anchor='100%'
+          scale='.1'
+          rotate='0' />
+
+        {/*<Rect
+          x='150'
+          y='75'
+          width='100'
+          height='100'
+          style={{ fill: 'purple' }}
+          anchor='50%'
+          // scale='1.2'
+          rotate='135' />
+
+        <Rect
+          x='150'
+          y='75'
+          width='100'
+          height='100'
+          style={{ fill: 'orange' }}
+          anchor='50%'
+          // scale='.8'
+          rotate='135' />
+
+        <Rect
+          width='40'
+          height='60'
+          x='3rem'
+          y='40%'
+          // anchor='50% 50%'
+          style={{ fill: 'white' }}
+          // translate='40 40'
+          // rotate='45'
+          />
+
+        <Rect
+          width='70'
+          height='10'
+          x='30rem'
+          y='calc(100% - 70px)'
+          style={{ fill: 'white' }}
+          // translate='40 40'
+          // rotate='45'
+          />
+
+        <Rect
+          width='50'
+          height='50'
+          x='315'
+          y='200'
+          style={{ fill: 'white' }}
+          // anchor='25%'
+          // skew='20'
+          // rotate='45'
+          />
+
+        <Rect
+          width='140'
+          height='5'
+          x='11rem'
+          y='50%'
+          style={{ fill: 'white' }} />
+
+        <Text x={100} y={200} rotate='360' anchor='50% 50%'>
+          <TextLine 
+            style={{ fill: 'green' }}
+            // anchor='50% 0'
+            // translate='0 0'
+            // rotate='5'
+            >
+            Lorem ipsum dolor
+          </TextLine>
+          <TextLine 
+            style={{ fill: 'green' }}
+            // anchor='50% 0'
+            >
+            Lorem ipsum dolor
+          </TextLine>
+        </Text>
+        */}
+      </Graph>
+    </div>
+  }
+}
+
+export default Test

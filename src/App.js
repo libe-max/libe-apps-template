@@ -246,7 +246,6 @@ export default class App extends Component {
     if (state.error_sheet) classes.push(`${c}_error`)
     if (state.konami_mode) classes.push(`${c}_konami`)
     if (state.show_expanded_medias_panel) classes.push(`${c}_expanded-medias`)
-
     const passedContext = {
       viewport: {
         ...props.viewport,

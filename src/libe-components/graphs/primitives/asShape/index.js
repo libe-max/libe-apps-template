@@ -17,7 +17,7 @@ import PositionBox from '../../primitives/PositionBox'
  *   cx, cy, cxValue, cyValue,
  *   width, height, widthValue, heightValue, background,
  *   points, d, pathLength,
- *
+ *   anchor, translate, rotate, skew, scale
  */
 
 const asShape = Wrapped => {
@@ -37,7 +37,7 @@ const asShape = Wrapped => {
     render () {
       const { props, context } = this
       const { current_graph: { xScale, yScale, calcWidth, calcHeight } } = context
-
+      console.log('asShape')
       const x = props.x !== undefined ? calcWidth(props.x) : props.xValue !== undefined ? xScale(props.xValue) : undefined
       const y = props.y !== undefined ? calcHeight(props.y) : props.yValue !== undefined ? yScale(props.yValue) : undefined
       const x1 = props.x1 !== undefined ? calcWidth(props.x1) : props.x1Value !== undefined ? xScale(props.x1Value) : undefined
@@ -73,6 +73,8 @@ const asShape = Wrapped => {
         d,
         pathLength
       }
+      delete childProps.x
+      delete childProps.y
       delete childProps.xValue
       delete childProps.yValue
       delete childProps.x1Value
@@ -86,14 +88,25 @@ const asShape = Wrapped => {
       delete childProps.rValue
       delete childProps.widthValue
       delete childProps.heightValue
+      delete childProps.anchor
+      delete childProps.translate
+      delete childProps.rotate
+      delete childProps.skew
+      delete childProps.scale
 
       /* Display */
       return <PositionBox
+        name={props.name}
         x={props.x}
         y={props.y}
         width={props.width}
         height={props.height}
-        background={props.background}>
+        background={props.background}
+        anchor={props.anchor}
+        translate={props.translate}
+        rotate={props.rotate}
+        skew={props.skew}
+        scale={props.scale}>
         <Wrapped {...childProps} />
       </PositionBox>
     }

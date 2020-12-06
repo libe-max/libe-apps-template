@@ -122,6 +122,7 @@ class Frame extends Component {
     /* Display */
     return <g className={classes.join(' ')}>
       <Viewport
+        name={`${props.name} - default viewport`}
         width={width}
         height={height}
         padding={props.viewportPadding}

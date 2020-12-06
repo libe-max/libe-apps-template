@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 
+import Test from './source/Test'
 import CO220192020 from './source/CO220192020'
 
 class GraphsPage extends Component {
   render () {
     return <div>
-      <CO220192020 />
+      <Test />
+      <div style={{ width: '100%', height: '100px' }} />
+      {/*<CO220192020 />*/}
     </div>
   }
 }

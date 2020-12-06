@@ -83,6 +83,12 @@ class CO220192020 extends Component {
                 </TextLine>
               </Text>
             }} />
+
+            <Rect
+              x={10}
+              width={40}
+              height={40}
+              style={{ fill: 'blue' }} />
           </g>
         }}>
       </Graph>

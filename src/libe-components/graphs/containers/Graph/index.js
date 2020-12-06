@@ -97,6 +97,7 @@ class Graph extends Component {
     /* Display */
     return <g className={classes.join(' ')}>
       <Frame
+        name={`${props.name} - default frame`}
         padding={props.framePadding}
         showTopAxis={props.showTopAxis}
         showRightAxis={props.showRightAxis}

@@ -13,7 +13,7 @@ import computeTextLevels from '../../../../libe-utils/text-levels-to-font-size-a
  *   
  *   PROPS
  *   fontSize, lineHeight, level, lineLevel
- *   x, y, xValue, yValue
+ *   x, y, xValue, yValue, anchor, translate, rotate, skew, scale
  *
  */
 
@@ -28,7 +28,6 @@ const asText = (Wrapped, defaultLevel, defaultLineLevel) => {
 
     static defaultLevel = defaultLevel
     static defaultLineLevel = defaultLineLevel
-    static lol = new Wrapped().c
 
     /* * * * * * * * * * * * * * * * *
      *
@@ -100,6 +99,11 @@ const asText = (Wrapped, defaultLevel, defaultLineLevel) => {
       delete childProps.yValue
       delete childProps.level
       delete childProps.lineLevel
+      delete childProps.anchor
+      delete childProps.translate
+      delete childProps.rotate
+      delete childProps.skew
+      delete childProps.scale
 
       /* Child context */
       const childContext = {
@@ -116,7 +120,15 @@ const asText = (Wrapped, defaultLevel, defaultLineLevel) => {
 
       /* Display */
       return <AppContext.Provider value={childContext}>
-        <PositionBox x={x} y={y}>
+        <PositionBox
+          name={props.name}
+          x={x}
+          y={y}
+          anchor={props.anchor}
+          translate={props.translate}
+          rotate={props.rotate}
+          skew={props.skew}
+          scale={props.scale}>
           <Wrapped {...childProps} />
         </PositionBox>
       </AppContext.Provider>
