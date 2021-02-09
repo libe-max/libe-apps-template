@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AppContext from '../../../../context'
 import Graph from '../../../../libe-components/graphs/Graph'
 import Rect from '../../../../libe-components/graphs/shapes/Rect'
+import Circle from '../../../../libe-components/graphs/shapes/Circle'
 import Text from '../../../../libe-components/graphs/text/Text'
 import TextLine from '../../../../libe-components/graphs/text/Line'
 
@@ -32,16 +33,127 @@ class Test extends Component {
         backgroundInner='red'
         clipInner>
 
+        <Circle
+          name='shape'
+          cx='20%'
+          cy='40%'
+          r='5%'
+          style={{ fill: 'transparent', stroke: 'black' }}
+          anchor='0%'
+          scale='1'
+          rotate='-15' />
+
+        <Rect
+          name='shape'
+          x='20%'
+          y='50%'
+          width='10%'
+          height='50'
+          style={{ fill: 'transparent', stroke: 'black' }}
+          anchor='0%'
+          scale='1'
+          rotate='0' />
+
+        <Rect
+          name='shape'
+          x='20%'
+          y='80%'
+          width='10%'
+          height='50'
+          style={{ fill: 'transparent', stroke: 'black' }}
+          anchor='0%'
+          scale='1.5'
+          rotate='45' />
+
+
+
+        <Rect
+          name='shape'
+          x='50%'
+          y='20%'
+          width='10%'
+          height='50'
+          style={{ fill: 'transparent', stroke: 'black' }}
+          anchor='50%'
+          scale='.5'
+          rotate='-15' />
+
+        <Rect
+          name='shape'
+          x='50%'
+          y='50%'
+          width='10%'
+          height='50'
+          style={{ fill: 'transparent', stroke: 'black' }}
+          anchor='50%'
+          scale='1'
+          rotate='0' />
+
+        <Rect
+          name='shape'
+          x='50%'
+          y='80%'
+          width='10%'
+          height='50'
+          style={{ fill: 'transparent', stroke: 'black' }}
+          anchor='50%'
+          scale='1.5'
+          rotate='45' />
+
+
+        <Rect
+          name='shape'
+          x='80%'
+          y='20%'
+          width='10%'
+          height='50'
+          style={{ fill: 'transparent', stroke: 'black' }}
+          anchor='100%'
+          scale='.5'
+          rotate='-15' />
+
+        <Rect
+          name='shape'
+          x='80%'
+          y='50%'
+          width='10%'
+          height='50'
+          style={{ fill: 'transparent', stroke: 'black' }}
+          anchor='100%'
+          scale='1'
+          rotate='0' />
+
+        <Rect
+          name='shape'
+          x='80%'
+          y='80%'
+          width='10%'
+          height='50'
+          style={{ fill: 'transparent', stroke: 'black' }}
+          anchor='100%'
+          scale='1.5'
+          rotate='45' />
+
+        {/*<Rect
+          name='shape'
+          x='150'
+          y='75'
+          width='50'
+          height='50'
+          style={{ fill: 'transparent', stroke: 'black' }}
+          anchor='0'
+          scale='1'
+          rotate='45' />
         <Rect
           name='shape'
           x='150'
           y='75'
-          width='100'
-          height='100'
+          width='50'
+          height='50'
           style={{ fill: 'transparent', stroke: 'black' }}
-          anchor='100%'
-          scale='.1'
-          rotate='0' />
+          anchor='50'
+          scale='1'
+          rotate='45' />*/}
 
         {/*<Rect
           x='150'

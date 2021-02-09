@@ -23,9 +23,14 @@ class PositionBox extends Component {
    * * * * * * * * * * * * * * * * */
   constructor (props) {
     super()
-    this.state = { clip_id: uuid() }
+    this.state = {
+      clip_id: uuid(),
+      anchor_hover: false
+    }
     this.c = 'lblb-graph-position-box'
     this.selfAwareStuff = this.selfAwareStuff.bind(this)
+    this.handleAnchorHover = this.handleAnchorHover.bind(this)
+    this.handleAnchorLeave = this.handleAnchorLeave.bind(this)
     console.log(props.name, 'constructor')
   }
 
@@ -55,12 +60,25 @@ class PositionBox extends Component {
 
   /* * * * * * * * * * * * * * * * *
    *
+   * HANDLE ANCHOR HOVER & LEAVE
+   *
+   * * * * * * * * * * * * * * * * */
+  handleAnchorHover () {
+    this.setState({ anchor_hover: true })
+  }
+
+  handleAnchorLeave () {
+    this.setState({ anchor_hover: false })
+  }
+
+  /* * * * * * * * * * * * * * * * *
+   *
    * SELF AWARE STUFF
    *
    * * * * * * * * * * * * * * * * */
   selfAwareStuff () {
     console.log(this.props.name, 'self aware stuff')
-    const { props, context, c, $wrapper } = this
+    const { props, context, c, $wrapper, $ghostBox } = this
     this.tilt = !this.tilt
     if (!$wrapper) return
     const {
@@ -71,7 +89,6 @@ class PositionBox extends Component {
       scale: propsScale
     } = props
     const { viewport } = context
-
     const $anchorBox = $wrapper.querySelector(`.${c}__anchor-box`)
     const $translateBox = $wrapper.querySelector(`.${c}__translate-box`)
     const $rotateBox = $wrapper.querySelector(`.${c}__rotate-box`)
@@ -86,6 +103,15 @@ class PositionBox extends Component {
 
     const boundingClientRect = $wrapper.getBoundingClientRect()
     const { width, height } = boundingClientRect
+
+    // Ghost box
+    $ghostBox.setAttribute('width', width)
+    $ghostBox.setAttribute('height', height)
+
+    console.log($wrapper)
+    console.log($ghostBox)
+    console.log(width, height)
+    console.log($ghostBox.getAttribute('width'), $ghostBox.getAttribute('height'))
 
     // Anchor
     const strAnchor = propsAnchor !== undefined
@@ -178,23 +204,40 @@ class PositionBox extends Component {
 
     /* Display */
     return <AppContext.Provider value={childContext}>
-      <g
-        className={c}
-        transform={`translate(${x}, ${y})`}
-        ref={n => this.$wrapper = n}>
-        <g className={`${c}__anchor-box`} transform='translate(0, 0) rotate(0, 0, 0), scale(0) skewX(0) skewY(0)'>
-          <g className={`${c}__translate-box`} transform='translate(0, 0) rotate(0, 0, 0), scale(0) skewX(0) skewY(0)'>
-            <g className={`${c}__rotate-box`} transform='translate(0, 0) rotate(0, 0, 0), scale(0) skewX(0) skewY(0)'>
-              <g className={`${c}__skew-box`} transform='translate(0, 0) rotate(0, 0, 0), scale(0) skewX(0) skewY(0)'>
-                <g className={`${c}__scale-box`} transform='translate(0, 0) rotate(0, 0, 0), scale(0) skewX(0) skewY(0)'>
-                  {props.background && <rect width={width} height={height} style={{ fill: props.background || 'transparent' }} />}
-                  {props.clip && <clipPath id={state.clip_id}><rect width={width} height={height} /></clipPath>}
-                  {props.clip && <g clipPath={clipPath}>{props.children}</g>}
-                  {!props.clip && props.children}
+      <g className={c}
+        transform={`translate(${x}, ${y})`}>
+        <g ref={n => this.$wrapper = n}>
+          <g className={`${c}__anchor-box`} transform='translate(0, 0) rotate(0, 0, 0), scale(0) skewX(0) skewY(0)'>
+            <g className={`${c}__translate-box`} transform='translate(0, 0) rotate(0, 0, 0), scale(0) skewX(0) skewY(0)'>
+              <g className={`${c}__rotate-box`} transform='translate(0, 0) rotate(0, 0, 0), scale(0) skewX(0) skewY(0)'>
+                <g className={`${c}__skew-box`} transform='translate(0, 0) rotate(0, 0, 0), scale(0) skewX(0) skewY(0)'>
+                  <g className={`${c}__scale-box`} transform='translate(0, 0) rotate(0, 0, 0), scale(0) skewX(0) skewY(0)'>
+                    {props.background && <rect width={width} height={height} style={{ fill: props.background || 'transparent' }} />}
+                    {props.clip && <clipPath id={state.clip_id}><rect width={width} height={height} /></clipPath>}
+                    {props.clip && <g clipPath={clipPath}>{props.children}</g>}
+                    {!props.clip && props.children}
+                  </g>
                 </g>
               </g>
             </g>
           </g>
+        </g>
+        <g>
+          <circle
+            className={`${c}__anchor-point`}
+            cx={0}
+            cy={0}
+            r={state.anchor_hover ? 8 : 4}
+            style={{ fill: 'black', cursor: 'pointer' }}
+            onMouseEnter={this.handleAnchorHover}
+            onMouseLeave={this.handleAnchorLeave}
+            ref={n => this.$anchorPoint = n} />
+          <rect
+            className={`${c}__ghost-box`}
+            x={0}
+            y={0}
+            style={{ stroke: 'yellow', fill: 'transparent' }}
+            ref={n => this.$ghostBox = n} />
         </g>
       </g>
     </AppContext.Provider>
