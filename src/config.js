@@ -4,7 +4,7 @@ const currentProtocol = typeof window !== 'undefined'
 const currentHostname = typeof window !== 'undefined'
   ? window.location.hostname
   : 'localhost'
-const showHeader = true
+const showHeader = false
 const staticsUrl = process.env.NODE_ENV === 'production'
   ? 'https://www.liberation.fr/apps/static'
   : `${currentProtocol}//${currentHostname}:3003`

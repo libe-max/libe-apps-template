@@ -12,8 +12,8 @@ import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Diaporama from './libe-components/blocks/Diaporama'
 import Svg from './libe-components/primitives/Svg'
 import InterTitle from './libe-components/text-levels/InterTitle'
-import Paragraph from './libe-components/text-levels/Paragraph'
 
+import HomePage from './pages/Home'
 import GraphsPage from './pages/demo/graphs'
   
 export default class App extends Component {
@@ -268,13 +268,13 @@ export default class App extends Component {
     return <AppContext.Provider value={passedContext}>
       <div id={props.meta.slug} className={classes.join(' ')}>
         {/* Header */}
-        <div className='lblb-default-apps-header'>
+        {/*<div className='lblb-default-apps-header'>
           <InterTitle
             level={1}
             className='lblb-default-apps-header__title'>
             Default title lorem ipsum dolor sit amet
           </InterTitle>
-        </div>
+        </div>*/}
 
         {/* Loading */}
         {state.loading_sheet
@@ -294,29 +294,13 @@ export default class App extends Component {
         && !state.error_sheet
         && <Router>
           <Switch>
-            
-            { /* Home page */ }
-            <Route exact path='/'>
-              <Paragraph
-                literary
-                style={{ width: '100%', textAlign: 'center' }}>
-                <strong>App is ready.</strong><br />
-                1. remove DemoPage component<br />
-                2. fill spreadsheet_id field in config.js<br />
-                3. display it's content via state.data_sheet<br /><br />
-                You can also navigate <Link to='/test'>here</Link> or <Link href='/demo'>there</Link>.
-              </Paragraph>
-            </Route>
-            
-            { /* Test page */ }
-            <Route exact path='/demo/graphs'>
-              <GraphsPage />
-            </Route>
+            <Route exact path='/'><HomePage data={props.data_sheet} /></Route>
+            <Route exact path='/demo/graphs'><GraphsPage /></Route>
           </Switch>
         </Router>}
 
         {/* Footer */}
-        <div className='lblb-default-apps-footer'>
+        {/*<div className='lblb-default-apps-footer'>
           <ShareArticle
             short
             iconsOnly
@@ -327,7 +311,7 @@ export default class App extends Component {
             updatedOn={props.meta.updated_on}
             authors={props.meta.authors} />
           <LibeLaboLogo target='blank' />
-        </div>
+        </div>*/}
 
         {/* Expanded medias panel */}
         <div
