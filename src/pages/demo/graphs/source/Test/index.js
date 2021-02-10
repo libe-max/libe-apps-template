@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import AppContext from '../../../../context'
-import Graph from '../../../../libe-components/graphs/Graph'
-import Rect from '../../../../libe-components/graphs/shapes/Rect'
-import Circle from '../../../../libe-components/graphs/shapes/Circle'
-import Text from '../../../../libe-components/graphs/text/Text'
-import TextLine from '../../../../libe-components/graphs/text/Line'
+import AppContext from '../../../../../context'
+import Graph from '../../../../../libe-components/graphs/Graph'
+import Rect from '../../../../../libe-components/graphs/shapes/Rect'
+import Circle from '../../../../../libe-components/graphs/shapes/Circle'
+import Text from '../../../../../libe-components/graphs/text/Text'
+import TextLine from '../../../../../libe-components/graphs/text/Line'
 
 class Test extends Component {
   /* * * * * * * * * * * * * * * * *

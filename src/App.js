@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+
 import { statics_url as staticsUrl } from './config'
 import AppContext from './context'
+
 import Loader from './libe-components/blocks/Loader'
 import LoadingError from './libe-components/blocks/LoadingError'
 import ShareArticle from './libe-components/blocks/ShareArticle'
@@ -11,7 +14,7 @@ import Svg from './libe-components/primitives/Svg'
 import InterTitle from './libe-components/text-levels/InterTitle'
 import Paragraph from './libe-components/text-levels/Paragraph'
 
-import GraphsPage from './pages/graphs'
+import GraphsPage from './pages/demo/graphs'
   
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -289,18 +292,28 @@ export default class App extends Component {
         { /* App */ }
         {!state.loading_sheet
         && !state.error_sheet
-        && false
-        && <Paragraph literary>
-          App is ready.<br />
-          - remove DemoPage component<br />
-          - fill spreadsheet_id field in config.js<br />
-          - display it's content via state.data_sheet
-        </Paragraph>}
-
-        { /* App */ }
-        {!state.loading_sheet
-        && !state.error_sheet
-        && <GraphsPage />}
+        && <Router>
+          <Switch>
+            
+            { /* Home page */ }
+            <Route exact path='/'>
+              <Paragraph
+                literary
+                style={{ width: '100%', textAlign: 'center' }}>
+                <strong>App is ready.</strong><br />
+                1. remove DemoPage component<br />
+                2. fill spreadsheet_id field in config.js<br />
+                3. display it's content via state.data_sheet<br /><br />
+                You can also navigate <Link to='/test'>here</Link> or <Link href='/demo'>there</Link>.
+              </Paragraph>
+            </Route>
+            
+            { /* Test page */ }
+            <Route exact path='/demo/graphs'>
+              <GraphsPage />
+            </Route>
+          </Switch>
+        </Router>}
 
         {/* Footer */}
         <div className='lblb-default-apps-footer'>
