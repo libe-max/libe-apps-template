@@ -14,7 +14,6 @@ import Svg from './libe-components/primitives/Svg'
 import InterTitle from './libe-components/text-levels/InterTitle'
 
 import HomePage from './pages/Home'
-import GraphsPage from './pages/demo/graphs'
   
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -57,10 +56,6 @@ export default class App extends Component {
    *
    * * * * * * * * * * * * * * * * */
   componentDidMount () {
-    window.setTimeout(e => this.setState(curr => ({
-      ...curr,
-      photo: false
-    })), 2000)
     document.addEventListener('keydown', this.watchKonamiCode)
     if (this.props.spreadsheet_id) return this.fetchSheet()
     return this.setState({ loading_sheet: false })
@@ -292,12 +287,7 @@ export default class App extends Component {
         { /* App */ }
         {!state.loading_sheet
         && !state.error_sheet
-        && <Router>
-          <Switch>
-            <Route exact path='/'><HomePage data={props.data_sheet} /></Route>
-            <Route exact path='/demo/graphs'><GraphsPage /></Route>
-          </Switch>
-        </Router>}
+        && <HomePage data={props.data_sheet} />}
 
         {/* Footer */}
         {/*<div className='lblb-default-apps-footer'>
