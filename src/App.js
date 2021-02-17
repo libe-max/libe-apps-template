@@ -261,7 +261,10 @@ export default class App extends Component {
     }
 
     return <AppContext.Provider value={passedContext}>
-      <div id={props.meta.slug} className={classes.join(' ')}>
+      <div
+        id={props.meta.slug}
+        className={classes.join(' ')}
+        style={{ background: 'red' }}>
         {/* Header */}
         {/*<div className='lblb-default-apps-header'>
           <InterTitle
