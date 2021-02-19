@@ -8,7 +8,9 @@ import React, { Component } from 'react'
  *   Draws a bar chart
  *
  *   PROPS
- *   x, y, width, height, fill, data, columns, min, max, origin, className
+ *   x, y, width, height, bgHoverable, cursor,
+ *   stackBars, accumulate, origin, data, columns, min, max, tooltip,
+ *   className
  *
  */
 
@@ -54,10 +56,6 @@ class BarChart extends Component {
       y: propsY,
       width: propsWidth,
       height: propsHeight,
-      fill: propsFill,
-      fillHover: propsFillHover,
-      bgFill: propsBgFill,
-      bgFillHover: propsBgFillHover,
       bgHoverable: propsBgHoverable,
       cursor: propsCursor,
       stackBars: propsStackBars,
@@ -76,12 +74,6 @@ class BarChart extends Component {
     const y = propsY || 0
     const width = propsWidth || 0
     const height = propsHeight || 0
-    const fill = Array.isArray(propsFill) ? propsFill : (propsFill ? [propsFill] : ['black'])
-    const fillHover = Array.isArray(propsFillHover)
-      ? [...propsFillHover, ...fill.slice(propsFillHover.length)]
-      : (propsFillHover ? [propsFillHover, ...fill.slice(1)] : fill)
-    const bgFill = propsBgFill || 'transparent'
-    const bgFillHover = propsBgFillHover || bgFill
     const bgHoverable = propsBgHoverable || false
     const cursor = propsCursor || 'default'
     const stackBars = propsStackBars || false
@@ -126,8 +118,6 @@ class BarChart extends Component {
       const colHeight = bandLength
       const colX = i * bandThickness
       const colY = 0
-      const colFill = bgFill
-      const colFillHover = bgFillHover
       let currentColTop = 0
       let currentColBottom = 0
       const bars = vals.map((val, j) => {
@@ -136,25 +126,31 @@ class BarChart extends Component {
         const barHeight = barHeightRatio * bandLength
         const barX = colX
         const barY = stackBars ? (barHeight >= 0 ? currentColTop : currentColBottom) : 0
-        const barFill = fill[j] || fill[0]
-        const barFillHover = fillHover[j] || fillHover[0]
         if (barHeight >= 0) currentColTop += barHeight
         else currentColBottom += barHeight
         const notOrientedBarData = {
           x: barX,
           y: barHeight >= 0 ? barY : (barY + barHeight),
           width: barWidth,
-          height: barHeight >= 0 ? barHeight : -1 * barHeight,
-          fill: barFill,
-          fillHover: barFillHover
+          height: barHeight >= 0 ? barHeight : -1 * barHeight
         }
         return {
-          x: originDirection === 'horizontal' ? notOrientedBarData.x : (origin === 'left' ? notOrientedBarData.y : (width - notOrientedBarData.y - notOrientedBarData.height)),
-          y: originDirection === 'vertical' ? notOrientedBarData.x : (origin === 'top' ? notOrientedBarData.y : (height - notOrientedBarData.y - notOrientedBarData.height)),
-          width: originDirection === 'horizontal' ? notOrientedBarData.width : notOrientedBarData.height,
-          height: originDirection === 'vertical' ? notOrientedBarData.width : notOrientedBarData.height,
-          fill: notOrientedBarData.fill,
-          fillHover: notOrientedBarData.fillHover
+          x: originDirection === 'horizontal'
+            ? notOrientedBarData.x
+            : origin === 'left'
+              ? notOrientedBarData.y
+              : width - notOrientedBarData.y - notOrientedBarData.height,
+          y: originDirection === 'vertical'
+            ? notOrientedBarData.x
+            : origin === 'top'
+              ? notOrientedBarData.y
+              : height - notOrientedBarData.y - notOrientedBarData.height,
+          width: originDirection === 'horizontal'
+            ? notOrientedBarData.width
+            : notOrientedBarData.height,
+          height: originDirection === 'vertical'
+            ? notOrientedBarData.width
+            : notOrientedBarData.height
         }
       })
       return {
@@ -163,9 +159,7 @@ class BarChart extends Component {
           x: originDirection === 'horizontal' ? colX : colY,
           y: originDirection === 'horizontal' ? colY : colX,
           width: originDirection === 'horizontal' ? colWidth : colHeight,
-          height: originDirection === 'horizontal' ? colHeight : colWidth,
-          fill: colFill,
-          fillHover: colFillHover
+          height: originDirection === 'horizontal' ? colHeight : colWidth
         }
       }
     })
@@ -183,23 +177,19 @@ class BarChart extends Component {
           x={barData.bg.x}
           y={barData.bg.y}
           width={barData.bg.width}
-          height={barData.bg.height}
-          style={{ fill: !isHovered ? barData.bg.fill : barData.bg.fillHover }} />
+          height={barData.bg.height} />
         <g className={`${c}__sub-bars`}>
           {barData.bars.map((subBarData, j) => {
             return <rect
               key={j}
-              className={`${c}__bar`}
+              className={`${c}__bar ${c}__bar-${j}`}
               x={subBarData.x}
               y={subBarData.y}
               width={subBarData.width}
               height={subBarData.height}
               onMouseEnter={() => !bgHoverable ? handleBarEnter(i) : null}
               onMouseLeave={() => !bgHoverable ? handleBarLeave(i) : null}
-              style={{
-                fill: !isHovered ? subBarData.fill : subBarData.fillHover,
-                cursor: !bgHoverable ? cursor : undefined
-              }} />
+              style={{ cursor: !bgHoverable ? cursor : undefined }} />
           })}
         </g>
       </g>
@@ -239,6 +229,7 @@ class BarChart extends Component {
     return <g
       transform={`translate(${x || 0}, ${y || 0})`}
       className={classes.join(' ')}>
+      <rect width={width} height={height} className={`${c}__bg`} />
       <g className={`${c}__bars`}>{bars}</g>
       <g className={`${c}__tooltips`}>{tooltips}</g>
     </g>

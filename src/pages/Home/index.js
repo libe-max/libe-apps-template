@@ -1,19 +1,25 @@
 import React, { Component } from 'react' 
 import moment from 'moment'
-import { scaleLinear, scaleTime, timeMonth } from 'd3'
+import { scaleLinear, scaleTime } from 'd3'
 import perlin from 'perlin-noise'
 import AppContext from '../../context'
-import './components/style.css'
-import BarChart from './components/BarChart'
-import Grid from './components/Grid'
+import BarChart from '../../libe-components/graphs-2/BarChart'
+import Grid from '../../libe-components/graphs-2/Grid'
 import Paragraph from '../../libe-components/text-levels/Paragraph'
+import fibonacci from '../../libe-utils/fibonacci'
 
 const noises = [
   perlin.generatePerlinNoise(90, 1, { octaveCount: 4, amplitude: 0.1, persistence: 0.2 }),
   perlin.generatePerlinNoise(90, 1, { octaveCount: 4, amplitude: 0.1, persistence: 0.2 })
 ]
 const columns = new Array(90).fill(null).map((e, i) => moment('1-1-2021', 'DD-MM-YYYY').add(i, 'days').format('D MMM'))
-const data = new Array(90).fill(null).map((e, i) => noises.map((line, j) => line[i] * (noises.length - j) * 1/8))
+const data = new Array(90).fill(null).map((e, i) => {
+  return noises.map((line, j) => {
+    const lineFactor = (1 - (j / noises.length))
+    const reductionFactor = 3000000
+    return line[i] * lineFactor * reductionFactor
+  })
+})
 
 /*
  *   Home page component
@@ -63,49 +69,47 @@ class Home extends Component {
       height={height}
       style={{ marginTop: '4rem', marginLeft: '1rem' }}>
       {/* Background */}
-      <rect x={0} y={0} width={width} height={height} style={{ fill: 'white' }} />
+      <rect
+        x={0}
+        y={0}
+        width={width}
+        height={height}
+        style={{ fill: 'white' }} />
       {/* Grid */}
       <Grid
         className='some-grid'
-        x={rem}
+        x={3 * rem}
         y={rem}
-        width={width - 2 * rem}
-        height={height - 2 * rem}
-        xScale={scaleTime([new Date(2021, 0, 1), new Date(2021, 2, 31)], [0, width - 2 * rem])}
-        yScale={scaleLinear([0, 20], [0, height - 2 * rem])}
-        xTicks={10}
-        yTicks={timeMonth.every(2)} />
+        width={width - 4 * rem}
+        height={height - 3 * rem}
+        xScale={scaleTime().domain([new Date(2021, 0, 1), new Date(2021, 3, 31)])}
+        yScale={scaleLinear().domain([0, 6e6])}
+        xTicks={[1, 2, 3].map(e => moment('2021-1-1', 'YYYY-MM-DD').add(e, 'months').toDate())}
+        yTicks={new Array(6).fill(0).map((e, i) => i * 6e6 / 6)}
+        xTickFormat={date => moment(date).format('D MMM YY')}
+        yTickFormat={val => `${val / 1e6}M`}
+        xBottomLabelPosition={({ x, y, val, label }) => ({ x, y: y + .5 * rem })}
+        yLeftLabelPosition={({ x, y, val, label }) => ({ y, x: (x - .5 * rem) })} />
       {/* Bars */}
       <BarChart
         className='some-bar-chart'
-        x={rem}
+        x={3 * rem}
         y={rem}
-        width={width - 2 * rem}
-        height={height - 2 * rem}
-        fill={[
-          'rgba(35, 6, 75, .9)',
-          'rgba(104, 216, 186, .7)'
-        ]}
-        fillHover={[
-          'rgba(35, 6, 75, 1)',
-          'rgba(104, 216, 186, 1)'
-        ]}
-        bgFill='rgba(240, 240, 240, 0)'
-        bgFillHover='rgba(240, 240, 240, .2)'
+        width={width - 4 * rem}
+        height={height - 3 * rem}
         bgHoverable={true}
         cursor='pointer'
-        origin='bottom'
-        stackBars={false}
-        accumulate={true}
+        stackBars={true}
+        accumulate={false}
         min={0}
-        max={20}
+        max={6e6}
         columns={this.state.columns}
         data={this.state.data}
         tooltip={({ val, col, bar, chart, i }) => {
           return <foreignObject
             key={i}
             x={bar.x - ((240 - bar.width) * bar.x / chart.width)}
-            y={Math.min(chart.height - bar.height, chart.height - 140)}
+            y={rem}
             width={240}
             height={104 + 2*rem}>
             <div style={{
