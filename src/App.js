@@ -14,7 +14,7 @@ import Svg from './libe-components/primitives/Svg'
 import InterTitle from './libe-components/text-levels/InterTitle'
 
 import HomePage from './pages/Home'
-  
+
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
    *
@@ -263,8 +263,7 @@ export default class App extends Component {
     return <AppContext.Provider value={passedContext}>
       <div
         id={props.meta.slug}
-        className={classes.join(' ')}
-        style={{ background: 'red' }}>
+        className={classes.join(' ')}>
         {/* Header */}
         {/*<div className='lblb-default-apps-header'>
           <InterTitle
@@ -290,7 +289,7 @@ export default class App extends Component {
         { /* App */ }
         {!state.loading_sheet
         && !state.error_sheet
-        && <HomePage data={props.data_sheet} />}
+        && <HomePage />}
 
         {/* Footer */}
         {/*<div className='lblb-default-apps-footer'>

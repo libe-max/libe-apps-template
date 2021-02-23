@@ -83,9 +83,9 @@ class Grid extends Component {
     const xLines = xTicks.map((tick, tickPos) => {
       const xPos = xScale(tick)
       const label = xFormatter(tick)
-      const lineClassName = `${c}__line ${c}__x-line ${c}__x-line-${tickPos}`
-      const topLabelClassName = `${c}__label ${c}__top-label ${c}__x-label ${c}__x-label-${tickPos}`
-      const bottomLabelClassName = `${c}__label ${c}__bottom-label ${c}__x-label ${c}__x-label-${tickPos}`
+      const lineClassName = `${c}__line ${c}__line_x ${c}__line_${tickPos}`
+      const topLabelClassName = `${c}__label ${c}__label_x ${c}__label_top ${c}__label_${tickPos}`
+      const bottomLabelClassName = `${c}__label ${c}__label_x ${c}__label_bottom ${c}__label_${tickPos}`
       const topLabelPosition = xTopLabelPosition({ x: xPos, y: 0, val: tick, label: label })
       const bottomLabelPosition = xBottomLabelPosition({ x: xPos, y: height, val: tick, label: label })
       return <g className={`${c}__x-tick`} key={xPos}>
@@ -98,9 +98,9 @@ class Grid extends Component {
     const yLines = yTicks.map((tick, tickPos) => {
       const yPos = yScale(tick)
       const label = yFormatter(tick)
-      const lineClassName = `${c}__line ${c}__y-line ${c}__y-line-${tickPos}`
-      const leftLabelClassName = `${c}__label ${c}__left-label ${c}__y-label ${c}__y-label-${tickPos}`
-      const rightLabelClassName = `${c}__label ${c}__right-label ${c}__y-label ${c}__y-label-${tickPos}`
+      const lineClassName = `${c}__line ${c}__line_x ${c}__line_${tickPos}`
+      const leftLabelClassName = `${c}__label ${c}__label_y ${c}__label_left ${c}__label_${tickPos}`
+      const rightLabelClassName = `${c}__label ${c}__label_y ${c}__label_right ${c}__label_${tickPos}`
       const leftLabelPosition = yLeftLabelPosition({ x: 0, y: yPos, val: tick, label: label })
       const rightLabelPosition = yRightLabelPosition({ x: width, y: yPos, val: tick, label: label })
       return <g className={`${c}__y-tick`} key={yPos}>

@@ -182,7 +182,7 @@ class BarChart extends Component {
           {barData.bars.map((subBarData, j) => {
             return <rect
               key={j}
-              className={`${c}__bar ${c}__bar-${j}`}
+              className={`${c}__bar ${c}__bar_${j}`}
               x={subBarData.x}
               y={subBarData.y}
               width={subBarData.width}

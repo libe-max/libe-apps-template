@@ -10,7 +10,7 @@ const meta = {
   url: '',
   description: '',
   image: '',
-  slug: 'test',
+  slug: 'vaccins-CN',
   tweet: '',
   published_on: '01/01/2020 12:00',
   updated_on: null,
