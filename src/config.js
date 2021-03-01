@@ -1,17 +1,9 @@
-const currentProtocol = typeof window !== 'undefined'
-  ? window.location.protocol
-  : 'http:'
-const currentHostname = typeof window !== 'undefined'
-  ? window.location.hostname
-  : 'localhost'
-const showHeader = true
-const staticsUrl = process.env.NODE_ENV === 'production'
-  ? 'https://www.liberation.fr/apps/static'
-  : `${currentProtocol}//${currentHostname}:3003`
-const proxydataUrl = process.env.NODE_ENV === 'production'
-  ? 'https://proxydata.liberation.fr'
-  : 'http://localhost:3004'
-const spreadsheetId = undefined
+const currentProtocol = typeof window !== 'undefined' ? window.location.protocol : 'http:'
+const currentHostname = typeof window !== 'undefined' ? window.location.hostname : 'localhost'
+const showHeader = false
+const staticsUrl = process.env.NODE_ENV === 'production' ? 'https://www.liberation.fr/apps/static' : `${currentProtocol}//${currentHostname}:3003`
+const proxydataUrl = process.env.NODE_ENV === 'production' ? 'https://proxydata.liberation.fr' : 'http://localhost:3004'
+const spreadsheetId = '1w-VA5oz0-DmYTfCz7NN0R_jOP8mUSjpa-Ho92fZ5Cjg'
 const meta = {
   author: 'Libé Labo',
   title: 'Libération - ',

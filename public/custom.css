@@ -1,80 +1,319 @@
-.lblb-graph {
-  font-family: 'Georgia';
+.lblb-text_level--4 { font-size: 0.375rem; }
+.lblb-text_level--3-5 { font-size: 0.4375rem; }
+.lblb-text_level--3 { font-size: 0.4375rem; }
+.lblb-text_level--2-5 { font-size: 0.5rem; }
+.lblb-text_level--2 { font-size: 0.5625rem; }
+.lblb-text_level--1-5 { font-size: 0.625rem; }
+.lblb-text_level--1 { font-size: 0.75rem; }
+.lblb-text_level--0-5 { font-size: 0.8125rem; }
+.lblb-text_level-0 { font-size: 0.875rem; }
+.lblb-text_level-0-5 { font-size: 1rem; }
+.lblb-text_level-1 { font-size: 1.125rem; }
+.lblb-text_level-1-5 { font-size: 1.25rem; }
+.lblb-text_level-2 { font-size: 1.4375rem; }
+.lblb-text_level-2-5 { font-size: 1.5625rem; }
+.lblb-text_level-3 { font-size: 1.75rem; }
+.lblb-text_level-3-5 { font-size: 1.9375rem; }
+.lblb-text_level-4 { font-size: 2.1875rem; }
+.lblb-text_level-4-5 { font-size: 2.4375rem; }
+.lblb-text_level-5 { font-size: 2.75rem; }
+.lblb-text_level-5-5 { font-size: 3.0625rem; }
+.lblb-text_level-6 { font-size: 3.4375rem; }
+.lblb-text_level-6-5 { font-size: 3.8125rem; }
+.lblb-text_level-7 { font-size: 4.3125rem; }
+.lblb-text_level-7-5 { font-size: 4.8125rem; }
+.lblb-text_level-8 { font-size: 5.375rem; }
+.lblb-text_level-8-5 { font-size: 6rem; }
+.lblb-text_level-9 { font-size: 6.6875rem; }
+.lblb-text_level-9-5 { font-size: 7.5rem; }
+.lblb-text_level-10 { font-size: 8.375rem; }
+.lblb-text_level-10-5 { font-size: 9.375rem; }
+.lblb-text_level-11 { font-size: 10.5rem; }
+.lblb-text_level-11-5 { font-size: 11.6875rem; }
+.lblb-text_level-12 { font-size: 13.125rem; }
+.lblb-text_level-12-5 { font-size: 14.625rem; }
+.lblb-text_level-13 { font-size: 16.375rem; }
+.lblb-text_level-13-5 { font-size: 18.3125rem; }
+.lblb-text_level-14 { font-size: 20.4375rem; }
+.lblb-text_level-14-5 { font-size: 22.875rem; }
+.lblb-text_level-15 { font-size: 25.5625rem; }
+.lblb-text_level-15-5 { font-size: 28.625rem; }
+.lblb-text_level-16 { font-size: 32rem; }
+.lblb-text_level-16-5 { font-size: 35.75rem; }
+.lblb-text_level-17 { font-size: 39.9375rem; }
+.lblb-text_level-17-5 { font-size: 44.6875rem; }
+.lblb-text_level-18 { font-size: 49.9375rem; }
+.lblb-text_level-18-5 { font-size: 55.875rem; }
+.lblb-text_level-19 { font-size: 62.4375rem; }
+.lblb-text_level-19-5 { font-size: 69.8125rem; }
+.lblb-text_level-20 { font-size: 78.0625rem; }
+.lblb-text_level-20-5 { font-size: 87.25rem; }
+.lblb-text_height-level--4 { line-height: 0.5rem; }
+.lblb-text_height-level--3-5 { line-height: 0.5rem; }
+.lblb-text_height-level--3 { line-height: 0.5rem; }
+.lblb-text_height-level--2-5 { line-height: 1rem; }
+.lblb-text_height-level--2 { line-height: 1rem; }
+.lblb-text_height-level--1-5 { line-height: 1rem; }
+.lblb-text_height-level--1 { line-height: 1rem; }
+.lblb-text_height-level--0-5 { line-height: 1rem; }
+.lblb-text_height-level-0 { line-height: 1rem; }
+.lblb-text_height-level-0-5 { line-height: 1.5rem; }
+.lblb-text_height-level-1 { line-height: 1.5rem; }
+.lblb-text_height-level-1-5 { line-height: 1.5rem; }
+.lblb-text_height-level-2 { line-height: 2rem; }
+.lblb-text_height-level-2-5 { line-height: 2rem; }
+.lblb-text_height-level-3 { line-height: 2rem; }
+.lblb-text_height-level-3-5 { line-height: 2.5rem; }
+.lblb-text_height-level-4 { line-height: 2.5rem; }
+.lblb-text_height-level-4-5 { line-height: 3rem; }
+.lblb-text_height-level-5 { line-height: 3.5rem; }
+.lblb-text_height-level-5-5 { line-height: 3.5rem; }
+.lblb-text_height-level-6 { line-height: 4rem; }
+.lblb-text_height-level-6-5 { line-height: 4.5rem; }
+.lblb-text_height-level-7 { line-height: 5rem; }
+.lblb-text_height-level-7-5 { line-height: 5.5rem; }
+.lblb-text_height-level-8 { line-height: 6.5rem; }
+.lblb-text_height-level-8-5 { line-height: 7rem; }
+.lblb-text_height-level-9 { line-height: 8rem; }
+.lblb-text_height-level-9-5 { line-height: 8.5rem; }
+.lblb-text_height-level-10 { line-height: 9.5rem; }
+.lblb-text_height-level-10-5 { line-height: 11rem; }
+.lblb-text_height-level-11 { line-height: 12rem; }
+.lblb-text_height-level-11-5 { line-height: 13.5rem; }
+.lblb-text_height-level-12 { line-height: 15rem; }
+.lblb-text_height-level-12-5 { line-height: 16.5rem; }
+.lblb-text_height-level-13 { line-height: 18.5rem; }
+.lblb-text_height-level-13-5 { line-height: 21rem; }
+.lblb-text_height-level-14 { line-height: 23rem; }
+.lblb-text_height-level-14-5 { line-height: 26rem; }
+.lblb-text_height-level-15 { line-height: 29rem; }
+.lblb-text_height-level-15-5 { line-height: 32.5rem; }
+.lblb-text_height-level-16 { line-height: 36rem; }
+.lblb-text_height-level-16-5 { line-height: 40.5rem; }
+.lblb-text_height-level-17 { line-height: 45rem; }
+.lblb-text_height-level-17-5 { line-height: 50.5rem; }
+.lblb-text_height-level-18 { line-height: 56.5rem; }
+.lblb-text_height-level-18-5 { line-height: 63rem; }
+.lblb-text_height-level-19 { line-height: 70.5rem; }
+.lblb-text_height-level-19-5 { line-height: 79rem; }
+.lblb-text_height-level-20 { line-height: 88rem; }
+.lblb-text_height-level-20-5 { line-height: 98.5rem; }
+
+@media screen and (max-width: 63rem) {
+  .lblb-text_level--4 { font-size: 0.4375rem; }
+  .lblb-text_level--3-5 { font-size: 0.5rem; }
+  .lblb-text_level--3 { font-size: 0.5625rem; }
+  .lblb-text_level--2-5 { font-size: 0.625rem; }
+  .lblb-text_level--2 { font-size: 0.625rem; }
+  .lblb-text_level--1-5 { font-size: 0.6875rem; }
+  .lblb-text_level--1 { font-size: 0.8125rem; }
+  .lblb-text_level--0-5 { font-size: 0.875rem; }
+  .lblb-text_level-0 { font-size: 0.9375rem; }
+  .lblb-text_level-0-5 { font-size: 1rem; }
+  .lblb-text_level-1 { font-size: 1.125rem; }
+  .lblb-text_level-1-5 { font-size: 1.25rem; }
+  .lblb-text_level-2 { font-size: 1.375rem; }
+  .lblb-text_level-2-5 { font-size: 1.5rem; }
+  .lblb-text_level-3 { font-size: 1.625rem; }
+  .lblb-text_level-3-5 { font-size: 1.75rem; }
+  .lblb-text_level-4 { font-size: 1.9375rem; }
+  .lblb-text_level-4-5 { font-size: 2.125rem; }
+  .lblb-text_level-5 { font-size: 2.3125rem; }
+  .lblb-text_level-5-5 { font-size: 2.5625rem; }
+  .lblb-text_level-6 { font-size: 2.8125rem; }
+  .lblb-text_level-6-5 { font-size: 3.0625rem; }
+  .lblb-text_level-7 { font-size: 3.375rem; }
+  .lblb-text_level-7-5 { font-size: 3.6875rem; }
+  .lblb-text_level-8 { font-size: 4rem; }
+  .lblb-text_level-8-5 { font-size: 4.4375rem; }
+  .lblb-text_level-9 { font-size: 4.8125rem; }
+  .lblb-text_level-9-5 { font-size: 5.3125rem; }
+  .lblb-text_level-10 { font-size: 5.8125rem; }
+  .lblb-text_level-10-5 { font-size: 6.375rem; }
+  .lblb-text_level-11 { font-size: 6.9375rem; }
+  .lblb-text_level-11-5 { font-size: 7.625rem; }
+  .lblb-text_level-12 { font-size: 8.375rem; }
+  .lblb-text_level-12-5 { font-size: 9.1875rem; }
+  .lblb-text_level-13 { font-size: 10rem; }
+  .lblb-text_level-13-5 { font-size: 11rem; }
+  .lblb-text_level-14 { font-size: 12.0625rem; }
+  .lblb-text_level-14-5 { font-size: 13.1875rem; }
+  .lblb-text_level-15 { font-size: 14.4375rem; }
+  .lblb-text_level-15-5 { font-size: 15.8125rem; }
+  .lblb-text_level-16 { font-size: 17.3125rem; }
+  .lblb-text_level-16-5 { font-size: 19rem; }
+  .lblb-text_level-17 { font-size: 20.8125rem; }
+  .lblb-text_level-17-5 { font-size: 22.8125rem; }
+  .lblb-text_level-18 { font-size: 24.9375rem; }
+  .lblb-text_level-18-5 { font-size: 27.3125rem; }
+  .lblb-text_level-19 { font-size: 29.9375rem; }
+  .lblb-text_level-19-5 { font-size: 32.8125rem; }
+  .lblb-text_level-20 { font-size: 35.9375rem; }
+  .lblb-text_level-20-5 { font-size: 39.375rem; }
+  .lblb-text_height-level--4 { line-height: 0.5rem; }
+  .lblb-text_height-level--3-5 { line-height: 1rem; }
+  .lblb-text_height-level--3 { line-height: 1rem; }
+  .lblb-text_height-level--2-5 { line-height: 1rem; }
+  .lblb-text_height-level--2 { line-height: 1rem; }
+  .lblb-text_height-level--1-5 { line-height: 1rem; }
+  .lblb-text_height-level--1 { line-height: 1rem; }
+  .lblb-text_height-level--0-5 { line-height: 1rem; }
+  .lblb-text_height-level-0 { line-height: 1.5rem; }
+  .lblb-text_height-level-0-5 { line-height: 1.5rem; }
+  .lblb-text_height-level-1 { line-height: 1.5rem; }
+  .lblb-text_height-level-1-5 { line-height: 1.5rem; }
+  .lblb-text_height-level-2 { line-height: 2rem; }
+  .lblb-text_height-level-2-5 { line-height: 2rem; }
+  .lblb-text_height-level-3 { line-height: 2rem; }
+  .lblb-text_height-level-3-5 { line-height: 2rem; }
+  .lblb-text_height-level-4 { line-height: 2.5rem; }
+  .lblb-text_height-level-4-5 { line-height: 2.5rem; }
+  .lblb-text_height-level-5 { line-height: 3rem; }
+  .lblb-text_height-level-5-5 { line-height: 3rem; }
+  .lblb-text_height-level-6 { line-height: 3.5rem; }
+  .lblb-text_height-level-6-5 { line-height: 3.5rem; }
+  .lblb-text_height-level-7 { line-height: 4rem; }
+  .lblb-text_height-level-7-5 { line-height: 4.5rem; }
+  .lblb-text_height-level-8 { line-height: 4.5rem; }
+  .lblb-text_height-level-8-5 { line-height: 5rem; }
+  .lblb-text_height-level-9 { line-height: 5.5rem; }
+  .lblb-text_height-level-9-5 { line-height: 6rem; }
+  .lblb-text_height-level-10 { line-height: 7rem; }
+  .lblb-text_height-level-10-5 { line-height: 7.5rem; }
+  .lblb-text_height-level-11 { line-height: 8rem; }
+  .lblb-text_height-level-11-5 { line-height: 9rem; }
+  .lblb-text_height-level-12 { line-height: 9.5rem; }
+  .lblb-text_height-level-12-5 { line-height: 10.5rem; }
+  .lblb-text_height-level-13 { line-height: 11.5rem; }
+  .lblb-text_height-level-13-5 { line-height: 12.5rem; }
+  .lblb-text_height-level-14 { line-height: 14rem; }
+  .lblb-text_height-level-14-5 { line-height: 15rem; }
+  .lblb-text_height-level-15 { line-height: 16.5rem; }
+  .lblb-text_height-level-15-5 { line-height: 18rem; }
+  .lblb-text_height-level-16 { line-height: 19.5rem; }
+  .lblb-text_height-level-16-5 { line-height: 21.5rem; }
+  .lblb-text_height-level-17 { line-height: 23.5rem; }
+  .lblb-text_height-level-17-5 { line-height: 26rem; }
+  .lblb-text_height-level-18 { line-height: 28.5rem; }
+  .lblb-text_height-level-18-5 { line-height: 31rem; }
+  .lblb-text_height-level-19 { line-height: 34rem; }
+  .lblb-text_height-level-19-5 { line-height: 37rem; }
+  .lblb-text_height-level-20 { line-height: 40.5rem; }
+  .lblb-text_height-level-20-5 { line-height: 44.5rem; }
 }
 
-.lblb-graph text,
-.lblb-graph tspan {
-  /*fill: #212121;*/
-  dominant-baseline: middle;
+@media screen and (max-width: 40rem) {
+  .lblb-text_level--4 { font-size: 0.4375rem; }
+  .lblb-text_level--3-5 { font-size: 0.5rem; }
+  .lblb-text_level--3 { font-size: 0.5rem; }
+  .lblb-text_level--2-5 { font-size: 0.5625rem; }
+  .lblb-text_level--2 { font-size: 0.625rem; }
+  .lblb-text_level--1-5 { font-size: 0.6875rem; }
+  .lblb-text_level--1 { font-size: 0.6875rem; }
+  .lblb-text_level--0-5 { font-size: 0.75rem; }
+  .lblb-text_level-0 { font-size: 0.875rem; }
+  .lblb-text_level-0-5 { font-size: 0.9375rem; }
+  .lblb-text_level-1 { font-size: 1rem; }
+  .lblb-text_level-1-5 { font-size: 1.0625rem; }
+  .lblb-text_level-2 { font-size: 1.1875rem; }
+  .lblb-text_level-2-5 { font-size: 1.3125rem; }
+  .lblb-text_level-3 { font-size: 1.375rem; }
+  .lblb-text_level-3-5 { font-size: 1.5rem; }
+  .lblb-text_level-4 { font-size: 1.625rem; }
+  .lblb-text_level-4-5 { font-size: 1.8125rem; }
+  .lblb-text_level-5 { font-size: 1.9375rem; }
+  .lblb-text_level-5-5 { font-size: 2.125rem; }
+  .lblb-text_level-6 { font-size: 2.3125rem; }
+  .lblb-text_level-6-5 { font-size: 2.5rem; }
+  .lblb-text_level-7 { font-size: 2.6875rem; }
+  .lblb-text_level-7-5 { font-size: 2.9375rem; }
+  .lblb-text_level-8 { font-size: 3.1875rem; }
+  .lblb-text_level-8-5 { font-size: 3.4375rem; }
+  .lblb-text_level-9 { font-size: 3.75rem; }
+  .lblb-text_level-9-5 { font-size: 4.0625rem; }
+  .lblb-text_level-10 { font-size: 4.4375rem; }
+  .lblb-text_level-10-5 { font-size: 4.8125rem; }
+  .lblb-text_level-11 { font-size: 5.25rem; }
+  .lblb-text_level-11-5 { font-size: 5.6875rem; }
+  .lblb-text_level-12 { font-size: 6.1875rem; }
+  .lblb-text_level-12-5 { font-size: 6.6875rem; }
+  .lblb-text_level-13 { font-size: 7.3125rem; }
+  .lblb-text_level-13-5 { font-size: 7.9375rem; }
+  .lblb-text_level-14 { font-size: 8.625rem; }
+  .lblb-text_level-14-5 { font-size: 9.3125rem; }
+  .lblb-text_level-15 { font-size: 10.125rem; }
+  .lblb-text_level-15-5 { font-size: 11rem; }
+  .lblb-text_level-16 { font-size: 12rem; }
+  .lblb-text_level-16-5 { font-size: 13rem; }
+  .lblb-text_level-17 { font-size: 14.125rem; }
+  .lblb-text_level-17-5 { font-size: 15.375rem; }
+  .lblb-text_level-18 { font-size: 16.6875rem; }
+  .lblb-text_level-18-5 { font-size: 18.125rem; }
+  .lblb-text_level-19 { font-size: 19.6875rem; }
+  .lblb-text_level-19-5 { font-size: 21.375rem; }
+  .lblb-text_level-20 { font-size: 23.1875rem; }
+  .lblb-text_level-20-5 { font-size: 25.1875rem; }
+  .lblb-text_height-level--4 { line-height: 0.5rem; }
+  .lblb-text_height-level--3-5 { line-height: 1rem; }
+  .lblb-text_height-level--3 { line-height: 1rem; }
+  .lblb-text_height-level--2-5 { line-height: 1rem; }
+  .lblb-text_height-level--2 { line-height: 1rem; }
+  .lblb-text_height-level--1-5 { line-height: 1rem; }
+  .lblb-text_height-level--1 { line-height: 1rem; }
+  .lblb-text_height-level--0-5 { line-height: 1rem; }
+  .lblb-text_height-level-0 { line-height: 1rem; }
+  .lblb-text_height-level-0-5 { line-height: 1.5rem; }
+  .lblb-text_height-level-1 { line-height: 1.5rem; }
+  .lblb-text_height-level-1-5 { line-height: 1.5rem; }
+  .lblb-text_height-level-2 { line-height: 1.5rem; }
+  .lblb-text_height-level-2-5 { line-height: 1.5rem; }
+  .lblb-text_height-level-3 { line-height: 2rem; }
+  .lblb-text_height-level-3-5 { line-height: 2rem; }
+  .lblb-text_height-level-4 { line-height: 2rem; }
+  .lblb-text_height-level-4-5 { line-height: 2.5rem; }
+  .lblb-text_height-level-5 { line-height: 2.5rem; }
+  .lblb-text_height-level-5-5 { line-height: 2.5rem; }
+  .lblb-text_height-level-6 { line-height: 3rem; }
+  .lblb-text_height-level-6-5 { line-height: 3rem; }
+  .lblb-text_height-level-7 { line-height: 3.5rem; }
+  .lblb-text_height-level-7-5 { line-height: 3.5rem; }
+  .lblb-text_height-level-8 { line-height: 4rem; }
+  .lblb-text_height-level-8-5 { line-height: 4rem; }
+  .lblb-text_height-level-9 { line-height: 4.5rem; }
+  .lblb-text_height-level-9-5 { line-height: 5rem; }
+  .lblb-text_height-level-10 { line-height: 5rem; }
+  .lblb-text_height-level-10-5 { line-height: 5.5rem; }
+  .lblb-text_height-level-11 { line-height: 6rem; }
+  .lblb-text_height-level-11-5 { line-height: 6.5rem; }
+  .lblb-text_height-level-12 { line-height: 7rem; }
+  .lblb-text_height-level-12-5 { line-height: 8rem; }
+  .lblb-text_height-level-13 { line-height: 8.5rem; }
+  .lblb-text_height-level-13-5 { line-height: 9rem; }
+  .lblb-text_height-level-14 { line-height: 10rem; }
+  .lblb-text_height-level-14-5 { line-height: 10.5rem; }
+  .lblb-text_height-level-15 { line-height: 11.5rem; }
+  .lblb-text_height-level-15-5 { line-height: 12.5rem; }
+  .lblb-text_height-level-16 { line-height: 13.5rem; }
+  .lblb-text_height-level-16-5 { line-height: 15rem; }
+  .lblb-text_height-level-17 { line-height: 16rem; }
+  .lblb-text_height-level-17-5 { line-height: 17.5rem; }
+  .lblb-text_height-level-18 { line-height: 19rem; }
+  .lblb-text_height-level-18-5 { line-height: 20.5rem; }
+  .lblb-text_height-level-19 { line-height: 22.5rem; }
+  .lblb-text_height-level-19-5 { line-height: 24.5rem; }
+  .lblb-text_height-level-20 { line-height: 26.5rem; }
+  .lblb-text_height-level-20-5 { line-height: 28.5rem; }
 }
 
-.lblb-graph rect {
-  fill: transparent;
+.lblb-text {
+  font-family: Georgia
 }
 
-.lblb-graph-graph__title {
-  font-family: 'Libe-Sans-Semicondensed';
-  font-size: 2.5rem;
-  line-height: 2.5rem;
-  font-weight: 800;
-  letter-spacing: .05rem;
+.lblb-text-h1,
+.lblb-text-h2,
+.lblb-text-h3,
+.lblb-text-h4,
+.lblb-text-h5,
+.lblb-text-h6 {
+  font-family: 'Libe-Sans-Semicondensed', Helvetica, Arial, sans-serif;
 }
-
-.lblb-graph-graph__subtitle {
-  font-family: 'Georgia';
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
-.lblb-graph-graph__source {
-  font-family: 'Synthese';
-  font-size: .75rem;
-  line-height: 1rem;
-  font-weight: 400;
-}
-
-.lblb-graph-axis__ticks text {
-  font-family: 'Synthese';
-}
-
-.lblb-graph-heading {
-  font-family: 'Libe-Sans-Semicondensed';
-  font-weight: 800;
-}
-
-.lblb-graph-heading._ff_lbssc {
-  letter-spacing: .05em;
-}
-
-.lblb-graph-heading.lblb-graph-h4,
-.lblb-graph-heading.lblb-graph-h5,
-.lblb-graph-heading.lblb-graph-h6 {
-  font-family: 'Synthese';
-}
-
-.lblb-graph-heading.lblb-graph-h6 {
-  font-weight: 600;
-}
-
-
-/*.lblb-graph-asset * {
-  fill: transparent;
-}
-
-.lblb-graph-asset text,
-.lblb-graph-asset tspan {
-  fill: #212121;
-}
-
-.lblb-graph-axis__domain line {
-  stroke: #212121;
-}
-
-.lblb-graph-axis__ticks line {
-  stroke: #212121;
-}
-
-.lblb-graph-axis__ticks text {
-  font-family: 'Synthese';
-}
-*/

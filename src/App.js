@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
 import { statics_url as staticsUrl } from './config'
 import AppContext from './context'
 
 import Loader from './libe-components/blocks/Loader'
 import LoadingError from './libe-components/blocks/LoadingError'
-import ShareArticle from './libe-components/blocks/ShareArticle'
-import LibeLaboLogo from './libe-components/blocks/LibeLaboLogo'
-import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Diaporama from './libe-components/blocks/Diaporama'
 import Svg from './libe-components/primitives/Svg'
-import InterTitle from './libe-components/text-levels/InterTitle'
-import Paragraph from './libe-components/text-levels/Paragraph'
 
-import GraphsPage from './pages/demo/graphs'
+import HomePage from './pages/Home'
+import JsonTableToObjects from './libe-utils/json-table-to-objects'
   
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -210,29 +205,34 @@ export default class App extends Component {
    *
    * * * * * * * * * * * * * * * * */
   async fetchSheet () {
-    this.setState({ loading_sheet: true, error_sheet: null })
-    const { proxydata_url: proxydataUrl, spreadsheet_id: spreadsheetId } = this.props
-    try {
-      const url = `${proxydataUrl}/proxy/spreadsheets/${spreadsheetId}`
-      const reach = await window.fetch(url)
-      if (!reach.ok) throw reach
-      const { data, err } = await reach.json()
-      if (err) throw err
-      const parsedData = data // Parse sheet here
-      this.setState({ loading_sheet: false, error_sheet: null, data_sheet: parsedData })
-      return data
-    } catch (error) {
-      if (error.status) {
-        const text = `${error.status} error while fetching : ${spreadsheetId}`
-        this.setState({ loading_sheet: false, error_sheet: error })
-        console.error(text, error)
-        return Error(text)
-      } else {
-        this.setState({ loading_sheet: false, error_sheet: error })
-        console.error(error)
-        return Error(error)
-      }
-    }
+    this.setState({
+      loading_sheet: false,
+      error_sheet: null,
+      data_sheet: [{"publish":"1","order":"1","important":"","small_title":"8 février 1974","big_title":"","text":"Naissance de Guy-Manuel de Homem-Christo"},{"publish":"1","order":"2","important":"","small_title":"3 janvier 1975","big_title":"","text":"Naissance de Thomas Bangalter"},{"publish":"1","order":"3","important":"","small_title":"1995","big_title":"","text":"Le duo fait la première partie des Chemical Brothers à Londres"},{"publish":"1","order":"4","important":"","small_title":"20 janvier 1997","big_title":"Parution de leur premier album, Homework","text":"Suspendisse mollis non tortor ac laoreet. Nunc ullamcorper urna in vestibulum dictum.","image":"https://upload.wikimedia.org/wikipedia/en/9/9c/Daftpunk-homework.jpg","video":"","audio":"","credit":"Crédit 1 / Crédit 2"},{"publish":"1","order":"5","important":"","small_title":"Écouter un extrait de Da Funk ","big_title":"","text":"Lorem ipsum dolor sit amet","image":"","video":"","audio":"https://upload.wikimedia.org/wikipedia/en/9/9c/Daftpunk-homework.mp3"},{"publish":"1","order":"6","important":"","small_title":"15 avril 2002","big_title":"","text":"Lorem ipsum dolor sit amet","image":"","video":"https://www.youtube.com/watch?v=FGBhQbmPwH8"},{"publish":"1","order":"7","important":"","small_title":"D'autres puces","big_title":"","text":"..."},{"publish":"1","order":"8","important":"","small_title":"22 février 2021","big_title":"","text":"Ils annoncent la séparation de leur duo dans une vidéo intitulée Epilogue."}]
+    })
+    // this.setState({ loading_sheet: true, error_sheet: null })
+    // const { proxydata_url: proxydataUrl, spreadsheet_id: spreadsheetId } = this.props
+    // try {
+    //   const url = `${proxydataUrl}/proxy/spreadsheets/${spreadsheetId}`
+    //   const reach = await window.fetch(url)
+    //   if (!reach.ok) throw reach
+    //   const { data, err } = await reach.json()
+    //   if (err) throw err
+    //   const parsedData = data // Parse sheet here
+    //   this.setState({ loading_sheet: false, error_sheet: null, data_sheet: JsonTableToObjects(parsedData) })
+    //   return data
+    // } catch (error) {
+    //   if (error.status) {
+    //     const text = `${error.status} error while fetching : ${spreadsheetId}`
+    //     this.setState({ loading_sheet: false, error_sheet: error })
+    //     console.error(text, error)
+    //     return Error(text)
+    //   } else {
+    //     this.setState({ loading_sheet: false, error_sheet: error })
+    //     console.error(error)
+    //     return Error(error)
+    //   }
+    // }
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -267,15 +267,6 @@ export default class App extends Component {
 
     return <AppContext.Provider value={passedContext}>
       <div id={props.meta.slug} className={classes.join(' ')}>
-        {/* Header */}
-        <div className='lblb-default-apps-header'>
-          <InterTitle
-            level={1}
-            className='lblb-default-apps-header__title'>
-            Default title lorem ipsum dolor sit amet
-          </InterTitle>
-        </div>
-
         {/* Loading */}
         {state.loading_sheet
         && <div className='lblb-default-apps-loader'>
@@ -292,42 +283,7 @@ export default class App extends Component {
         { /* App */ }
         {!state.loading_sheet
         && !state.error_sheet
-        && <Router>
-          <Switch>
-            
-            { /* Home page */ }
-            <Route exact path='/'>
-              <Paragraph
-                literary
-                style={{ width: '100%', textAlign: 'center' }}>
-                <strong>App is ready.</strong><br />
-                1. remove DemoPage component<br />
-                2. fill spreadsheet_id field in config.js<br />
-                3. display it's content via state.data_sheet<br /><br />
-                You can also navigate <Link to='/test'>here</Link> or <Link href='/demo'>there</Link>.
-              </Paragraph>
-            </Route>
-            
-            { /* Test page */ }
-            <Route exact path='/demo/graphs'>
-              <GraphsPage />
-            </Route>
-          </Switch>
-        </Router>}
-
-        {/* Footer */}
-        <div className='lblb-default-apps-footer'>
-          <ShareArticle
-            short
-            iconsOnly
-            tweet={props.meta.tweet}
-            url={props.meta.url} />
-          <ArticleMeta
-            publishedOn={props.meta.published_on}
-            updatedOn={props.meta.updated_on}
-            authors={props.meta.authors} />
-          <LibeLaboLogo target='blank' />
-        </div>
+        && <HomePage data={state.data_sheet} />}
 
         {/* Expanded medias panel */}
         <div
