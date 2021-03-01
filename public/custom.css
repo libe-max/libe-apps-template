@@ -1,80 +1,8 @@
-.lblb-graph {
-  font-family: 'Georgia';
+#vaccins-CN .lblb-graph-grid__label_top,
+#vaccins-CN .lblb-graph-grid__label_right {
+  display: none;
 }
 
-.lblb-graph text,
-.lblb-graph tspan {
-  /*fill: #212121;*/
-  dominant-baseline: middle;
-}
-
-.lblb-graph rect {
-  fill: transparent;
-}
-
-.lblb-graph-graph__title {
-  font-family: 'Libe-Sans-Semicondensed';
-  font-size: 2.5rem;
-  line-height: 2.5rem;
-  font-weight: 800;
-  letter-spacing: .05rem;
-}
-
-.lblb-graph-graph__subtitle {
-  font-family: 'Georgia';
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
-.lblb-graph-graph__source {
-  font-family: 'Synthese';
-  font-size: .75rem;
-  line-height: 1rem;
-  font-weight: 400;
-}
-
-.lblb-graph-axis__ticks text {
-  font-family: 'Synthese';
-}
-
-.lblb-graph-heading {
-  font-family: 'Libe-Sans-Semicondensed';
-  font-weight: 800;
-}
-
-.lblb-graph-heading._ff_lbssc {
-  letter-spacing: .05em;
-}
-
-.lblb-graph-heading.lblb-graph-h4,
-.lblb-graph-heading.lblb-graph-h5,
-.lblb-graph-heading.lblb-graph-h6 {
-  font-family: 'Synthese';
-}
-
-.lblb-graph-heading.lblb-graph-h6 {
+#vaccins-CN .lblb-graph-grid__label_bottom {
   font-weight: 600;
 }
-
-
-/*.lblb-graph-asset * {
-  fill: transparent;
-}
-
-.lblb-graph-asset text,
-.lblb-graph-asset tspan {
-  fill: #212121;
-}
-
-.lblb-graph-axis__domain line {
-  stroke: #212121;
-}
-
-.lblb-graph-axis__ticks line {
-  stroke: #212121;
-}
-
-.lblb-graph-axis__ticks text {
-  font-family: 'Synthese';
-}
-*/

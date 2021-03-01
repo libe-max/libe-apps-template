@@ -1,16 +1,8 @@
-const currentProtocol = typeof window !== 'undefined'
-  ? window.location.protocol
-  : 'http:'
-const currentHostname = typeof window !== 'undefined'
-  ? window.location.hostname
-  : 'localhost'
-const showHeader = true
-const staticsUrl = process.env.NODE_ENV === 'production'
-  ? 'https://www.liberation.fr/apps/static'
-  : `${currentProtocol}//${currentHostname}:3003`
-const proxydataUrl = process.env.NODE_ENV === 'production'
-  ? 'https://proxydata.liberation.fr'
-  : 'http://localhost:3004'
+const currentProtocol = typeof window !== 'undefined' ? window.location.protocol : 'http:'
+const currentHostname = typeof window !== 'undefined' ? window.location.hostname : 'localhost'
+const showHeader = false
+const staticsUrl = process.env.NODE_ENV === 'production' ? 'https://www.liberation.fr/apps/static' : `${currentProtocol}//${currentHostname}:3003`
+const proxydataUrl = process.env.NODE_ENV === 'production' ? 'https://proxydata.liberation.fr' : 'http://localhost:3004'
 const spreadsheetId = undefined
 const meta = {
   author: 'Libé Labo',
@@ -18,7 +10,7 @@ const meta = {
   url: '',
   description: '',
   image: '',
-  slug: 'test',
+  slug: 'vaccins-CN',
   tweet: '',
   published_on: '01/01/2020 12:00',
   updated_on: null,

@@ -12,6 +12,7 @@
     "libe-components": "^1.2.2",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
+    "perlin-noise": "0.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
@@ -28,7 +29,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "standard": "standard --verbose | snazzy",
-    "standard-fix": "standard --fix --verbose | snazzy"
+    "standard-fix": "standard --fix --verbose | snazzy",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,6 +44,7 @@
   "devDependencies": {
     "cheerio": "^1.0.0-rc.5",
     "snazzy": "^9.0.0",
+    "source-map-explorer": "^2.5.2",
     "standard": "^16.0.3"
   }
 }

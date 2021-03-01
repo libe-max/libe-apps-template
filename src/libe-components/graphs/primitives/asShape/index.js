@@ -37,7 +37,6 @@ const asShape = Wrapped => {
     render () {
       const { props, context } = this
       const { current_graph: { xScale, yScale, calcWidth, calcHeight } } = context
-      console.log('asShape', Wrapped.name)
       const x = props.x !== undefined ? calcWidth(props.x) : props.xValue !== undefined ? xScale(props.xValue) : undefined
       const y = props.y !== undefined ? calcHeight(props.y) : props.yValue !== undefined ? yScale(props.yValue) : undefined
       const x1 = props.x1 !== undefined ? calcWidth(props.x1) : props.x1Value !== undefined ? xScale(props.x1Value) : undefined
