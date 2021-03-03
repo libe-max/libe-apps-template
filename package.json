@@ -16,6 +16,7 @@
     "react-helmet": "^6.1.0",
     "react-leaflet": "^3.1.0",
     "react-scripts": "^4.0.2",
+    "react-svg": "^12.1.0",
     "styled-components": "^5.2.1",
     "uuid": "^8.3.2",
     "whatwg-fetch": "^3.5.0"

@@ -11,6 +11,7 @@ import P from '../../libe-components/text/P'
 import Span from '../../libe-components/text/Span'
 import fibonacci from '../../libe-utils/fibonacci'
 import parseTsv from '../../libe-utils/parse-tsv'
+import regions from './regions.json'
 
 const dataRootUrl = `http://localhost:3006`
 const ageCategories = [{
@@ -19,87 +20,32 @@ const ageCategories = [{
   data_identifiers: ['tt']
 }, {
   name: '18 - 29',
-  value: '18',
+  value: '29',
   data_identifiers: ['24', '29']
 }, {
   name: '30 - 39',
-  value: '30',
+  value: '39',
   data_identifiers: ['39']
 }, {
   name: '40 - 49',
-  value: '40',
+  value: '49',
   data_identifiers: ['49']
 }, {
   name: '50 - 59',
-  value: '50',
+  value: '59',
   data_identifiers: ['59']
 }, {
   name: '60 - 69',
-  value: '60',
+  value: '69',
   data_identifiers: ['64', '69']
 }, {
   name: '70 - 79',
-  value: '70',
+  value: '79',
   data_identifiers: ['74', '79']
 }, {
   name: '80 et +',
   value: '80',
   data_identifiers: ['80']
-}]
-const regions = [{
-  name: 'Guadeloupe',
-  code: '1'
-}, {
-  name: 'Martinique',
-  code: '2'
-}, {
-  name: 'Guyane',
-  code: '3'
-}, {
-  name: 'La Réunion',
-  code: '4'
-}, {
-  name: 'Mayotte',
-  code: '6'
-}, {
-  name: 'Île-de-France',
-  code: '11'
-}, {
-  name: 'Centre-Val-de-Loire',
-  code: '24'
-}, {
-  name: 'Bourgogne-Franche-Comté',
-  code: '27'
-}, {
-  name: 'Normandie',
-  code: '28'
-}, {
-  name: 'Hauts-de-France',
-  code: '32'
-}, {
-  name: 'Grand Est',
-  code: '44'
-}, {
-  name: 'Pays de la Loire',
-  code: '52'
-}, {
-  name: 'Bretagne',
-  code: '53'
-}, {
-  name: 'Nouvelle-Aquitaine',
-  code: '75'
-}, {
-  name: 'Occitanie',
-  code: '76'
-}, {
-  name: 'Auvergne-Rhône-Alpes',
-  code: '84'
-}, {
-  name: 'Provence-Alpes-Côte d\'Azur',
-  code: '93'
-}, {
-  name: 'Corse',
-  code: '94'
 }]
 
 const dataGenerator = (nbChanels, length) => {
@@ -278,12 +224,15 @@ class Home extends Component {
     const jsons = csvs.data.map(csv => parseTsv(csv, [4], ',')[0])
     const daysObj = {}
     jsons.forEach(json => json.forEach(entry => {
-      if (!daysObj[entry.jour]) daysObj[entry.jour] = 0
-      daysObj[entry.jour] += parseInt(entry.n_dose1, 10)
+      if (!daysObj[entry.jour]) daysObj[entry.jour] = [0, 0]
+      daysObj[entry.jour][0] += parseInt(entry.n_dose1, 10)
+      daysObj[entry.jour][1] += Math.ceil(parseInt(entry.n_dose1, 10) / 4)
     }))
     const days = new Array(nbDays).fill(null).map((_, i) => {
       const date = moment(startMoment).add(i, 'days').format('YYYY-MM-DD')
-      return { date, n_dose1: daysObj[date] || 0 }
+      const nDose1 = daysObj[date] ? daysObj[date][0] : 0
+      const nDose2 = daysObj[date] ? daysObj[date][1] : 0
+      return { date, n_dose1: nDose1, n_dose2: nDose2 }
     })
     return { ...csvs, days }
   }
@@ -353,9 +302,9 @@ class Home extends Component {
               moment(startMoment).toDate(),
               moment(startMoment).add(nbDays, 'days').toDate()
             ])}
-            yScale={scaleLinear().domain([0, 3e6])}
+            yScale={scaleLinear().domain([0, 33e6])}
             xTicks={5}
-            yTicks={new Array(6).fill(0).map((e, i) => i * 6e6 / 6)}
+            yTicks={new Array(6).fill(0).map((e, i) => i * 33e6 / 6)}
             xTickFormat={date => moment(date).format('D MMM YY')}
             yTickFormat={val => `${val / 1e6}M`}
             xBottomLabelPosition={({ x, y, val, label }) => ({ x, y: y + .5 * rem })}
@@ -382,12 +331,12 @@ class Home extends Component {
             height={franceHeight - 3 * rem}
             bgHoverable={true}
             cursor='pointer'
-            stackBars={true}
+            stackBars={false}
             accumulate={true}
             min={0}
-            max={3e6}
+            max={33e6}
             columns={state.columns}
-            data={data.find(reg => reg.reg === 'FRA').days.map(day => day.n_dose1)}
+            data={data.find(reg => reg.reg === 'FRA').days.map(day => [day.n_dose1, day.n_dose2])}
             tooltip={({ val, col, bar, chart, i }) => {
               return <foreignObject
                 key={i}
@@ -448,7 +397,7 @@ class Home extends Component {
               {new Array(nbSlots).fill(null).map((slot, slotNb) => {
                 const regionNb = slotNb + lineNb * regionSlotsPerLine
                 const region = regions[regionNb]
-                const regionData = data.find(reg => reg.reg === region.code).days.map(day => day.n_dose1)
+                const regionData = data.find(reg => reg.reg === region.code).days.map(day => [day.n_dose1, day.n_dose2])
                 return <g key={slotNb}>
                   <Grid
                     x={(slotNb % regionSlotsPerLine) * regionSlotWidth}
@@ -492,7 +441,7 @@ class Home extends Component {
                     max={4e5}
                     columns={state.columns}
                     data={regionData}
-                    stackBars={true}
+                    stackBars={false}
                     accumulate={true}
                     tooltip={({ val, col, bar, chart, i }) => {
                       return <foreignObject

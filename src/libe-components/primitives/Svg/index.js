@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ReactSvg from 'react-svg'
+import { ReactSVG } from 'react-svg'
 import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
 /*
@@ -35,7 +35,7 @@ export default class Svg extends Component {
 
     /* Display component */
     return <div className={classes.join(' ')} {...passedProps}>
-      <ReactSvg
+      <ReactSVG
         fallback={fallback}
         renumerateIRIElements={false}
         {...this.props} />
