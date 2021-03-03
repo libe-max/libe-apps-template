@@ -1,9 +1,4 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-
-import { statics_url as staticsUrl } from './config'
-import AppContext from './context'
-
 import Loader from './libe-components/blocks/Loader'
 import LoadingError from './libe-components/blocks/LoadingError'
 import ShareArticle from './libe-components/blocks/ShareArticle'
@@ -12,8 +7,9 @@ import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Diaporama from './libe-components/blocks/Diaporama'
 import Svg from './libe-components/primitives/Svg'
 import InterTitle from './libe-components/text-levels/InterTitle'
-
 import HomePage from './pages/Home'
+import { statics_url as staticsUrl } from './config'
+import AppContext from './context'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
