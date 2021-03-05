@@ -1,4 +1,4 @@
-function JsonTableToObjects (table) {
+function jsonTableToObjects (table) {
   const keys = table[0]
   const lines = table.slice(1)
   return lines.map(line => {
@@ -8,4 +8,4 @@ function JsonTableToObjects (table) {
   })
 }
 
-export default JsonTableToObjects
+export default jsonTableToObjects

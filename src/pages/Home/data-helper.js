@@ -1089,43 +1089,43 @@ const regions = [{
 rawPopDep.forEach((line, i) => {
   const [dep, cls, pop] = line
   const reg = regions.find(region => region.depts.includes(dep))
-  if (!reg.pop) reg.pop = { tt: 0, _17: 0, _29: 0, _39: 0, _49: 0, _59: 0, _69: 0, _79: 0, _80: 0 }
+  if (!reg.pop) reg.pop = { _tt: 0, _17: 0, _29: 0, _39: 0, _49: 0, _59: 0, _69: 0, _79: 0, _80: 0 }
   switch (cls) {
     case 9:
     case 17:
       reg.pop._17 += pop
-      reg.pop.tt += pop
+      reg.pop._tt += pop
       break
     case 24:
     case 29:
       reg.pop._29 += pop
-      reg.pop.tt += pop
+      reg.pop._tt += pop
       break
     case 39:
       reg.pop._39 += pop
-      reg.pop.tt += pop
+      reg.pop._tt += pop
       break
     case 49:
       reg.pop._49 += pop
-      reg.pop.tt += pop
+      reg.pop._tt += pop
       break
     case 59:
       reg.pop._59 += pop
-      reg.pop.tt += pop
+      reg.pop._tt += pop
       break
     case 64:
     case 69:
       reg.pop._69 += pop
-      reg.pop.tt += pop
+      reg.pop._tt += pop
       break
     case 74:
     case 79:
       reg.pop._79 += pop
-      reg.pop.tt += pop
+      reg.pop._tt += pop
       break
     case 80:
       reg.pop._80 += pop
-      reg.pop.tt += pop
+      reg.pop._tt += pop
       break
     default:
       console.error(i, line)

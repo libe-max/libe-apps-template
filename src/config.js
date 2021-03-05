@@ -3,11 +3,11 @@ const currentHostname = typeof window !== 'undefined' ? window.location.hostname
 const showHeader = false
 const staticsUrl = process.env.NODE_ENV === 'production' ? 'https://www.liberation.fr/apps/static' : `${currentProtocol}//${currentHostname}:3003`
 const proxydataUrl = process.env.NODE_ENV === 'production' ? 'https://proxydata.liberation.fr' : 'http://localhost:3004'
-const spreadsheetId = undefined
+const spreadsheetId = '1MCIf6Icv0Z4Tn70Sog_cWzI6dG9ytFzANKly8eNs7KI'
 const meta = {
   author: 'Libé Labo',
   title: 'Libération - ',
-  url: '',
+  url: 'https://www.liberation.fr/apps/2021/02/vaccins-CN/bar-charts',
   description: '',
   image: '',
   slug: 'vaccins-CN',

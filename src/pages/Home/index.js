@@ -11,15 +11,19 @@ import P from '../../libe-components/text/P'
 import Span from '../../libe-components/text/Span'
 import fibonacci from '../../libe-utils/fibonacci'
 import parseTsv from '../../libe-utils/parse-tsv'
+import roundNumber from '../../libe-utils/round-number'
+import numberToSpacedString from '../../libe-utils/number-to-spaced-string'
 import regions from './regions.json'
 
-const dataRootUrl = `http://localhost:3006`
+const dataRootUrl = process.env.NODE_ENV === 'production'
+  ? 'https://www.liberation.fr/apps/maxime/data-savinien'
+  : `http://localhost:3006`
 const ageCategories = [{
   name: 'Total',
   value: 'tt',
   data_identifiers: ['tt']
 }, {
-  name: '18 - 29',
+  name: '18 - 29 ans',
   value: '29',
   data_identifiers: ['24', '29']
 }, {
@@ -43,7 +47,7 @@ const ageCategories = [{
   value: '79',
   data_identifiers: ['74', '79']
 }, {
-  name: '80 et +',
+  name: '80 ans et +',
   value: '80',
   data_identifiers: ['80']
 }]
@@ -139,36 +143,36 @@ class Home extends Component {
    *
    * * * * * * * * * * * * * * * * */
   async handleFilterClick (value) {
-    return new Promise((resolve, reject) => {
-      const cacheExists = this.state.cached_data[value]
-      if (cacheExists) {
-        this.setState(curr => ({
+    const cacheExists = this.state.cached_data[value]
+    if (cacheExists) return new Promise((resolve, reject) => this.setState(
+      curr => ({
+        ...curr,
+        current_filter: value,
+        current_data: cacheExists
+      }),
+      cb => resolve()
+    ))
+
+    try {
+      const allData = await this.fetchAllData(value)
+      return new Promise((resolve, reject) => this.setState(
+        curr => ({
           ...curr,
           current_filter: value,
-          current_data: cacheExists
-        }))
-      } else {
-        try {
-          this.setState(
-            curr => ({ ...curr, current_filter: value }),
-            async cb => {
-              const allData = await this.fetchAllData()
-              this.setState(curr => ({
-                ...curr,
-                current_data: allData,
-                cached_data: {
-                  ...curr.cached_data,
-                  [value]: allData
-                }
-              }))
-            }
-          )
-        } catch (err) {
-          this.setState(curr => ({ ...curr, data_error: err }))
-        }
-      }
-    })
-
+          current_data: allData,
+          cached_data: {
+            ...curr.cached_data,
+            [value]: allData
+          }
+        }),
+        cb => resolve()
+      ))
+    } catch (err) {
+      return new Promise((resolve, reject) => this.setState(
+        curr => ({ ...curr, data_error: err }),
+        cb => resolve()
+      ))
+    }
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -176,8 +180,7 @@ class Home extends Component {
    * FETCH ALL DATA
    *
    * * * * * * * * * * * * * * * * */
-  async fetchAllData () {
-    const { current_filter: filter } = this.state
+  async fetchAllData (filter = this.state.current_filter) {
     const category = ageCategories.find(cat => cat.value === filter)
     const resourcesList = [{
       filter,
@@ -262,6 +265,12 @@ class Home extends Component {
     const regionWidth = regionSlotWidth - 2 * rem
     const regionHeight = Math.floor(regionSlotWidth * 9 / 20)
 
+    const scales = props.data
+    const frYScaleMax = scales[`fr_${state.current_filter}`]
+    const regYScaleMax = scales[`reg_${state.current_filter}`]
+
+    const frData = data.find(reg => reg.reg === 'FRA').days.map(day => [day.n_dose1/*, day.n_dose2*/])
+
     return <div className={`${c}`}>
       <div className={`${c}__actions`}>
         <Span level={0}>
@@ -302,11 +311,11 @@ class Home extends Component {
               moment(startMoment).toDate(),
               moment(startMoment).add(nbDays, 'days').toDate()
             ])}
-            yScale={scaleLinear().domain([0, 33e6])}
+            yScale={scaleLinear().domain([0, frYScaleMax])}
             xTicks={5}
-            yTicks={new Array(6).fill(0).map((e, i) => i * 33e6 / 6)}
+            yTicks={new Array(7).fill(0).map((e, i) => i * frYScaleMax / 6)}
             xTickFormat={date => moment(date).format('D MMM YY')}
-            yTickFormat={val => `${val / 1e6}M`}
+            yTickFormat={val => `${roundNumber(val / 1e6, 1)}M` }
             xBottomLabelPosition={({ x, y, val, label }) => ({ x, y: y + .5 * rem })}
             yLeftLabelPosition={({ x, y, val, label }) => ({ y, x: (x - .5 * rem) })} />
           {/* Title */}
@@ -334,9 +343,9 @@ class Home extends Component {
             stackBars={false}
             accumulate={true}
             min={0}
-            max={33e6}
+            max={frYScaleMax}
             columns={state.columns}
-            data={data.find(reg => reg.reg === 'FRA').days.map(day => [day.n_dose1, day.n_dose2])}
+            data={frData}
             tooltip={({ val, col, bar, chart, i }) => {
               return <foreignObject
                 key={i}
@@ -351,14 +360,15 @@ class Home extends Component {
                   padding: '.25rem',
                   boxShadow: '.125rem .125rem .25rem 0 rgba(25, 25, 25, .1)'
                 }}>
-                  <Paragraph small literary>
+                  <P level={-1}>
                     <strong>{col}</strong>
-                    {val.map((v, i) => <span key={i}>
+                    {val.map((v, j) => <span key={j}>
                       <br />
-                      Value {i + 1} - {v}
+                      1e vaccination ce jour : {numberToSpacedString(frData[i][0])}<br />
+                      Cumul : {numberToSpacedString(v)}
                     </span>)}
                     <br />
-                  </Paragraph>
+                  </P>
                 </div>
               </foreignObject>}} />
           <line 
@@ -389,15 +399,17 @@ class Home extends Component {
                 y={0}
                 width={lineWidth}
                 height={lineHeight}
-                yScale={scaleLinear().domain([0, 100])}
+                yScale={scaleLinear().domain([0, regYScaleMax])}
                 xTicks={0}
-                yTicks={1}
+                yTicks={[0, regYScaleMax]}
                 yTickFormat={val => `${val}%`}
                 yLeftLabelPosition={props => ({ ...props, x: props.x - .5 * rem })} />
               {new Array(nbSlots).fill(null).map((slot, slotNb) => {
                 const regionNb = slotNb + lineNb * regionSlotsPerLine
                 const region = regions[regionNb]
-                const regionData = data.find(reg => reg.reg === region.code).days.map(day => [day.n_dose1, day.n_dose2])
+                const regFilterPop = region.pop[`_${state.current_filter}`]
+                const regFilterLimit = regFilterPop * regYScaleMax / 100
+                const regionData = data.find(reg => reg.reg === region.code).days.map(day => [day.n_dose1/*, day.n_dose2*/])
                 return <g key={slotNb}>
                   <Grid
                     x={(slotNb % regionSlotsPerLine) * regionSlotWidth}
@@ -438,7 +450,7 @@ class Home extends Component {
                     cursor='pointer'
                     bgHoverable={true}
                     min={0}
-                    max={4e5}
+                    max={regFilterLimit}
                     columns={state.columns}
                     data={regionData}
                     stackBars={false}
@@ -448,7 +460,7 @@ class Home extends Component {
                         x={0}
                         y={0}
                         width={chart.width}
-                        height={3.5 * rem}>
+                        height={4 * rem}>
                         <div style={{
                           width: chart.width - 2 * rem,
                           margin: rem,
@@ -459,9 +471,12 @@ class Home extends Component {
                         }}>
                           <Paragraph small literary>
                             <strong style={{ marginRight: '.25rem' }}>{col}</strong>
-                            {val.map((v, i) => <span key={i} style={{ marginRight: '.25rem' }}>
-                              {v}
-                            </span>)}
+                            {numberToSpacedString(regFilterPop)} hab.<br />
+                            {regYScaleMax}% = {numberToSpacedString(regFilterLimit)}<br />
+                            {/*val.map((v, j) => <span key={j} style={{ marginRight: '.25rem' }}>
+                              1e vaccination ce jour : {numberToSpacedString(regionData[i][0])}<br />
+                              Cumul : {numberToSpacedString(v)}
+                            </span>)*/}
                           </Paragraph>
                         </div>
                       </foreignObject>

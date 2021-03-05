@@ -1,5 +1,6 @@
 {
   "name": "libe-apps-template",
+  "homepage": "https://www.liberation.fr/apps/2021/02/vaccins-CN/bar-charts",
   "version": "0.2.4",
   "private": true,
   "dependencies": {
