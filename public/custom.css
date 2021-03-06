@@ -52,13 +52,18 @@
   background: rgba(35, 6, 75, 1);
 }
 
-/*#vaccins-CN .lblb-graph-bar-chart__bar {
-  stroke-width: .5px;
-  stroke: blue;
-}*/
-
 #vaccins-CN .lblb-graph-bar-chart__bar_0 {
   fill: rgba(35, 6, 75, 1);
+  stroke: rgba(35, 6, 75, 1);
+  stroke-width: 1px;
+  opacity: 1;
+}
+
+#vaccins-CN .lblb-graph-bar-chart__bar_1 {
+  fill: rgba(104, 216, 186, 1);
+  stroke: rgba(104, 216, 186, 1);
+  stroke-width: 1px;
+  opacity: 1;
 }
 
 .lblb-text_level--4 { font-size: 0.375rem; }

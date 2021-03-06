@@ -13,11 +13,13 @@ import fibonacci from '../../libe-utils/fibonacci'
 import parseTsv from '../../libe-utils/parse-tsv'
 import roundNumber from '../../libe-utils/round-number'
 import numberToSpacedString from '../../libe-utils/number-to-spaced-string'
-import regions from './regions.json'
+import _regions from './regions.json'
+
+const regions = _regions.sort((a, b) => a.name > b.name ? 1 : -1)
 
 const dataRootUrl = process.env.NODE_ENV === 'production'
-  ? 'https://www.liberation.fr/apps/maxime/data-savinien'
-  : `http://localhost:3006`
+  ? 'https://www.liberation.fr/apps/libelabo/datavax'
+  : 'http://localhost:3006'
 const ageCategories = [{
   name: 'Total',
   value: 'tt',
@@ -75,9 +77,7 @@ const columns = new Array(nbDays)
     .add(i, 'days')
     .format('D MMM'))
 
-const franceData = dataGenerator(2, nbDays)
 const nbRegions = regions.length
-const regionsData = new Array(nbRegions).fill(null).map(e => dataGenerator(2, nbDays))
 
 /*
  *   Home page component
@@ -96,11 +96,7 @@ class Home extends Component {
     current_filter: 'tt',
     cached_data: {},
     data_error: null,
-    columns,
-    data: {
-      france: franceData,
-      regions: regionsData
-    }
+    columns
   }
   
   /* * * * * * * * * * * * * * * * *
@@ -252,7 +248,6 @@ class Home extends Component {
     const { rem } = viewport
     
     const width = viewport.width
-    const height = 4000
 
     if (!data) return <div className={`${c}`} />
 
@@ -264,12 +259,15 @@ class Home extends Component {
     const regionSlotWidth = (width - 3 * rem) / regionSlotsPerLine
     const regionWidth = regionSlotWidth - 2 * rem
     const regionHeight = Math.floor(regionSlotWidth * 9 / 20)
+    const nbLines = Math.ceil(nbRegions / regionSlotsPerLine)
+
+    const height = franceHeight + nbLines * (regionHeight + 2 * rem) + 2 * rem
 
     const scales = props.data
     const frYScaleMax = scales[`fr_${state.current_filter}`]
     const regYScaleMax = scales[`reg_${state.current_filter}`]
 
-    const frData = data.find(reg => reg.reg === 'FRA').days.map(day => [day.n_dose1/*, day.n_dose2*/])
+    const frData = data.find(reg => reg.reg === 'FRA').days.map(day => [day.n_dose1, day.n_dose2])
 
     return <div className={`${c}`}>
       <div className={`${c}__actions`}>
@@ -364,7 +362,8 @@ class Home extends Component {
                     <strong>{col}</strong>
                     {val.map((v, j) => <span key={j}>
                       <br />
-                      1e vaccination ce jour : {numberToSpacedString(frData[i][0])}<br />
+                      -<br />
+                      {j + 1}e vaccinations : {numberToSpacedString(frData[i][j])}<br />
                       Cumul : {numberToSpacedString(v)}
                     </span>)}
                     <br />
@@ -381,7 +380,7 @@ class Home extends Component {
         <g
           className={`${c}__regions`}
           transform={`translate(${3 * rem}, ${franceHeight + rem})`}>{
-          new Array(Math.ceil(nbRegions / regionSlotsPerLine)).fill(null).map((line, lineNb) => {
+          new Array(nbLines).fill(null).map((line, lineNb) => {
             const loSlotNb = lineNb * regionSlotsPerLine
             const hiSlotNb = Math.min((lineNb + 1) * regionSlotsPerLine, nbRegions)
             const nbSlots = hiSlotNb - loSlotNb
@@ -409,7 +408,7 @@ class Home extends Component {
                 const region = regions[regionNb]
                 const regFilterPop = region.pop[`_${state.current_filter}`]
                 const regFilterLimit = regFilterPop * regYScaleMax / 100
-                const regionData = data.find(reg => reg.reg === region.code).days.map(day => [day.n_dose1/*, day.n_dose2*/])
+                const regionData = data.find(reg => reg.reg === region.code).days.map(day => [day.n_dose1, day.n_dose2])
                 return <g key={slotNb}>
                   <Grid
                     x={(slotNb % regionSlotsPerLine) * regionSlotWidth}
@@ -423,26 +422,6 @@ class Home extends Component {
                     yTicks={0}
                     xTickFormat={date => moment(date).format('MMM')}
                     xBottomLabelPosition={({ x, y, val, label }) => ({ x, y: y + .5 * rem })} />
-                  {/* Title */}
-                  <foreignObject
-                    x={(slotNb % regionSlotsPerLine) * regionSlotWidth}
-                    y={0}
-                    width={regionWidth}
-                    height={rem}>
-                    <div style={{
-                      width: regionWidth,
-                      height: 2 * rem
-                    }}>
-                      <P
-                        level={-1}
-                        style={{
-                          textAlign: 'center',
-                          fontFamily: 'Libe-Typewriter',
-                          fontWeight: 800,
-                          textShadow: '1px 1px 0 white'
-                        }}>{regions[regionNb].name}</P>
-                    </div>
-                  </foreignObject>
                   <BarChart                  
                     x={(slotNb % regionSlotsPerLine) * regionSlotWidth}
                     width={regionWidth}
@@ -457,30 +436,44 @@ class Home extends Component {
                     accumulate={true}
                     tooltip={({ val, col, bar, chart, i }) => {
                       return <foreignObject
-                        x={0}
+                        x={-.25 * chart.width}
                         y={0}
-                        width={chart.width}
-                        height={4 * rem}>
+                        width={1.5 * chart.width}
+                        height={3.5 * rem}>
                         <div style={{
-                          width: chart.width - 2 * rem,
+                          maxWidth: 1.5 * chart.width - 2 * rem,
                           margin: rem,
                           background: 'white',
                           padding: '.125rem',
                           boxShadow: '.0625rem .0625rem .125rem 0 rgba(25, 25, 25, .1)',
                           textAlign: 'center'
                         }}>
-                          <Paragraph small literary>
+                          <P level={-1}>
                             <strong style={{ marginRight: '.25rem' }}>{col}</strong>
-                            {numberToSpacedString(regFilterPop)} hab.<br />
-                            {regYScaleMax}% = {numberToSpacedString(regFilterLimit)}<br />
-                            {/*val.map((v, j) => <span key={j} style={{ marginRight: '.25rem' }}>
-                              1e vaccination ce jour : {numberToSpacedString(regionData[i][0])}<br />
-                              Cumul : {numberToSpacedString(v)}
-                            </span>)*/}
-                          </Paragraph>
+                            {val.map((v, j) => <span key={j}>
+                              Cumul {j + 1}e : {numberToSpacedString(v).replace(' ', ' ')}<br />
+                            </span>)}
+                          </P>
                         </div>
                       </foreignObject>
                     }} />
+                  {/* Title */}
+                  <foreignObject
+                    x={(slotNb % regionSlotsPerLine) * regionSlotWidth}
+                    y={0}
+                    width={regionWidth}
+                    height={2 * rem}>
+                    <div style={{ width: regionWidth, height: 2 * rem }}>
+                      <P
+                        level={-1}
+                        style={{
+                          textAlign: 'center',
+                          fontFamily: 'Libe-Typewriter',
+                          fontWeight: 800,
+                          textShadow: '1px 1px 0 white'
+                        }}>{regions[regionNb].name}</P>
+                    </div>
+                  </foreignObject>
                 </g>
               })}
               <line 
