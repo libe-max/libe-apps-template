@@ -15,13 +15,13 @@ import roundNumber from '../../libe-utils/round-number'
 import numberToSpacedString from '../../libe-utils/number-to-spaced-string'
 import _regions from './regions.json'
 
-const regions = _regions.sort((a, b) => a.name > b.name ? 1 : -1)
+const regions = _regions.sort((a, b) => a.name.localeCompare(b.name))
 
 const dataRootUrl = process.env.NODE_ENV === 'production'
-  ? 'https://www.liberation.fr/apps/libelabo/datavax'
+  ? 'https://www.liberation.fr/apps/2021/02/vaccins-CN/data'
   : 'http://localhost:3006'
 const ageCategories = [{
-  name: 'Total',
+  name: 'Ensemble',
   value: 'tt',
   data_identifiers: ['tt']
 }, {
@@ -68,14 +68,14 @@ const dataGenerator = (nbChanels, length) => {
 }
 
 const startMoment = moment('15-12-2020', 'DD-MM-YYYY')
-const endMoment = moment()
+const endMoment = moment().add(-1, 'days')
 const nbDays = endMoment.diff(startMoment, 'days')
 
 const columns = new Array(nbDays)
   .fill(null)
   .map((e, i) => moment(startMoment)
     .add(i, 'days')
-    .format('D MMM'))
+    .format('D MMMM YYYY'))
 
 const nbRegions = regions.length
 
@@ -272,7 +272,6 @@ class Home extends Component {
     return <div className={`${c}`}>
       <div className={`${c}__actions`}>
         <Span level={0}>
-          <span>Filtre :&nbsp;</span>
           {ageCategories.map(category => {
             const classes = [`${c}__filter-button`]
             if (category.value === state.current_filter) classes.push(`${c}__filter-button_active`)
@@ -348,22 +347,23 @@ class Home extends Component {
               return <foreignObject
                 key={i}
                 x={bar.x - ((240 - bar.width) * bar.x / chart.width)}
+                x={(chart.width - 240) / 2}
                 y={Math.min(5 * rem, chart.height - (104 + 2 * rem))}
+                y={Math.min(3 * rem, chart.height - (6 * rem))}
                 width={240}
-                height={104 + 2*rem}>
+                height={6 * rem}>
                 <div style={{
-                  width: 240 - 2 * rem,
-                  margin: rem,
+                  width: 240 - 0.5 * rem,
+                  margin: 0.25 * rem,
                   background: 'white',
                   padding: '.25rem',
-                  boxShadow: '.125rem .125rem .25rem 0 rgba(25, 25, 25, .1)'
+                  boxShadow: '0 0 .25rem 0 rgba(25, 25, 25, .1)'
                 }}>
                   <P level={-1}>
                     <strong>{col}</strong>
                     {val.map((v, j) => <span key={j}>
                       <br />
-                      -<br />
-                      {j + 1}e vaccinations : {numberToSpacedString(frData[i][j])}<br />
+                      {j === 0 ? '1res' : '2es'} vaccinations : {numberToSpacedString(frData[i][j])}<br />
                       Cumul : {numberToSpacedString(v)}
                     </span>)}
                     <br />
@@ -436,23 +436,27 @@ class Home extends Component {
                     accumulate={true}
                     tooltip={({ val, col, bar, chart, i }) => {
                       return <foreignObject
-                        x={-.25 * chart.width}
-                        y={0}
-                        width={1.5 * chart.width}
-                        height={3.5 * rem}>
+                        x={-.125 * chart.width}
+                        y={1 * rem}
+                        width={1.25 * chart.width}
+                        height={3 * rem}>
                         <div style={{
-                          maxWidth: 1.5 * chart.width - 2 * rem,
-                          margin: rem,
+                          maxWidth: 1.25 * chart.width - rem,
+                          margin: 0.25 * rem,
                           background: 'white',
-                          padding: '.125rem',
-                          boxShadow: '.0625rem .0625rem .125rem 0 rgba(25, 25, 25, .1)',
+                          padding: '.25rem',
+                          boxShadow: '0 0 .25rem 0 rgba(25, 25, 25, .1)',
                           textAlign: 'center'
                         }}>
                           <P level={-1}>
-                            <strong style={{ marginRight: '.25rem' }}>{col}</strong>
-                            {val.map((v, j) => <span key={j}>
-                              Cumul {j + 1}e : {numberToSpacedString(v).replace(' ', ' ')}<br />
-                            </span>)}
+                            <strong style={{ marginRight: '.25rem' }}>{
+                              moment(col, 'D MMMM YYYY').format('D MMM')
+                            }</strong>
+                            <span>1res : {numberToSpacedString(regionData[i][0]).replace(' ', ' ')}</span>
+                            <span>, 2es : {numberToSpacedString(regionData[i][1]).replace(' ', ' ')}</span>
+                            {/*val.map((v, j) => <span key={j}>
+                              Cumul {j === 0 ? '1res' : '2es'} : {numberToSpacedString(v).replace(' ', ' ')}<br />
+                            </span>)*/}
                           </P>
                         </div>
                       </foreignObject>
