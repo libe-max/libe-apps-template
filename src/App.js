@@ -1,9 +1,4 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-
-import { statics_url as staticsUrl } from './config'
-import AppContext from './context'
-
 import Loader from './libe-components/blocks/Loader'
 import LoadingError from './libe-components/blocks/LoadingError'
 import ShareArticle from './libe-components/blocks/ShareArticle'
@@ -12,8 +7,10 @@ import ArticleMeta from './libe-components/blocks/ArticleMeta'
 import Diaporama from './libe-components/blocks/Diaporama'
 import Svg from './libe-components/primitives/Svg'
 import InterTitle from './libe-components/text-levels/InterTitle'
-
+import jsonTableToObjects from './libe-utils/json-table-to-objects'
 import HomePage from './pages/Home'
+import { statics_url as staticsUrl } from './config'
+import AppContext from './context'
 
 export default class App extends Component {
   /* * * * * * * * * * * * * * * * *
@@ -213,7 +210,11 @@ export default class App extends Component {
       if (!reach.ok) throw reach
       const { data, err } = await reach.json()
       if (err) throw err
-      const parsedData = data // Parse sheet here
+      const unTypedParsedData = jsonTableToObjects(data)[0]
+      const parsedData = {}
+      Object.keys(unTypedParsedData).forEach(key => {
+        parsedData[key] = parseFloat(unTypedParsedData[key])
+      })
       this.setState({ loading_sheet: false, error_sheet: null, data_sheet: parsedData })
       return data
     } catch (error) {
@@ -289,7 +290,7 @@ export default class App extends Component {
         { /* App */ }
         {!state.loading_sheet
         && !state.error_sheet
-        && <HomePage />}
+        && <HomePage data={state.data_sheet} />}
 
         {/* Footer */}
         {/*<div className='lblb-default-apps-footer'>

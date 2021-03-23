@@ -1,5 +1,5 @@
-function parseTsv (data, widths) {
-  const table = data.split('\n').map(line => line.split('\t').map(e => e.trim()))
+function parseTsv (data, widths, splitter = '\t') {
+  const table = data.split('\n').map(line => line.split(splitter).map(e => e.trim()))
   const pages = widths.map((val, pageNb) => {
     const lowBound = widths.slice(0, pageNb).reduce((a, b) => a + b, 0)
     const hiBound = lowBound + val
