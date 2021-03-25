@@ -266,13 +266,13 @@ export default class App extends Component {
         id={props.meta.slug}
         className={classes.join(' ')}>
         {/* Header */}
-        {/*<div className='lblb-default-apps-header'>
+        <div className='lblb-default-apps-header'>
           <InterTitle
             level={1}
             className='lblb-default-apps-header__title'>
             Default title lorem ipsum dolor sit amet
           </InterTitle>
-        </div>*/}
+        </div>
 
         {/* Loading */}
         {state.loading_sheet
