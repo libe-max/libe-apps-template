@@ -1,6 +1,7 @@
 {
   "name": "libe-apps-template",
   "version": "0.2.4",
+  "homepage": "https://www.liberation.fr/apps/2021/03/40-ans-willem",
   "private": true,
   "dependencies": {
     "chroma-js": "^2.1.0",

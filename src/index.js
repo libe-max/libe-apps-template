@@ -30,8 +30,8 @@ class AppWrapper extends Component {
       const $body = document.querySelector('body')
       const navHeight = $nav ? $nav.offsetHeight : 0
       const bodyPaddingTop = $body ? parseFloat(window.getComputedStyle($body)['padding-top'].slice(0, -2)) : 0
-      const width = window.innerWidth
-      const height = window.innerHeight
+      const width = document.body.clientWidth // window.innerWidth
+      const height = document.body.clientHeight // window.innerHeight
       const displayName = Object.keys(curr.breakpoints).find(name => {
         const { min, max } = curr.breakpoints[name]
         return min <= width && max >= width

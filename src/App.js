@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 import Loader from './libe-components/blocks/Loader'
 import LoadingError from './libe-components/blocks/LoadingError'
 import ShareArticle from './libe-components/blocks/ShareArticle'
@@ -210,11 +211,15 @@ export default class App extends Component {
       if (!reach.ok) throw reach
       const { data, err } = await reach.json()
       if (err) throw err
-      const unTypedParsedData = jsonTableToObjects(data)[0]
-      const parsedData = {}
-      Object.keys(unTypedParsedData).forEach(key => {
-        parsedData[key] = parseFloat(unTypedParsedData[key])
-      })
+      const parsedData = jsonTableToObjects(data)
+        .filter(d => d.publish && d.date)
+        .map(frontpage => ({
+          ...frontpage,
+          date: moment(frontpage.date, 'DD/MM/YYYY'),
+          sd_url: `./images/sd/${frontpage.root_url}`,
+          hd_url: `./images/hd/${frontpage.root_url}`
+        }))
+        .sort((a, b) => a.date - b.date)
       this.setState({ loading_sheet: false, error_sheet: null, data_sheet: parsedData })
       return data
     } catch (error) {

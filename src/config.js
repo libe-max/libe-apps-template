@@ -3,14 +3,14 @@ const currentHostname = typeof window !== 'undefined' ? window.location.hostname
 const showHeader = true
 const staticsUrl = process.env.NODE_ENV === 'production' ? 'https://www.liberation.fr/apps/static' : `${currentProtocol}//${currentHostname}:3003`
 const proxydataUrl = process.env.NODE_ENV === 'production' ? 'https://proxydata.liberation.fr' : 'http://localhost:3004'
-const spreadsheetId = '1MCIf6Icv0Z4Tn70Sog_cWzI6dG9ytFzANKly8eNs7KI'
+const spreadsheetId = '1x6kzjPUjX4Pt3t__HeZklgSbhdkgAaxvZMHQxCpr0gw'
 const meta = {
   author: 'Libé Labo',
   title: 'Libération - ',
-  url: 'https://www.liberation.fr/apps/2021/02/vaccins-CN/bar-charts',
+  url: 'https://www.liberation.fr/apps/2021/03/40-ans-willem',
   description: '',
   image: '',
-  slug: 'vaccins-CN',
+  slug: 'unes-willem',
   tweet: '',
   published_on: '01/01/2020 12:00',
   updated_on: null,

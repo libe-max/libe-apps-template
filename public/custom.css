@@ -1,69 +1,74 @@
-#vaccins-CN .lblb-graph-grid__label_top,
-#vaccins-CN .lblb-graph-grid__label_right {
-  display: none;
+body {
+  background-color: #212121;
 }
 
-#vaccins-CN .lblb-graph-grid__label_bottom {
-  font-weight: 600;
+#unes-willem .frontpages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-#vaccins-CN .lblb-app-home-page__graph {
-  z-index: 1;
+#unes-willem .frontpage {
+  display: inline-flex;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
-#vaccins-CN .lblb-app-home-page__actions {
+#unes-willem .frontpage__ratio-box {
+  width: 100%;
+  padding-bottom: 140%;
+}
+
+#unes-willem .frontpage img {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  max-width: calc(70% - 2rem);
-  text-align: right;
-  z-index: 2;
+  width: 100%;
+  transition: transform 200ms;
 }
 
-@media screen and (max-width: 40rem) {
-  #vaccins-CN .lblb-app-home-page__actions {
-    position: relative;
-    width: 100%;
-    max-width: unset;
-    text-align: center;
-    top: unset;
-    right: unset;
-    margin-bottom: .5rem;
-  }
+#unes-willem .frontpage p {
+  position: absolute;
+  padding: .25rem;
+  font-family: Libe-Sans-Semicondensed;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  border-bottom: .5rem solid red;
+  text-shadow: 0 0 .125rem rgba(19, 19, 19, .9);
+  background: rgba(19, 19, 19, .7);
 }
 
-#vaccins-CN .lblb-app-home-page__actions .lblb-text-span {
-  font-family: 'Synthese';
+#unes-willem .frontpage img:hover {
+  transform: scale(1.05);
 }
 
-#vaccins-CN .lblb-app-home-page__filter-button {
-  cursor: pointer;
-  border: .125rem solid rgba(35, 6, 75, 1);
-  color: rgba(35, 6, 75, 1);
-  margin-right: -.0625rem;
-  padding: .25rem .5rem;
-  background: white;
-  transition: color 200ms, background 200ms;
-}
-
-#vaccins-CN .lblb-app-home-page__filter-button_active,
-#vaccins-CN .lblb-app-home-page__filter-button:hover {
+#unes-willem .exergue {
   color: white;
-  background: rgba(35, 6, 75, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-#vaccins-CN .lblb-graph-bar-chart__bar_0 {
-  fill: rgba(35, 6, 75, 1);
-  stroke: rgba(35, 6, 75, 1);
-  stroke-width: 1px;
-  opacity: 1;
+#unes-willem .frontpage.hide,
+#unes-willem .exergue.hide {
+  opacity: 0;
+  transform: translateY(200px);
 }
 
-#vaccins-CN .lblb-graph-bar-chart__bar_1 {
-  fill: rgba(104, 216, 186, 1);
-  stroke: rgba(104, 216, 186, 1);
-  stroke-width: 1px;
-  opacity: 1;
+#unes-willem .frontpage.fade-in,
+#unes-willem .exergue.fade-in {
+  animation-name: fadeIn;
+  animation-timing-function: ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .lblb-text_level--4 { font-size: 0.375rem; }
