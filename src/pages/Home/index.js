@@ -35,12 +35,10 @@ class Home extends Component {
    *
    * * * * * * * * * * * * * * * * */
   componentDidMount () {
-    // [...this.$frontpages.querySelectorAll('.frontpage, .exergue')].forEach($frontpage => this.observe($frontpage))
     this.observe()
   }
 
   componentDidUpdate () {
-    // [...this.$frontpages.querySelectorAll('.frontpage, .exergue')].forEach($frontpage => this.observe($frontpage))
     this.observe()
   }
 
