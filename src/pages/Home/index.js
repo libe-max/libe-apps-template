@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import H3 from '../../libe-components/text/H3'
 import P from '../../libe-components/text/P'
+import JSXInterpreter from '../../libe-components/logic/JSXInterpreter'
 import AppContext from '../../context'
 
 /*
@@ -27,6 +28,7 @@ class Home extends Component {
     this.c = 'lblb-app-home-page'
     this.observe = this.observe.bind(this)
     this.observerHandler = this.observerHandler.bind(this)
+    this.frontpageClickHandler = this.frontpageClickHandler.bind(this)
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -47,9 +49,12 @@ class Home extends Component {
    * INTERSECTION OBSERVATION
    *
    * * * * * * * * * * * * * * * * */
-  observer = new IntersectionObserver(this.observerHandler, { threshold: .25 })
+  observer = IntersectionObserver
+    ? new IntersectionObserver(this.observerHandler, { threshold: .25 })
+    : null
   observeList = []
   observe ($elt) {
+    if (!this.observer) return
     const toObserve = [...this.$frontpages.querySelectorAll('.frontpage, .exergue')]
     toObserve.forEach($observable => {
       if (this.observeList.indexOf($observable) === -1) {
@@ -58,6 +63,7 @@ class Home extends Component {
       }
     })
   }
+
   observerHandler (entries, observer) {
     if (!entries.length) return
     entries.forEach(entry => {
@@ -66,20 +72,8 @@ class Home extends Component {
       if (isIntersecting) {
         target.classList.remove('hide')
         target.classList.add('fade-in')
-      } else {
-        // target.classList.remove('fade-in')
-        // target.classList.add('hide')
       }
     })
-    // const observed = entries[0]
-    // const { isIntersecting, target } = observed
-    // if (isIntersecting) {
-    //   target.classList.remove('hide')
-    //   target.classList.add('fade-in')
-    // } else {
-    //   target.classList.remove('fade-in')
-    //   target.classList.add('hide')
-    // }
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -88,6 +82,15 @@ class Home extends Component {
    *
    * * * * * * * * * * * * * * * * */
   static contextType = AppContext
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * FRONT PAGE CLICK HANDLER
+   *
+   * * * * * * * * * * * * * * * * */
+  frontpageClickHandler (e, frontpage) {
+    window.open(frontpage.hd_url)
+  }
   
   /* * * * * * * * * * * * * * * * *
    *
@@ -105,6 +108,9 @@ class Home extends Component {
     const colWidth = width / nbColumns
     const frontpagePadding = colWidth * 0.15
 
+    const exergueClass = this.observer ? 'exergue' : 'exergue hide'
+    const frontpageClass = this.observer ? 'frontpage' : 'frontpage hide'
+
     return <div
       className={`frontpages`}
       ref={n => this.$frontpages = n}>{
@@ -118,11 +124,11 @@ class Home extends Component {
             padding: `${1.5 * frontpagePadding}px ${rem}px`,
             animationDuration: `${Math.random() * 500 + 200}ms`
           }}>
-          {frontpage.titre && <H3>{frontpage.titre}</H3>}
-          <P level={3}>{frontpage.texte}</P>
+          {frontpage.titre && <H3 level={3}><JSXInterpreter content={frontpage.titre || ''} /></H3>}
+          <P level={1.5}><JSXInterpreter content={frontpage.texte || ''} /></P>
         </div>
 
-        return <div
+        if (frontpage.type === 'une') return <div
           key={i}
           className={`frontpage hide`}
           style={{
@@ -132,15 +138,16 @@ class Home extends Component {
           <div
             className={`frontpage__ratio-box`}
             style={{ transform: `translateY(${offset}px)` }}>
-            <img
-              loading='lazy'
-              src={frontpage.sd_url}
+            <div
+              className={`frontpage__image-box`}
               style={{
                 top: `50%`,
                 left: `50%`,
                 transform: 'translate(-50%, -50%)',
                 width: `calc(100% - 2 * ${frontpagePadding}px)`
-              }} />
+              }}>
+              <img loading='lazy' src={frontpage.sd_url} onClick={e => this.frontpageClickHandler(e, frontpage)} />
+            </div>
             <P style={{
               color: 'white',
               left: frontpagePadding,
@@ -150,6 +157,8 @@ class Home extends Component {
             </P>
           </div>
         </div>
+
+        return null
       })
     }</div>
   }

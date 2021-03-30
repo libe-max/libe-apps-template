@@ -2,6 +2,87 @@ body {
   background-color: #212121;
 }
 
+:root {
+  --len-header-height: 50rem;
+}
+
+#unes-willem .header {
+  position: relative;
+  background: white;
+  text-align: center;
+  height: var(--len-header-height);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#unes-willem .header__image {
+  height: var(--len-header-height);
+  width: calc(var(--len-header-height) / 1.084);
+  flex-grow: 0;
+  flex-shrink: 0;
+  background-image: url('./images/une.jpg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: 2%;
+}
+
+#unes-willem .header__content {
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: calc(94% - (var(--len-header-height) / 1.084));
+  margin: 0 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 80rem) {
+  #unes-willem .header {
+    flex-direction: column;
+    justify-content: center;
+    height: unset;
+    padding: 1rem;
+  }
+
+  #unes-willem .header__image {
+    width: 100%;
+    height: 40rem;
+  }
+
+  #unes-willem .header__content {
+    width: 100%;
+    margin: 0;
+    background: transparent;
+  }
+}
+
+@media screen and (max-width: 63rem) {
+  #unes-willem .header__image {
+    width: 100%;
+    height: 30rem;
+  }
+}
+
+@media screen and (max-width: 40rem) {
+  #unes-willem .header__image {
+    width: 100%;
+    height: 20rem;
+  }
+}
+
+#unes-willem .header h2 {
+  margin-bottom: 1.5rem;
+  color: rgb(230, 0, 4);
+}
+
+#unes-willem .header p {
+  margin-bottom: 1.5rem;
+  color: #191919;
+  max-width: 32rem;
+}
+
 #unes-willem .frontpages {
   display: flex;
   flex-wrap: wrap;
@@ -19,8 +100,12 @@ body {
   padding-bottom: 140%;
 }
 
-#unes-willem .frontpage img {
+#unes-willem .frontpage__image-box {
   position: absolute;
+  width: 100%;
+}
+
+#unes-willem .frontpage img {
   width: 100%;
   transition: transform 200ms;
 }
@@ -50,7 +135,7 @@ body {
 
 #unes-willem .frontpage.hide,
 #unes-willem .exergue.hide {
-  opacity: 0;
+  opacity: 0.3;
   transform: translateY(200px);
 }
 
@@ -60,9 +145,17 @@ body {
   animation-timing-function: ease-out;
 }
 
+#unes-willem .exergue > * {
+  max-width: 48rem;
+}
+
+#unes-willem .exergue h3 {
+  margin-bottom: 1.5rem;
+}
+
 @keyframes fadeIn {
   from {
-    opacity: 0;
+    opacity: 0.3;
     transform: translateY(200px);
   }
   to {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Map as Leaflet, TileLayer } from 'react-leaflet'
+import { MapContainer as Leaflet, TileLayer } from 'react-leaflet'
 import PropTypes from 'prop-types'
 import removeObjectKeys from '../../../libe-utils/remove-object-keys'
 
