@@ -9,7 +9,7 @@ const meta = {
   title: 'Libération - ',
   url: 'https://www.liberation.fr/apps/2021/03/40-ans-willem',
   description: '',
-  image: '',
+  image: 'https://www.liberation.fr/apps/2021/03/40-ans-willem/social.jpg',
   slug: 'unes-willem',
   tweet: '',
   published_on: '01/01/2020 12:00',
