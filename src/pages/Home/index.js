@@ -7,6 +7,10 @@ import BarChart from '../../libe-components/graphs-2/BarChart'
 import Grid from '../../libe-components/graphs-2/Grid'
 import Paragraph from '../../libe-components/text-levels/Paragraph'
 import H1 from '../../libe-components/text/H1'
+import H2 from '../../libe-components/text/H2'
+import H4 from '../../libe-components/text/H4'
+import H5 from '../../libe-components/text/H5'
+import H6 from '../../libe-components/text/H6'
 import P from '../../libe-components/text/P'
 import Span from '../../libe-components/text/Span'
 import fibonacci from '../../libe-utils/fibonacci'
@@ -17,9 +21,12 @@ import _regions from './regions.json'
 
 const regions = _regions.sort((a, b) => a.name.localeCompare(b.name))
 
-const dataRootUrl = process.env.NODE_ENV === 'production'
-  ? 'https://www.liberation.fr/apps/2021/02/vaccins-CN/data'
-  : 'http://localhost:3006'
+const dataRootUrl = process.env.NODE_ENV !== 'production'
+  ? 'http://localhost:3006'
+  : window.location?.host === 'www.liberation.fr'
+    ? 'https://www.liberation.fr/apps/2021/02/vaccins-CN/data'
+    : 'https://maximefabas.github.io/apps/2021/02/vaccins-CN/data'
+
 const ageCategories = [{
   name: 'Ensemble',
   value: 'tt',
@@ -246,6 +253,16 @@ class Home extends Component {
     const { current_data: data } = state
     const { viewport } = context
     const { rem } = viewport
+
+    const responsiveValue = (values) => {
+      if (!Array.isArray(values) || values.length !== 3) return
+      const dispName = viewport.display_name
+      return dispName === 'lg'
+        ? values[0]
+        : dispName === 'md'
+          ? values[1]
+          : values[2]
+    }
     
     const width = viewport.width
 
@@ -253,6 +270,15 @@ class Home extends Component {
 
     const franceWidth = viewport.width
     const franceHeight = Math.min(Math.floor(franceWidth * 9 / 16), 600)
+    const franceMarginTop = responsiveValue([4, 2, 3])
+
+    const titleLevel = responsiveValue([4, 2, 3])
+    const titleLineLevel = responsiveValue([2.5, 1, 1.5])
+    const legendWidth = responsiveValue([12 * rem, 12 * rem, 7 * rem])
+    const legendXPos = responsiveValue([2.5 * rem, 2.5 * rem, width - legendWidth])
+    const legendYPos = responsiveValue([7.5 * rem, 6 * rem, 0 * rem])
+    const legend1Label = responsiveValue(['1res vaccinations', '1res vaccinations', '1res vacc.'])
+    const legend2Label = responsiveValue(['2es vaccinations', '2es vaccinations', '2es vacc.'])
 
     const nbRegions = data.length - 1
     const regionSlotsPerLine = Math.max(Math.floor(width / (12 * rem)), 1)
@@ -301,7 +327,7 @@ class Home extends Component {
           {/* Grid */}
           <Grid
             x={3 * rem}
-            y={rem}
+            y={3 * rem}
             width={franceWidth - 4 * rem}
             height={franceHeight - 3 * rem}
             xScale={scaleTime().domain([
@@ -321,8 +347,8 @@ class Home extends Component {
             y={1 * rem}
             width={15 * rem}
             height={8 * rem}>
-            <div style={{ width: 18 * rem, height: 8 * rem }}>
-              <H1 level={2.5} lineLevel={1.5}>
+            <div style={{ width: 15 * rem, height: 8 * rem }}>
+              <H1 level={titleLevel} lineLevel={titleLineLevel}>
                 Nombre<br />
                 de vaccinations<br />
                 en France.
@@ -332,7 +358,7 @@ class Home extends Component {
           {/* Bars */}
           <BarChart
             x={3 * rem}
-            y={rem}
+            y={3 * rem}
             width={franceWidth - 4 * rem}
             height={franceHeight - 3 * rem}
             bgHoverable={true}
@@ -372,14 +398,65 @@ class Home extends Component {
               </foreignObject>}} />
           <line 
             x1={3 * rem}
-            y1={rem + franceHeight - 3 * rem}
+            y1={3 * rem + franceHeight - 3 * rem}
             x2={3 * rem + franceWidth - 4 * rem}
-            y2={rem + franceHeight - 3 * rem}
-            style={{ strokeWidth: 3, stroke: '#191919', strokeLinecap: 'round' }} />
+            y2={3 * rem + franceHeight - 3 * rem}
+            style={{
+              strokeWidth: 3,
+              stroke: '#191919',
+              strokeLinecap: 'round'
+            }} />
+          {/* Legend */}
+          <foreignObject
+            x={legendXPos}
+            y={legendYPos}
+            width={legendWidth}
+            height={8 * rem}>
+            <div style={{
+              width: legendWidth - 1 * rem,
+              margin: .5 * rem,
+              padding: .5 * rem,
+              background: 'rgba(255, 255, 255, .9)',
+              boxShadow: '0 0 .25rem 0 rgba(25, 25, 25, .1)'
+            }}>
+              <P
+                level={-1}
+                lineLevel={1}
+                style={{
+                  fontFamily: 'Libe-Typewriter',
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                <Span
+                  level={2}
+                  lineLevel={1}
+                  style={{
+                    color: 'rgba(35, 6, 75, 1)' }}>
+                  <strong>—</strong>
+                </Span>&nbsp;&nbsp;{legend1Label}
+              </P>
+              <P
+                level={-1}
+                lineLevel={1}
+                style={{
+                  fontFamily: 'Libe-Typewriter',
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                <Span
+                  level={2}
+                  lineLevel={1}
+                  style={{
+                    color: 'rgba(104, 216, 186, 1)' }}>
+                  <strong>—</strong>
+                </Span>&nbsp;&nbsp;{legend2Label}
+              </P>
+            </div>
+          </foreignObject>
         </g>
         <g
           className={`${c}__regions`}
-          transform={`translate(${3 * rem}, ${franceHeight + rem})`}>{
+          transform={`translate(${3 * rem}, ${franceHeight + 3 * rem})`}>{
           new Array(nbLines).fill(null).map((line, lineNb) => {
             const loSlotNb = lineNb * regionSlotsPerLine
             const hiSlotNb = Math.min((lineNb + 1) * regionSlotsPerLine, nbRegions)
@@ -437,7 +514,7 @@ class Home extends Component {
                     tooltip={({ val, col, bar, chart, i }) => {
                       return <foreignObject
                         x={-.125 * chart.width}
-                        y={1 * rem}
+                        y={1.5 * rem}
                         width={1.25 * chart.width}
                         height={3 * rem}>
                         <div style={{

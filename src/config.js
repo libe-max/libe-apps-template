@@ -1,7 +1,7 @@
 const currentProtocol = typeof window !== 'undefined' ? window.location.protocol : 'http:'
 const currentHostname = typeof window !== 'undefined' ? window.location.hostname : 'localhost'
 const showHeader = false
-const staticsUrl = process.env.NODE_ENV === 'production' ? 'https://www.liberation.fr/apps/static' : `${currentProtocol}//${currentHostname}:3003`
+const staticsUrl = process.env.NODE_ENV === 'production' ? `${currentProtocol}//${currentHostname}/apps/static` : `${currentProtocol}//${currentHostname}:3003`
 const proxydataUrl = process.env.NODE_ENV === 'production' ? 'https://proxydata.liberation.fr' : 'http://localhost:3004'
 const spreadsheetId = '1MCIf6Icv0Z4Tn70Sog_cWzI6dG9ytFzANKly8eNs7KI'
 const meta = {
