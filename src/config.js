@@ -1,8 +1,15 @@
 const currentProtocol = typeof window !== 'undefined' ? window.location.protocol : 'http:'
 const currentHostname = typeof window !== 'undefined' ? window.location.hostname : 'localhost'
 const showHeader = true
-const staticsUrl = process.env.NODE_ENV === 'production' ? `${currentProtocol}//${currentHostname}/apps/static` : `${currentProtocol}//${currentHostname}:3003`
-const proxydataUrl = process.env.NODE_ENV === 'production' ? 'https://proxydata.liberation.fr' : 'http://localhost:3004'
+const staticsUrl = process.env.NODE_ENV === 'production'
+  && currentHostname !== 'localhost'
+  ? `${currentProtocol}//${currentHostname}/apps/static`
+  : `${currentProtocol}//${currentHostname}:3003`
+const proxydataUrl = process.env.NODE_ENV === 'production'
+  && currentHostname !== 'localhost'
+  ? 'https://proxydata.liberation.fr'
+  : 'http://localhost:3004'
+const headerUrl = `${staticsUrl}/scripts/libe-header.js`
 const spreadsheetId = '1x6kzjPUjX4Pt3t__HeZklgSbhdkgAaxvZMHQxCpr0gw'
 const meta = {
   author: 'Libé Labo',
@@ -49,6 +56,7 @@ module.exports = {
   show_header: showHeader,
   statics_url: staticsUrl,
   proxydata_url: proxydataUrl,
+  header_url: headerUrl,
   spreadsheet_id: spreadsheetId,
   meta: meta,
   viewport: initViewport

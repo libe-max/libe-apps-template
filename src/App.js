@@ -269,34 +269,11 @@ export default class App extends Component {
       expand_media: this.expandMedia
     }
 
-    const title1 = !state.loading_sheet && !state.error_sheet
-      ? state.data_sheet.find(e => e.type === 'titre-1').texte
-      : ''
-    const title2 = !state.loading_sheet && !state.error_sheet
-      ? state.data_sheet.find(e => e.type === 'titre-2').texte
-      : ''
-    const subTitle = !state.loading_sheet && !state.error_sheet
-      ? state.data_sheet.find(e => e.type === 'sous-titre').texte
-      : ''
-
     return <AppContext.Provider value={passedContext}>
       <div
         id={props.meta.slug}
         className={classes.join(' ')}>
         {/* Header */}
-        <div className='header'>
-          <div className='header__image' />
-          <div className='header__content'>
-            <H2 level={8} lineLevel={7}>
-              <span style={{ color: 'rgb(230, 0, 4)' }}><JSXInterpreter content={title1} /></span><br />
-              <span style={{ color: '#191919' }}><JSXInterpreter content={title2} /></span>
-            </H2>
-            <P level={2.5}>
-              <JSXInterpreter content={subTitle} />
-            </P>
-            <P style={{ color: '#777777' }} level={1}>Publié le <span style={{ color: '#191919' }}>31 mars 2021</span></P>
-          </div>
-        </div>
 
         {/* Loading */}
         {state.loading_sheet
@@ -315,13 +292,6 @@ export default class App extends Component {
         {!state.loading_sheet
         && !state.error_sheet
         && <HomePage data={state.data_sheet} /> }
-
-        <P
-          className='lblb-signature'
-          style={{ color: '#AAAAAA', textAlign: 'center', marginTop: '2rem', marginBottom: '20rem' }}
-          level={1}>
-          Publié le <span style={{ color: 'white' }}>31 mars 2021</span>
-        </P>
 
         {/* Footer */}
         {/*<div className='lblb-default-apps-footer'>

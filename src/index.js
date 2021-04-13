@@ -64,7 +64,7 @@ class AppWrapper extends Component {
     if (config.show_header) {
       const headerScript = document.createElement('script')
       headerScript.setAttribute('type', 'text/javascript')
-      headerScript.setAttribute('src', 'https://www.liberation.fr/menu/script.js')
+      headerScript.setAttribute('src', config.header_url)
       document.body.appendChild(headerScript)
     }
   }
