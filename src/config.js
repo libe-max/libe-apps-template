@@ -1,6 +1,6 @@
 const currentProtocol = typeof window !== 'undefined' ? window.location.protocol : 'http:'
 const currentHostname = typeof window !== 'undefined' ? window.location.hostname : 'localhost'
-const showHeader = true
+const showHeader = false
 const staticsUrl = process.env.NODE_ENV === 'production'
   && currentHostname !== 'localhost'
   ? `${currentProtocol}//${currentHostname}/apps/static`
@@ -13,11 +13,11 @@ const headerUrl = `${staticsUrl}/scripts/libe-header.js`
 const spreadsheetId = '1x6kzjPUjX4Pt3t__HeZklgSbhdkgAaxvZMHQxCpr0gw'
 const meta = {
   author: 'Libé Labo',
-  title: 'Libération - ',
-  url: 'https://www.liberation.fr/apps/2021/03/40-ans-willem',
+  title: 'Libération - Les élections régionales en data',
+  url: 'https://www.liberation.fr/apps/2021/05/regionales',
   description: '',
-  image: '',
-  slug: 'unes-willem',
+  image: 'https://www.liberation.fr/apps/2021/05/regionales/social.jpg',
+  slug: 'regionales-2021',
   tweet: '',
   published_on: '01/01/2020 12:00',
   updated_on: null,
