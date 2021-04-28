@@ -7,7 +7,7 @@ const spreadsheetId = '1MCIf6Icv0Z4Tn70Sog_cWzI6dG9ytFzANKly8eNs7KI'
 const meta = {
   author: 'Libé Labo',
   title: 'Libération - ',
-  url: 'https://www.liberation.fr/apps/2021/02/vaccins-CN/bar-charts',
+  url: 'https://www.liberation.fr/apps/2021/05/vaccination/bar-charts',
   description: '',
   image: '',
   slug: 'vaccins-CN',

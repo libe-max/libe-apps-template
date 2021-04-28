@@ -269,16 +269,16 @@ class Home extends Component {
     if (!data) return <div className={`${c}`} />
 
     const franceWidth = viewport.width
-    const franceHeight = Math.min(Math.floor(franceWidth * 9 / 16), 600)
-    const franceMarginTop = responsiveValue([4, 2, 3])
+    const franceHeight = Math.min(Math.floor(franceWidth * 11 / 16), 700)
+    const franceMarginTop = responsiveValue([4 * rem, 2 * rem, 2 * rem])
 
     const titleLevel = responsiveValue([4, 2, 3])
     const titleLineLevel = responsiveValue([2.5, 1, 1.5])
-    const legendWidth = responsiveValue([12 * rem, 12 * rem, 7 * rem])
+    const legendWidth = responsiveValue([12 * rem, 13 * rem, 9 * rem])
     const legendXPos = responsiveValue([2.5 * rem, 2.5 * rem, width - legendWidth])
-    const legendYPos = responsiveValue([7.5 * rem, 6 * rem, 0 * rem])
+    const legendYPos = responsiveValue([3.5 * rem, 3.5 * rem, 1.5 * rem])
     const legend1Label = responsiveValue(['1res vaccinations', '1res vaccinations', '1res vacc.'])
-    const legend2Label = responsiveValue(['2es vaccinations', '2es vaccinations', '2es vacc.'])
+    const legend2Label = responsiveValue(['Vaccination complète', 'Vaccination complète', 'Vacc. complète'])
 
     const nbRegions = data.length - 1
     const regionSlotsPerLine = Math.max(Math.floor(width / (12 * rem)), 1)
@@ -287,7 +287,7 @@ class Home extends Component {
     const regionHeight = Math.floor(regionSlotWidth * 9 / 20)
     const nbLines = Math.ceil(nbRegions / regionSlotsPerLine)
 
-    const height = franceHeight + nbLines * (regionHeight + 2 * rem) + 2 * rem
+    const height = franceHeight + franceMarginTop + nbLines * (regionHeight + 2 * rem) + 2 * rem + 1 * rem
 
     const scales = props.data
     const frYScaleMax = scales[`fr_${state.current_filter}`]
@@ -316,7 +316,9 @@ class Home extends Component {
         height={height}>
         
         {/* France */}
-        <g className={`${c}__france`}>
+        <g
+          className={`${c}__france`}
+          transform={`translate(0 ${franceMarginTop})`}>
           {/* Background */}
           <rect
             x={0}
@@ -327,27 +329,27 @@ class Home extends Component {
           {/* Grid */}
           <Grid
             x={3 * rem}
-            y={3 * rem}
+            y={5 * rem}
             width={franceWidth - 4 * rem}
-            height={franceHeight - 3 * rem}
+            height={franceHeight - 5 * rem}
             xScale={scaleTime().domain([
               moment(startMoment).toDate(),
               moment(startMoment).add(nbDays, 'days').toDate()
             ])}
             yScale={scaleLinear().domain([0, frYScaleMax])}
-            xTicks={5}
+            xTicks={4}
             yTicks={new Array(7).fill(0).map((e, i) => i * frYScaleMax / 6)}
-            xTickFormat={date => moment(date).format('D MMM YY')}
+            xTickFormat={date => moment(date).year() === moment().year() ? moment(date).format('MMM') : moment(date).format('MMM YY')}
             yTickFormat={val => `${roundNumber(val / 1e6, 1)}M` }
             xBottomLabelPosition={({ x, y, val, label }) => ({ x, y: y + .5 * rem })}
             yLeftLabelPosition={({ x, y, val, label }) => ({ y, x: (x - .5 * rem) })} />
           {/* Title */}
           <foreignObject
-            x={3 * rem}
-            y={1 * rem}
-            width={15 * rem}
+            x={responsiveValue([3 * rem, 3 * rem, 1 * rem])}
+            y={responsiveValue([-3 * rem, -1 * rem, -1.5 * rem])}
+            width={20 * rem}
             height={8 * rem}>
-            <div style={{ width: 15 * rem, height: 8 * rem }}>
+            <div style={{ width: 20 * rem, height: 8 * rem }}>
               <H1 level={titleLevel} lineLevel={titleLineLevel}>
                 Nombre<br />
                 de vaccinations<br />
@@ -385,8 +387,8 @@ class Home extends Component {
                   padding: '.25rem',
                   boxShadow: '0 0 .25rem 0 rgba(25, 25, 25, .1)'
                 }}>
-                  <P level={-1}>
-                    <strong>{col}</strong>
+                  <P level={-1} style={{ fontFamily: 'Synthese' }}>
+                    <strong style={{ fontWeight: 600 }}>{col}</strong>
                     {val.map((v, j) => <span key={j}>
                       <br />
                       {j === 0 ? '1res' : '2es'} vaccinations : {numberToSpacedString(frData[i][j])}<br />
@@ -402,7 +404,7 @@ class Home extends Component {
             x2={3 * rem + franceWidth - 4 * rem}
             y2={3 * rem + franceHeight - 3 * rem}
             style={{
-              strokeWidth: 3,
+              strokeWidth: 1,
               stroke: '#191919',
               strokeLinecap: 'round'
             }} />
@@ -415,7 +417,7 @@ class Home extends Component {
             <div style={{
               width: legendWidth - 1 * rem,
               margin: .5 * rem,
-              padding: .5 * rem,
+              padding: '.25rem .5rem',
               background: 'rgba(255, 255, 255, .9)',
               boxShadow: '0 0 .25rem 0 rgba(25, 25, 25, .1)'
             }}>
@@ -423,7 +425,7 @@ class Home extends Component {
                 level={-1}
                 lineLevel={1}
                 style={{
-                  fontFamily: 'Libe-Typewriter',
+                  fontFamily: 'Synthese',
                   display: 'flex',
                   alignItems: 'center'
                 }}>
@@ -431,7 +433,7 @@ class Home extends Component {
                   level={2}
                   lineLevel={1}
                   style={{
-                    color: 'rgba(35, 6, 75, 1)' }}>
+                    color: 'rgba(183, 196, 247, 1)' }}>
                   <strong>—</strong>
                 </Span>&nbsp;&nbsp;{legend1Label}
               </P>
@@ -439,7 +441,7 @@ class Home extends Component {
                 level={-1}
                 lineLevel={1}
                 style={{
-                  fontFamily: 'Libe-Typewriter',
+                  fontFamily: 'Synthese',
                   display: 'flex',
                   alignItems: 'center'
                 }}>
@@ -447,7 +449,7 @@ class Home extends Component {
                   level={2}
                   lineLevel={1}
                   style={{
-                    color: 'rgba(104, 216, 186, 1)' }}>
+                    color: 'rgba(110, 138, 239, 1)' }}>
                   <strong>—</strong>
                 </Span>&nbsp;&nbsp;{legend2Label}
               </P>
@@ -456,7 +458,7 @@ class Home extends Component {
         </g>
         <g
           className={`${c}__regions`}
-          transform={`translate(${3 * rem}, ${franceHeight + 3 * rem})`}>{
+          transform={`translate(${3 * rem}, ${franceHeight + franceMarginTop + 3 * rem})`}>{
           new Array(nbLines).fill(null).map((line, lineNb) => {
             const loSlotNb = lineNb * regionSlotsPerLine
             const hiSlotNb = Math.min((lineNb + 1) * regionSlotsPerLine, nbRegions)
@@ -497,8 +499,8 @@ class Home extends Component {
                     ])}
                     xTicks={2}
                     yTicks={0}
-                    xTickFormat={date => moment(date).format('MMM')}
-                    xBottomLabelPosition={({ x, y, val, label }) => ({ x, y: y + .5 * rem })} />
+                    xTickFormat={date => moment(date).year() === moment().year() ? moment(date).format('MMM') : moment(date).format('MMM YY')}
+                    xBottomLabelPosition={({ x, y, val, label }) => ({ x, y: y + .25 * rem })} />
                   <BarChart                  
                     x={(slotNb % regionSlotsPerLine) * regionSlotWidth}
                     width={regionWidth}
@@ -525,8 +527,8 @@ class Home extends Component {
                           boxShadow: '0 0 .25rem 0 rgba(25, 25, 25, .1)',
                           textAlign: 'center'
                         }}>
-                          <P level={-1}>
-                            <strong style={{ marginRight: '.25rem' }}>{
+                          <P level={-1} style={{ fontFamily: 'Synthese' }}>
+                            <strong style={{ marginRight: '.25rem', fontWeight: 600 }}>{
                               moment(col, 'D MMMM YYYY').format('D MMM')
                             }</strong>
                             <span>1res : {numberToSpacedString(regionData[i][0]).replace(' ', ' ')}</span>
@@ -546,11 +548,12 @@ class Home extends Component {
                     height={2 * rem}>
                     <div style={{ width: regionWidth, height: 2 * rem }}>
                       <P
-                        level={-1}
+                        level={-.5}
                         style={{
                           textAlign: 'center',
-                          fontFamily: 'Libe-Typewriter',
-                          fontWeight: 800,
+                          fontFamily: 'Libe-Sans-Semicondensed',
+                          fontWeight: 600,
+                          letterSpacing: '.03em',
                           textShadow: '1px 1px 0 white'
                         }}>{regions[regionNb].name}</P>
                     </div>
@@ -562,7 +565,7 @@ class Home extends Component {
                 y1={lineHeight}
                 x2={lineWidth}
                 y2={lineHeight}
-                style={{ strokeWidth: 3, stroke: '#191919', strokeLinecap: 'round' }} />
+                style={{ strokeWidth: 1, stroke: '#191919', strokeLinecap: 'round' }} />
             </g>
           })
         }</g>
