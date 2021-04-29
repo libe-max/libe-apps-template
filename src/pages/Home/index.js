@@ -24,7 +24,7 @@ const regions = _regions.sort((a, b) => a.name.localeCompare(b.name))
 const dataRootUrl = process.env.NODE_ENV !== 'production'
   ? 'http://localhost:3006'
   : window.location?.host === 'www.liberation.fr'
-    ? 'https://www.liberation.fr/apps/2021/02/vaccins-CN/data'
+    ? 'https://www.liberation.fr/apps/2021/05/vaccination/data'
     : 'https://maximefabas.github.io/apps/2021/02/vaccins-CN/data'
 
 const ageCategories = [{
@@ -360,9 +360,9 @@ class Home extends Component {
           {/* Bars */}
           <BarChart
             x={3 * rem}
-            y={3 * rem}
+            y={5 * rem}
             width={franceWidth - 4 * rem}
-            height={franceHeight - 3 * rem}
+            height={franceHeight - 5 * rem}
             bgHoverable={true}
             cursor='pointer'
             stackBars={false}
