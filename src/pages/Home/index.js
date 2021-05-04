@@ -1,5 +1,8 @@
 import React, { Component } from 'react' 
 import Carrousel from './components/blocks/Carrousel'
+import H1 from '../../libe-components/text/H1'
+import H3 from '../../libe-components/text/H3'
+import ScoresRegionales from './components/cards/ScoresRegionales'
 import AppContext from '../../context'
 
 /*
@@ -41,17 +44,20 @@ class Home extends Component {
     const { props, context, c } = this
     const { data } = props
     const { viewport } = context
-
-    const slidesData = [
-      { title: 'Title 1!', content: <span>Some content!</span> },
-      { title: 'Title 2!', content: <span>Some content!</span> },
-      { title: 'Title 3!', content: <span>Some content!</span> },
-      { title: 'Title 4!', content: <span>Some content!</span> }
-    ]
+    const { rem } = viewport
 
     return <div className={c}>
+      <H1 level={3} className='regionales-2021__region-name'>
+        Bretagne
+      </H1>
       <Carrousel>
-        {slidesData.map((slideData, i) => <div key={i}>{slideData.content}</div>)}
+        <ScoresRegionales className='regionales-2021__slide' val={'Vue d\'ensemble'} />
+        <ScoresRegionales className='regionales-2021__slide' val={'Vue d\'ensemble'} />
+        <ScoresRegionales className='regionales-2021__slide' val={'Vue d\'ensemble'} />
+        <ScoresRegionales className='regionales-2021__slide' val={'Vue d\'ensemble'} />
+        <ScoresRegionales className='regionales-2021__slide' val={'Vue d\'ensemble'} />
+        <ScoresRegionales className='regionales-2021__slide' val={'Vue d\'ensemble'} />
+        <ScoresRegionales className='regionales-2021__slide' val={'Vue d\'ensemble'} />
       </Carrousel>
     </div>
   }

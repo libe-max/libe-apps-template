@@ -1,84 +1,147 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import Flickity from 'flickity'
-import 'flickity/dist/flickity.min.css'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import Svg from '../../../../../libe-components/primitives/Svg'
+import P from '../../../../../libe-components/text/P'
 import removeObjectKeys from '../../../../../libe-utils/remove-object-keys'
+import AppContext from '../../../../../context'
 
 /*
  *   Carrousel component
  *   ------------------------------------------------------
  *
  *   DESCRIPTION
- *   Displays children inside a carrousel
+ *   Renders children through a react-slick Slider
  *
  *   PROPS
- *   slides
+ *   children, className
  *
  */
 
 export default class Carrousel extends Component {
+  /* * * * * * * * * * * * * * * * *
+   *
+   * MAKE CONTEXT ACCESSIBLE
+   *
+   * * * * * * * * * * * * * * * * */
+  static contextType = AppContext
+
+  /* * * * * * * * * * * * * * * * *
+   *
+   * INITIAL STATE
+   *
+   * * * * * * * * * * * * * * * * */
+  state = {
+    value: 0
+  }
+
   /* * * * * * * * * * * * * * * *
    *
    * CONSTRUCTOR
    *
    * * * * * * * * * * * * * * * */
-  constructor(props) {
+  constructor () {
     super()
     this.c = 'lblb-carrousel'
-    this.usedProps = ['slides', 'className']
-    this.state = { flickityReady: false }
-    this.refreshFlickity = this.refreshFlickity.bind(this)
+    this.usedProps = ['children', 'className']
+    this.handlePrevClick = this.handlePrevClick.bind(this)
+    this.handleNextClick = this.handleNextClick.bind(this)
+    this.dirtySlickTrackFix = this.dirtySlickTrackFix.bind(this)
+    this.cleanDirtySlickTrackFix = this.cleanDirtySlickTrackFix.bind(this)
   }
 
   /* * * * * * * * * * * * * * * *
    *
-   * MOUNT, UPDATE, UNMOUNT
+   * DID MOUNT, UPDATE & WILL UNMOUNT
    *
    * * * * * * * * * * * * * * * */
   componentDidMount () {
-    this.flickity = new Flickity(this.flickityNode, this.props.options || {})
-    this.setState({ flickityReady: true })
+    this.dirtySlickTrackFix()
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    const flickityDidBecomeActive = !prevState.flickityReady && this.state.flickityReady
-    const childrenDidChange = prevProps.children.length !== this.props.children.length
-    if (flickityDidBecomeActive || childrenDidChange) this.refreshFlickity()
+  componentDidUpdate() {
+    this.dirtySlickTrackFix()
   }
 
   componentWillUnmount () {
-    this.flickity.destroy()
+    this.cleanDirtySlickTrackFix()
   }
 
   /* * * * * * * * * * * * * * * *
    *
-   * REFRESH FLICKITY
+   * DIRTY & CLEAN SLICK TRACK FIX
    *
    * * * * * * * * * * * * * * * */
-  refreshFlickity () {
-    this.flickity.reloadCells()
-    this.flickity.resize()
-    this.flickity.updateDraggable()
+  dirtySlickTrackFix () {
+    if (!this.$root) return
+    if (!this.dirtyFixTimeouts) this.dirtyFixTimeouts = []
+    this.dirtyFixTimeouts.push(window.setTimeout(() => {
+      const $track = this.$root.querySelector('.slick-track')
+      $track.style.width = `${100000}px`
+    }, 100))
+    this.dirtyFixTimeouts.push(window.setTimeout(() => {
+      const $track = this.$root.querySelector('.slick-track')
+      $track.style.width = `${100000}px`
+    }, 500))
+  }
+
+  cleanDirtySlickTrackFix () {
+    if (!this.dirtyFixTimeouts) return
+    this.dirtyFixTimeouts.forEach(timeout => window.clearTimeout(timeout))
   }
 
   /* * * * * * * * * * * * * * * *
    *
-   * RENDER PORTAL
+   * HANDLERS
    *
    * * * * * * * * * * * * * * * */
-  renderPortal () {
-    if (!this.flickityNode) return null
-    const mountNode = this.flickityNode.querySelector('.flickity-slider')
-    if (mountNode) return ReactDOM.createPortal(this.props.children, mountNode)
+  handlePrevClick (e) {
+    if (!this.slider) return
+    this.slider.slickPrev()
+  }
+
+  handleNextClick (e) {
+    if (!this.slider) return
+    this.slider.slickNext()
   }
 
   /* * * * * * * * * * * * * * * *
    *
-   * RENDER PORTAL
+   * RENDER
    *
    * * * * * * * * * * * * * * * */
   render () {
-    const { props, state, c } = this
+    const { props, state, context, c } = this
+    const { config, viewport } = context
+
+    /* Logic */
+    const settings = {
+      arrows: false,
+      accessibility: true,
+      infinite: true,
+      speed: viewport.display_name === 'lg' ? 100 : 50,
+      centerMode: true,
+      variableWidth: true,
+      slidesToScroll: 1,
+      dots: true,
+      customPaging: i => {
+        return <P level={-.5} className={`${c}__dot`}>{i + 1}</P>
+      }
+      /*,
+      appendDots: dots => <ul>
+        {dots.map((dot, i) => {
+          const handleClick = e => this.slider?.slickGoTo(i)
+          return dot
+          return <li
+            key={i}
+            onClick={handleClick}
+            className={`${c}__dot`}>
+            {i + 1}
+          </li>
+        })}
+      </ul>*/
+    }
 
     /* Assign classes */
     const classes = [c]
@@ -87,110 +150,25 @@ export default class Carrousel extends Component {
     /* Passed props */
     const passedProps = removeObjectKeys(props, this.usedProps)
 
-    return [
-      <div
-        className={classes.join(' ')}
-        key='flickityBase'
-        ref={node => (this.flickityNode = node)}
-        {...passedProps} />,
-      this.renderPortal(),
-    ].filter(Boolean)
+    /* Display */
+    return <div
+      className={classes.join(' ')}
+      ref={n => this.$root = n}>
+      <Slider
+        {...settings}
+        className={`${c}__slider`}
+        ref={n => (this.slider = n)}>
+        {props.children.map((child, i) => <div
+          key={i}
+          onClick={e => this.slider?.slickGoTo(i)}
+          className={`${c}__slide`}>
+          {child}
+        </div>)}
+      </Slider>
+      <div className={`${c}__buttons`}>
+        <button onClick={this.handlePrevClick}><Svg src={`${config.statics_url}/assets/left-arrow-head-icon_40.svg`} /></button>
+        <button onClick={this.handleNextClick}><Svg src={`${config.statics_url}/assets/right-arrow-head-icon_40.svg`} /></button>
+      </div>
+    </div>
   }
-
-
-
-  // state = {
-  //   active_slide: null
-  // }
-
-  // /* * * * * * * * * * * * * * * *
-  //  *
-  //  * CONSTRUCTOR
-  //  *
-  //  * * * * * * * * * * * * * * * */
-  // constructor () {
-  //   super()
-  //   this.c = 'lblb-carrousel'
-  //   this.usedProps = ['slides', 'className']
-  //   this.handlePrevClick = this.handlePrevClick.bind(this)
-  //   this.handleNextClick = this.handleNextClick.bind(this)
-  // }
-
-  // /* * * * * * * * * * * * * * * *
-  //  *
-  //  * HANDLE PREV CLICK
-  //  *
-  //  * * * * * * * * * * * * * * * */
-  // handlePrevClick (e) {
-  //   const slides = this.props.slides || []
-  //   this.setState(curr => ({
-  //     ...curr,
-  //     active_slide: (slides.length + curr.active_slide - 1) % slides.length
-  //   }))
-  // }
-
-  // /* * * * * * * * * * * * * * * *
-  //  *
-  //  * HANDLE NEXT CLICK
-  //  *
-  //  * * * * * * * * * * * * * * * */
-  // handleNextClick (e) {
-  //   const slides = this.props.slides || []
-  //   this.setState(curr => ({
-  //     ...curr,
-  //     active_slide: (slides.length + curr.active_slide + 1) % slides.length
-  //   }))
-  // }
-
-  // /* * * * * * * * * * * * * * * *
-  //  *
-  //  * RENDER
-  //  *
-  //  * * * * * * * * * * * * * * * */
-  // render () {
-  //   const { props, state, c } = this
-  //   const { slides } = props
-  //   const activeSlideNb = (state.active_slide ?? 0) % slides.length
-
-  //   /* Assign classes */
-  //   const classes = [c]
-  //   if (props.className) classes.push(props.className)
-
-  //   /* Passed props */
-  //   const passedProps = removeObjectKeys(props, this.usedProps)
-
-  //   return <div className={classes.join(' ')} {...passedProps}>
-  //     <div className={`${c}__actions`}>
-  //       <button
-  //         onClick={this.handlePrevClick}
-  //         className={`${c}__action ${c}__action_prev`}>
-  //         prev
-  //       </button>
-  //       <span className={`${c}__page-info`}>
-  //         title
-  //       </span>
-  //       <button
-  //         onClick={this.handleNextClick}
-  //         className={`${c}__action ${c}__action_next`}>
-  //         next
-  //       </button>
-  //     </div>
-  //     <div className={`${c}__content-wrapper`}>
-  //       <div className={`${c}__content`}>
-  //         {slides.map((slide, i) => i === activeSlideNb
-  //           ? <div
-  //             key={i}
-  //             className={`${c}__slide ${c}__slide_active`}>
-  //             {slide.content}
-  //           </div>
-  //           : <div
-  //             key={i}
-  //             className={`${c}__slide`}>
-  //             {slide.content}
-  //           </div>          
-  //         )}
-  //       </div>
-  //     </div>
-  //   </div>
-  // }
-}
+} 

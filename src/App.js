@@ -13,7 +13,7 @@ import H2 from './libe-components/text/H2'
 import P from './libe-components/text/P'
 import jsonTableToObjects from './libe-utils/json-table-to-objects'
 import HomePage from './pages/Home'
-import { statics_url as staticsUrl } from './config'
+import config from './config'
 import AppContext from './context'
 
 export default class App extends Component {
@@ -254,6 +254,7 @@ export default class App extends Component {
     if (state.konami_mode) classes.push(`${c}_konami`)
     if (state.show_expanded_medias_panel) classes.push(`${c}_expanded-medias`)
     const passedContext = {
+      config,
       viewport: {
         ...props.viewport,
         responsive_value_getter: obj => {
@@ -320,7 +321,7 @@ export default class App extends Component {
           <button
             className='lblb-default-expanded-medias-panel__close-button'
             onClick={this.handleCloseExpandedMediasPanelClick}>
-            <Svg src={`${staticsUrl}/assets/tilted-cross-icon_40.svg`} />
+            <Svg src={`${config.statics_url}/assets/tilted-cross-icon_40.svg`} />
           </button>
         </div>
       </div>
