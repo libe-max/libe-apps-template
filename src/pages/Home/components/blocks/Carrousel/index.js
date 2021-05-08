@@ -15,7 +15,7 @@ import AppContext from '../../../../../context'
  *   Renders children through a react-slick Slider
  *
  *   PROPS
- *   children, className
+ *   settings, children, className
  *
  */
 
@@ -78,11 +78,11 @@ export default class Carrousel extends Component {
     if (!this.dirtyFixTimeouts) this.dirtyFixTimeouts = []
     this.dirtyFixTimeouts.push(window.setTimeout(() => {
       const $track = this.$root.querySelector('.slick-track')
-      $track.style.width = `${100000}px`
+      $track.style.width = '100000px'
     }, 100))
     this.dirtyFixTimeouts.push(window.setTimeout(() => {
       const $track = this.$root.querySelector('.slick-track')
-      $track.style.width = `${100000}px`
+      $track.style.width = '100000px'
     }, 500))
   }
 
@@ -125,23 +125,20 @@ export default class Carrousel extends Component {
       variableWidth: true,
       slidesToScroll: 1,
       dots: true,
-      customPaging: i => {
-        return <P level={-.5} className={`${c}__dot`}>{i + 1}</P>
-      }
-      /*,
-      appendDots: dots => <ul>
-        {dots.map((dot, i) => {
-          const handleClick = e => this.slider?.slickGoTo(i)
-          return dot
-          return <li
-            key={i}
-            onClick={handleClick}
-            className={`${c}__dot`}>
-            {i + 1}
-          </li>
-        })}
-      </ul>*/
+      customPaging: i => <P
+        level={-.5}
+        className={`${c}__dot`}>
+        {i + 1}
+      </P>,
+      ...props.settings
     }
+    const prevIcon = viewport.display_name !== 'sm'
+      ? `${config.statics_url}/assets/left-arrow-head-icon_40.svg`
+      : `${config.statics_url}/assets/left-arrow-head-icon_24.svg`
+    const nextIcon = viewport.display_name !== 'sm'
+      ? `${config.statics_url}/assets/right-arrow-head-icon_40.svg`
+      : `${config.statics_url}/assets/right-arrow-head-icon_24.svg`
+
 
     /* Assign classes */
     const classes = [c]
@@ -165,9 +162,10 @@ export default class Carrousel extends Component {
           {child}
         </div>)}
       </Slider>
+      <div className={`${c}__absolute-pos-dots-compensator`}>&nbsp;</div>
       <div className={`${c}__buttons`}>
-        <button onClick={this.handlePrevClick}><Svg src={`${config.statics_url}/assets/left-arrow-head-icon_40.svg`} /></button>
-        <button onClick={this.handleNextClick}><Svg src={`${config.statics_url}/assets/right-arrow-head-icon_40.svg`} /></button>
+        <button onClick={this.handlePrevClick}><Svg src={prevIcon} /></button>
+        <button onClick={this.handleNextClick}><Svg src={nextIcon} /></button>
       </div>
     </div>
   }

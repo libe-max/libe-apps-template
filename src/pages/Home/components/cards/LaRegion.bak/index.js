@@ -3,7 +3,7 @@ import H3 from '../../../../../libe-components/text/H3'
 import removeObjectKeys from '../../../../../libe-utils/remove-object-keys'
 
 /*
- *   ScoresRegionales component
+ *   LaRegion component
  *   ------------------------------------------------------
  *
  *   PROPS
@@ -11,7 +11,7 @@ import removeObjectKeys from '../../../../../libe-utils/remove-object-keys'
  *
  */
 
-export default class ScoresRegionales extends Component {
+export default class LaRegion extends Component {
   /* * * * * * * * * * * * * * * *
    *
    * CONSTRUCTOR
@@ -19,7 +19,7 @@ export default class ScoresRegionales extends Component {
    * * * * * * * * * * * * * * * */
   constructor(props) {
     super()
-    this.c = 'score-regionales'
+    this.c = 'slide'
     this.usedProps = []
   }
 
@@ -40,10 +40,12 @@ export default class ScoresRegionales extends Component {
 
     /* Display */
     return <div
+      id='region'
       className={classes.join(' ')}
       {...passedProps}>
-      <H3 level={2} className='regionales-2021__slide-title'>{props.val}</H3>
-      <div className='regionales-2021__slide-card'>CARD</div>
+      <H3 level={2} className='slide__title'>La région</H3>
+      <div className='slide__card'>
+      </div>
     </div>
   }
 }

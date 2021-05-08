@@ -1,42 +1,74 @@
-#regionales-2021 .regionales-2021__region-name {
+#regionales-2021 {
+  --c-navy: #001F3F;
+  --c-blue: #0074D9;
+  --c-aqua: #7FDBFF;
+  --c-teal: #39CCCC;
+  --c-olive: #3D9970;
+  --c-green: #2ECC40;
+  --c-lime: #01FF70;
+  --c-yellow: #FFDC00;
+  --c-orange: #FF851B;
+  --c-red: #FF4136;
+  --c-fuchsia: #F012BE;
+  --c-purple: #B10DC9;
+  --c-maroon: #85144B;
+  --c-white: #fff;
+  --c-silver: #ddd;
+  --c-gray: #aaa;
+  --c-black: #111;
+}
+
+#regionales-2021 .region-name {
   color: rgba(221, 0, 19, 1);
   font-family: 'Libe-Sans';
   width: 100%;
   text-align: center;
 }
 
-#regionales-2021 .regionales-2021__slide {
-  margin: 0 0 3.5rem 0;
+#regionales-2021 .lblb-carrousel .slick-slide.slick-active {
+  opacity: 1;
+  cursor: default;
 }
 
-#regionales-2021 .regionales-2021__slide-title {
+#regionales-2021 .slide {
+  padding: 0 .5rem .5rem .5rem;
+  background-color: #FAFAFA;
+  transition: background-color 200ms;
+}
+
+#regionales-2021 .lblb-carrousel .slick-slide.slick-active .slide {
+  background-color: #FFFFFF;
+}
+
+#regionales-2021 .slide__title {
   width: 100%;
   text-align: center;
   font-family: 'Libe-Sans';
-  background-color: blue;
 }
 
-#regionales-2021 .regionales-2021__slide-card {
+#regionales-2021 .slide__card {
   width: 26rem;
   height: 26rem;
   max-width: calc(100vw - 1rem);
   max-height: calc(100vw - 1rem);
-  background-color: blue;
-  box-shadow: 0 0 .5rem 0 rgba(25, 25, 25, .1);
 }
 
-#regionales-2021 .lblb-carrousel .slick-dots {
-  bottom: 1rem;
+@media screen and (max-width: 40rem) {
+  #regionales-2021 .slide {
+    padding: 0 0 .5rem 0;
+  }
 }
+
+/* COMPONENTS */
 
 .lblb-carrousel {
+  --len-dots-bar-height: 3.5rem;
   width: 100%;
   position: relative;
-  background: #FAFAFA;
 }
 
 .lblb-carrousel .slick-slide {
-  opacity: .2;
+  opacity: .05;
   transition: opacity 200ms;
   cursor: grab;
 }
@@ -51,7 +83,10 @@
 }
 
 .lblb-carrousel .slick-dots {
-  bottom: 0;
+  height: var(--len-dots-bar-height);
+  bottom: calc(-1 * var(--len-dots-bar-height));
+  padding: 1rem 0;
+  background: #FAFAFA;
 }
 
 .lblb-carrousel .slick-dots li {
@@ -83,6 +118,11 @@
   color: #FAFAFA;
 }
 
+.lblb-carrousel__absolute-pos-dots-compensator {
+  height: var(--len-dots-bar-height);
+  width: 100%;
+}
+
 .lblb-carrousel__buttons {
   position: absolute;
   transform: translate(0, -50%);
@@ -111,8 +151,23 @@
 
 .lblb-carrousel__buttons .lblb-svg #fill-1 {
   fill: #191919;
-  stroke-width: 2px;
+  stroke-width: 1px;
   stroke: #191919;
+}
+
+/* TEXT */
+
+.lblb-text {
+  font-family: Georgia
+}
+
+.lblb-text-h1,
+.lblb-text-h2,
+.lblb-text-h3,
+.lblb-text-h4,
+.lblb-text-h5,
+.lblb-text-h6 {
+  font-family: 'Libe-Sans-Semicondensed', Helvetica, Arial, sans-serif;
 }
 
 .lblb-text_level--4 { font-size: 0.375rem; }
@@ -420,17 +475,4 @@
   .lblb-text_line-level-19-5 { line-height: 24.5rem; }
   .lblb-text_line-level-20 { line-height: 26.5rem; }
   .lblb-text_line-level-20-5 { line-height: 28.5rem; }
-}
-
-.lblb-text {
-  font-family: Georgia
-}
-
-.lblb-text-h1,
-.lblb-text-h2,
-.lblb-text-h3,
-.lblb-text-h4,
-.lblb-text-h5,
-.lblb-text-h6 {
-  font-family: 'Libe-Sans-Semicondensed', Helvetica, Arial, sans-serif;
 }
