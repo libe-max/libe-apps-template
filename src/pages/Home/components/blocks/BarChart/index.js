@@ -71,11 +71,11 @@ export default class BarChart extends Component {
       }))
       if (child.type === Axis) {
         const gridArea = switcher(child.props.direction, [
-          { case: v => /^t/.test(v), return: 'tAxis' },
-          { case: v => /^r/.test(v), return: 'rAxis' },
-          { case: v => /^b/.test(v), return: 'bAxis' },
-          { case: v => /^l/.test(v), return: 'lAxis' },
-          { case: v => true, return: 'bAxis' }
+          { case: v => /^t/.test(v), return: v => 'tAxis' },
+          { case: v => /^r/.test(v), return: v => 'rAxis' },
+          { case: v => /^b/.test(v), return: v => 'bAxis' },
+          { case: v => /^l/.test(v), return: v => 'lAxis' },
+          { case: v => true, return: v => 'bAxis' }
         ])
         if (gridArea) {
           children[gridArea] = child
@@ -93,33 +93,13 @@ export default class BarChart extends Component {
       className={classes.join(' ')}
       style={style}
       {...passedProps}>
+      <div style={{ gridRow: 2, gridColumn: 2, position: 'relative' }}>
+        {children.bars}
+      </div>
       <div style={{ gridRow: 1, gridColumn: 2 }}>{children.tAxis}</div>
       <div style={{ gridRow: 2, gridColumn: 3 }}>{children.rAxis}</div>
       <div style={{ gridRow: 3, gridColumn: 2 }}>{children.bAxis}</div>
       <div style={{ gridRow: 2, gridColumn: 1 }}>{children.lAxis}</div>
-      <div style={{ gridRow: 2, gridColumn: 2, position: 'relative' }}>
-        {children.bars}
-      </div>
     </div>
-
-    // return <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-    //   <div style={{ width: '100%', flexGrow: 0, flexShrink: 0, display: 'flex', textAlign: 'center' }}>
-    //     <div style={{ flexGrow: 0, flexShrink: 0, textAlign: 'center', background: 'violet' }}>top left</div>
-    //     <div style={{ flexGrow: 1, textAlign: 'center', background: 'coral' }}>top</div>
-    //     <div style={{ flexGrow: 0, flexShrink: 0, textAlign: 'center', background: 'violet' }}>top right</div>
-    //   </div>
-    //   <div style={{ width: '100%', display: 'flex', flexGrow: 1, flexShrink: 0 }}>
-    //     <div style={{ flexGrow: 0, flexShrink: 0, textAlign: 'center', background: 'violet' }}>left</div>
-    //     <div style={{ flexGrow: 1, textAlign: 'center', background: 'white' }}>
-    //       <Bars {...this.props} />
-    //     </div>
-    //     <div style={{ flexGrow: 0, flexShrink: 0, textAlign: 'center', background: 'violet' }}>right</div>
-    //   </div>
-    //   <div style={{ width: '100%', flexGrow: 0, flexShrink: 0, display: 'flex', textAlign: 'center' }}>
-    //     <div style={{ flexGrow: 0, flexShrink: 0, textAlign: 'center', background: 'violet' }}>bottom left</div>
-    //     <div style={{ flexGrow: 1, textAlign: 'center', background: 'coral' }}>bottom</div>
-    //     <div style={{ flexGrow: 0, flexShrink: 0, textAlign: 'center', background: 'violet' }}>bottom right</div>
-    //   </div>
-    // </div>
   }
 }

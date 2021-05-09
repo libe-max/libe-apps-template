@@ -7,7 +7,7 @@ function switcher (value, tests = []) {
     return false
   })
   if (!passed.length) return
-  return passed[0].return
+  return passed[0].return(value)
 }
 
 export default switcher
