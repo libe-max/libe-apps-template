@@ -17,7 +17,7 @@ export default class SplitBar extends Component {
   constructor () {
     super()
     this.c = 'lblb-split-bars'
-    this.usedProps = ['height', 'width', 'orientation', 'data', 'styleSplits', 'reverse', 'style']
+    this.usedProps = ['height', 'width', 'orientation', 'data', 'styles', 'labels', 'reverse', 'style']
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -29,63 +29,72 @@ export default class SplitBar extends Component {
     const { props, c } = this
 
     /* Logic */
-    const orientation = props.orientation === 'vertical' ? 1 : 0
+    const orientationNb = props.orientation === 'vertical' ? 1 : 0
     const reverse = props.reverse
       ? props.reverse
-      : orientation
+      : orientationNb
         ? true
         : false
+
+    const data = props.data ? Array.isArray(props.data) ? props.data : [props.data] : []
+    const sum = numbersArraySum(props.data)
+
+    const splits = data.map((split, i) => {
+      const splitSum = numbersArraySum(split)
+      const splitLength = `calc(100% * ${splitSum} / ${sum})`
+      const splitWideness = '100%'
+      const splitHeight = orientationNb ? splitLength : splitWideness
+      const splitWidth = orientationNb ? splitWideness : splitLength
+
+      const splitStyle = props.styles ? props.styles([i], split) : {}
+      const splitLabel = props.labels ? props.labels([i], split) : undefined
+
+      return <div
+        key={i}
+        className={`${c}__split`}
+        style={{
+          width: splitWidth,
+          height: splitHeight,
+          flexShrink: 0,
+          flexGrow: 0,
+          position: 'relative',
+        }}>
+        <span style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          ...splitStyle
+        }}>
+          {splitLabel}
+        </span>
+        {Array.isArray(split) && <SplitBar
+          key={i}
+          width={splitWidth}
+          height={splitHeight}
+          labels={(pos, value) => (props.labels ? props.labels([i, ...pos], value) : undefined)}
+          styles={(pos, value) => (props.styles ? props.styles([i, ...pos], value) : {})}
+          orientation={orientationNb ? 'vertical' : 'horizontal'}
+          data={split} />}
+      </div>
+    })
+
     const style = {
       height: props.height ?? '100%',
       width: props.width ?? '100%',
       flexShrink: 0,
       flexGrow: 0,
       display: 'flex',
-      flexDirection: orientation && reverse
+      flexDirection: orientationNb && reverse
         ? 'column-reverse'
-        : orientation
+        : orientationNb
           ? 'column'
           : reverse
             ? 'row-reverse'
             : 'row',
       ...props.style
     }
-
-    const data = props.data ? Array.isArray(props.data) ? props.data : [props.data] : []
-    const sum = numbersArraySum(props.data)
-
-    const splits = data.map((subData, i) => {
-      const subDataSum = numbersArraySum(subData)
-      const subSplitBarLength = `calc(100% * ${subDataSum} / ${sum})`
-      const subSplitBarWideness = '100%'
-      const subSplitBarHeight = orientation ? subSplitBarLength : subSplitBarWideness
-      const subSplitBarWidth = orientation ? subSplitBarWideness : subSplitBarLength
-      const subSplitBarStyle = props.styleSplits([i], subData)
-
-      if (Array.isArray(subData)) return <SplitBar
-        key={i}
-        width={subSplitBarWidth}
-        height={subSplitBarHeight}
-        styleSplits={(pos, value) => props.styleSplits([i, ...pos], value)}
-        orientation={orientation ? 'vertical' : 'horizontal'}
-        data={subData} />
-
-      return <div
-        key={i}
-        className={`${c}__split`}
-        style={{
-          width: subSplitBarWidth,
-          height: subSplitBarHeight,
-          flexShrink: 0,
-          flexGrow: 0,
-          position: 'relative',
-          ...subSplitBarStyle
-        }}>
-        <span style={{ position: 'absolute' }}>
-          &nbsp;
-        </span>
-      </div>
-    })
 
     /* Assign classes */
     const classes = [c]

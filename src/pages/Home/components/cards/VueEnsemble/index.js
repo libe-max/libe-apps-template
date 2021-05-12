@@ -54,7 +54,7 @@ export default class VueEnsemble extends Component {
           display: 'grid',
           padding: '1rem 0',
           gridGap: '1rem',
-          gridTemplateRows: '1fr 1fr',
+          gridTemplateRows: '50% 50%',
           gridTemplateColumns: '1fr',
           gridTemplateAreas: `"one" "two"`
         }}>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SplitBar from '../../blocks/SplitBarOld'
+import SplitBar from '../../blocks/SplitBar'
 import H3 from '../../../../../libe-components/text/H3'
 import P from '../../../../../libe-components/text/P'
 import Span from '../../../../../libe-components/text/Span'
@@ -102,7 +102,13 @@ export default class PrecElections extends Component {
               <div style={{ width: '100%' }}>
                 <SplitBar
                   height='3rem'
-                  data={election.votes} />
+                  data={[1, [2, 4], [3, 4]]}
+                  labels={(pos, val) => (pos.length === 1 ? <span>Label</span> : null)}
+                  styles={(pos, val) => {
+                    if (pos.length === 1) {
+                      return { background: ['blue', 'red', 'violet'][pos[0]] }
+                    }
+                  }} />
               </div>
             </div>
           })

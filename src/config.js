@@ -10,7 +10,7 @@ const proxydataUrl = process.env.NODE_ENV === 'production'
   ? 'https://proxydata.liberation.fr'
   : 'http://localhost:3004'
 const headerUrl = `${staticsUrl}/scripts/libe-header.js`
-const spreadsheetId = '1x6kzjPUjX4Pt3t__HeZklgSbhdkgAaxvZMHQxCpr0gw'
+const spreadsheetId = '1tJ1haIbBmBBk_EDtgazhNbzfy4YGSryXOT5M5hvaAXc'
 const meta = {
   author: 'Libé Labo',
   title: 'Libération - Les élections régionales en data',

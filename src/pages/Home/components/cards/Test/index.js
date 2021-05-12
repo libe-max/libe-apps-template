@@ -63,34 +63,40 @@ export default class Test extends Component {
             direction='top'
             domain={hDomain}
             scale='band'
+            ticks={[
+              moment('2017-4-17', 'YYYY-MM-DD'),
+              moment('2017-4-19', 'YYYY-MM-DD')
+            ]}
             tickFormat={v => v.format('DD/MM')}
-            ticksOffset='1rem'
+            tickLineLength='3rem'
+            tickLabelOffset='2rem'
             offset='.5rem' />
           <Axis
             direction='right'
             domain={[dataMin, dataMax]}
-            ticks={8}
-            ticksOffset='1rem'
+            ticks={16}
+            tickLabelOffset='.5rem'
             offset='.5rem' />
           <Axis
             direction='bottom'
             domain={hDomain}
             scale='band'
+            ticks={2}
+            tickLabelOffset='.5rem'
             tickFormat={v => v.format('DD/MM')}
-            ticksOffset='1rem'
-            offset='.5rem' />
+            offset='3rem' />
           <Axis
             direction='left'
             domain={[dataMin, dataMax]}
             ticks={5}
-            ticksOffset='4rem'
+            tickLabelOffset='.5rem'
             offset='.5rem' />
           <Bars
             direction='top'
             max={dataMax}
             data={data}
             barsPadding='.125rem'
-            styleBars={(pos, value) => {
+            styles={(pos, value) => {
               const style = {}
               if (pos[0] === 1) style.opacity = '.8'
               if (pos[1] === 0) style.background = 'coral'

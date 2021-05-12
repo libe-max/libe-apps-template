@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DataGrid from '../../blocks/DataGrid'
 import H3 from '../../../../../libe-components/text/H3'
 import P from '../../../../../libe-components/text/P'
+import Span from '../../../../../libe-components/text/Span'
 import removeObjectKeys from '../../../../../libe-utils/remove-object-keys'
 
 /*
@@ -67,42 +68,40 @@ export default class LeDepartement extends Component {
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center'
           }} />
-        <div className='slide__card-two' style={{ gridArea: 'two' }}>
-          <DataGrid columns={2}>
-            {departmentFacts.map((departmentFact, i) => {
-              const pStyle = {
-                textAlign: 'center',
-                fontFamily: 'Libe-Sans-Semicondensed',
-                fontWeight: 800,
-                letterSpacing: '.03em'
-              }
-              return <div
-                key={i}
-                role='region-fact-fact'>
-                <P
-                  role='region-fact-data'
-                  level={-.5}
-                  lineLevel={-1}
-                  style={{ ...pStyle, ...departmentFact.line_1_style }}>
-                  {departmentFact.line_1}
-                </P>
-                <P
-                  role='region-fact-data'
-                  level={-.5}
-                  lineLevel={-1}
-                  style={{ ...pStyle, ...departmentFact.line_2_style }}>
-                  {departmentFact.line_2}
-                </P>
-                <P
-                  role='region-fact-data'
-                  level={-.5}
-                  lineLevel={-1}
-                  style={{ ...pStyle, ...departmentFact.line_3_style }}>
-                  {departmentFact.line_3}
-                </P>
-              </div>
-            })}
-          </DataGrid>
+        <div className='slide__card-two' style={{
+          gridArea: 'two',
+          textAlign: 'center'
+        }}>
+          {departmentFacts.map((departmentFact, i) => {
+            const pStyle = {
+              textAlign: 'left',
+              fontFamily: 'Synthese',
+              fontWeight: 400
+            }
+            return <div
+              key={i}
+              style={{
+                height: '18px',
+                display: 'inline-block',
+                marginRight: '.5rem'
+              }}
+              role='region-fact-fact'>
+              <Span
+                role='region-fact-data'
+                level={-1.5}
+                lineLevel={-4}
+                style={{ ...pStyle, ...departmentFact.line_1_style }}>
+                {departmentFact.line_1}&nbsp;
+              </Span>
+              <Span
+                role='region-fact-data'
+                level={-1.5}
+                lineLevel={-4}
+                style={{ ...pStyle, ...departmentFact.line_2_style }}>
+                {departmentFact.line_2}
+              </Span>
+            </div>
+          })}
         </div>
       </div>
     </div>

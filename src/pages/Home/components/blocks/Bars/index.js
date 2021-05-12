@@ -5,6 +5,7 @@ import {
   max as numbersArrayMax,
   sum as numbersArraySum
 } from '../../../../../libe-utils/numbers-array-utils'
+import switcher from '../../../../../libe-utils/switcher'
 import removeObjectKeys from '../../../../../libe-utils/remove-object-keys'
 
 /*
@@ -14,7 +15,7 @@ import removeObjectKeys from '../../../../../libe-utils/remove-object-keys'
  */
 const usedProps = [
   'width', 'height', 'data', 'max', 'orientation', 'direction', 'barsPadding',
-  'styleBars', 'className', 'style'
+  'styles', 'className', 'style'
 ]
 export { usedProps }
 
@@ -43,16 +44,15 @@ export default class Bars extends Component {
     const max = props.max ?? numbersArrayMax(...data) ?? 0
     const height = props.height ?? '100%'
     const width = props.width ?? '100%'
-    const orientation = props.orientation === 'vertical' ? 1 : 0
-    const direction = props.direction === 'top' || props.direction === 'left'
-      ? 1
-      : props.direction === 'right' || props.direction === 'bottom'
-        ? 0
-        : props.direction === 'center'
-          ? 2
-          : orientation === 1
-            ? 0
-            : 1
+    const orientationNb = props.orientation === 'vertical' ? 1 : 0
+    const directionNb = switcher(props.direction, [
+      { case: v => /^t/.test(v), return: v => 1 },
+      { case: v => /^r/.test(v), return: v => 0 },
+      { case: v => /^b/.test(v), return: v => 0 },
+      { case: v => /^l/.test(v), return: v => 1 },
+      { case: v => /^c/.test(v), return: v => 2 },
+      { case: v => true, return: v => 1 - orientationNb }
+    ])
     const barsPadding = props.barsPadding ?? 0
     const style = {
       height,
@@ -63,11 +63,11 @@ export default class Bars extends Component {
       minHeight: height,
       overflow: 'hidden',
       display: 'flex',
-      padding: orientation ? `${barsPadding} 0` : `0 ${barsPadding}`,
-      flexDirection: orientation ? 'column' : 'row',
-      alignItems: direction === 0
+      padding: orientationNb ? `${barsPadding} 0` : `0 ${barsPadding}`,
+      flexDirection: orientationNb ? 'column' : 'row',
+      alignItems: directionNb === 0
         ? 'flex-start'
-        : direction === 1
+        : directionNb === 1
           ? 'flex-end'
           : 'center',
       ...props.style
@@ -76,21 +76,21 @@ export default class Bars extends Component {
       const flatValue = numbersArraySum(datum)
       const barWideness = `calc(100% / ${data.length})`
       const barLength = `calc(100% * ${flatValue} / ${max})`
-      const barHeight = orientation ? barWideness : barLength
-      const barWidth = orientation ? barLength : barWideness
+      const barHeight = orientationNb ? barWideness : barLength
+      const barWidth = orientationNb ? barLength : barWideness
       return <div
         key={i}
         style={{
           width: barWidth,
           height: barHeight,
-          padding: orientation ? `${barsPadding} 0` : `0 ${barsPadding}`,
+          padding: orientationNb ? `${barsPadding} 0` : `0 ${barsPadding}`,
           position: 'relative'
         }}>
         <SplitBar
           key={i}
-          reverse={direction === 1}
-          orientation={orientation ? 'horizontal' : 'vertical'}
-          styleSplits={(pos, value) => props.styleBars([i, ...pos], value)}
+          reverse={directionNb === 1}
+          orientation={orientationNb ? 'horizontal' : 'vertical'}
+          styles={(pos, value) => (props.styles ? props.styles([i, ...pos], value) : {})}
           data={datum}
           height='100%'
           width= '100%' />

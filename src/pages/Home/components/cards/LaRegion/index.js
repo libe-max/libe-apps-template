@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import H3 from '../../../../../libe-components/text/H3'
+import P from '../../../../../libe-components/text/P'
 import removeObjectKeys from '../../../../../libe-utils/remove-object-keys'
 
 /*
@@ -23,7 +24,7 @@ export default class LaRegion extends Component {
     this.c = 'slide'
     this.usedProps = [
       'mapUrl', 'presidentColor', 'presidentPhoto', 'presidentName',
-      'presidentLabel', 'presidentParty', 'nbSeats', 'seatsDistribution'
+      'presidentLabel', 'presidentParty', 'nbSeats', 'nbSeatsLabel', 'seatsDistribution'
     ]
   }
 
@@ -42,6 +43,14 @@ export default class LaRegion extends Component {
     /* Passed props */
     const passedProps = removeObjectKeys(props, this.usedProps)
 
+    const twoStyle = {
+      gridArea: 'two',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+
     /* Display */
     return <div
       id='region'
@@ -53,11 +62,11 @@ export default class LaRegion extends Component {
         style={{
           display: 'grid',
           padding: '1rem 0',
-          gridGap: '1rem',
-          gridTemplateColumns: '1fr 1fr',
-          gritTemplateRows: '1fr 1fr',
-          gridTemplateAreas: `"one one"
-                              "two three"`
+          gridTemplateColumns: 'calc(50% - .5rem) 1rem calc(50% - .5rem)',
+          gridTemplateRows: 'calc(50% - .5rem) 1rem calc(50% - .5rem)',
+          gridTemplateAreas: `"one one one"
+                              "gap gap gap"
+                              "two gap2 three"`
         }}>
         <div
           className='slide__card-one'
@@ -66,30 +75,84 @@ export default class LaRegion extends Component {
             backgroundImage: `url(${props.mapUrl})`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            backgroundColor: 'var(--c-navy)'            
+            backgroundPosition: 'center'
           }} />
         <div
           className='slide__card-two'
-          style={{
-            gridArea: 'two',            
-            backgroundColor: 'var(--c-red)'
+          style={twoStyle}>
+          <div style={{
+            width: '5rem',
+            height: '5rem',
+            marginBottom: '.5rem',
+            borderRadius: '50%',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundImage: `url(${props.presidentPhoto})`,
+            boxShadow: `0 0 0 .25rem ${props.presidentColor}`,
+          }} />
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
           }}>
-            {props.presidentColor}
-            {props.presidentPhoto}
-            {props.presidentName}
-            {props.presidentLabel}
-            {props.presidentParty}
+            <P level={1} lineLevel={0} style={{
+              fontFamily: 'Libe-Sans-Semicondensed',
+              fontWeight: 600,
+              letterSpacing: '.03em' }}>
+              {props.presidentLabel}
+            </P>
+            <P level={1} lineLevel={0} style={{
+              fontFamily: 'Libe-Sans-Semicondensed',
+              fontWeight: 800,
+              letterSpacing: '.03em' }}>
+              {props.presidentName}
+            </P>
+            <P level={1} lineLevel={0} style={{
+              fontFamily: 'Libe-Sans-Semicondensed',
+              fontWeight: 800,
+              letterSpacing: '.03em',
+              color: props.presidentColor }}>
+              {props.presidentParty}
+            </P>
           </div>
+        </div>
         <div
           className='slide__card-three'
           style={{
             gridArea: 'three',
-            backgroundColor: 'var(--c-lime)'
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
           }}>
-            {props.nbSeats}
-            {props.seatsDistribution?.toString()}
-          </div>
+            <div style={{
+              height: '5rem',
+              width: '100%',
+              backgroundRepeat: 'no-repeat',
+              backgroundImage: `url(${props.seatsDistribution})`,
+              backgroundPosition: 'center',
+              backgroundSize: 'contain'
+            }} />
+            <P level={4.5} lineLevel={0} style={{
+              fontFamily: 'Libe-Sans-Semicondensed',
+              fontWeight: 800,
+              letterSpacing: '.03em',
+              position: 'relative',
+              top: '-1rem'
+            }}>
+              {props.nbSeats}
+            </P>
+            <P level={1} lineLevel={0} style={{
+              fontFamily: 'Libe-Sans-Semicondensed',
+              fontWeight: 600,
+              letterSpacing: '.03em',
+              textAlign: 'center'
+            }}>
+              {props.nbSeatsLabel}
+            </P>
+        </div>
       </div>
     </div>
   }

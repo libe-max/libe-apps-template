@@ -60,6 +60,12 @@ export default class DataGrid extends Component {
       justifyContent: 'space-around',
       alignItems: 'space-around',
     }
+    const cellStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
 
     /* Assign classes */
     const classes = [c]
@@ -84,7 +90,8 @@ export default class DataGrid extends Component {
             const child = childrenArr[childPos]
             return <div
               key={childPos}
-              className={`${c}__cell`}>
+              className={`${c}__cell`}
+              style={cellStyle}>
               {child}
             </div>
           })}
