@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import H3 from '../../../../../libe-components/text/H3'
 import Span from '../../../../../libe-components/text/Span'
+import JSXInterpreter from '../../../../../libe-components/logic/JSXInterpreter'
 import BarChart from '../../blocks/BarChart'
 import Bars from '../../blocks/Bars'
 import Axis from '../../blocks/Axis'
@@ -82,6 +83,8 @@ export default class Covid extends Component {
     /* Passed props */
     const passedProps = removeObjectKeys(props, this.usedProps)
 
+    console.log(props)
+
     /* Display */
     return <div
       id='covid'
@@ -92,16 +95,12 @@ export default class Covid extends Component {
         className='slide__card'
         style={cardStyle}>
         <div className='slide__card-one' style={{ gridArea: 'one' }}>
-          <button onClick={e => this.setState({ toggle: false })}>{
-            state.toggle
-              ? `• ${props.regionName}`
-              : <strong>• {props.regionName}</strong>
-          }</button>
-          <button onClick={e => this.setState({ toggle: true })}>{
-            state.toggle
-              ? <strong>• France</strong>
-              : '• France'
-          }</button>
+          <button onClick={e => this.setState({ toggle: false })}>
+            <JSXInterpreter content={state.toggle ? `• ${props.regionName}` : `<strong>• ${props.regionName}</strong>`} />
+          </button>
+          <button onClick={e => this.setState({ toggle: true })}>
+            <JSXInterpreter content={state.toggle ? '<strong>• France</strong>' : '• France'} />
+          </button>
         </div>
         <div
           className='slide__card-two'
@@ -120,15 +119,26 @@ export default class Covid extends Component {
                 <Axis
                   direction='right'
                   tickLabelOffset='.5rem'
-                  domain={[0, 7]}
-                  ticks={3} />
+                  domain={graphs[0].domain}
+                  ticks={3}
+                  tickFormat={tick => <Span
+                    level={-2}
+                    style={{
+                      fontFamily: 'Synthese',
+                      position: 'relative',
+                      top: '-5px'
+                    }}>{tick}</Span>} />
+                <Axis
+                  direction='bottom'
+                  scale='band'
+                  domain={[]} />
                 <Bars
                   direction='top'
-                  max={7}
-                  data={graphs[0].data}                  
+                  max={graphs[0].domain[1]}
+                  data={state.toggle ? graphs[0].france_data : graphs[0].data}
                   styles={(pos, value) => {
                     const style = {}
-                    if (pos.length === 2) style.background = 'coral'
+                    if (pos.length === 2) style.background = 'rgba(221, 0, 19, 1)'
                     return style
                   }} />
               </BarChart>
@@ -148,15 +158,26 @@ export default class Covid extends Component {
                 <Axis
                   direction='right'
                   tickLabelOffset='.5rem'
-                  domain={[0, 7]}
-                  ticks={3} />
+                  domain={graphs[1].domain}
+                  ticks={3}
+                  tickFormat={tick => <Span
+                    level={-2}
+                    style={{
+                      fontFamily: 'Synthese',
+                      position: 'relative',
+                      top: '-5px'
+                    }}>{tick}</Span>} />
+                <Axis
+                  direction='bottom'
+                  scale='band'
+                  domain={[]} />
                 <Bars
                   direction='top'
-                  max={7}
-                  data={graphs[1].data}
+                  max={graphs[1].domain[1]}
+                  data={state.toggle ? graphs[1].france_data : graphs[1].data}
                   styles={(pos, value) => {
                     const style = {}
-                    if (pos.length === 2) style.background = 'coral'
+                    if (pos.length === 2) style.background = 'rgba(221, 0, 19, 1)'
                     return style
                   }} />
               </BarChart>
@@ -176,19 +197,26 @@ export default class Covid extends Component {
                 <Axis
                   direction='right'
                   tickLabelOffset='.5rem'
-                  domain={[0, 7]}
-                  ticks={3} />
+                  domain={graphs[2].domain}
+                  ticks={3}
+                  tickFormat={tick => <Span
+                    level={-2}
+                    style={{
+                      fontFamily: 'Synthese',
+                      position: 'relative',
+                      top: '-5px'
+                    }}>{`${tick}%`}</Span>} />
                 <Axis
                   direction='bottom'
                   scale='band'
                   domain={['one', 'two', 'three']} />
                 <Bars
                   direction='top'
-                  max={7}
-                  data={graphs[2].data}                  
+                  max={graphs[2].domain[1]}
+                  data={state.toggle ? graphs[2].france_data : graphs[2].data}
                   styles={(pos, value) => {
                     const style = {}
-                    if (pos.length === 2) style.background = 'coral'
+                    if (pos.length === 2) style.background = 'rgba(221, 0, 19, 1)'
                     return style
                   }} />
               </BarChart>

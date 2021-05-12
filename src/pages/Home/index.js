@@ -160,13 +160,14 @@ class Home extends Component {
 
     const activeRegionId = state.active_region_id
     const initialSlide = state.init_slide
-    const region = data.findRegionById(activeRegionId)
+    const region = data.findRegionById(activeRegionId) ?? data.findRegionById('ara')
     const departments = data.departments.filter(department => department.region_id === region.id)
     const party = data.findPartyById(region.president_party_id) || {}
 
     return <div className={c}>
       <H1 level={3} className='region-name'>{region.name}</H1>
       <Carrousel settings={{ initialSlide }}>
+        
         <VueEnsemble
           mapUrl={region.map_overall_url}
           regionFacts={[{
@@ -194,6 +195,7 @@ class Home extends Component {
             line_2_style: { color: '#191919' },
             line_3_style: { color: party.color }
           }]} />
+        
         <LaRegion
           mapUrl={region.map_region_url}
           presidentColor={party.color}
@@ -204,6 +206,7 @@ class Home extends Component {
           nbSeats={<JSXInterpreter content={region.nb_seats ?? ''} />}
           nbSeatsLabel={<JSXInterpreter content={region.nb_seats_label ?? ''} />}
           seatsDistribution={region.seats_infog_url} />
+        
         <LeDepartement
           mapUrl={region.map_departments_url}
           departmentFacts={
@@ -218,120 +221,163 @@ class Home extends Component {
                 line_2_style: { fontFamily: 'Synthese', fontWeight: 400, color: deptPresidentParty.color }
               }
           })} />
+
         <PrecElections
-          elections={[
-            {
-              title: 'Européennes',
-              subtitle: '1er tour — 2019',
-              abstention: '52%',
-              votes: [
-                { label: 'PS', color: 'navy', value: 24 },
-                { label: 'NPA', color: 'olive', value: 32 },
-                { label: 'LR', color: 'red', value: 16 },
-                { label: 'LREM', color: 'yellow', value: 4 },
-                { label: 'ABS', color: '#DDDDDD', value: 52 }
-              ].map((vote, i) => ({
-                ...vote,
-                label: <P
-                  level={-2}
-                  style={{
-                    display: 'inline-block',
-                    marginLeft: '.125rem',
-                    fontFamily: 'Synthese',
-                    fontWeight: '400',
-                    color: '#FFFFFF',
-                    opacity: .95,
-                    textAlign: 'center',
-                    background: 'rgba(25, 25, 25, .4)',
-                    borderRadius: '.125rem',
-                    padding: '.125rem'
-                  }}>
-                  {vote.label}<br />
-                  {vote.value}%
-                </P>
-              }))
-            },
-            {
-              title: 'Présidentielles',
-              subtitle: '1er tour — 2017',
-              abstention: '46%',
-              votes: [
-                { label: 'PS', color: 'yellow', value: 24 },
-                { label: 'NPA', color: 'olive', value: 32 },
-                { label: 'LR', color: 'red', value: 16 },
-                { label: 'LREM', color: 'yellow', value: 4 },
-                { label: 'ABS', color: '#DDDDDD', value: 46 }
-              ].map((vote, i) => ({
-                ...vote,
-                label: <P
-                  level={-2}
-                  style={{
-                    display: 'inline-block',
-                    marginLeft: '.125rem',
-                    fontFamily: 'Synthese',
-                    fontWeight: '400',
-                    color: '#FFFFFF',
-                    opacity: .95,
-                    textAlign: 'center',
-                    background: 'rgba(25, 25, 25, .4)',
-                    borderRadius: '.125rem',
-                    padding: '.125rem'
-                  }}>
-                  {vote.label}<br />
-                  {vote.value}%
-                </P>
-              }))
-            },
-            {
-              title: 'Régionales',
-              subtitle: '1er tour — 2015',
-              abstention: '48%',
-              votes: [
-                { label: 'PS', color: 'navy', value: 24 },
-                { label: 'NPA', color: 'olive', value: 32 },
-                { label: 'LR', color: 'red', value: 16 },
-                { label: 'LREM', color: 'yellow', value: 4 },
-                { label: 'ABS', color: '#DDDDDD', value: 48 }
-              ].map((vote, i) => ({
-                ...vote,
-                label: <P
-                  level={-2}
-                  style={{
-                    display: 'inline-block',
-                    marginLeft: '.125rem',
-                    fontFamily: 'Synthese',
-                    fontWeight: '400',
-                    color: '#FFFFFF',
-                    opacity: .95,
-                    textAlign: 'center',
-                    background: 'rgba(25, 25, 25, .4)',
-                    borderRadius: '.125rem',
-                    padding: '.125rem'
-                  }}>
-                  {vote.label}<br />
-                  {vote.value}%
-                </P>
-              }))
-            }
-          ]} />
-        <Covid
-          regionName={'Bretagne'}
-          graphs={[{
-            label: 'Incidence',
-            legend: 'nombre de cas pour 100 000 hab.',
-            data: [1, [1, [1, 1]], [[[[[[0, 0, 2]]]]]], 4]
+          elections={[{
+            title: <JSXInterpreter content={region.election_2015_label} />,
+            subtitle: <JSXInterpreter content={region.election_2015_sublabel} />,
+            abstention_label: <JSXInterpreter content={region.election_2015_abstention_label} />,
+            abstention: <JSXInterpreter content={region.election_2015_abstention} />,
+            votes: (region.election_2015_result ?? '')
+              .replace('{', '').replace('}', '')
+              .trim()
+              .split(',')
+              .map(e => {
+                const [_id, _score] = e.trim().split(':')
+                const id = _id.trim()
+                const score = parseFloat(_score)
+                const party = data.findPartyById(id)
+                return {
+                  label: id?.toUpperCase(),
+                  color: party?.color,
+                  score: score
+                }
+              })
           }, {
-            label: 'Décès',
-            legend: 'nombre de décès pour 100 000 hab.',
-            data: [5, [1, 2], [2, 6], [1, 1, [7, 3]]]
+            title: <JSXInterpreter content={region.election_2017_label} />,
+            subtitle: <JSXInterpreter content={region.election_2017_sublabel} />,
+            abstention_label: <JSXInterpreter content={region.election_2017_abstention_label} />,
+            abstention: <JSXInterpreter content={region.election_2017_abstention} />,
+            votes: (region.election_2017_result ?? '')
+              .replace('{', '').replace('}', '')
+              .split(',')
+              .map(e => {
+                const [_id, _score] = e.trim().split(':')
+                const id = _id.trim()
+                const score = parseFloat(_score)
+                const party = data.findPartyById(id)
+                return {
+                  label: id?.toUpperCase(),
+                  color: party?.color,
+                  score: score
+                }
+              })
           }, {
-            label: 'Vaccination',
-            legend: 'part de la pop. ayant reçu au moins une dose',
-            data: [5, [1, 2], [2, 6], [1, 1, [7, 3]]]
+            title: <JSXInterpreter content={region.election_2019_label} />,
+            subtitle: <JSXInterpreter content={region.election_2019_sublabel} />,
+            abstention_label: <JSXInterpreter content={region.election_2019_abstention_label} />,
+            abstention: <JSXInterpreter content={region.election_2019_abstention} />,
+            votes: (region.election_2019_result ?? '')
+              .replace('{', '').replace('}', '')
+              .split(',')
+              .map(e => {
+                const [_id, _score] = e.trim().split(':')
+                const id = _id.trim()
+                const score = parseFloat(_score)
+                const party = data.findPartyById(id)
+                return {
+                  label: id?.toUpperCase(),
+                  color: party?.color,
+                  score: score
+                }
+              })
           }]} />
+        
+        <Covid
+          regionName={region.name}
+          graphs={[{
+            label: <JSXInterpreter content={region.covid_incidence_label} />,
+            legend: <JSXInterpreter content={region.covid_incidence_sublabel} />,
+            domain: (region.covid_incidence_data_domain ?? '')
+              .replace('[', '').replace(']', '')
+              .split(',')
+              .map(e => parseFloat(e.trim())),
+            data: (region.covid_incidence ?? '')
+              .replace('[', '').replace(']', '')
+              .split(',')
+              .map(e => parseFloat(e.trim())),
+            france_data: (region.covid_france_incidence ?? '')
+              .replace('[', '').replace(']', '')
+              .split(',')
+              .map(e => parseFloat(e.trim()))
+          }, {
+            label: <JSXInterpreter content={region.covid_deaths_label} />,
+            legend: <JSXInterpreter content={region.covid_deaths_sublabel} />,
+            domain: (region.covid_incidence_data_domain ?? '')
+              .replace('[', '').replace(']', '')
+              .split(',')
+              .map(e => parseFloat(e.trim())),
+            data: (region.covid_deaths ?? '')
+              .replace('[', '').replace(']', '')
+              .split(',')
+              .map(e => parseFloat(e.trim())),
+            france_data: (region.covid_france_deaths ?? '')
+              .replace('[', '').replace(']', '')
+              .split(',')
+              .map(e => parseFloat(e.trim()))
+          }, {
+            label: <JSXInterpreter content={region.covid_vaccination_label} />,
+            legend: <JSXInterpreter content={region.covid_vaccination_sublabel} />,
+            domain: (region.covid_incidence_data_domain ?? '')
+              .replace('[', '').replace(']', '')
+              .split(',')
+              .map(e => parseFloat(e.trim())),
+            data: (region.covid_vaccination ?? '')
+              .replace('[', '').replace(']', '')
+              .split(',')
+              .map(e => parseFloat(e.trim())),
+            france_data: (region.covid_france_vaccination ?? '')
+              .replace('[', '').replace(']', '')
+              .split(',')
+              .map(e => parseFloat(e.trim()))
+          }]} />
+        
         <Population
-          regionName={'Bretagne'} />
-        <Territoire />
+          regionName={'Bretagne'}
+          domain={(region.population_breakdown_domain ?? '')
+            .replace('[', '').replace(']', '')
+            .split(',')
+            .map(e => parseFloat(e.trim()))}
+          maleData={(region.male_population_breakdown ?? '')
+            .replace('[', '').replace(']', '')
+            .split(',')
+            .map(e => parseFloat(e.trim()))
+            .reverse()}
+          femaleData={(region.female_population_breakdown ?? '')
+            .replace('[', '').replace(']', '')
+            .split(',')
+            .map(e => parseFloat(e.trim()))
+            .reverse()}
+          maleFranceData={(region.male_france_population_breakdown ?? '')
+            .replace('[', '').replace(']', '')
+            .split(',')
+            .map(e => parseFloat(e.trim()))
+            .reverse()}
+          femaleFranceData={(region.female_france_population_breakdown ?? '')
+            .replace('[', '').replace(']', '')
+            .split(',')
+            .map(e => parseFloat(e.trim()))
+            .reverse()} />
+        
+        <Territoire
+          superficyLabel={<JSXInterpreter content={region.superficy_label} />}
+          superficy={parseFloat(region.superficy ?? 0)}
+          superficyUnit={<JSXInterpreter content={region.superficy_unit} />}
+          agriSuperficyLabel={<JSXInterpreter content={region.agri_superficy_label} />}
+          agriSuperficy={parseFloat(region.agri_superficy ?? 0)}
+          artiSuperficyLabel={<JSXInterpreter content={region.arti_superficy_label} />}
+          artiSuperficy={parseFloat(region.arti_superficy ?? 0)}
+          natuSuperficyLabel={<JSXInterpreter content={region.natu_superficy_label} />}
+          natuSuperficy={parseFloat(region.natu_superficy ?? 0)}
+          densityLabel={<JSXInterpreter content={region.density_label} />}
+          density={parseFloat(region.density ?? 0)}
+          densityUnit={<JSXInterpreter content={region.density_unit} />}
+          franceDensity={parseFloat(region.franceDensity ?? 0)}
+          natuColor={region.natu_color}
+          agriColor={region.agri_color}
+          artiColor={region.arti_color}
+          noneColor={region.none_color} />
+        
         <Chomage
           regionName={'Bretagne'}
           graphs={[{
@@ -343,6 +389,7 @@ class Home extends Component {
             legend: 'nombre de décès pour 100 000 hab.',
             data: [5, [1, 2], [2, 6], [1, 1, [7, 3]]]
           }]} />
+        
         <Budget />
         {/*
           <Test />

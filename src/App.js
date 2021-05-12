@@ -215,7 +215,6 @@ export default class App extends Component {
       const { data, err } = await reach.json()
       if (err) throw err
       const parsedData = data
-    console.log(data)
       this.setState({ loading_sheet: false, error_sheet: null, data_sheet: parsedData })
       return data
     } catch (error) {

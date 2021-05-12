@@ -70,38 +70,50 @@ export default class LeDepartement extends Component {
           }} />
         <div className='slide__card-two' style={{
           gridArea: 'two',
-          textAlign: 'center'
+          textAlign: 'center',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          flexWrap: 'wrap'
         }}>
-          {departmentFacts.map((departmentFact, i) => {
-            const pStyle = {
-              textAlign: 'left',
-              fontFamily: 'Synthese',
-              fontWeight: 400
-            }
-            return <div
-              key={i}
-              style={{
-                height: '18px',
-                display: 'inline-block',
-                marginRight: '.5rem'
-              }}
-              role='region-fact-fact'>
-              <Span
-                role='region-fact-data'
-                level={-1.5}
-                lineLevel={-4}
-                style={{ ...pStyle, ...departmentFact.line_1_style }}>
-                {departmentFact.line_1}&nbsp;
-              </Span>
-              <Span
-                role='region-fact-data'
-                level={-1.5}
-                lineLevel={-4}
-                style={{ ...pStyle, ...departmentFact.line_2_style }}>
-                {departmentFact.line_2}
-              </Span>
-            </div>
-          })}
+          <div>
+            {departmentFacts.map((departmentFact, i) => {
+              return <>
+                <Span level={-1} style={departmentFact.line_1_style}>{departmentFact.line_1}&nbsp;</Span>
+                <Span level={-1} style={departmentFact.line_2_style}>{departmentFact.line_2}&nbsp;</Span>
+              </>
+
+
+              const pStyle = {
+                textAlign: 'left',
+                fontFamily: 'Synthese',
+                fontWeight: 400
+              }
+              return <span
+                key={i}
+                style={{
+                  height: '18px',
+                  display: 'inline-block',
+                  marginRight: '.5rem'
+                }}
+                role='region-fact-fact'>
+                <Span
+                  role='region-fact-data'
+                  level={-1.5}
+                  lineLevel={-4}
+                  style={{ ...pStyle, ...departmentFact.line_1_style }}>
+                  {departmentFact.line_1}&nbsp;
+                </Span>
+                <Span
+                  role='region-fact-data'
+                  level={-1.5}
+                  lineLevel={-4}
+                  style={{ ...pStyle, ...departmentFact.line_2_style }}>
+                  {departmentFact.line_2}
+                </Span>
+              </span>
+            })}
+          </div>
         </div>
       </div>
     </div>

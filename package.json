@@ -3,25 +3,25 @@
   "version": "0.2.4",
   "private": true,
   "dependencies": {
-    "chroma-js": "^2.1.0",
-    "d3": "^6.5.0",
+    "chroma-js": "^2.1.1",
+    "d3": "^6.7.0",
     "html-to-react": "^1.4.5",
     "html2json": "^1.0.2",
     "leaflet": "^1.7.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "perlin-noise": "0.0.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-leaflet": "^3.1.0",
-    "react-scripts": "^4.0.2",
+    "react-scripts": "^4.0.3",
     "react-slick": "^0.28.1",
-    "react-svg": "^12.1.0",
+    "react-svg": "^13.0.4",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^5.2.1",
+    "styled-components": "^5.3.0",
     "uuid": "^8.3.2",
-    "whatwg-fetch": "^3.5.0"
+    "whatwg-fetch": "^3.6.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -42,7 +42,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "cheerio": "^1.0.0-rc.5",
+    "cheerio": "^1.0.0-rc.9",
     "snazzy": "^9.0.0",
     "source-map-explorer": "^2.5.2",
     "standard": "^16.0.3"

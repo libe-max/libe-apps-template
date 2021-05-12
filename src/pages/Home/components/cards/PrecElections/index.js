@@ -45,6 +45,7 @@ export default class PrecElections extends Component {
 
     // title
     // subtitle
+    // abstention_label
     // abstention
     // votes
 
@@ -90,23 +91,47 @@ export default class PrecElections extends Component {
                   <Span
                     level={4}
                     style={{ fontFamily: 'Libe-Sans-Semicondensed' }}>
-                    {election.abstention}&nbsp;
+                    {election.abstention}%&nbsp;
                   </Span>
                   <Span
                     level={-2}
                     style={{ fontFamily: 'Synthese' }}>
-                    Taux<br />d'abstention
+                    {election.abstention_label}
                   </Span>
                 </div>
               </div>
               <div style={{ width: '100%' }}>
                 <SplitBar
                   height='3rem'
-                  data={[1, [2, 4], [3, 4]]}
-                  labels={(pos, val) => (pos.length === 1 ? <span>Label</span> : null)}
+                  data={election.votes.map(e => e.score)}
+                  labels={(pos, val) => {
+                    if (pos.length === 1) {
+                      const vote = election?.votes[pos[0]]
+                      const label = vote?.label
+                      const score = vote?.score
+                      const result = <span style={{
+                        position: 'relative',
+                        top: '50%',
+                        left: '.25rem',
+                        display: 'inline-block',
+                        transform: 'translate(0, -50%)',
+                        background: 'rgba(25, 25, 25, .15)',
+                        textShadow: '1px 1px 0 rgba(25, 25, 25, .3)',
+                        color: '#FFFFFF',
+                        borderRadius: '.125rem',
+                        padding: '.125rem'
+                      }}>
+                        <P level={-2} style={{ fontFamily: 'Synthese', fontWeight: 600 }}>{label}</P>
+                        <P level={-2} style={{ fontFamily: 'Synthese' }}>{score}%</P>
+                      </span>
+                      return score > 5 ? result : null
+                    }
+                  }}
                   styles={(pos, val) => {
                     if (pos.length === 1) {
-                      return { background: ['blue', 'red', 'violet'][pos[0]] }
+                      const vote = election?.votes[pos[0]]
+                      const color = vote?.color
+                      return { background: color }
                     }
                   }} />
               </div>

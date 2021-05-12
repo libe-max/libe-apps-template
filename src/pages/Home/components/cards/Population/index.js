@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import H3 from '../../../../../libe-components/text/H3'
+import Span from '../../../../../libe-components/text/Span'
 import BarChart from '../../blocks/BarChart'
 import Bars from '../../blocks/Bars'
 import Axis from '../../blocks/Axis'
@@ -32,7 +33,7 @@ export default class Population extends Component {
   constructor(props) {
     super()
     this.c = 'slide'
-    this.usedProps = ['regionName']
+    this.usedProps = ['regionName', 'maleData', 'femaleData', 'maleFranceData', 'femaleFranceData', 'domain']
   }
 
   /* * * * * * * * * * * * * * * *
@@ -59,14 +60,7 @@ export default class Population extends Component {
     }
     const cardTwoChildrenStyle = {
       flexShrink: 0,
-      flexGrow: 0,
-      background: 'red',
-      width: `calc((100% - 2rem) / 2)`
-    }
-    const cardTwoMiddleChildrenStyle = {
-      ...cardTwoChildrenStyle,
-      width: '2rem',
-      background: 'green'
+      flexGrow: 0
     }
 
     /* Assign classes */
@@ -98,34 +92,62 @@ export default class Population extends Component {
         <div
           className='slide__card-two'
           style={cardTwoStyle}>
-          <div style={cardTwoChildrenStyle}>
+          <div style={{
+            ...cardTwoChildrenStyle,
+            width: 'calc(50% + 1rem)'
+          }}>
             <BarChart>
               <Axis
                 direction='bottom'
-                domain={[30, 0]}
-                ticks={3} />
+                domain={[...props.domain].reverse()}
+                ticks={3}
+                tickFormat={val => <Span
+                  level={0}
+                  style={{ fontFamily: 'Synthese' }}>
+                  {val}%
+                </Span>} />
+              <Axis
+                direction='right'
+                domain={[0, 100]}
+                ticks={10}
+                tickFormat={val => <Span
+                  level={0}
+                  style={{
+                    display: 'block',
+                    width: '2rem',
+                    textAlign: 'center',
+                    top: '-.25rem',
+                    position: 'relative',
+                    fontFamily: 'Synthese'
+                  }}>
+                  {val}
+                </Span>} />
               <Bars
                 orientation='vertical'
                 direction='left'
-                data={[1, 2, 3]}
+                max={props.domain[1]}
+                data={state.toggle ? props.maleFranceData : props.maleData}
                 styles={(pos, val) => ({ background: 'blue' })} />
             </BarChart>
           </div>
-          <div style={cardTwoMiddleChildrenStyle}>
-            <Axis
-              direction='right'
-              domain={[0, 100]}
-              ticks={10} />
-          </div>
-          <div style={cardTwoChildrenStyle}>
+          <div style={{
+            ...cardTwoChildrenStyle,
+            width: 'calc(50% - 1rem)'
+          }}>
             <BarChart>
               <Axis
                 direction='bottom'
-                domain={[0, 30]}
-                ticks={3} />
+                domain={props.domain}
+                ticks={3}
+                tickFormat={val => <Span
+                  level={0}
+                  style={{ fontFamily: 'Synthese' }}>
+                  {val}%
+                </Span>} />
               <Bars
                 orientation='vertical'
-                data={[1, 2, 3]}
+                max={props.domain[1]}
+                data={state.toggle ? props.femaleFranceData : props.femaleData}
                 styles={(pos, val) => ({ background: 'blue' })} />
             </BarChart>
           </div>
