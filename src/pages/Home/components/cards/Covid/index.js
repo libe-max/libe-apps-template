@@ -138,7 +138,7 @@ export default class Covid extends Component {
                   domain={graphs[0].domain}
                   ticks={3}
                   tickFormat={tick => <Span
-                    level={-1.5}
+                    level={-1}
                     style={{
                       fontFamily: 'Synthese',
                       position: 'relative',
@@ -189,7 +189,7 @@ export default class Covid extends Component {
                   domain={graphs[1].domain}
                   ticks={3}
                   tickFormat={tick => <Span
-                    level={-1.5}
+                    level={-1}
                     style={{
                       fontFamily: 'Synthese',
                       position: 'relative',
@@ -240,7 +240,7 @@ export default class Covid extends Component {
                   domain={graphs[2].domain}
                   ticks={3}
                   tickFormat={tick => <Span
-                    level={-1.5}
+                    level={-1}
                     style={{
                       fontFamily: 'Synthese',
                       position: 'relative',
@@ -256,7 +256,7 @@ export default class Covid extends Component {
                   scale='band'
                   domain={['one', 'two', 'three']}
                   tickFormat={tick => <Span
-                    level={-1.5}
+                    level={-1}
                     style={{
                       fontFamily: 'Synthese',
                     }}>{tick}</Span>} />

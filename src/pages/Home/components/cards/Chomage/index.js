@@ -147,7 +147,20 @@ export default class Chomage extends Component {
                   direction='right'
                   tickLabelOffset='.5rem'
                   domain={[0, 7]}
-                  ticks={3} />
+                  ticks={3}
+                  tickLabelOffset='-2.25rem'
+                  tickFormat={tick => <Span
+                    level={-1.5}
+                    style={{
+                      fontFamily: 'Synthese',
+                      position: 'relative',
+                      top: '-8px',
+                      fontWeight: 600,
+                      width: '2rem',
+                      display: 'block',
+                      textAlign: 'right',
+                      textShadow: '1px 1px 0 rgba(255, 255, 255, .7)'
+                    }}>{tick}</Span>} />
                 <Bars
                   direction='top'
                   max={7}
@@ -189,11 +202,31 @@ export default class Chomage extends Component {
                   direction='right'
                   tickLabelOffset='.5rem'
                   domain={[0, 7]}
-                  ticks={3} />
+                  ticks={3}
+                  tickLabelOffset='-2.25rem'
+                  tickFormat={tick => <Span
+                    level={-1.5}
+                    style={{
+                      fontFamily: 'Synthese',
+                      position: 'relative',
+                      top: '-8px',
+                      fontWeight: 600,
+                      width: '2rem',
+                      display: 'block',
+                      textAlign: 'right',
+                      textShadow: '1px 1px 0 rgba(255, 255, 255, .7)'
+                    }}>{tick}</Span>} />
                 <Axis
                   direction='bottom'
                   scale='band'
-                  domain={['one', 'two', 'three']} />
+                  domain={['one', 'two', 'three']}
+                  tickFormat={tick => <Span
+                    level={-1.5}
+                    style={{
+                      fontFamily: 'Synthese',
+                      textAlign: 'right',
+                      textShadow: '1px 1px 0 rgba(255, 255, 255, .7)'
+                    }}>{tick}</Span>} />
                 <Bars
                   direction='top'
                   max={7}
