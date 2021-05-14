@@ -135,7 +135,7 @@ export default class LaRegion extends Component {
               backgroundPosition: 'center',
               backgroundSize: 'contain'
             }} />
-            <P level={4.5} lineLevel={0} style={{
+            {/*<P level={4.5} lineLevel={0} style={{
               fontFamily: 'Libe-Sans-Semicondensed',
               fontWeight: 800,
               letterSpacing: '.03em',
@@ -143,12 +143,13 @@ export default class LaRegion extends Component {
               top: '-1rem'
             }}>
               {props.nbSeats}
-            </P>
+            </P>*/}
             <P level={1} lineLevel={0} style={{
               fontFamily: 'Libe-Sans-Semicondensed',
               fontWeight: 600,
               letterSpacing: '.03em',
-              textAlign: 'center'
+              textAlign: 'center',
+              marginTop: '1rem'
             }}>
               {props.nbSeatsLabel}
             </P>

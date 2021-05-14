@@ -187,14 +187,14 @@ class Home extends Component {
             line_1_style: { color: '#191919' },
             line_2_style: { color: '#191919' },
             line_3_style: { color: '#dd0013' }
-          }, {
+          }/*, {
             line_1: <JSXInterpreter content={region.president_label ?? ''} />,
             line_2: <JSXInterpreter content={region.president_name ?? ''} />,
             line_3: <JSXInterpreter content={party.name ?? ''} />,
             line_1_style: { color: '#191919' },
             line_2_style: { color: '#191919' },
             line_3_style: { color: party.color }
-          }]} />
+          }*/]} />
         
         <LaRegion
           mapUrl={region.map_region_url}

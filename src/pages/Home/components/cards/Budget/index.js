@@ -209,7 +209,7 @@ export default class Budget extends Component {
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-between'
+            justifyContent: 'flex-start'
           }}>
             <div style={{ width: '100%', paddingBottom: '100%', position: 'relative' }}>
               <div style={{
@@ -234,7 +234,12 @@ export default class Budget extends Component {
                 </div>
               </div>
             </div>
-            <div></div>
+            <div style={{ width: '100%', textAlign: 'center' }}>
+              <Span
+                level={-1}
+                lineLevel={-4}
+                style={{ fontFamily: 'Synthese', fontWeight: 600, lineHeight: '.5rem' }}>{props.trainOutcomeLabel}</Span>
+            </div>
           </div>
           <div style={{
             width: '30%',
@@ -242,7 +247,7 @@ export default class Budget extends Component {
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-between'
+            justifyContent: 'flex-start'
           }}>
             <div style={{ width: '100%', paddingBottom: '100%', position: 'relative' }}>
               <div style={{
@@ -267,7 +272,12 @@ export default class Budget extends Component {
                 </div>
               </div>
             </div>
-            <div></div>
+            <div style={{ width: '100%', textAlign: 'center' }}>
+              <Span
+                level={-1}
+                lineLevel={-4}
+                style={{ fontFamily: 'Synthese', fontWeight: 600, lineHeight: '.5rem' }}>{props.highschoolOutcomeLabel}</Span>
+            </div>
           </div>
           <div style={{
             width: '30%',
@@ -275,7 +285,7 @@ export default class Budget extends Component {
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-between'
+            justifyContent: 'flex-start'
           }}>
             <div style={{ width: '100%', paddingBottom: '100%', position: 'relative' }}>
               <div style={{
@@ -300,7 +310,12 @@ export default class Budget extends Component {
                 </div>
               </div>
             </div>
-            <div></div>
+            <div style={{ width: '100%', textAlign: 'center' }}>
+              <Span
+                level={-1}
+                lineLevel={-4}
+                style={{ fontFamily: 'Synthese', fontWeight: 600, lineHeight: '.5rem' }}>{props.trainingOutcomeLabel}</Span>
+            </div>
           </div>
         </div>
       </div>
