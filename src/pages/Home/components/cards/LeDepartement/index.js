@@ -78,10 +78,10 @@ export default class LeDepartement extends Component {
         }}>
           <div>
             {departmentFacts.map((departmentFact, i) => {
-              return <>
+              return <span key={i}>
                 <Span level={-1} style={departmentFact.line_1_style}>{departmentFact.line_1}&nbsp;</Span>
                 <Span level={-1} style={departmentFact.line_2_style}>{departmentFact.line_2}&nbsp;</Span>
-              </>
+              </span>
             })}
           </div>
         </div>

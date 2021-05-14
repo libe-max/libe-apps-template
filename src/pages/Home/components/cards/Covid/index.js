@@ -51,7 +51,6 @@ export default class Covid extends Component {
       display: 'grid',
       gridTemplateColumns: '1fr',
       gridTemplateRows: '2rem 1fr',
-      gridGap: '1rem',
       padding: '1rem 0',
       gridTemplateAreas: '"one" "two"'
     }
@@ -83,8 +82,6 @@ export default class Covid extends Component {
     /* Passed props */
     const passedProps = removeObjectKeys(props, this.usedProps)
 
-    console.log(props)
-
     /* Display */
     return <div
       id='covid'
@@ -95,12 +92,31 @@ export default class Covid extends Component {
         className='slide__card'
         style={cardStyle}>
         <div className='slide__card-one' style={{ gridArea: 'one' }}>
-          <button onClick={e => this.setState({ toggle: false })}>
-            <JSXInterpreter content={state.toggle ? `• ${props.regionName}` : `<strong>• ${props.regionName}</strong>`} />
-          </button>
-          <button onClick={e => this.setState({ toggle: true })}>
-            <JSXInterpreter content={state.toggle ? '<strong>• France</strong>' : '• France'} />
-          </button>
+          <div style={{ display: 'flex', fontFamily: 'Synthese', justifyContent: 'center' }}>
+            <Span
+              level={0}
+              onClick={e => this.setState({ toggle: false })}
+              style={{
+                opacity: state.toggle ? .6 : 1,
+                fontFamily: 'Synthese',
+                borderBottom: state.toggle
+                  ? '.0625rem solid rgba(19, 19, 19, .3)'
+                  : '.125rem solid rgba(251, 0, 6, 1)',
+                cursor: 'pointer',
+                marginRight: '1rem'
+              }}>{props.regionName}</Span>
+            <Span
+              level={0}
+              onClick={e => this.setState({ toggle: true })}
+              style={{
+                opacity: state.toggle ? 1 : .6,
+                fontFamily: 'Synthese',
+                borderBottom: state.toggle
+                  ? '.125rem solid rgba(251, 0, 6, 1)'
+                  : '.0625rem solid rgba(19, 19, 19, .3)',
+                cursor: 'pointer'
+              }}>France</Span>
+          </div>
         </div>
         <div
           className='slide__card-two'
@@ -118,15 +134,20 @@ export default class Covid extends Component {
               <BarChart>
                 <Axis
                   direction='right'
-                  tickLabelOffset='.5rem'
+                  tickLabelOffset='-2.25rem'
                   domain={graphs[0].domain}
                   ticks={3}
                   tickFormat={tick => <Span
-                    level={-2}
+                    level={-1.5}
                     style={{
                       fontFamily: 'Synthese',
                       position: 'relative',
-                      top: '-5px'
+                      top: '-8px',
+                      fontWeight: 600,
+                      width: '2rem',
+                      display: 'block',
+                      textAlign: 'right',
+                      textShadow: '1px 1px 0 rgba(255, 255, 255, .7)'
                     }}>{tick}</Span>} />
                 <Axis
                   direction='bottom'
@@ -138,7 +159,14 @@ export default class Covid extends Component {
                   data={state.toggle ? graphs[0].france_data : graphs[0].data}
                   styles={(pos, value) => {
                     const style = {}
-                    if (pos.length === 2) style.background = 'rgba(221, 0, 19, 1)'
+                    if (pos.length === 2) {
+                      style.background = `linear-gradient(
+                        to bottom,
+                        rgba(221, 0, 19, .8),
+                        rgba(221, 0, 19, .2) .5rem,
+                        rgba(221, 0, 19, .05)
+                      )`
+                    }
                     return style
                   }} />
               </BarChart>
@@ -157,15 +185,20 @@ export default class Covid extends Component {
               <BarChart>
                 <Axis
                   direction='right'
-                  tickLabelOffset='.5rem'
+                  tickLabelOffset='-2.25rem'
                   domain={graphs[1].domain}
                   ticks={3}
                   tickFormat={tick => <Span
-                    level={-2}
+                    level={-1.5}
                     style={{
                       fontFamily: 'Synthese',
                       position: 'relative',
-                      top: '-5px'
+                      top: '-8px',
+                      fontWeight: 600,
+                      width: '2rem',
+                      display: 'block',
+                      textAlign: 'right',
+                      textShadow: '1px 1px 0 rgba(255, 255, 255, .7)'
                     }}>{tick}</Span>} />
                 <Axis
                   direction='bottom'
@@ -177,7 +210,14 @@ export default class Covid extends Component {
                   data={state.toggle ? graphs[1].france_data : graphs[1].data}
                   styles={(pos, value) => {
                     const style = {}
-                    if (pos.length === 2) style.background = 'rgba(221, 0, 19, 1)'
+                    if (pos.length === 2) {
+                      style.background = `linear-gradient(
+                        to bottom,
+                        rgba(221, 0, 19, .8),
+                        rgba(221, 0, 19, .3) .5rem,
+                        rgba(221, 0, 19, 0)
+                      )`
+                    }
                     return style
                   }} />
               </BarChart>
@@ -196,27 +236,44 @@ export default class Covid extends Component {
               <BarChart>
                 <Axis
                   direction='right'
-                  tickLabelOffset='.5rem'
+                  tickLabelOffset='-2.25rem'
                   domain={graphs[2].domain}
                   ticks={3}
                   tickFormat={tick => <Span
-                    level={-2}
+                    level={-1.5}
                     style={{
                       fontFamily: 'Synthese',
                       position: 'relative',
-                      top: '-5px'
+                      top: '-8px',
+                      fontWeight: 600,
+                      width: '2rem',
+                      display: 'block',
+                      textAlign: 'right',
+                      textShadow: '1px 1px 0 rgba(255, 255, 255, .7)'
                     }}>{`${tick}%`}</Span>} />
                 <Axis
                   direction='bottom'
                   scale='band'
-                  domain={['one', 'two', 'three']} />
+                  domain={['one', 'two', 'three']}
+                  tickFormat={tick => <Span
+                    level={-1.5}
+                    style={{
+                      fontFamily: 'Synthese',
+                    }}>{tick}</Span>} />
                 <Bars
                   direction='top'
                   max={graphs[2].domain[1]}
                   data={state.toggle ? graphs[2].france_data : graphs[2].data}
                   styles={(pos, value) => {
                     const style = {}
-                    if (pos.length === 2) style.background = 'rgba(221, 0, 19, 1)'
+                    if (pos.length === 2) {
+                      style.background = `linear-gradient(
+                        to bottom,
+                        rgba(221, 0, 19, .8),
+                        rgba(221, 0, 19, .3) .5rem,
+                        rgba(221, 0, 19, 0)
+                      )`
+                    }
                     return style
                   }} />
               </BarChart>

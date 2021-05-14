@@ -296,6 +296,7 @@ class Home extends Component {
               .replace('[', '').replace(']', '')
               .split(',')
               .map(e => parseFloat(e.trim())),
+            data: new Array(100).fill(null).map(e => Math.random() * 100),
             france_data: (region.covid_france_incidence ?? '')
               .replace('[', '').replace(']', '')
               .split(',')
@@ -333,7 +334,10 @@ class Home extends Component {
           }]} />
         
         <Population
-          regionName={'Bretagne'}
+          regionName={region.name}
+          graphLabel={<JSXInterpreter content={region.population_breakdown_label} />}
+          population={region.population}
+          populationUnit={<JSXInterpreter content={region.population_unit} />}
           domain={(region.population_breakdown_domain ?? '')
             .replace('[', '').replace(']', '')
             .split(',')
@@ -371,23 +375,37 @@ class Home extends Component {
           natuSuperficy={parseFloat(region.natu_superficy ?? 0)}
           densityLabel={<JSXInterpreter content={region.density_label} />}
           density={parseFloat(region.density ?? 0)}
+          densityGraph={region.density_graph}
           densityUnit={<JSXInterpreter content={region.density_unit} />}
           franceDensity={parseFloat(region.franceDensity ?? 0)}
           natuColor={region.natu_color}
           agriColor={region.agri_color}
           artiColor={region.arti_color}
-          noneColor={region.none_color} />
+          noneColor={region.none_color}
+          franceAgriSuperficy={region.france_agri_superficy}
+          franceArtiSuperficy={region.france_arti_superficy}
+          franceNatuSuperficy={region.france_natu_superficy} />
         
         <Chomage
-          regionName={'Bretagne'}
+          regionName={region.name}
+          currentUnemploymentRates={region.current_unemployment_rate}
+          currentPovertyRates={region.current_poverty_rate}
+          franceCurrentUnemploymentRate={props.france_current_unemployment_rate}
+          franceUnemploymentRates={props.france_unemployment_rates}
+          franceCurrentPovertyRate={props.france_current_poverty_rate}
+          francePovertyRates={props.france_poverty_rates}
           graphs={[{
-            label: 'Incidence',
-            legend: 'nombre de cas pour 100 000 hab.',
-            data: [1, [1, [1, 1]], [[[[[[0, 0, 2]]]]]], 4]
+            label: <JSXInterpreter content={region.unemployment_rates_label} />,
+            data: (region.unemployment_rates ?? '')
+              .replace('[', '').replace(']', '')
+              .split(',')
+              .map(e => parseFloat(e.trim()))
           }, {
-            label: 'Décès',
-            legend: 'nombre de décès pour 100 000 hab.',
-            data: [5, [1, 2], [2, 6], [1, 1, [7, 3]]]
+            label: <JSXInterpreter content={region.poverty_rates_label} />,
+            data: (region.poverty_rates ?? '')
+              .replace('[', '').replace(']', '')
+              .split(',')
+              .map(e => parseFloat(e.trim()))
           }]} />
         
         <Budget />

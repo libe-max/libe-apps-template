@@ -26,8 +26,8 @@ export default class territoire extends Component {
     this.c = 'slide'
     this.usedProps = [
       'superficyLabel', 'superficy', 'superficyUnit', 'agriSuperficyLabel', 'agriSuperficy',
-      'artiSuperficyLabel', 'artiSuperficy', 'natuSuperficyLabel', 'natuSuperficy', 'densityLabel', 'density', 'densityUnit', 'franceDensity',
-      'natuColor', 'agriColor', 'artiColor', 'noneColor'
+      'artiSuperficyLabel', 'artiSuperficy', 'natuSuperficyLabel', 'natuSuperficy', 'densityLabel', 'density', 'densityGraph', 'densityUnit', 'franceDensity',
+      'natuColor', 'agriColor', 'artiColor', 'noneColor', 'franceAgriSuperficy', 'franceArtiSuperficy', 'franceNatuSuperficy'
     ]
   }
 
@@ -44,11 +44,12 @@ export default class territoire extends Component {
     }
     const cardHalfStyle = {
       width: '50%',
-      margin: '2rem .5rem'
+      margin: '3.5rem .5rem'
     }
     const titleRowStyle = {
       display: 'flex',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      marginBottom: '.25rem'
     }
     const graphWrapperStyle = {
       position: 'relative',
@@ -111,8 +112,30 @@ export default class territoire extends Component {
       <div className='slide__card' style={cardStyle}>
         <div style={cardHalfStyle}>
           <div style={titleRowStyle}>
-            <Span level={0} style={{ fontFamily: 'Synthese' }}>{props.superficyLabel}</Span>
-            <Span level={0} style={{ fontFamily: 'Synthese' }}>{makeReadable(props.superficy)} {props.superficyUnit}</Span>
+            <Span level={0} style={{
+              fontFamily: 'Libe-Sans-Semicondensed',
+              fontWeight: 600,
+              letterSpacing: '.03rem'
+            }}>
+              {props.superficyLabel}
+            </Span>
+            <Span>
+              <Span
+                level={0}
+                style={{
+                  fontFamily: 'Libe-Sans-Semicondensed',
+                  color: 'rgba(251, 0, 6, 1)',
+                  fontWeight: 600
+                }}>
+                {makeReadable(props.superficy)}
+              </Span>
+              &nbsp;
+              <Span
+                level={-1}
+                style={{ fontFamily: 'Synthese' }}>
+                {props.superficyUnit}
+              </Span>
+            </Span>
           </div>
           <div style={graphWrapperStyle}>
             <div style={graphInnerWrapperStyle}>
@@ -151,22 +174,145 @@ export default class territoire extends Component {
             </div>
           </div>
           <div style={{ marginTop: '.5rem' }}>
-            <P lineLevel={-2}><Span level={0} lineLevel={-2}>idiom</Span> <Span level={0} lineLevel={-2}>label</Span></P>
-            <P lineLevel={-2}><Span level={0} lineLevel={-2}>idiom</Span> <Span level={0} lineLevel={-2}>label</Span></P>
-            <P lineLevel={-2}><Span level={0} lineLevel={-2}>idiom</Span> <Span level={0} lineLevel={-2}>label</Span></P>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: '.25rem'
+            }}>
+              <Span
+                level={0}
+                lineLevel={-2}
+                style={{
+                  width: '.75rem',
+                  height: '.75rem',
+                  background: props.agriColor,
+                  display: 'inline-block',
+                  borderRadius: '50%',
+                  marginRight: '.25rem'
+                }} />
+              <Span
+                level={-1}
+                lineLevel={-2}
+                style={{ fontFamily: 'Synthese' }}>
+                {props.agriSuperficyLabel} (France : <span style={{ color: props.agriColor, fontWeight: 600 }}>
+                  {props.franceAgriSuperficy}
+                </span>)
+              </Span>
+            </div>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: '.25rem'
+            }}>
+              <Span
+                level={0}
+                lineLevel={-2}
+                style={{
+                  width: '.75rem',
+                  height: '.75rem',
+                  background: props.natuColor,
+                  display: 'inline-block',
+                  borderRadius: '50%',
+                  marginRight: '.25rem'
+                }} />
+              <Span
+                level={-1}
+                lineLevel={-2}
+                style={{ fontFamily: 'Synthese' }}>
+                {props.natuSuperficyLabel} (France : <span style={{ color: props.natuColor, fontWeight: 600 }}>{props.franceNatuSuperficy}</span>)
+              </Span>
+            </div>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: '.25rem' }}>
+              <Span
+                level={0}
+                lineLevel={-2}
+                style={{
+                  width: '.75rem',
+                  height: '.75rem',
+                  background: props.artiColor,
+                  display: 'inline-block',
+                  borderRadius: '50%',
+                  marginRight: '.25rem'
+                }} />
+              <Span
+                level={-1}
+                lineLevel={-2}
+                style={{ fontFamily: 'Synthese' }}>
+                {props.artiSuperficyLabel} (France : <span style={{ color: props.artiColor, fontWeight: 600 }}>{props.franceArtiSuperficy}</span>)
+              </Span>
+            </div>
           </div>
         </div>
         <div style={cardHalfStyle}>
           <div style={titleRowStyle}>
-            <Span level={0} style={{ fontFamily: 'Synthese' }}>{props.densityLabel}</Span>
-            <Span level={0} style={{ fontFamily: 'Synthese' }}>{makeReadable(props.density)} {props.densityUnit}</Span>
+            <Span level={0} style={{
+              fontFamily: 'Libe-Sans-Semicondensed',
+              fontWeight: 600,
+              letterSpacing: '.03rem'
+            }}>
+              {props.densityLabel}
+            </Span>
+            <Span>
+              <Span
+                level={0}
+                style={{
+                  fontFamily: 'Libe-Sans-Semicondensed',
+                  color: 'rgba(251, 0, 6, 1)',
+                  fontWeight: 600
+                }}>
+                {makeReadable(props.density)}
+              </Span>
+              &nbsp;
+              <Span
+                level={-1}
+                style={{ fontFamily: 'Synthese' }}>
+                {props.densityUnit}
+              </Span>
+            </Span>
           </div>
           <div style={graphWrapperStyle}>
-            <div style={graphInnerWrapperStyle}>
-              Graph
-            </div>
+            <div style={{
+              ...graphInnerWrapperStyle,
+              backgroundImage: `url(${props.densityGraph})`,
+              backgroundPosition: 'center',
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat'
+            }} />
           </div>
-          <P level={0} style={{ fontFamily: 'Synthese' }}>France : {props.franceDensity} {props.densityUnit}</P>
+          <div style={{
+            width: '100%',
+            marginTop: '.5rem',
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center'
+          }}>
+            <Span level={-1} style={{
+              fontFamily: 'Synthese',
+              letterSpacing: '.03rem'
+            }}>
+              France&nbsp;:&nbsp;
+            </Span>
+            <Span style={{ display: 'inline-flex', alignItems: 'center' }}>
+              <Span
+                level={0}
+                style={{
+                  fontFamily: 'Libe-Sans-Semicondensed',
+                  color: 'rgba(251, 0, 6, 1)',
+                  fontWeight: 600
+                }}>
+                {makeReadable(props.franceDensity)}
+              </Span>
+              &nbsp;
+              <Span
+                level={-1}
+                style={{ fontFamily: 'Synthese' }}>
+                {props.densityUnit}
+              </Span>
+            </Span>
+          </div>
         </div>
       </div>
     </div>

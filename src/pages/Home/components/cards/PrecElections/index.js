@@ -89,13 +89,13 @@ export default class PrecElections extends Component {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <Span
-                    level={4}
-                    style={{ fontFamily: 'Libe-Sans-Semicondensed' }}>
+                    level={3}
+                    style={{ fontFamily: 'Libe-Sans-Semicondensed', fontWeight: 600, color: 'rgba(251, 0, 6, 1)' }}>
                     {election.abstention}%&nbsp;
                   </Span>
                   <Span
                     level={-2}
-                    style={{ fontFamily: 'Synthese' }}>
+                    style={{ fontFamily: 'Synthese', lineHeight: '.75rem' }}>
                     {election.abstention_label}
                   </Span>
                 </div>

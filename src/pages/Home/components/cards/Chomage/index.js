@@ -33,7 +33,11 @@ export default class Chomage extends Component {
   constructor(props) {
     super()
     this.c = 'slide'
-    this.usedProps = ['regionName', 'graphs']
+    this.usedProps = [
+      'regionName', 'graphs', 'currentUnemploymentRates', 'currentPovertyRates',
+      'franceCurrentUnemploymentRate', 'franceUnemploymentRates', 'franceCurrentPovertyRate',
+      'francePovertyRates'
+    ]
   }
 
   /* * * * * * * * * * * * * * * *
@@ -92,16 +96,31 @@ export default class Chomage extends Component {
         className='slide__card'
         style={cardStyle}>
         <div className='slide__card-one' style={{ gridArea: 'one' }}>
-          <button onClick={e => this.setState({ toggle: false })}>{
-            state.toggle
-              ? `• ${props.regionName}`
-              : <strong>• {props.regionName}</strong>
-          }</button>
-          <button onClick={e => this.setState({ toggle: true })}>{
-            state.toggle
-              ? <strong>• France</strong>
-              : '• France'
-          }</button>
+          <div style={{ display: 'flex', fontFamily: 'Synthese', justifyContent: 'center' }}>
+            <Span
+              level={0}
+              onClick={e => this.setState({ toggle: false })}
+              style={{
+                opacity: state.toggle ? .6 : 1,
+                fontFamily: 'Synthese',
+                borderBottom: state.toggle
+                  ? '.0625rem solid rgba(19, 19, 19, .3)'
+                  : '.125rem solid rgba(251, 0, 6, 1)',
+                cursor: 'pointer',
+                marginRight: '1rem'
+              }}>{props.regionName}</Span>
+            <Span
+              level={0}
+              onClick={e => this.setState({ toggle: true })}
+              style={{
+                opacity: state.toggle ? 1 : .6,
+                fontFamily: 'Synthese',
+                borderBottom: state.toggle
+                  ? '.125rem solid rgba(251, 0, 6, 1)'
+                  : '.0625rem solid rgba(19, 19, 19, .3)',
+                cursor: 'pointer'
+              }}>France</Span>
+          </div>
         </div>
         <div
           className='slide__card-two'
@@ -110,7 +129,14 @@ export default class Chomage extends Component {
             className='chomage-graph'
             style={graphWrapperStyle}>
             <div className='chomage-graph-title'>
-              <Span style={{ fontFamily: 'Libe-Sans-Semicondensed' }}>{graphs[0].label} </Span>
+              <Span style={{ fontFamily: 'Libe-Sans-Semicondensed' }}>
+                {graphs[0].label} <span style={{
+                  color: 'rgba(251, 0, 6, 1)',
+                  fontWeight: 600,
+                  letterSpacing: '.03em' }}>{state.toggle
+                  ? props.franceCurrentUnemploymentRate
+                  : props.currentUnemploymentRates
+                }%</span></Span>
               <Span level={-2} style={{ fontFamily: 'Synthese' }}>{graphs[0].legend}</Span>
             </div>
             <div
@@ -128,7 +154,14 @@ export default class Chomage extends Component {
                   data={graphs[0].data}  
                   styles={(pos, value) => {
                     const style = {}
-                    if (pos.length === 2) style.background = 'coral'
+                    if (pos.length === 2) {
+                      style.background = `linear-gradient(
+                        to bottom,
+                        rgba(221, 0, 19, .8),
+                        rgba(221, 0, 19, .2) .5rem,
+                        rgba(221, 0, 19, .05)
+                      )`
+                    }
                     return style
                   }} />
               </BarChart>
@@ -138,7 +171,14 @@ export default class Chomage extends Component {
             className='chomage-graph'
             style={lastGraphWrapperStyle}>
             <div className='chomage-graph-title'>
-              <Span style={{ fontFamily: 'Libe-Sans-Semicondensed' }}>{graphs[0].label} </Span>
+              <Span style={{ fontFamily: 'Libe-Sans-Semicondensed' }}>
+                {graphs[0].label} <span style={{
+                  color: 'rgba(251, 0, 6, 1)',
+                  fontWeight: 600,
+                  letterSpacing: '.03em' }}>{state.toggle
+                  ? props.franceCurrentPovertyRate
+                  : props.currentPovertyRates
+                }%</span></Span>
               <Span level={-2} style={{ fontFamily: 'Synthese' }}>{graphs[0].legend}</Span>
             </div>
             <div
@@ -160,7 +200,14 @@ export default class Chomage extends Component {
                   data={graphs[1].data} 
                   styles={(pos, value) => {
                     const style = {}
-                    if (pos.length === 2) style.background = 'coral'
+                    if (pos.length === 2) {
+                      style.background = `linear-gradient(
+                        to bottom,
+                        rgba(221, 0, 19, .8),
+                        rgba(221, 0, 19, .2) .5rem,
+                        rgba(221, 0, 19, .05)
+                      )`
+                    }
                     return style
                   }} />
               </BarChart>
