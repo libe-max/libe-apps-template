@@ -390,10 +390,10 @@ class Home extends Component {
           regionName={region.name}
           currentUnemploymentRates={region.current_unemployment_rate}
           currentPovertyRates={region.current_poverty_rate}
-          franceCurrentUnemploymentRate={props.france_current_unemployment_rate}
-          franceUnemploymentRates={props.france_unemployment_rates}
-          franceCurrentPovertyRate={props.france_current_poverty_rate}
-          francePovertyRates={props.france_poverty_rates}
+          franceCurrentUnemploymentRate={region.france_current_unemployment_rate}
+          franceUnemploymentRates={region.france_unemployment_rates}
+          franceCurrentPovertyRate={region.france_current_poverty_rate}
+          francePovertyRates={region.france_poverty_rates}
           graphs={[{
             label: <JSXInterpreter content={region.unemployment_rates_label} />,
             data: (region.unemployment_rates ?? '')
@@ -408,7 +408,29 @@ class Home extends Component {
               .map(e => parseFloat(e.trim()))
           }]} />
         
-        <Budget />
+        <Budget
+          incomeLabel={region.income_label}
+          income={region.income}
+          incomeAvgLabel={region.income_avg_label}
+          incomeAvg={region.income_avg}
+          incomeMax={region.income_max}
+          incomeUnit={region.income_unit}
+          outcomeLabel={region.outcome_label}
+          outcome={region.outcome}
+          outcomeAvgLabel={region.outcome_avg_label}
+          outcomeAvg={region.outcome_avg}
+          outcomeMax={region.outcome_max}
+          outcomeUnit={region.outcome_unit}
+          trainOutcomeLabel={region.train_outcome_label}
+          trainOutcome={region.train_outcome}
+          trainOutcomeUnit={region.train_outcome_unit}
+          highschoolOutcomeLabel={region.highschool_outcome_label}
+          highschoolOutcome={region.highschool_outcome}
+          highschoolOutcomeUnit={region.highschool_outcome_unit}
+          trainingOutcomeLabel={region.training_outcome_label}
+          trainingOutcome={region.training_outcome}
+          trainingOutcomeUnit={region.training_outcome_unit}
+          outcomeItemMax={region.outcome_item_max} />
         {/*
           <Test />
           <LaRegion />

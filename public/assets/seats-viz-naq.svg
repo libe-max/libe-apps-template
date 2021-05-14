@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="130" height="65" viewBox="0 0 130 65">
+  <defs>
+    <clipPath id="clip-_._assets_seats-viz-naq">
+      <rect width="130" height="65"/>
+    </clipPath>
+  </defs>
+  <g id="_._assets_seats-viz-naq" data-name="./assets/seats-viz-naq" clip-path="url(#clip-_._assets_seats-viz-naq)">
+    <rect width="130" height="65" fill="#fff"/>
+    <text id="_183" data-name="183" transform="translate(65 64)" font-size="21" font-family="LibeSansSemiCondensed-Bold, LibeSans SemiCondensed" font-weight="700"><tspan x="-13.639" y="0">183</tspan></text>
+    <g id="PEPS" transform="translate(0 60.719)">
+      <ellipse id="Ellipse_1480" data-name="Ellipse 1480" cx="2.14" cy="2.14" rx="2.14" ry="2.14" fill="#c61818" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1481" data-name="Ellipse 1481" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(5.356)" fill="#c61818" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1482" data-name="Ellipse 1482" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(10.717)" fill="#c61818" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1483" data-name="Ellipse 1483" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(16.077)" fill="#c61818" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1484" data-name="Ellipse 1484" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(21.437)" fill="#c61818" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1485" data-name="Ellipse 1485" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(26.801)" fill="#c61818" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1486" data-name="Ellipse 1486" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(32.168)" fill="#c61818" stroke="#000" stroke-width="0"/>
+    </g>
+    <g id="EELV" transform="translate(0.431 43.987)">
+      <ellipse id="Ellipse_1487" data-name="Ellipse 1487" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(0 11.226)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1488" data-name="Ellipse 1488" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(5.42 11.061)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1489" data-name="Ellipse 1489" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(10.829 11.058)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1490" data-name="Ellipse 1490" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(16.253 11.05)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1491" data-name="Ellipse 1491" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(21.695 11.046)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1492" data-name="Ellipse 1492" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(0.911 5.776)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1493" data-name="Ellipse 1493" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(27.164 11.043)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1494" data-name="Ellipse 1494" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(6.47 5.465)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1495" data-name="Ellipse 1495" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(32.674 11.043)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1496" data-name="Ellipse 1496" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(11.991 5.473)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1497" data-name="Ellipse 1497" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(17.55 5.488)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1498" data-name="Ellipse 1498" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(2.298 0.431)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1499" data-name="Ellipse 1499" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(23.161 5.51)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1500" data-name="Ellipse 1500" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(8.07)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1501" data-name="Ellipse 1501" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(13.753 0.049)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1502" data-name="Ellipse 1502" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(28.851 5.551)" fill="#19cc73" stroke="#000" stroke-width="0"/>
+    </g>
+    <g id="PS" transform="translate(4.577)">
+      <ellipse id="Ellipse_1503" data-name="Ellipse 1503" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(0 39.211)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1504" data-name="Ellipse 1504" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(15.368 44.11)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1505" data-name="Ellipse 1505" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(6.054 38.709)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1506" data-name="Ellipse 1506" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(30.512 49.609)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1507" data-name="Ellipse 1507" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(21.231 44.215)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1508" data-name="Ellipse 1508" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(2.298 34.189)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1509" data-name="Ellipse 1509" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(11.95 38.84)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1510" data-name="Ellipse 1510" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(8.696 33.664)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1511" data-name="Ellipse 1511" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(17.97 39.024)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1512" data-name="Ellipse 1512" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(27.239 44.384)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1513" data-name="Ellipse 1513" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(5.027 29.391)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1514" data-name="Ellipse 1514" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(14.847 33.926)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1515" data-name="Ellipse 1515" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(24.151 39.29)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1516" data-name="Ellipse 1516" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(11.822 28.907)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1517" data-name="Ellipse 1517" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(33.473 44.658)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1518" data-name="Ellipse 1518" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(8.168 24.844)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1519" data-name="Ellipse 1519" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(21.171 34.29)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1520" data-name="Ellipse 1520" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(30.56 39.695)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1521" data-name="Ellipse 1521" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(18.262 29.361)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1522" data-name="Ellipse 1522" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(15.402 24.48)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1523" data-name="Ellipse 1523" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(11.695 20.593)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1524" data-name="Ellipse 1524" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(27.719 34.811)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1525" data-name="Ellipse 1525" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(24.923 29.983)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1526" data-name="Ellipse 1526" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(22.153 25.193)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1527" data-name="Ellipse 1527" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(37.304 40.343)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1528" data-name="Ellipse 1528" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(15.582 16.669)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1529" data-name="Ellipse 1529" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(19.401 20.432)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1530" data-name="Ellipse 1530" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(34.582 35.591)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1531" data-name="Ellipse 1531" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(31.872 30.868)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1532" data-name="Ellipse 1532" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(29.17 26.163)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1533" data-name="Ellipse 1533" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(19.799 13.1)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1534" data-name="Ellipse 1534" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(26.475 21.474)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1535" data-name="Ellipse 1535" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(23.783 16.796)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1536" data-name="Ellipse 1536" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(24.312 9.914)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1537" data-name="Ellipse 1537" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(41.873 36.82)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1538" data-name="Ellipse 1538" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(39.2 32.176)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1539" data-name="Ellipse 1539" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(36.528 27.532)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1540" data-name="Ellipse 1540" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(33.855 22.891)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1541" data-name="Ellipse 1541" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(31.179 18.251)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1542" data-name="Ellipse 1542" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(28.502 13.61)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1543" data-name="Ellipse 1543" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(29.083 7.137)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1544" data-name="Ellipse 1544" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(33.514 10.908)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1545" data-name="Ellipse 1545" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(36.205 15.559)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1546" data-name="Ellipse 1546" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(38.9 20.211)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1547" data-name="Ellipse 1547" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(41.599 24.87)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1548" data-name="Ellipse 1548" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(44.305 29.537)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1549" data-name="Ellipse 1549" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(34.084 4.79)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1550" data-name="Ellipse 1550" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(47.019 34.215)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1551" data-name="Ellipse 1551" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(38.769 8.715)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1552" data-name="Ellipse 1552" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(41.494 13.43)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1553" data-name="Ellipse 1553" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(39.271 2.89)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1554" data-name="Ellipse 1554" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(44.234 18.168)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1555" data-name="Ellipse 1555" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(46.989 22.932)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1556" data-name="Ellipse 1556" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(44.212 7.047)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1557" data-name="Ellipse 1557" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(49.759 27.738)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1558" data-name="Ellipse 1558" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(44.602 1.451)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1559" data-name="Ellipse 1559" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(46.986 11.893)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1560" data-name="Ellipse 1560" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(52.563 32.611)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1561" data-name="Ellipse 1561" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(49.778 16.789)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1562" data-name="Ellipse 1562" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(49.793 5.93)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1563" data-name="Ellipse 1563" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(52.593 21.755)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1564" data-name="Ellipse 1564" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(50.04 0.487)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1565" data-name="Ellipse 1565" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(52.612 10.96)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1566" data-name="Ellipse 1566" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(55.434 26.831)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1567" data-name="Ellipse 1567" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(55.449 16.092)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1568" data-name="Ellipse 1568" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(55.461 5.368)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1569" data-name="Ellipse 1569" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(55.543)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1570" data-name="Ellipse 1570" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(58.306 10.649)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1571" data-name="Ellipse 1571" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(58.306 21.362)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1572" data-name="Ellipse 1572" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(58.306 32.071)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1573" data-name="Ellipse 1573" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(61.068)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1574" data-name="Ellipse 1574" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(61.151 5.368)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1575" data-name="Ellipse 1575" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(61.162 16.092)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1576" data-name="Ellipse 1576" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(61.177 26.831)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1577" data-name="Ellipse 1577" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(63.999 10.96)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1578" data-name="Ellipse 1578" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(66.571 0.487)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1579" data-name="Ellipse 1579" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(64.018 21.755)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1580" data-name="Ellipse 1580" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(66.818 5.93)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1581" data-name="Ellipse 1581" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(66.833 16.789)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1582" data-name="Ellipse 1582" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(64.048 32.611)" fill="#ff697f" stroke="#000" stroke-width="0"/>
+    </g>
+    <g id="PRG" transform="translate(71.428 1.451)">
+      <ellipse id="Ellipse_1583" data-name="Ellipse 1583" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(2.774 10.443)" fill="#fda7b4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1584" data-name="Ellipse 1584" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(5.158)" fill="#fda7b4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1585" data-name="Ellipse 1585" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(0 26.287)" fill="#fda7b4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1586" data-name="Ellipse 1586" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(5.548 5.596)" fill="#fda7b4" stroke="#000" stroke-width="0"/>
+    </g>
+    <g id="MoDem-UC" transform="translate(74.169 2.89)">
+      <ellipse id="Ellipse_1587" data-name="Ellipse 1587" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(0.03 20.042)" fill="#ff994e" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1588" data-name="Ellipse 1588" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(2.785 15.278)" fill="#ff994e" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1589" data-name="Ellipse 1589" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(7.748)" fill="#ff994e" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1590" data-name="Ellipse 1590" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(5.525 10.54)" fill="#ff994e" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1591" data-name="Ellipse 1591" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(8.25 5.825)" fill="#ff994e" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1592" data-name="Ellipse 1592" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(0 31.325)" fill="#ff994e" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1593" data-name="Ellipse 1593" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(12.936 1.9)" fill="#ff994e" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1594" data-name="Ellipse 1594" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(2.714 26.647)" fill="#ff994e" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1595" data-name="Ellipse 1595" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(5.42 21.98)" fill="#ff994e" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1596" data-name="Ellipse 1596" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(8.119 17.321)" fill="#ff994e" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1597" data-name="Ellipse 1597" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(10.814 12.669)" fill="#ff994e" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1598" data-name="Ellipse 1598" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(13.505 8.018)" fill="#ff994e" stroke="#000" stroke-width="0"/>
+    </g>
+    <g id="UDIT" transform="translate(84.66 7.137)">
+      <ellipse id="Ellipse_1599" data-name="Ellipse 1599" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(7.444)" fill="#acbaf2" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1600" data-name="Ellipse 1600" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(8.025 6.473)" fill="#acbaf2" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1601" data-name="Ellipse 1601" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(5.349 11.114)" fill="#acbaf2" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1602" data-name="Ellipse 1602" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(2.673 15.754)" fill="#acbaf2" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1603" data-name="Ellipse 1603" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(0 20.395)" fill="#acbaf2" stroke="#000" stroke-width="0"/>
+    </g>
+    <g id="LR-CPNT" transform="translate(79.315 9.914)">
+      <ellipse id="Ellipse_1604" data-name="Ellipse 1604" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(2.673 22.261)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1605" data-name="Ellipse 1605" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(0 26.906)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1606" data-name="Ellipse 1606" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(17.561)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1607" data-name="Ellipse 1607" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(18.09 6.882)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1608" data-name="Ellipse 1608" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(15.398 11.56)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1609" data-name="Ellipse 1609" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(22.074 3.186)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1610" data-name="Ellipse 1610" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(12.703 16.249)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1611" data-name="Ellipse 1611" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(10.001 20.953)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1612" data-name="Ellipse 1612" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(7.291 25.676)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1613" data-name="Ellipse 1613" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(22.471 10.518)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1614" data-name="Ellipse 1614" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(26.291 6.755)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1615" data-name="Ellipse 1615" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(4.569 30.429)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1616" data-name="Ellipse 1616" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(19.72 15.278)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1617" data-name="Ellipse 1617" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(16.95 20.069)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1618" data-name="Ellipse 1618" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(14.154 24.896)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1619" data-name="Ellipse 1619" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(30.178 10.679)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1620" data-name="Ellipse 1620" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(26.471 14.566)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1621" data-name="Ellipse 1621" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(23.611 19.446)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1622" data-name="Ellipse 1622" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(11.313 29.781)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1623" data-name="Ellipse 1623" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(20.702 24.375)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1624" data-name="Ellipse 1624" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(33.705 14.93)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1625" data-name="Ellipse 1625" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(8.4 34.743)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1626" data-name="Ellipse 1626" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(30.05 18.993)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1627" data-name="Ellipse 1627" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(17.722 29.376)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1628" data-name="Ellipse 1628" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(27.026 24.012)" fill="#6a85f4" stroke="#000" stroke-width="0"/>
+    </g>
+    <g id="LMR" transform="translate(93.949 29.391)">
+      <ellipse id="Ellipse_1629" data-name="Ellipse 1629" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(22.213)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1630" data-name="Ellipse 1630" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(0 14.993)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1631" data-name="Ellipse 1631" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(9.27 9.633)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1632" data-name="Ellipse 1632" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(18.543 4.273)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+    </g>
+    <g id="DINA" transform="translate(90.676 34.189)">
+      <ellipse id="Ellipse_1633" data-name="Ellipse 1633" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(18.562 4.652)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1634" data-name="Ellipse 1634" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(28.214)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1635" data-name="Ellipse 1635" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(9.281 10.027)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1636" data-name="Ellipse 1636" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(0 15.421)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1637" data-name="Ellipse 1637" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(24.458 4.52)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1638" data-name="Ellipse 1638" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(15.143 9.922)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1639" data-name="Ellipse 1639" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(30.512 5.023)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1640" data-name="Ellipse 1640" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(5.806 15.349)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1641" data-name="Ellipse 1641" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(20.905 9.847)" fill="#4267cb" stroke="#000" stroke-width="0"/>
+    </g>
+    <g id="RN" transform="translate(92.659 43.987)">
+      <ellipse id="Ellipse_1642" data-name="Ellipse 1642" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(24.604)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1643" data-name="Ellipse 1643" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(9.513 5.51)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1644" data-name="Ellipse 1644" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(30.377 0.431)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1645" data-name="Ellipse 1645" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(15.125 5.488)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1646" data-name="Ellipse 1646" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(20.683 5.473)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1647" data-name="Ellipse 1647" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(0 11.043)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1648" data-name="Ellipse 1648" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(26.205 5.465)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1649" data-name="Ellipse 1649" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(5.51 11.043)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1650" data-name="Ellipse 1650" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(31.763 5.776)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1651" data-name="Ellipse 1651" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(10.979 11.046)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1652" data-name="Ellipse 1652" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(16.422 11.05)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1653" data-name="Ellipse 1653" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(21.845 11.058)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1654" data-name="Ellipse 1654" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(27.254 11.061)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1655" data-name="Ellipse 1655" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(32.674 11.226)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1656" data-name="Ellipse 1656" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(0.937 16.733)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1657" data-name="Ellipse 1657" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(6.305 16.733)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1658" data-name="Ellipse 1658" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(11.669 16.733)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1659" data-name="Ellipse 1659" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(17.029 16.733)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1660" data-name="Ellipse 1660" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(22.389 16.733)" fill="#26286f" stroke="#000" stroke-width="0"/>
+      <ellipse id="Ellipse_1661" data-name="Ellipse 1661" cx="2.14" cy="2.14" rx="2.14" ry="2.14" transform="translate(27.749 16.733)" fill="#26286f" stroke="#000" stroke-width="0"/>
+    </g>
+    <g id="NI" transform="translate(125.765 60.719)">
+      <ellipse id="Ellipse_1662" data-name="Ellipse 1662" cx="2.14" cy="2.14" rx="2.14" ry="2.14" fill="#dedede" stroke="#000" stroke-width="0"/>
+    </g>
+  </g>
+</svg>

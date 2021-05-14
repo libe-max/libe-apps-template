@@ -68,11 +68,8 @@ export default class Chomage extends Component {
       display: 'flex',
       flexDirection: 'column',
       margin: '.5rem 0',
-      height: 'calc((100% - 1.5rem) / 3)'
-    }
-    const lastGraphWrapperStyle = {
-      ...graphWrapperStyle,
-      height: 'calc(1.5rem + (100% - 1.5rem) / 3)'
+      height: '50%'
+      // height: 'calc((100% - 1.5rem) / 3)'
     }
     const barChartWrapperStyle = {
       width: '100%',
@@ -161,6 +158,17 @@ export default class Chomage extends Component {
                       textAlign: 'right',
                       textShadow: '1px 1px 0 rgba(255, 255, 255, .7)'
                     }}>{tick}</Span>} />
+                <Axis
+                  direction='bottom'
+                  scale='band'
+                  domain={['one', 'two', 'three']}
+                  tickFormat={tick => <Span
+                    level={-1.5}
+                    style={{
+                      fontFamily: 'Synthese',
+                      textAlign: 'right',
+                      textShadow: '1px 1px 0 rgba(255, 255, 255, .7)'
+                    }}>{tick}</Span>} />
                 <Bars
                   direction='top'
                   max={7}
@@ -182,17 +190,17 @@ export default class Chomage extends Component {
           </div>
           <div
             className='chomage-graph'
-            style={lastGraphWrapperStyle}>
+            style={graphWrapperStyle}>
             <div className='chomage-graph-title'>
               <Span style={{ fontFamily: 'Libe-Sans-Semicondensed' }}>
-                {graphs[0].label} <span style={{
+                {graphs[1].label} <span style={{
                   color: 'rgba(251, 0, 6, 1)',
                   fontWeight: 600,
                   letterSpacing: '.03em' }}>{state.toggle
                   ? props.franceCurrentPovertyRate
                   : props.currentPovertyRates
                 }%</span></Span>
-              <Span level={-2} style={{ fontFamily: 'Synthese' }}>{graphs[0].legend}</Span>
+              <Span level={-2} style={{ fontFamily: 'Synthese' }}>{graphs[1].legend}</Span>
             </div>
             <div
               className='chomage-graph-bars-comp'

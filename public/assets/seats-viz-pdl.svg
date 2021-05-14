@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="130" height="65" viewBox="0 0 130 65">
+  <defs>
+    <clipPath id="clip-_._assets_seats-viz-pdl">
+      <rect width="130" height="65"/>
+    </clipPath>
+  </defs>
+  <g id="_._assets_seats-viz-pdl" data-name="./assets/seats-viz-pdl" clip-path="url(#clip-_._assets_seats-viz-pdl)">
+    <rect width="130" height="65" fill="#fff"/>
+    <text id="_93" data-name="93" transform="translate(65 64)" font-size="21" font-family="LibeSansSemiCondensed-Bold, LibeSans SemiCondensed" font-weight="700"><tspan x="-10.584" y="0">93</tspan></text>
+    <g id="EC" transform="translate(0 58.985)">
+      <ellipse id="Ellipse_1821" data-name="Ellipse 1821" cx="3.005" cy="3.005" rx="3.005" ry="3.005" fill="#19cc73"/>
+      <ellipse id="Ellipse_1822" data-name="Ellipse 1822" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(7.525)" fill="#19cc73"/>
+      <ellipse id="Ellipse_1823" data-name="Ellipse 1823" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(15.053)" fill="#19cc73"/>
+      <ellipse id="Ellipse_1824" data-name="Ellipse 1824" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(22.582 0.004)" fill="#19cc73"/>
+      <ellipse id="Ellipse_1825" data-name="Ellipse 1825" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(30.126 0.004)" fill="#19cc73"/>
+    </g>
+    <g id="SERR" transform="translate(1.007 26.884)">
+      <ellipse id="Ellipse_1826" data-name="Ellipse 1826" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(0 23.589)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1827" data-name="Ellipse 1827" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(7.517 24.31)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1828" data-name="Ellipse 1828" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(15.2 24.333)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1829" data-name="Ellipse 1829" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(22.95 24.378)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1830" data-name="Ellipse 1830" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(2.171 15.294)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1831" data-name="Ellipse 1831" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(30.806 24.449)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1832" data-name="Ellipse 1832" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(9.625 16.74)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1833" data-name="Ellipse 1833" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(17.634 16.868)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1834" data-name="Ellipse 1834" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(5.466 7.382)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1835" data-name="Ellipse 1835" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(25.824 17.075)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1836" data-name="Ellipse 1836" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(12.799 9.554)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1837" data-name="Ellipse 1837" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(21.278 9.91)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1838" data-name="Ellipse 1838" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(34.307 17.435)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1839" data-name="Ellipse 1839" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(9.82)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1840" data-name="Ellipse 1840" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(16.973 2.9)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1841" data-name="Ellipse 1841" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(30.088 10.485)" fill="#ff697f"/>
+      <ellipse id="Ellipse_1842" data-name="Ellipse 1842" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(26.031 3.659)" fill="#ff697f"/>
+    </g>
+    <g id="LREM" transform="translate(16.158 20.17)">
+      <ellipse id="Ellipse_1843" data-name="Ellipse 1843" cx="3.005" cy="3.005" rx="3.005" ry="3.005" fill="#ffcc58"/>
+      <ellipse id="Ellipse_1844" data-name="Ellipse 1844" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(6.913 3.629)" fill="#ffcc58"/>
+      <ellipse id="Ellipse_1845" data-name="Ellipse 1845" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(24.265 18.202)" fill="#ffcc58"/>
+    </g>
+    <g id="UC" transform="translate(22.364 2.359)">
+      <ellipse id="Ellipse_1846" data-name="Ellipse 1846" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(14.216 29.393)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1847" data-name="Ellipse 1847" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(0 11.898)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1848" data-name="Ellipse 1848" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(10.403 22.811)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1849" data-name="Ellipse 1849" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(6.604 16.248)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1850" data-name="Ellipse 1850" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(6.961 6.897)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1851" data-name="Ellipse 1851" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(13.186 11.958)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1852" data-name="Ellipse 1852" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(16.943 18.468)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1853" data-name="Ellipse 1853" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(20.7 24.975)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1854" data-name="Ellipse 1854" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(24.46 31.486)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1855" data-name="Ellipse 1855" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(14.55 2.908)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1856" data-name="Ellipse 1856" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(20.317 8.663)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1857" data-name="Ellipse 1857" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(24.119 15.275)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1858" data-name="Ellipse 1858" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(27.936 21.932)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1859" data-name="Ellipse 1859" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(22.612)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1860" data-name="Ellipse 1860" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(31.771 28.657)" fill="#acbaf2"/>
+      <ellipse id="Ellipse_1861" data-name="Ellipse 1861" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(27.849 6.428)" fill="#acbaf2"/>
+    </g>
+    <g id="LR" transform="translate(53.365)">
+      <ellipse id="Ellipse_1862" data-name="Ellipse 1862" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(0.725 15.685)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1863" data-name="Ellipse 1863" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(0 0.594)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1864" data-name="Ellipse 1864" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(4.625 22.736)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1865" data-name="Ellipse 1865" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(4.621 7.656)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1866" data-name="Ellipse 1866" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(8.55)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1867" data-name="Ellipse 1867" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(8.55 15.027)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1868" data-name="Ellipse 1868" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(8.55 30.054)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1869" data-name="Ellipse 1869" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(12.48 7.656)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1870" data-name="Ellipse 1870" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(12.476 22.736)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1871" data-name="Ellipse 1871" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(17.101 0.594)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1872" data-name="Ellipse 1872" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(16.376 15.685)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1873" data-name="Ellipse 1873" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(20.253 8.787)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1874" data-name="Ellipse 1874" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(16.331 31.016)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1875" data-name="Ellipse 1875" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(25.49 2.359)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1876" data-name="Ellipse 1876" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(20.166 24.291)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1877" data-name="Ellipse 1877" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(23.983 17.634)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1878" data-name="Ellipse 1878" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(27.785 11.022)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1879" data-name="Ellipse 1879" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(33.552 5.267)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1880" data-name="Ellipse 1880" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(23.642 33.845)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1881" data-name="Ellipse 1881" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(27.402 27.334)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1882" data-name="Ellipse 1882" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(31.159 20.828)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1883" data-name="Ellipse 1883" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(34.916 14.317)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1884" data-name="Ellipse 1884" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(41.141 9.257)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1885" data-name="Ellipse 1885" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(41.498 18.607)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1886" data-name="Ellipse 1886" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(37.699 25.17)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1887" data-name="Ellipse 1887" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(48.102 14.257)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1888" data-name="Ellipse 1888" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(33.886 31.752)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1889" data-name="Ellipse 1889" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(30.043 38.372)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1890" data-name="Ellipse 1890" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(47.396 23.799)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1891" data-name="Ellipse 1891" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(54.308 20.17)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1892" data-name="Ellipse 1892" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(43.429 30.543)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1893" data-name="Ellipse 1893" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(39.371 37.369)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1894" data-name="Ellipse 1894" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(52.486 29.784)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1895" data-name="Ellipse 1895" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(59.639 26.884)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1896" data-name="Ellipse 1896" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(35.152 44.319)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1897" data-name="Ellipse 1897" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(48.181 36.794)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1898" data-name="Ellipse 1898" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(56.66 36.437)" fill="#6a85f4"/>
+      <ellipse id="Ellipse_1899" data-name="Ellipse 1899" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(43.635 43.958)" fill="#6a85f4"/>
+    </g>
+    <g id="RNPdL" transform="translate(92.019 34.266)">
+      <ellipse id="Ellipse_1900" data-name="Ellipse 1900" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(25.34)" fill="#0d377a"/>
+      <ellipse id="Ellipse_1901" data-name="Ellipse 1901" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(13.171 9.486)" fill="#0d377a"/>
+      <ellipse id="Ellipse_1902" data-name="Ellipse 1902" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(21.181 9.358)" fill="#0d377a"/>
+      <ellipse id="Ellipse_1903" data-name="Ellipse 1903" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(0 17.067)" fill="#0d377a"/>
+      <ellipse id="Ellipse_1904" data-name="Ellipse 1904" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(28.634 7.912)" fill="#0d377a"/>
+      <ellipse id="Ellipse_1905" data-name="Ellipse 1905" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(7.855 16.996)" fill="#0d377a"/>
+    </g>
+    <g id="APdL-TL" transform="translate(93.706 50.473)">
+      <ellipse id="Ellipse_1906" data-name="Ellipse 1906" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(13.919 0.744)" fill="#26286f"/>
+      <ellipse id="Ellipse_1907" data-name="Ellipse 1907" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(21.602 0.721)" fill="#26286f"/>
+      <ellipse id="Ellipse_1908" data-name="Ellipse 1908" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(29.119)" fill="#26286f"/>
+      <ellipse id="Ellipse_1909" data-name="Ellipse 1909" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(0 8.517)" fill="#26286f"/>
+      <ellipse id="Ellipse_1910" data-name="Ellipse 1910" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(7.544 8.517)" fill="#26286f"/>
+      <ellipse id="Ellipse_1911" data-name="Ellipse 1911" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(15.072 8.513)" fill="#26286f"/>
+      <ellipse id="Ellipse_1912" data-name="Ellipse 1912" cx="3.005" cy="3.005" rx="3.005" ry="3.005" transform="translate(22.601 8.513)" fill="#26286f"/>
+    </g>
+    <g id="NI" transform="translate(123.832 58.985)">
+      <ellipse id="Ellipse_1913" data-name="Ellipse 1913" cx="3.005" cy="3.005" rx="3.005" ry="3.005" fill="#dedede"/>
+    </g>
+  </g>
+</svg>
