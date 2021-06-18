@@ -205,11 +205,13 @@ export default class App extends Component {
     this.setState({ loading_sheet: true, error_sheet: null })
     const { proxydata_url: proxydataUrl, spreadsheet_id: spreadsheetId } = this.props
     try {
-      const url = `${proxydataUrl}/proxy/spreadsheets/${spreadsheetId}`
+      const url = `${window.location.href}data.json`
       const reach = await window.fetch(url)
       if (!reach.ok) throw reach
-      const { data, err } = await reach.json()
-      if (err) throw err
+      // const { data, err } = await reach.json()
+      const data = await reach.json()
+      // if (err) throw err
+      console.log(data)
       const unTypedParsedData = jsonTableToObjects(data)[0]
       const parsedData = {}
       Object.keys(unTypedParsedData).forEach(key => {
