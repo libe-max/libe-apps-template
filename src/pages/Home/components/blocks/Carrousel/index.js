@@ -155,7 +155,7 @@ export default class Carrousel extends Component {
         {...settings}
         className={`${c}__slider`}
         ref={n => (this.slider = n)}>
-        {props.children.map((child, i) => <div
+        {React.Children.map(props.children, (child, i) => child && <div
           key={i}
           onClick={e => this.slider?.slickGoTo(i)}
           className={`${c}__slide`}>

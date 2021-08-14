@@ -71,15 +71,6 @@ export default class Budget extends Component {
     const highschoolRatio = `${100 * Math.pow(props.highschoolOutcome / props.outcomeItemMax, .5)}%`
     const trainingRatio = `${100 * Math.pow(props.trainingOutcome / props.outcomeItemMax, .5)}%`
 
-    console.log('train', props.trainOutcome)
-    console.log('highschool', props.highschoolOutcome)
-    console.log('training', props.trainingOutcome)
-    console.log('max', props.outcomeItemMax)
-    console.log('train ratio', trainRatio)
-    console.log('highschool ratio', highschoolRatio)
-    console.log('training ratio', trainingRatio)
-    console.log('=======')
-
     /* Assign classes */
     const classes = [c]
     if (props.className) classes.push(props.className)

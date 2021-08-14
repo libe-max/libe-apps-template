@@ -45,7 +45,8 @@ window
 class Home extends Component {
   state = {
     data: null,
-    active_region_id: windowSearch.r ?? 'bre',
+    active_region_id: windowSearch.r ?? 'ara',
+    hidden_slides: windowSearch.h?.split('-').map(e => parseInt(e)) ?? [],
     init_slide: parseInt(windowSearch.p ?? 0)
   }
 
@@ -168,7 +169,8 @@ class Home extends Component {
       <H1 level={3} className='region-name'>{region.name}</H1>
       <Carrousel settings={{ initialSlide }}>
         
-        <VueEnsemble
+        {state.hidden_slides.indexOf(1) === -1
+          && <VueEnsemble
           mapUrl={region.map_overall_url}
           regionFacts={[{
             line_1: <JSXInterpreter content={region.population_label ?? ''} />,
@@ -187,16 +189,10 @@ class Home extends Component {
             line_1_style: { color: '#191919' },
             line_2_style: { color: '#191919' },
             line_3_style: { color: '#dd0013' }
-          }/*, {
-            line_1: <JSXInterpreter content={region.president_label ?? ''} />,
-            line_2: <JSXInterpreter content={region.president_name ?? ''} />,
-            line_3: <JSXInterpreter content={party.name ?? ''} />,
-            line_1_style: { color: '#191919' },
-            line_2_style: { color: '#191919' },
-            line_3_style: { color: party.color }
-          }*/]} />
+          }]} />}
         
-        <LaRegion
+        {state.hidden_slides.indexOf(2) === -1
+          && <LaRegion
           mapUrl={region.map_region_url}
           presidentColor={party.color}
           presidentPhoto={region.president_photo}
@@ -205,24 +201,28 @@ class Home extends Component {
           presidentParty={<JSXInterpreter content={party.name ?? ''} />}
           nbSeats={<JSXInterpreter content={region.nb_seats ?? ''} />}
           nbSeatsLabel={<JSXInterpreter content={region.nb_seats_label ?? ''} />}
-          seatsDistribution={region.seats_infog_url} />
+          seatsDistribution={region.seats_infog_url} />}
         
-        <LeDepartement
+        {state.hidden_slides.indexOf(3) === -1
+          && region.id !== 'mar'
+          && region.id !== 'guy'
+          && <LeDepartement
           mapUrl={region.map_departments_url}
           departmentFacts={
             departments.map((department) => {
               const line1 = `${department.name} (${department.number})`
               const deptPresidentParty = data.findPartyById(department.president_party_id)
-              const line2 = `${department.president_short_name}&nbsp;(${deptPresidentParty.short_name})`
+              const line2 = `${department.president_short_name}&nbsp;(${deptPresidentParty?.short_name ?? ''})`
               return {
                 line_1: <JSXInterpreter content={line1} />,
                 line_2: <JSXInterpreter content={line2} />,
                 line_1_style: { fontFamily: 'Synthese', fontWeight: 600, color: '#191919' },
-                line_2_style: { fontFamily: 'Synthese', fontWeight: 400, color: deptPresidentParty.color }
+                line_2_style: { fontFamily: 'Synthese', fontWeight: 400, color: deptPresidentParty?.color }
               }
-          })} />
+          })} />}
 
-        <PrecElections
+        {state.hidden_slides.indexOf(4) === -1
+          && <PrecElections
           elections={[{
             title: <JSXInterpreter content={region.election_2015_label} />,
             subtitle: <JSXInterpreter content={region.election_2015_sublabel} />,
@@ -281,9 +281,10 @@ class Home extends Component {
                   score: score
                 }
               })
-          }]} />
+          }]} />}
         
-        <Covid
+        {state.hidden_slides.indexOf(5) === -1
+          && <Covid
           regionName={region.name}
           graphs={[{
             label: <JSXInterpreter content={region.covid_incidence_label} />,
@@ -331,9 +332,10 @@ class Home extends Component {
               .replace('[', '').replace(']', '')
               .split(',')
               .map(e => parseFloat(e.trim()))
-          }]} />
+          }]} />}
         
-        <Population
+        {state.hidden_slides.indexOf(6) === -1
+          && <Population
           regionName={region.name}
           graphLabel={<JSXInterpreter content={region.population_breakdown_label} />}
           population={region.population}
@@ -361,9 +363,10 @@ class Home extends Component {
             .replace('[', '').replace(']', '')
             .split(',')
             .map(e => parseFloat(e.trim()))
-            .reverse()} />
+            .reverse()} />}
         
-        <Territoire
+        {state.hidden_slides.indexOf(7) === -1
+          && <Territoire
           superficyLabel={<JSXInterpreter content={region.superficy_label} />}
           superficy={parseFloat(region.superficy ?? 0)}
           superficyUnit={<JSXInterpreter content={region.superficy_unit} />}
@@ -377,16 +380,17 @@ class Home extends Component {
           density={parseFloat(region.density ?? 0)}
           densityGraph={region.density_graph}
           densityUnit={<JSXInterpreter content={region.density_unit} />}
-          franceDensity={parseFloat(region.franceDensity ?? 0)}
+          franceDensity={parseFloat(region.france_density ?? 0)}
           natuColor={region.natu_color}
           agriColor={region.agri_color}
           artiColor={region.arti_color}
           noneColor={region.none_color}
           franceAgriSuperficy={region.france_agri_superficy}
           franceArtiSuperficy={region.france_arti_superficy}
-          franceNatuSuperficy={region.france_natu_superficy} />
+          franceNatuSuperficy={region.france_natu_superficy} />}
         
-        <Chomage
+        {state.hidden_slides.indexOf(8) === -1
+          && <Chomage
           regionName={region.name}
           currentUnemploymentRates={region.current_unemployment_rate}
           currentPovertyRates={region.current_poverty_rate}
@@ -406,9 +410,10 @@ class Home extends Component {
               .replace('[', '').replace(']', '')
               .split(',')
               .map(e => parseFloat(e.trim()))
-          }]} />
+          }]} />}
         
-        <Budget
+        {state.hidden_slides.indexOf(9) === -1
+          && <Budget
           incomeLabel={region.income_label}
           income={region.income}
           incomeAvgLabel={region.income_avg_label}
@@ -430,12 +435,8 @@ class Home extends Component {
           trainingOutcomeLabel={region.training_outcome_label}
           trainingOutcome={region.training_outcome}
           trainingOutcomeUnit={region.training_outcome_unit}
-          outcomeItemMax={region.outcome_item_max} />
-        {/*
-          <Test />
-          <LaRegion />
-          <LaRegion />
-        */}
+          outcomeItemMax={region.outcome_item_max} />}
+
       </Carrousel>
     </div>
   }
